@@ -13,6 +13,9 @@ import { IoMdMore } from "react-icons/io";
 import { FaDownload } from "react-icons/fa";
 import ViewReception from "../../../../Components/System/Settings/Reception/ViewReception";
 import SettingContext from "../../../../Context/SettingContext";
+import { TableCell } from "../../../../Components/Table/TableCell";
+import { TableRow } from "../../../../Components/Table/TableRow";
+import CustomTable from "../../../../Components/Table";
 
 const EditIcon = () => {
   return (
@@ -213,7 +216,7 @@ const Reception = () => {
         >
           <Image
             className="pointer"
-            src={"/icons/view.png"}
+            src={"/icons/view.svg"}
             alt="view image "
             width={30}
             height={30}
@@ -229,7 +232,7 @@ const Reception = () => {
           <Image
             className="pointer"
             alt={"editImg"}
-            src={"/edit.png"}
+            src={"/icons/edit.svg"}
             width={30}
             height={30}
           />
@@ -414,25 +417,46 @@ const Reception = () => {
           <fieldset className=" fieldBorder mt-3">
             <legend className="text-center">كل الزيارات</legend>
 
-            <DataTableComponent
-              className={
-                "overflow-y-auto overflow-x-auto scrollbar-thin scrollbar-thumb-[#C8D0D0] scrollbar-track-transparent "
-              }
-              handleOpenViewVisit={() => {
-                setViewVisit(true);
-              }}
-              handleOpenEditVisit={() => {
-                setEditVisit(true);
-              }}
-              columns={columns}
-              data={visits}
-              // <DataTableComponent
-              //   className={
-              //     "overflow-y-auto overflow-x-auto scrollbar-thin scrollbar-thumb-[#C8D0D0] scrollbar-track-transparent "
-              //   }
-              //   columns={columns}
-              //   data={visits}
-            />
+            
+              
+               {/* <DataTableComponent
+                className={
+                  "overflow-y-auto overflow-x-auto scrollbar-thin scrollbar-thumb-[#C8D0D0] scrollbar-track-transparent "
+                }
+                columns={columns}
+                data={visits}
+            /> */}
+            <CustomTable columns={columns} data={visits}>
+                  {visits && visits.length > 0
+                    ? visits.map(
+                        (
+                          {
+                            id,
+                            personName,
+                            Enterprise,
+                            visitDate,
+                            view,
+                            edit,
+                          },
+                          index
+                        ) => (
+                          <TableRow
+                            className={`my-2 border !border-[#efaa207f] ${
+                              index % 2 === 0 ? "bg-[#151521]" : ""
+                            }`}
+                            key={index}
+                          >
+                            <TableCell textColor="#ffffff7f">{id}</TableCell>
+                            <TableCell>{personName}</TableCell>
+                            <TableCell>{Enterprise}</TableCell>
+                            <TableCell>{visitDate}</TableCell>
+                            <TableCell>{view}</TableCell>
+                            <TableCell>{edit}</TableCell>
+                          </TableRow>
+                        )
+                      )
+                    : null}
+                </CustomTable>
           </fieldset>
         </div>
       </div>

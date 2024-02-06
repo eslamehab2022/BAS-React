@@ -130,7 +130,10 @@ const AllMeetings = () => {
         }
       />
 
-      <div className={styles.cleanderbg}>
+      <div 
+      // className={styles.cleanderbg}
+      className="bg-[#1E1E2D] h-[801px] rounded-[17px]"
+      >
         <AddMeeting view={view} setView={setView} />
 
         <DnDCalendar

@@ -10,6 +10,9 @@ import EditReviewReport from "../../../../../Components/System/Projects/EditRevi
 import AddUpdateDesignReport from "../../../../../Components/System/Projects/AddDesignReport/AddUpdateDesignReport";
 import ShowDesignReport from "../../../../../Components/System/Projects/ShowDesignReport/ShowDesignReport";
 import Image from "../../../../../Components/Image";
+import { TableCell } from "../../../../../Components/Table/TableCell";
+import { TableRow } from "../../../../../Components/Table/TableRow";
+import CustomTable from "../../../../../Components/Table";
 
 const NestedReportMangment = () => {
   const { openReport, setOpenReport, reportType, setReportType } =
@@ -30,7 +33,7 @@ const NestedReportMangment = () => {
       ProjectType: " تصميم",
       display: (
         <Image
-          src={process.env.PUBLIC_URL + "/icons/view.png"}
+          src={process.env.PUBLIC_URL + "/icons/view.svg"}
           onClick={() => {
             setShowReport(true);
           }}
@@ -40,7 +43,7 @@ const NestedReportMangment = () => {
       ),
       edit: (
         <Image
-          src={process.env.PUBLIC_URL + "/edit.png"}
+          src={process.env.PUBLIC_URL + "/icons/edit.svg"}
           onClick={() => {
             setEditReport(true);
             setId(reportsData[index].id);
@@ -57,7 +60,7 @@ const NestedReportMangment = () => {
       selector: (row) => row.id,
     },
     {
-      name: "اسم المشروع",
+      name: "اسم التقرير",
       selector: (row) => row.ProjectName,
     },
     {
@@ -65,14 +68,15 @@ const NestedReportMangment = () => {
       selector: (row) => row.ProjectNumber,
     },
     {
-      name: "  نوع  العميل",
-      selector: (row) => row.ClientType,
-    },
-
-    {
       name: "تاريخ الانشاء",
       selector: (row) => row.createdAt,
     },
+    {
+      name: "نوع المشروع",
+      selector: (row) => row.ClientType,
+    },
+
+    
 
     {
       name: "    عرض",
@@ -137,15 +141,48 @@ const NestedReportMangment = () => {
                   </legend>
                 )}
 
-                <div className="mt-3    ">
-                  <div className=" max-h-full">
-                    <DataTableComponent
+                  <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+                    {/* <DataTableComponent
                       className={"  !h-[400px]"}
                       columns={columns}
                       data={reportsData}
-                    />
+                    /> */}
+                    <CustomTable columns={columns} data={reportsData}>
+                  {reportsData && reportsData.length > 0
+                    ? reportsData.map(
+                        (
+                          {
+                            id,
+                            ProjectName,
+                            ProjectNumber,
+                            createdAt,
+                            // ClientType,
+                            ProjectType,
+                            display,
+                            edit
+                          },
+                          index
+                        ) => (
+                          <TableRow
+                            className={`my-2 border !border-[#efaa207f] ${
+                              index % 2 === 0 ? "bg-[#151521]" : ""
+                            }`}
+                            key={index}
+                          >
+                            <TableCell textColor="#ffffff7f">{id}</TableCell>
+                            <TableCell>{ProjectName}</TableCell>
+                            <TableCell>{ProjectNumber}</TableCell>
+                            {/* <TableCell>{ClientType}</TableCell> */}
+                            <TableCell>{createdAt}</TableCell>
+                            <TableCell>{ProjectType}</TableCell>
+                            <TableCell>{display}</TableCell>
+                            <TableCell>{edit}</TableCell>
+                          </TableRow>
+                        )
+                      )
+                    : null}
+                </CustomTable>
                   </div>
-                </div>
               </fieldset>
             </div>
           )}

@@ -66,7 +66,7 @@ const HrIndex = () => {
                                   : "!border-transparent"
                               }      pointer`}
                             >
-                              <span> كل الموظفين</span>
+                              <span>كل الموظفين</span>
                             </div>
                           </div>
                         </Link>

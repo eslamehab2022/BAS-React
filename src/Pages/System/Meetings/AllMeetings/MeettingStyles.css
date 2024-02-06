@@ -157,3 +157,12 @@ background: #2B2B40; */
 .chooseDepartment .modal-content .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
 color: white !important;
 }
+.rbc-time-view{
+    /* min-height: 0px !important; */
+}
+.rbc-time-view::-webkit-scrollbar{
+    display: none;
+}
+.rbc-time-view.rbc-row{
+    /* min-height: 0px !important; */
+}

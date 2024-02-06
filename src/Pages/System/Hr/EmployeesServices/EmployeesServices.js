@@ -8,6 +8,9 @@ import { AddHrType } from "../../../../Context/AddHr.js";
 import AddServices from "../../../../Components/System/Hr/AddServices/AddServices.js";
 import Pdf from "../../../../Components/Pdf.jsx";
 import ShowServicesComponent from "../../../../Components/System/Hr/ShowServicesComponent/ShowServicesComponent.jsx";
+import { TableCell } from "../../../../Components/Table/TableCell.jsx";
+import { TableRow } from "../../../../Components/Table/TableRow.jsx";
+import CustomTable from "../../../../Components/Table/index.jsx";
 const EmployeesServices = () => {
   const [showServices, setShowServices] = useState(false);
 
@@ -26,8 +29,9 @@ const EmployeesServices = () => {
           }}
         >
           <img
-            src={process.env.PUBLIC_URL + "/icons/view.png"}
+            src={process.env.PUBLIC_URL + "/icons/view.svg"}
             className="pointer"
+            alt=""
           />
         </div>
       ),
@@ -201,7 +205,45 @@ const EmployeesServices = () => {
               <fieldset className={`${style.allServciesTable} mt-5`}>
                 <legend className="text-center ">كل النماذج</legend>
 
-                <DataTableComponent data={data} columns={columns} />
+                {/* <DataTableComponent data={data} columns={columns} /> */}
+                <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+                <CustomTable columns={columns} data={data}>
+                  {data && data.length > 0
+                    ? data.map(
+                        (
+                          {
+                            id,
+                            employeeName,
+                            employeeCode,
+                            ServicesType,
+                            servicesDate,
+                            status,
+                            display,
+                          },
+                          index
+                        ) => (
+                          <TableRow
+                            className={`my-2 border !border-[#efaa207f] ${
+                              index % 2 === 0 ? "bg-[#151521]" : ""
+                            }`}
+                            key={index}
+                          >
+                            <TableCell textColor="#ffffff7f">{id}</TableCell>
+                            <TableCell>{employeeName}</TableCell>
+                            <TableCell>{employeeCode}</TableCell>
+                            <TableCell>{ServicesType}</TableCell>
+                            <TableCell>{servicesDate}</TableCell>
+                            <TableCell>{status}</TableCell>
+                            <TableCell>{display}</TableCell>
+                          </TableRow>
+                        )
+                      )
+                    : null}
+                </CustomTable>
+                </div>
+
+
+
               </fieldset>
             </div>
           </div>

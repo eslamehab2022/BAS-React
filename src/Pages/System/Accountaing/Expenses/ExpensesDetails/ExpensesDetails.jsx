@@ -12,6 +12,9 @@ import { useContext } from "react";
 import { addAccountType } from "../../../../../Context/AddAccountaing";
 import AddExpensesReports from "../../../../../Components/System/Accountaing/AddExpensesReports/AddExpensesReports";
 import AddItems from "../../../../../Components/System/Accountaing/AddItems/AddItems";
+import { TableCell } from "../../../../../Components/Table/TableCell.jsx";
+import { TableRow } from "../../../../../Components/Table/TableRow.jsx";
+import CustomTable from "../../../../../Components/Table/index.jsx";
 
 const ExpensesDetails = () => {
   // handle search by Date
@@ -203,7 +206,42 @@ const ExpensesDetails = () => {
                   <legend className="text-center"> الاصناف</legend>
                 )}
 
-                <DataTableComponent data={data} columns={columns} />
+                {/* <DataTableComponent data={data} columns={columns} /> */}
+                <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+              <CustomTable columns={columns} data={data}>
+                  {data && data.length > 0
+                    ? data.map(
+                        (
+                          {
+                            id,
+                            ReportName,
+                            clause,
+                            DueDate,
+                            display,
+                            ExpensesReports,
+                            
+                          },
+                          index
+                        ) => (
+                          <TableRow
+                            className={`my-2 border !border-[#efaa207f] ${
+                              index % 2 === 0 ? "bg-[#151521]" : ""
+                            }`}
+                            key={index}
+                          >
+                            <TableCell textColor="#ffffff7f">{id}</TableCell>
+                            <TableCell>{ReportName}</TableCell>
+                            <TableCell>{clause}</TableCell>
+                            <TableCell>{DueDate}</TableCell>
+                            <TableCell>{display}</TableCell>
+                            <TableCell>{ExpensesReports}</TableCell>
+                            
+                          </TableRow>
+                        )
+                      )
+                    : null}
+                </CustomTable>
+                </div>
               </fieldset>
             </>
           )}

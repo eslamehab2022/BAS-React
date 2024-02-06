@@ -11,6 +11,9 @@ import { AddHrType } from "../../../../Context/AddHr.js";
 import ShowHolidayComponent from "../../../../Components/System/Hr/ShowHolidayComponent/ShowHolidayComponent.jsx";
 import AddHoliday from "../../../../Components/System/Hr/AddHoliday/AddHoliday.jsx";
 import Image from "../../../../Components/Image.jsx";
+import { TableCell } from "../../../../Components/Table/TableCell.jsx";
+import { TableRow } from "../../../../Components/Table/TableRow.jsx";
+import CustomTable from "../../../../Components/Table/index.jsx";
 
 const HolidayMangment = () => {
   const [ShowHoliday, setShowHoliday] = useState(false);
@@ -31,7 +34,7 @@ const HolidayMangment = () => {
           }}
         >
           <Image
-            src={process.env.PUBLIC_URL + "/icons/view.png"}
+            src={process.env.PUBLIC_URL + "/icons/view.svg"}
             className="pointer"
           />
         </div>
@@ -191,11 +194,46 @@ const HolidayMangment = () => {
             </div>
             <fieldset className={`${style.allhoildaysTables} mt-5`}>
               <legend className="text-center ">كل الاجازات</legend>
-              <DataTableComponent
+              {/* <DataTableComponent
     
                 data={data}
                 columns={columns}
-              />
+              /> */}
+              <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+              <CustomTable columns={columns} data={data}>
+                  {data && data.length > 0
+                    ? data.map(
+                        (
+                          {
+                            id,
+                            employeeName,
+                            employeeCode,
+                            holidayType,
+                            holidayDate,
+                            status,
+                            display,
+                          },
+                          index
+                        ) => (
+                          <TableRow
+                            className={`my-2 border !border-[#efaa207f] ${
+                              index % 2 === 0 ? "bg-[#151521]" : ""
+                            }`}
+                            key={index}
+                          >
+                            <TableCell textColor="#ffffff7f">{id}</TableCell>
+                            <TableCell>{employeeName}</TableCell>
+                            <TableCell>{employeeCode}</TableCell>
+                            <TableCell>{holidayType}</TableCell>
+                            <TableCell>{holidayDate}</TableCell>
+                            <TableCell>{status}</TableCell>
+                            <TableCell>{display}</TableCell>
+                          </TableRow>
+                        )
+                      )
+                    : null}
+                </CustomTable>
+              </div>
             </fieldset>
           </div>
         </div>

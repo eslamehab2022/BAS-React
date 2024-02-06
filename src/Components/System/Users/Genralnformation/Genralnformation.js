@@ -5,6 +5,9 @@ import { useContext, useState } from "react";
 import ShowHolidayComponent from "../../Hr/ShowHolidayComponent/ShowHolidayComponent";
 import { AddHrType } from "../../../../Context/AddHr";
 import PersonalAttachments from "../PersonalAttachments/PersonalAttachments";
+import { TableCell } from "../../../Table/TableCell";
+import { TableRow } from "../../../Table/TableRow";
+import CustomTable from "../../../Table";
 const Genralnformation = () => {
   const { openHr, HrType } = useContext(AddHrType)
   const [ShowHoliday, setShowHoliday] = useState(false)
@@ -21,7 +24,7 @@ const Genralnformation = () => {
           setShowHoliday(true)
         }}
       >
-        <img src={process.env.PUBLIC_URL + "/icons/view.png"} className='pointer' />
+        <img src={process.env.PUBLIC_URL + "/icons/view.png"} className='pointer' alt="" />
       </div>,
 
 
@@ -95,7 +98,46 @@ const Genralnformation = () => {
 
 
           </p>
-          <DataTableComponent className={"overflow-x-hidden w-100"} data={data} columns={columns} />
+        <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+
+          {/* <DataTableComponent 
+          className={"overflow-x-hidden w-100"} 
+          data={data} 
+          columns={columns} 
+          /> */}
+<CustomTable columns={columns} data={data}>
+                  {data && data.length > 0
+                    ? data.map(
+                        (
+                          {
+                            id,
+                            employeeName,
+                            employeeCode,
+                            holidayType,
+                            holidayDate,
+                            display
+                            
+                          },
+                          index
+                        ) => (
+                          <TableRow
+                            className={`my-2 border !border-[#efaa207f] ${
+                              index % 2 === 0 ? "bg-[#151521]" : ""
+                            }`}
+                            key={index}
+                          >
+                            <TableCell textColor="#ffffff7f">{id}</TableCell>
+                            <TableCell>{employeeName}</TableCell>
+                            <TableCell>{employeeCode}</TableCell>
+                            <TableCell>{holidayType}</TableCell>
+                            <TableCell>{holidayDate}</TableCell>
+                            <TableCell>{display}</TableCell>
+                          </TableRow>
+                        )
+                      )
+                    : null}
+                </CustomTable>
+        </div>
 
 
         </div>
