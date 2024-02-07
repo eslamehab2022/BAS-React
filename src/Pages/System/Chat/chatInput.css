@@ -1,0 +1,11 @@
+.chatInputContainer .react-emoji {
+  position: static !important;
+}
+.chatInputContainer .react-emoji-picker--container {
+  bottom: 13% !important;
+  top: unset !important;
+}
+.chatInputContainer .react-input-emoji--container {
+  border: unset !important;
+  direction: rtl !important;
+}

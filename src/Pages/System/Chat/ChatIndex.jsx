@@ -113,13 +113,15 @@ const ChatIndex = () => {
                 return (
                   <Link
                     to={`/System/chat/saudia/${user.id}`}
-                    className="my-2 p-2 pointer flex  border !border-transparent hover:!border-[#EFAA20] gap-3  mx-2"
+                    className="my-2 p-2  pointer flex  border !border-transparent hover:!border-[#EFAA20] gap-3  mx-2"
                     key={user.id}
                   >
                     <Image
                       src={user.img}
                       alt="userimg"
-                      className={"w-full h-[40px] rounded-[50%]"}
+                      className={
+                        "w-full h-[40px] relative  rounded-[50%]"
+                      }
                     />
 
                     <div className="flex flex-col">

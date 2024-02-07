@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react";
 import styles from "./MainProjects.module.css";
 import "./MainProjects.css";
-import DesignRequestChart from "../../../../Components/System/Requests/DesignRequestChart/DesignRequestChart";
+import DesignRequestChart from "../../../../Components/System/Requests/DesignRequestChart/DesignRequestChart.js";
 import DataTableComponent from "../../../../Components/DataTableComponent.jsx";
 
 import { Button } from "react-bootstrap";
-import ConfirmPoper from "../../../../Components/System/ConfirmPoper";
-import PieChart from "../../../../Components/pieChart";
+import ConfirmPoper from "../../../../Components/System/ConfirmPoper.jsx";
+import PieChart from "../../../../Components/pieChart.jsx";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import ShowProjectComponent from "../../../../Components/System/Projects/ShowProjectComponent";
-import EditProject from "../../../../Components/System/Projects/EditProject/EditProject";
+import ShowProjectComponent from "../../../../Components/System/Projects/ShowProjectComponent.js";
+import EditProject from "../../../../Components/System/Projects/EditProject/EditProject.js";
 import { AddReportType } from "../../../../Context/AddReport.js";
 import Image from "../../../../Components/Image.jsx";
 import { TableCell } from "../../../../Components/Table/TableCell.jsx";
@@ -147,7 +147,6 @@ const NestedMainProjects = () => {
                             ClientType,
                             createdAt,
                             ProjectType,
-                            
                             display,
                             edit,
                           },
@@ -171,7 +170,7 @@ const NestedMainProjects = () => {
                         )
                       )
                     : null}
-                </CustomTable>
+              </CustomTable>
             </div>
           </fieldset>
         </div>

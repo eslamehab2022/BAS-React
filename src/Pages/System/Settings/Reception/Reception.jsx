@@ -167,7 +167,7 @@ const SubCategoryBtn = ({ title, active, setActive, index, setTerms }) => {
 
 const Reception = () => {
   const { ReciptionType, setReceptionType } = useContext(SettingContext);
-  const { id, setId } = useState(null);
+  const [ id, setId ] = useState(null);
   const [visitsData, setVisitsData] = useState([]);
   const [openPdf, setOpenPdf] = useState(false);
   const [active, setActive] = useState(0);

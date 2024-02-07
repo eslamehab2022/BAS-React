@@ -23,4 +23,15 @@
     border-radius: 11px;
     border: 1px dashed #434362;
 }
-
+.apexcharts-toolbar{
+    top: 3px !important;
+    
+}
+.apexcharts-canvas{
+    padding-top: 15px;
+}
+.apexcharts-menu{
+    border: none !important;
+    padding: 0px !important;
+    right: 0px !important;
+}

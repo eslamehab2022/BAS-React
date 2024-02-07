@@ -9,7 +9,7 @@ const SearchUsers = () => {
   const users = Array.from({ length: 15 });
   return (
     <div>
-      <div className="search-users ">
+      <div className="search-users scrollbar-none ">
         <div className="d-flex justify-content-between align-items-center m-2">
           <p className="text-center my-3 text-white   ">كل الموظفين</p>
           <NavDropdown
@@ -50,7 +50,7 @@ const SearchUsers = () => {
           <Link
             to={"/System/Hr/Users"}
             key={index}  
-            className="tab d-flex  py-1 "
+            className="tab d-flex mb-1 py-1 border !border-transparent hover:!border-[#EFAA20]"
           >
             <Image
               src={process.env.PUBLIC_URL + "/People/islam.jpg"}
@@ -58,8 +58,8 @@ const SearchUsers = () => {
               className="user-img  "
             />
             <div className="d-flex flex-column me-3 ">
-              <h2 className=" name-header text-white  my-0">اسلام إيهاب</h2>
-              <p className="main-text">Islam@bsa.com</p>
+              <h2 className="text-white text-base font-medium">اسلام إيهاب</h2>
+              <p className="text-white/30 text-sm font-normal">Islam@bsa.com</p>
             </div>
           </Link>
         ))}

@@ -15,6 +15,7 @@ class MonthlyApexChart extends React.Component {
         chart: {
           height: 350,
           type: "bar",
+          
         },
         plotOptions: {
           bar: {

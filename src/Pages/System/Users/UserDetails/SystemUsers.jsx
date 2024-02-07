@@ -55,26 +55,26 @@ const SystemUsers = () => {
       >
         <SystemControler />
 
-        <div className="row">
-          <div className="col-md-6">
-            <div className="row">
-              <div className="col-md-6">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="">
                 <AllUserCategories />
               </div>
-              <div className="col-md-6">
+              <div className="">
                 <SearchUsers />
               </div>
             </div>
           </div>
 
-          <div className="col-md-6">
-            <div className="show-employee py-4 px-2 w-100 ">
+          <div className="">
+            <div className="show-employee py-4 px-2 w-100 scrollbar-none ">
               <div className="show-employee-header">
                 <div className="d-flex justify-content-between">
-                  <p className="golden">مدير قسم / البرمجة</p>
-                  <div>
-                    <Button className="export-bg ms-2 ">تصدير CSV </Button>
-                    <Button className="export-bg ms-2"> تصدير Excel </Button>
+                  <p className="text-[#D59921] mb-5 font-medium">مدير قسم / البرمجة</p>
+                  <div className="flex gap-1">
+                    <button className="text-xs font-medium h-7 px-4 rounded-[3px] bg-[#D9D9D980]">تصدير CSV </button>
+                    <button className="text-xs font-medium h-7 px-4 rounded-[3px] bg-[#D9D9D980]"> تصدير Excel </button>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between w-100">
