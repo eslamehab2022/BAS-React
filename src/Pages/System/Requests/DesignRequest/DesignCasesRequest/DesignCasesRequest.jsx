@@ -21,7 +21,7 @@ const DesignCasesRequest = () => {
 
   const DesignCasesProjects = Array.from({ length: 10 }).map((_, index) => {
     return {
-      id: index+1,
+      id: index + 1,
       ProjectName: "BSA",
       ProjectNumber: "53543",
       createdAt: "12-10-2023",
@@ -112,7 +112,8 @@ const DesignCasesRequest = () => {
         setChartColor("#E40038  ");
 
         break;
-        default: break;
+      default:
+        break;
     }
   }, [DesignProjectType]);
 
@@ -126,13 +127,11 @@ const DesignCasesRequest = () => {
   return (
     <>
       {showProject ? (
-        <div className="AllRequests-scroll">
-          (
+        <div className="AllRequests-scroll h-[600px] scrollbar-none">
           <ShowDesignRequest
             DesignProjectType={DesignProjectType}
             setShowProject={setShowProject}
           />
-          )
         </div>
       ) : (
         <div className="AllRequests p-3">
@@ -159,48 +158,46 @@ const DesignCasesRequest = () => {
               </legend>
 
               <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
-
                 {/* <DataTableComponent
                   
                   columns={columns}
                   data={DesignCasesProjects}
                 /> */}
                 <CustomTable columns={columns} data={DesignCasesProjects}>
-                {DesignCasesProjects && DesignCasesProjects.length > 0
-            ? DesignCasesProjects.map(
-                (
-                  {
-                    id,
-                    ProjectName,
-                    ProjectNumber,
-                    createdAt,
-                    ProjectType,
-                    status,
-                    display,
-                    edit
-                    
-                  },
-                  index
-                ) => (
-                  <TableRow
-                    className={`my-2 border !border-[#efaa207f] ${
-                      index % 2 === 0 ? "bg-[#151521]" : ""
-                    }`}
-                    key={index}
-                  >
-                    <TableCell textColor="#ffffff7f">{id}</TableCell>
-                    <TableCell>{ProjectName}</TableCell>
-                    <TableCell>{ProjectNumber}</TableCell>
-                    <TableCell>{createdAt}</TableCell>
-                    <TableCell>{ProjectType}</TableCell>
-                    <TableCell>{status}</TableCell>
-                    
-                    <TableCell>{display}</TableCell>
-                    <TableCell>{edit}</TableCell>
-                  </TableRow>
-                )
-              )
-            : null}
+                  {DesignCasesProjects && DesignCasesProjects.length > 0
+                    ? DesignCasesProjects.map(
+                        (
+                          {
+                            id,
+                            ProjectName,
+                            ProjectNumber,
+                            createdAt,
+                            ProjectType,
+                            status,
+                            display,
+                            edit,
+                          },
+                          index
+                        ) => (
+                          <TableRow
+                            className={`my-2 border !border-[#efaa207f] ${
+                              index % 2 === 0 ? "bg-[#151521]" : ""
+                            }`}
+                            key={index}
+                          >
+                            <TableCell textColor="#ffffff7f">{id}</TableCell>
+                            <TableCell>{ProjectName}</TableCell>
+                            <TableCell>{ProjectNumber}</TableCell>
+                            <TableCell>{createdAt}</TableCell>
+                            <TableCell>{ProjectType}</TableCell>
+                            <TableCell>{status}</TableCell>
+
+                            <TableCell>{display}</TableCell>
+                            <TableCell>{edit}</TableCell>
+                          </TableRow>
+                        )
+                      )
+                    : null}
                 </CustomTable>
               </div>
             </fieldset>
@@ -209,7 +206,7 @@ const DesignCasesRequest = () => {
       )}
 
       {editRequest && (
-        <div className="AllRequests-scroll">
+        <div className="AllRequests-scroll scrollbar-none">
           <EditDesignRequest
             editRequest={editRequest}
             setEditRequest={setEditRequest}

@@ -50,7 +50,7 @@ export default function CustomSelect({children,...props}) {
           onChange={handleChange}
           input={<OutlinedInput sx={{paddingRight: "0px !important"}} />}
           IconComponent={MdKeyboardArrowLeft}
-          {...props}
+          
           renderValue={(selected) => {
             if (!selected) {
               return <span className='text-white/50 '>ابحث عن ....</span>;
@@ -88,6 +88,7 @@ export default function CustomSelect({children,...props}) {
               transform: "none"
             },
           }}
+          {...props}
         >
           {children}
           

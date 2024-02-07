@@ -1,5 +1,7 @@
 import React from "react";
+import { RiEdit2Line } from "react-icons/ri";
 import { Button, Form, Modal, NavDropdown } from "react-bootstrap";
+import IconButton from '@mui/material/IconButton';
 import "./index.css";
 import { useState } from "react";
 import EditDesignRequest from "../Requests/EditRequest/EditDesignRequest";
@@ -9,6 +11,7 @@ import Image from "../../Image";
 import CustomModal from "../../Modals/CustomModal";
 import SuccessfullModal from "../../Modals/SuccessfullModal";
 import CommentModel from "../../Modals/CommentModel";
+import { IoMdMore } from "react-icons/io";
 const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
   const [showImg, setShowImg] = useState(false);
   const [imgSrc, setImgSrc] = useState(
@@ -53,7 +56,7 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
   };
 
   return (
-    <div className="show-Design   p-2">
+    <div className="show-Design">
       {showImg && (
         <Modal
           size="lg"
@@ -80,7 +83,7 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
         message={"هل انت متاكد من قبول الطلب"}
       />
       <SuccessfullModal
-        show={finishedRefuse||ConfirmAcceptRequest}
+        show={finishedRefuse || ConfirmAcceptRequest}
         message={message}
         handleClose={() => {
           setConfirmAcceptRequest(false);
@@ -113,7 +116,7 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
         handleClose={handleDeleteRequest}
       />
 
-      {/* {editRequest && (
+      {editRequest && (
         <EditDesignRequest
           editRequest={editRequest}
           setEditRequest={setEditRequest}
@@ -127,13 +130,13 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
           setEditRequest={setEditRequest}
           text={"تم تعديل الطلب فى المشاريع بنجاح  "}
         />
-      )} */}
+      )}
 
-      <div className="border-golden">
-        <div className="row px-2 py-3">
+      <div className="border-golden mb-4">
+        {/* <div className="row px-2 py-3">
           <div className="col-md-6 mb-2">
-            <p className="text-white">
-              اسم المشروع : <span>BSA</span>{" "}
+            <p className="text-white flex gap-2">
+              اسم المشروع : <span className="text-white/30">BSA</span>{" "}
             </p>
           </div>
           <div className="col-md-6   mb-2">
@@ -143,8 +146,8 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
             </div>
           </div>
           <div className="col-md-6 mb-2">
-            <p className="text-white">
-              نوع المشروع : <span>التصميم</span>{" "}
+            <p className="text-white flex gap-2">
+              نوع المشروع : <span className="text-white/30">التصميم</span>{" "}
             </p>
           </div>
           <div className="col-md-6 mb-2">
@@ -165,9 +168,9 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
             </p>
           </div>
           <div className="col-md-6 mb-2">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              رقم الطلب : <span> 0123</span>{" "}
+              رقم الطلب : <span className="text-white/30"> 0123</span>{" "}
             </p>
           </div>
 
@@ -255,80 +258,205 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
               ""
             )}
           </div>
+        </div> */}
+
+        <div className="row p-4 justify-between">
+          <div className="col-6 flex flex-col items-start gap-4">
+            <p className="text-white flex gap-2">
+              اسم المشروع : <span className="text-white/30">BSA</span>{" "}
+            </p>
+            <p className="text-white flex gap-2">
+              نوع المشروع : <span className="text-white/30">التصميم</span>{" "}
+            </p>
+            <p className="text-white flex gap-2">
+              {" "}
+              رقم الطلب : <span className="text-white/30"> 0123</span>{" "}
+            </p>
+          </div>
+          <div className="col-6 flex flex-col items-end gap-4">
+          <div className="flex gap-2 justify-start">
+              <button className="text-xs font-medium bg-[#D9D9D980] text-white py-1 px-3 rounded-[3px]">تصدير CSV </button>
+              <button className="text-xs font-medium bg-[#D9D9D980] text-white py-1 px-3 rounded-[3px]"> تصدير Excel </button>
+            </div>
+            <div className="">
+            <p className="text-white text-xl font-normal">
+                
+                الحالة :
+                {DesignProjectType === "inProgress" ? (
+                  <span>قيد التنفيذ</span>
+                ) : DesignProjectType === "pending" ? (
+                  <span>فى انتظار الموافقة</span>
+                ) : DesignProjectType === "rejected" ? (
+                  <span>مرفوضة</span>
+                ) : (
+                  ""
+                )}
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="">
+                <button onClick={()=> setEditRequest(true)} className="flex items-center gap-1 bg-[#19B159] rounded-[3px] text-white text-xs p-1">
+                  تعديل
+                  <RiEdit2Line/>
+                  {/* <img src="/icons/edit.svg" alt="" className="filter invert" /> */}
+                </button>
+              </div>
+              <div className="">
+                {DesignProjectType == "inProgress" ? (
+                  <div className="flex items-center gap-3">
+                    
+
+                    <NavDropdown
+                      title={
+                          <IoMdMore color="white" fontSize={25} />
+                      }
+                      className="fs-5 "
+                    >
+                      <NavDropdown.Item
+                        className="text-end  d-flex justify-content-between  align-items-center"
+                        href="#action/3.2"
+                      >
+                        <span> المشروع</span>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        className="text-end  d-flex justify-content-between align-items-center"
+                        href="#action/3.3"
+                      >
+                        <span> العميل</span>
+                      </NavDropdown.Item>
+                      <NavDropdown.Item
+                        className="text-end  d-flex justify-content-between align-items-center"
+                        href="#action/3.3"
+                      >
+                        <span> الحسابات</span>
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </div>
+                ) : DesignProjectType === "pending" ? (
+                  <div className="d-flex gap-3">
+                    <Image
+                      className="pointer confirm"
+                      onClick={() => {
+                        setAcceptRequest(true);
+                      }}
+                      src={process.env.PUBLIC_URL + "/icons/confirm.png"}
+                    />
+                    <Image
+                      className="pointer declince"
+                      onClick={() => {
+                        setRefuseRequest(true);
+                      }}
+                      src={process.env.PUBLIC_URL + "/icons/declince.png"}
+                    />
+                  
+                  </div>
+                ) : DesignProjectType === "rejected" ? (
+                  <div className="d-flex gap-3">
+                    <Image
+                      className="pointer confirm"
+                      onClick={() => {
+                        setAcceptRequest(true);
+                      }}
+                      src={process.env.PUBLIC_URL + "/icons/confirm.png"}
+                    />
+
+
+
+                    <Image
+                      className="pointer delete-icon"
+                      onClick={() => {
+                        setDeleteRequest(true);
+                      }}
+                      src={process.env.PUBLIC_URL + "/icons/deleteRequest.png"}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+                  
+            </div>
+          </div>
         </div>
       </div>
-      <fieldset className="border-golden my-4">
+
+      <div className="h-[600px] overflow-scroll scrollbar-none px-4">
+      
+      
+      
+      
+      <fieldset className="border-golden my-4 p-4">
         <legend className="text-center">بيانات المشروع</legend>
         <div className="row px-2">
-          <div className="col-md-6 mt-2">
-            <p className="text-white">
-              اسم المالك : <span>BSA</span>
+          <div className="col-md-6 mb-3">
+            <p className="text-white flex gap-2">
+              اسم المالك : <span className="text-white/30">BSA</span>
             </p>
           </div>
-          <div className="col-md-6 mt-2">
-            <p className="text-white">
+          <div className="col-md-6 mb-3">
+            <p className="text-white flex gap-2">
               {" "}
-              موقع المشروع : <span>السعودية</span>
+              موقع المشروع : <span className="text-white/30">السعودية</span>
             </p>
           </div>
-          <div className="col-md-6 mt-2">
-            <p className="text-white">
+          <div className="col-md-6 mb-3">
+            <p className="text-white flex gap-2">
               {" "}
-              المدينة : <span>السعودية</span>
+              المدينة : <span className="text-white/30">السعودية</span>
             </p>
           </div>
-          <div className="col-md-6 mt-2">
-            <p className="text-white">
+          <div className="col-md-6 mb-3">
+            <p className="text-white flex gap-2">
               {" "}
-              الحي : <span>السعودية</span>
+              الحي : <span className="text-white/30">السعودية</span>
             </p>
           </div>
-          <div className="col-md-6 mt-2">
-            <p className="text-white">
+          <div className="col-md-6 mb-3">
+            <p className="text-white flex gap-2">
               {" "}
-              رقم القطعة : <span>___ </span>
+              رقم القطعة : <span className="text-white/30">___ </span>
             </p>
           </div>
-          <div className="col-md-6 mt-2">
-            <p className="text-white">
+          <div className="col-md-6 mb-3">
+            <p className="text-white flex gap-2">
               {" "}
-              رقم المخطط : <span>___ </span>
+              رقم المخطط : <span className="text-white/30">___ </span>
             </p>
           </div>
-          <div className="col-md-6 mt-2">
-            <p className="text-white">
+          <div className="col-md-6 mb-3">
+            <p className="text-white flex gap-2">
               {" "}
-              نوع المشروع : <span>التصميم </span>
+              نوع المشروع : <span className="text-white/30">التصميم </span>
             </p>
           </div>
         </div>
       </fieldset>
-
-      <fieldset className="border-golden my-4">
+                  
+      <fieldset className="border-golden my-4 p-4">
         <legend className="text-center">بيانات المالك</legend>
         <div className="row px-2">
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              نوع العميل : <span>BSA</span>
+              نوع العميل : <span className="text-white/30">BSA</span>
             </p>
           </div>
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              رقم الشهادة الضربية : <span> ــــــــــ </span>
+              رقم الشهادة الضربية : <span className="text-white/30"> ــــــــــ </span>
             </p>
           </div>
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              نوع الهوية : <span></span>
+              نوع الهوية : <span className="text-white/30"></span>
             </p>
           </div>
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              البريد الالكتروني : <span> </span>
+              البريد الالكتروني : <span className="text-white/30"> </span>
             </p>
           </div>
           <div className="col-md-6 mt-3 mb-3">
@@ -341,42 +469,44 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
               alt="owner img"
             />
 
-            <p className="text-white"> صورة الهوية </p>
+            <p className="text-white flex gap-2"> صورة الهوية </p>
           </div>
 
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              رقم الجوال : <span> </span>
+              رقم الجوال : <span className="text-white/30"> </span>
             </p>
           </div>
         </div>
       </fieldset>
-      <fieldset className="border-golden my-4">
+
+
+      <fieldset className="border-golden my-4 p-4">
         <legend className="text-center">بيانات الوكيل</legend>
         <div className="row px-2">
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              نوع العميل : <span>BSA</span>
+              نوع العميل : <span className="text-white/30">BSA</span>
             </p>
           </div>
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              رقم الوكالة : <span> ــــــــــ </span>
+              رقم الوكالة : <span className="text-white/30"> ــــــــــ </span>
             </p>
           </div>
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              اسم الصك : <span></span>
+              اسم الصك : <span className="text-white/30"></span>
             </p>
           </div>
           <div className="col-md-6 mt-3">
-            <p className="text-white">
+            <p className="text-white flex gap-2">
               {" "}
-              رقم الصك : <span> </span>
+              رقم الصك : <span className="text-white/30"> </span>
             </p>
           </div>
           <div className="col-md-6 mt-3 mb-3">
@@ -408,14 +538,15 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
       </fieldset>
 
       <div className="my-3 mx-2 d-flex justify-content-end">
-        <Button
+        <button
           onClick={() => {
             setShowProject(false);
           }}
-          className="sumbmitAddUpdateUser"
+          className="bg-[#EFAA20] text-black transition-colors hover:bg-[#2B2B40] hover:!text-white border !border-[#EFAA20] py-1 px-5 rounded-[6px]"
         >
           موافق
-        </Button>
+        </button>
+      </div>
       </div>
     </div>
   );

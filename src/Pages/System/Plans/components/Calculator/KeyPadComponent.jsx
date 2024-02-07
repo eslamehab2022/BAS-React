@@ -6,7 +6,7 @@ const Button = ({ bgColor, name, children, onClick,cols="col-span-1" }) => {
       style={{
         backgroundColor: bgColor,
       }}
-      className={`${cols} border !border-[#464647] text-white w-full  text-[30px]`}
+      className={`${cols} border !border-[#464647] text-white w-full py-1.5 text-[30px]`}
       name={name}
       onClick={onClick}
     >
@@ -28,10 +28,10 @@ const KeyPadComponent = ({ onClick }) => {
 
       <Button
         bgColor={"#1E1E2D"}
-        name="."
+        name="%"
         onClick={(e) => onClick(e.target.name)}
       >
-        .
+        %
       </Button>
       <Button
         bgColor={"#1E1E2D"}

@@ -126,7 +126,7 @@ const ReviewCasesRequest = () => {
   return (
     <div className=" p-3">
       {showProject ? (
-        <div className="AllRequests-scroll">
+        <div className="AllRequests-scroll h-[600px] scrollbar-none">
           <ShowReviewRequest
             ReviewProjectType={ReviewProjectType}
             setShowProject={setShowProject}
@@ -205,7 +205,7 @@ const ReviewCasesRequest = () => {
       )}
 
       {editRequest && (
-        <div className="AllRequests-scroll">
+        <div className="AllRequests-scroll scrollbar-none">
           <EditReviewRequest
             editRequest={editRequest}
             setEditRequest={setEditRequest}

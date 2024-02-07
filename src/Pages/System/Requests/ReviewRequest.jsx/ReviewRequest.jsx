@@ -90,12 +90,11 @@ const ReviewRequest = () => {
       selector: (row) => row.edit,
     },
   ];
-  console.log(editRequest);
 
   return (
     <>
       {showProject ? (
-        <div className="AllRequests-scroll">
+        <div className="AllRequests-scroll scrollbar-none">
           <ShowReviewRequest
             ReviewProjectType={ReviewProjectType}
             setShowProject={setShowProject}
