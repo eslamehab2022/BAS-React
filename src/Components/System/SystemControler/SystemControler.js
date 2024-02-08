@@ -17,13 +17,15 @@ const SystemControler = ({ child }) => {
     <>
       <div className="user-control-model px-4  mb-4 d-flex align-items-center justify-content-between">
         <div className="  w-100">{child}</div>
-        <div className="icons  flex gap-1">
+        <div className="icons  flex  items-center gap-1">
           <IconButton onClick={handleShowCalculator} aria-label="calculator">
-            <Image
-              src={process.env.PUBLIC_URL + "/icons/Calculator.png"}
-              alt="Calculator Image"
-              className="pointer system-notification mx-1"
-            />
+            <div>
+              <Image
+                src={process.env.PUBLIC_URL + "/icons/Calculator.png"}
+                alt="Calculator Image"
+                className="pointer system-notification mx-1"
+              />
+            </div>
           </IconButton>
 
           <IconButton aria-label="messages">
@@ -40,11 +42,13 @@ const SystemControler = ({ child }) => {
             onClick={handleToggleNotifications}
             aria-label="notification"
           >
-            <Image
-              src={process.env.PUBLIC_URL + "/icons/notification.png"}
-              alt="notification Image"
-              className="pointer system-notification mx-1"
-            />
+            <div>
+              <Image
+                src={process.env.PUBLIC_URL + "/icons/notification.png"}
+                alt="notification Image"
+                className="pointer system-notification mx-1"
+              />
+            </div>
           </IconButton>
         </div>
       </div>

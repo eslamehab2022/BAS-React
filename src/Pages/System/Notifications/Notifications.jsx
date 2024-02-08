@@ -62,6 +62,58 @@ const Notifications = ({ show }) => {
             </div>
           </div>
         </div>
+        <div className="h-[140px] pointer my-3 p-2 bg-[#2B2B40] rounded-[9px] w-90 mx-auto">
+          <div className="flex gap-3">
+            <Image
+              src={"/icons/Notifactionicon.png"}
+              alt="Notifactionicon image"
+              className={"w-[55px] h-[55px] rounded-[50%]"}
+            />
+            <div className="flex flex-col gap-2">
+              <p className="text-[15px] text-[#6A6A71]"> رساله جديدة </p>
+              <p className="text-[15px] text-white">
+                {" "}
+                لقد تم الرد علي رسالتك يمكنك تفقد محادثاتي:{" "}
+              </p>
+            </div>
+          </div>
+          <div className="flex mt-3 justify-end items-center gap-4">
+            <div className="flex items-center gap-2">
+              <p className="text-white">12:30</p>
+              <FaRegClock color="#B7B7B7" />
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-white">15-10-2023</p>
+              <MdOutlineDateRange color="#B7B7B7" />
+            </div>
+          </div>
+        </div>
+        <div className="h-[140px] pointer my-3 p-2 bg-[#2B2B40] rounded-[9px] w-90 mx-auto">
+          <div className="flex gap-3">
+            <Image
+              src={"/icons/Notifactionicon.png"}
+              alt="Notifactionicon image"
+              className={"w-[55px] h-[55px] rounded-[50%]"}
+            />
+            <div className="flex flex-col gap-2">
+              <p className="text-[15px] text-[#6A6A71]"> رساله جديدة </p>
+              <p className="text-[15px] text-white">
+                {" "}
+                لقد تم الرد علي رسالتك يمكنك تفقد محادثاتي:{" "}
+              </p>
+            </div>
+          </div>
+          <div className="flex mt-3 justify-end items-center gap-4">
+            <div className="flex items-center gap-2">
+              <p className="text-white">12:30</p>
+              <FaRegClock color="#B7B7B7" />
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-white">15-10-2023</p>
+              <MdOutlineDateRange color="#B7B7B7" />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
