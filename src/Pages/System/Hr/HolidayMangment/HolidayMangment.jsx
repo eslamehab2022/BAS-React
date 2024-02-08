@@ -88,13 +88,13 @@ const HolidayMangment = () => {
       />
       {openHr === true && HrType == "holiday" ? <AddHoliday /> : ""}
 
-      <div className="row">
-        <div className="col-md-3">
-          <div className={`${style.holidayTypesContainer}`}>
+      <div className="grid grid-cols-12 gap-2">
+        <div className="col-span-3">
+          <div className={`${style.holidayTypesContainer} py-5 !px-0`}>
             <SearchComponent />
-            <p className="text-white mt-2">كل الاجازات</p>
-            <div className="flex my-3 p-2  gap-3 w-full  border !border-transparent hover:!border-[#EFAA20] pointer">
-              <div className={`${style.pdfbackground} `}>
+            <p className="text-white mt-2 text-sm px-2">كل الاجازات</p>
+            <div className="flex items-center p-2  gap-3 my-3 w-full  border !border-transparent hover:!border-[#EFAA20] pointer ">
+            <div className={`bg-[#151521] p-2 rounded-md `}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -136,10 +136,10 @@ const HolidayMangment = () => {
                   </defs>
                 </svg>
               </div>
-              <p className="text-white">اجازة مرضي</p>
+              <p className="text-white text-sm">اجازة مرضي</p>
             </div>
-            <div className="flex p-2  gap-3 my-3 w-full  border !border-transparent hover:!border-[#EFAA20] pointer ">
-              <div className={`${style.pdfbackground} `}>
+            <div className="flex items-center p-2  gap-3 my-3 w-full  border !border-transparent hover:!border-[#EFAA20] pointer ">
+              <div className={`bg-[#151521] p-2 rounded-md `}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -181,11 +181,11 @@ const HolidayMangment = () => {
                   </defs>
                 </svg>
               </div>
-              <p className="text-white">اجازة عارضة</p>
+              <p className="text-white text-sm">اجازة عارضة</p>
             </div>
           </div>
         </div>
-        <div className="col-md-9">
+        <div className="col-span-9">
           <div className={`${style.allhoildays} allhoildaysContainer p-4`}>
             <p className="text-white  text-xl">كل الاجازات المخصصة</p>
             <div className="d-flex gap-3 mt-3 w-100">

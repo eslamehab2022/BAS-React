@@ -7,16 +7,45 @@ import Image from "../../../Components/Image";
 import { SideBarProvider } from "../../../Context/SideBarProvider";
 const SystemIndex = () => {
   const { collapsed, setCollapsed } = useContext(SideBarProvider);
-
   return (
-    <section className="full-system over-flow-hidden  system-bg ">
-      <div className="   w-90 mx-auto d-flex gap-2  tablet:relative justify-end mt-1 ">
+    <section className="full-system system-bg min-h-screen relative">
+      <header className="container-lg">
+        <nav className="flex justify-end">
+          <div className="">
+            <Image
+              src={process.env.PUBLIC_URL + "/icons/systemlogo.png"}
+              alt="BSA logo"
+              className="system-logo text-white"
+            />
+          </div>
+        </nav>
+      </header>
+
+      <section className="container px-10 flex justify-between gap-3 py-2 ">
+        <div className="max-w-xs ">
+          <AsideBar />
+        </div>
+        <main className="w-full transition-all">
+        <Outlet />
+        </main>
+      </section>
+    </section>
+  );
+};
+
+export default SystemIndex;
+/*
+<section className="full-system over-flow-hidden  system-bg ">
+      <div className="w-90 mx-auto d-flex gap-2  tablet:relative justify-end mt-1 ">
         <Image
           src={process.env.PUBLIC_URL + "/icons/systemlogo.png"}
           alt="BSA logo"
           className="system-logo text-white"
         />
       </div>
+
+
+      
       <div
         className={`d-flex gap-4 mx-auto  w-90  ${
           collapsed && " justify-between"
@@ -47,7 +76,4 @@ const SystemIndex = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-export default SystemIndex;
+ */

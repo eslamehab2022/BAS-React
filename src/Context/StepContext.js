@@ -120,7 +120,7 @@ const StepContext = ({ children }) => {
   };
 
   return (
-    <div>
+    <>
       {confirmSubmit && (
         <ConfirmPoper
           confirmPoper={confirmSubmit}
@@ -158,7 +158,7 @@ const StepContext = ({ children }) => {
       >
         {children}
       </multiStepContext.Provider>
-    </div>
+    </>
   );
 };
 

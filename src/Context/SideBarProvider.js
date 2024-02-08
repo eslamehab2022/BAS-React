@@ -1,26 +1,15 @@
-import React, { createContext, useState } from 'react'
-import App from '../App'
+import React, { createContext, useState } from "react";
+import App from "../App";
 
-
-export const SideBarProvider = React.createContext()
+export const SideBarProvider = React.createContext();
 const SidebarContext = ({ children }) => {
-    const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(false);
 
+  return (
+    <SideBarProvider.Provider value={{ collapsed, setCollapsed }}>
+      {children}
+    </SideBarProvider.Provider>
+  );
+};
 
-
-
-
-
-    return (
-        <div>
-            <SideBarProvider.Provider value={{ collapsed, setCollapsed}}>
-
-                {children}
-
-            </SideBarProvider.Provider>
-
-        </div>
-    )
-}
-
-export default SidebarContext 
+export default SidebarContext;

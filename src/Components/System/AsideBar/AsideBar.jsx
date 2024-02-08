@@ -59,7 +59,7 @@ const AsideBar = () => {
         collapsedWidth="100px !important"
         rootStyles={{
           color: "#FFF",
-          height: "897px",
+          // height: "897px",
           border: "2px solid #EFAA20 !important",
           borderRadius: "19px",
           overflow:"hidden"

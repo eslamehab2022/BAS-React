@@ -140,7 +140,7 @@ const AllMeetings = () => {
           popup
           onSelectEvent={handleEditMeeting}
           defaultDate={moment().toDate()}
-          defaultView="week"
+          defaultView="month"
           events={events}
           localizer={localizer}
           onEventDrop={moveEvent}

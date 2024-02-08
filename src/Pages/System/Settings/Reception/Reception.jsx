@@ -276,7 +276,7 @@ const Reception = () => {
       />
 
       <div className="grid grid-cols-4 gap-3">
-        <div className="bg-[#1E1E2D] h-[801px]  rounded-[19px]">
+        <div className="bg-[#1E1E2D]  rounded-[19px]">
           <div className="p-3 ">
             <div className="my-3">
               <p className="text-white text-[15px] ">الاستقبال</p>
@@ -291,7 +291,7 @@ const Reception = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#1E1E2D] h-[801px]   rounded-[19px]">
+        <div className="bg-[#1E1E2D]   rounded-[19px]">
           <div className="pt-4 px-3">
             <p className="text-white text-[15px]">كل الزيارات</p>
           </div>
@@ -396,7 +396,7 @@ const Reception = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#1E1E2D] h-[801px]  rounded-[19px] col-span-2 ">
+        <div className="bg-[#1E1E2D]  rounded-[19px] col-span-2 ">
           <div className="p-3">
             {status === "Exports" ? (
               <p className="text-xl text-white">كل الزيارات الصادرة</p>

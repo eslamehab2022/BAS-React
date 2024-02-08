@@ -1303,7 +1303,10 @@ height: 250px !important;
 .rbc-btn-group button{
   
 }
-.rbc-btn-group button:hover , .rbc-active{
+.rbc-btn-group button:hover ,
+.rbc-btn-group button:active ,
+.rbc-btn-group button:focus ,
+ .rbc-active{
   background-color: #1E1E2D !important; 
   border-color: #EFAA20 !important;
 }
