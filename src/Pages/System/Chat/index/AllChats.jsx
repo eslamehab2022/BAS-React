@@ -1,11 +1,10 @@
 import React from "react";
-import Image from "../../../Components/Image";
+import Image from "../../../../Components/Image";
 
 const AllChats = () => {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <div className="flex flex-col justify-center items-center">
-        {/* Message */}
         <Image
           src="/icons/Message.gif"
           className={"w-[308px] h-[308px]"}

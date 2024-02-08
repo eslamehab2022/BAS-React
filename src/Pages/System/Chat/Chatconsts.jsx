@@ -5,6 +5,8 @@ export const saudiaUsers = [
     email: "ehab@bsa.com",
     img: "/icons/noprofileimage.png",
     poisition: "مدير مكتب",
+    status: "notConnected",
+    country: "saudia",
   },
   {
     id: 1,
@@ -12,6 +14,9 @@ export const saudiaUsers = [
     email: "wadd@bsa.com",
     img: "/icons/noprofileimage.png",
     poisition: "مساعدة مدير",
+    status: "notConnected",
+    country: "saudia",
+
   },
   {
     id: 2,
@@ -19,6 +24,9 @@ export const saudiaUsers = [
     email: "ibrahim@bsa.com",
     img: "/icons/noprofileimage.png",
     poisition: " محاسب",
+    status: "notConnected",
+    country: "saudia",
+
   },
 ];
 
@@ -29,6 +37,9 @@ export const egypetUsers = [
     email: "eslam@bsa.com",
     img: "/People/islam.jpg",
     poisition: " مدير فريق البرمجة",
+    status: "notConnected",
+    country: "egypet",
+
   },
   {
     id: 1,
@@ -36,6 +47,8 @@ export const egypetUsers = [
     email: "habeeb@bsa.com",
     img: "/People/habeeb.jpg",
     poisition: " مطور واجهة امامي  ",
-    
+    status: "connected",
+    country: "egypet",
+
   },
 ];

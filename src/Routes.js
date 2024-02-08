@@ -69,9 +69,9 @@ import Plans from "./Pages/System/Plans";
 import PlansProjects from "./Pages/System/Plans/Projects";
 import AddProject from "./Pages/System/Plans/Projects/AddProject";
 import HrUsers from "./Components/System/Hr/UserDetails/HrUsers";
-import ChatIndex from "./Pages/System/Chat/ChatIndex";
-import AllChats from "./Pages/System/Chat/AllChats";
-import UserChat from "./Pages/System/Chat/UserChat";
+import ChatIndex from "./Pages/System/Chat/index/ChatIndex";
+import AllChats from "./Pages/System/Chat/index/AllChats";
+import UserChat from "./Pages/System/Chat/UserChat/UserChat";
 
 const SignUP = lazy(() => import("./Pages/DashBoard/SignUP/SignUP"));
 const SignIn = lazy(() => import("./Pages/DashBoard/SignIn/SignIn"));
