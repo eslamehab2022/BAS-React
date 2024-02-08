@@ -25,7 +25,7 @@ const Notifications = ({ show }) => {
               </p>
             </div>
           </div>
-          <div className="flex justify-end items-center gap-4">
+          <div className="flex mt-3 justify-end items-center gap-4">
             <div className="flex items-center gap-2">
               <p className="text-white">12:30</p>
               <FaRegClock color="#B7B7B7" />
@@ -51,7 +51,7 @@ const Notifications = ({ show }) => {
               </p>
             </div>
           </div>
-          <div className="flex justify-end items-center gap-4">
+          <div className="flex mt-3 justify-end items-center gap-4">
             <div className="flex items-center gap-2">
               <p className="text-white">12:30</p>
               <FaRegClock color="#B7B7B7" />

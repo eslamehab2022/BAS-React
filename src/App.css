@@ -1377,3 +1377,13 @@ color: white;
   color: rgba(255, 255, 255, 0.5);
 
 }
+.meeting .rbc-time-content::-webkit-scrollbar{
+  display: none;
+}
+.rbc-time-header{
+  margin-right: 0px !important;
+  background: rgb(22, 22, 34);
+}
+.rbc-time-header .rbc-label{
+  display: none;
+}

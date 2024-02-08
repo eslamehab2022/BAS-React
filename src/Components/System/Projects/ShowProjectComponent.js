@@ -310,7 +310,7 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
         </Modal>
       )}
 
-      {confirmContinueProject && (
+      {/* {confirmContinueProject && (
         <Modal
           className="submitSystemPoper"
           size="lg"
@@ -349,9 +349,9 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
             </div>
           </Modal.Body>
         </Modal>
-      )}
+      )} */}
 
-      {continueProject && (
+      {/* {continueProject && (
         <Modal
           className="submitSystemPoper"
           size="lg"
@@ -389,7 +389,33 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
             </div>
           </Modal.Body>
         </Modal>
-      )}
+      )} */}
+
+
+<CustomModal
+        title="التاكيد"
+        show={continueProject}
+        message={"هل انت متاكد من استكمال هذا المشروع"}
+        handleSave={() => {
+          handleContinueProject()
+        }}
+        handleClose={() => {
+          setContinueProject(false)
+            
+        }}
+      />
+      <SuccessfullModal
+        show={confirmContinueProject}
+        message={"تم استكمال المشروع بنجاح"}
+        handleClose={() => {
+          setConfirmContinueProject(false);
+        }}
+      />
+
+
+
+
+
 
       {viewMore && (
         <Modal
@@ -776,7 +802,7 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
                   alt=""
                   src={process.env.PUBLIC_URL + "/icons/delete.png"}
                 />
-                <CustomModal
+        <CustomModal
         title="التاكيد"
         show={openDeleteModal}
         message={"هل انت متاكد من حذف المشروع"}
