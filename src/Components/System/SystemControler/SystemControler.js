@@ -3,10 +3,16 @@ import IconButton from "@mui/material/IconButton";
 import Calculator from "../../../Pages/System/Plans/components/Calculator";
 import { Link } from "react-router-dom";
 import Image from "../../Image";
+import Notifications from "../../../Pages/System/Notifications/Notifications";
+
 const SystemControler = ({ child }) => {
   const [showCalculator, setShowCalculator] = useState(false);
-  const handleCloseCalculator = () => setShowCalculator(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const handleShowCalculator = () => setShowCalculator(true);
+  const handleCloseCalculator = () => setShowCalculator(false);
+  const handleToggleNotifications = () =>
+    setShowNotifications(!showNotifications);
+
   return (
     <>
       <div className="user-control-model px-4  mb-4 d-flex align-items-center justify-content-between">
@@ -30,7 +36,10 @@ const SystemControler = ({ child }) => {
             </Link>
           </IconButton>
 
-          <IconButton aria-label="notification">
+          <IconButton
+            onClick={handleToggleNotifications}
+            aria-label="notification"
+          >
             <Image
               src={process.env.PUBLIC_URL + "/icons/notification.png"}
               alt="notification Image"
@@ -39,7 +48,7 @@ const SystemControler = ({ child }) => {
           </IconButton>
         </div>
       </div>
-
+      <Notifications show={showNotifications} />
       <Calculator show={showCalculator} onClose={handleCloseCalculator} />
     </>
   );

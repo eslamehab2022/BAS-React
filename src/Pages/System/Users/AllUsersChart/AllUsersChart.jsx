@@ -21,11 +21,11 @@ const AllUsersChart = () => {
     <div className="AllUsersChart">
       <SystemControler />
 
-      <div className="row">
-        <div className="col-md-3">
+      <div className="grid grid-cols-12 gap-2">
+        <div className="col-span-3">
           <AllUserCategories />
         </div>
-        <div className="col-md-9">
+        <div className="col-span-9">
           <Outlet />
         </div>
       </div>

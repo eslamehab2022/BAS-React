@@ -92,35 +92,35 @@ const AddFinancialClaims = () => {
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
-                اسم المشروع :<span className="main-text"> BSA</span>
+                اسم المشروع :<span className="text-white/20"> BSA</span>
               </p>
               <p className="projectdetails text-white w-50">
                 {" "}
                 اسم العميل:
-                <span className="main-text"> اسلام ايهاب</span>
+                <span className="text-white/20"> اسلام ايهاب</span>
               </p>
             </div>
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
-                نوع المشروع :<span className="main-text"> التصميم</span>
+                نوع المشروع :<span className="text-white/20"> التصميم</span>
               </p>
 
               <p className="projectdetails text-white w-50 ">
                 {" "}
-                رقم الطلب :<span className="main-text"> : 0003</span>
+                رقم الطلب :<span className="text-white/20"> : 0003</span>
               </p>
             </div>
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
-                البريد الاكترونى :<span className="main-text"></span>
+                البريد الاكترونى :<span className="text-white/20"></span>
               </p>
 
               <p className="projectdetails text-white w-50 ">
                 {" "}
                 رقم الجوال:
-                <span className="main-text"></span>
+                <span className="text-white/20"></span>
               </p>
             </div>
           </fieldset>
@@ -130,7 +130,7 @@ const AddFinancialClaims = () => {
               <p className="projectdetails text-white w-100">
                 {" "}
                 التعريف الضريبى:
-                <span className="main-text">
+                <span className="text-white/20">
                   {" "}
                   مكتب بدر عبد المحسن بن سليمان لاستشارات الهندسية
                 </span>
@@ -138,29 +138,29 @@ const AddFinancialClaims = () => {
               <p className="projectdetails text-white w-50">
                 {" "}
                 اسم العميل:
-                <span className="main-text"> اسلام ايهاب</span>
+                <span className="text-white/20"> اسلام ايهاب</span>
               </p>
             </div>
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
                 الرقم الضريبي :
-                <span className="main-text"> 300195565100003</span>
+                <span className="text-white/20"> 300195565100003</span>
               </p>
 
               <p className="projectdetails text-white w-50 ">
                 {" "}
-                الكود :<span className="main-text"> : 0003</span>
+                الكود :<span className="text-white/20"> : 0003</span>
               </p>
             </div>
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
-                العنوان :<span className="main-text">الرياض حي النخيل</span>
+                العنوان :<span className="text-white/20">الرياض حي النخيل</span>
               </p>
 
               <p className="projectdetails text-white w-50 ">
-                <span className="main-text"></span>
+                <span className="text-white/20"></span>
               </p>
             </div>
           </fieldset>
@@ -169,19 +169,19 @@ const AddFinancialClaims = () => {
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-100">
                 {" "}
-                تاريخ الفاتورة :<span className="main-text">2023-10-20</span>
+                تاريخ الفاتورة :<span className="text-white/20">2023-10-20</span>
               </p>
             </div>
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
                 الرقم الضريبي :
-                <span className="main-text"> 300195565100003</span>
+                <span className="text-white/20"> 300195565100003</span>
               </p>
 
               <p className="projectdetails text-white w-50 ">
                 {" "}
-                السادة :<span className="main-text"> : ........... </span>
+                السادة :<span className="text-white/20"> : ........... </span>
               </p>
             </div>
             <div className="flex w-90 m-auto  gap-3 ">
@@ -189,7 +189,7 @@ const AddFinancialClaims = () => {
                 {" "}
                 البريد الالكتروني :
               </p>
-              <span className="main-text"> Habeebnasr4@gmail.com</span>
+              <span className="text-white/20"> Habeebnasr4@gmail.com</span>
             </div>
           </fieldset>
           <fieldset className="showProjectBorder w-90 mx-auto pb-3 ">
@@ -197,29 +197,29 @@ const AddFinancialClaims = () => {
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-100">
                 {" "}
-                المبلغ الاجمالي :<span className="main-text">1000 ريال</span>
+                المبلغ الاجمالي :<span className="text-white/20">1000 ريال</span>
               </p>
             </div>
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
                 عدد الدفعات:
-                <span className="main-text"> 2</span>
+                <span className="text-white/20"> 2</span>
               </p>
 
               <p className="projectdetails text-white w-50 ">
                 {" "}
-                المبلغ المتبقي :<span className="main-text"> : 500 ريال</span>
+                المبلغ المتبقي :<span className="text-white/20"> : 500 ريال</span>
               </p>
             </div>
             <div className="d-flex w-90 m-auto justify-content-between">
               <p className="projectdetails text-white w-50">
                 {" "}
-                عدد الدفعات المتبقي :<span className="main-text"> 1</span>
+                عدد الدفعات المتبقي :<span className="text-white/20"> 1</span>
               </p>
 
               <p className="projectdetails text-white w-50 ">
-                <span className="main-text"></span>
+                <span className="text-white/20"></span>
               </p>
             </div>
           </fieldset>

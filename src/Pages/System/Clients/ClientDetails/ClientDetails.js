@@ -13,6 +13,7 @@ import ShowClientDetails from "../../../../Components/System/Clients/ShowClient/
 import CustomTable from "../../../../Components/Table/index.jsx";
 import { TableRow } from "../../../../Components/Table/TableRow.jsx";
 import { TableCell } from "../../../../Components/Table/TableCell.jsx";
+import DownloadButton from "../../../../Components/Buttons/DownloadButton.jsx";
 
 const ClientDetails = () => {
   const [showProject, setShowProject] = useState(false);
@@ -149,8 +150,8 @@ const ClientDetails = () => {
       </div>
       <div className="col-md-8  p-3   client-details-Component">
         <div className="flex justify-end gap-2 ">
-          <button className="text-xs font-medium bg-[#D9D9D980] text-white w-20 py-1 rounded-[3px]">تصدير CSV </button>
-          <button className="text-xs font-medium bg-[#D9D9D980] text-white w-20 py-1 rounded-[3px]"> تصدير Excel </button>
+          <DownloadButton>تصدير CSV </DownloadButton>
+          <DownloadButton> تصدير Excel </DownloadButton>
         </div>
         <div className="flex justify-end gap-2 ">
           <button className="mt-2 ms-5 flex justify-center gap-1 text-xs font-medium bg-[#9E0C1E] text-white w-20 py-1 rounded-[3px]">

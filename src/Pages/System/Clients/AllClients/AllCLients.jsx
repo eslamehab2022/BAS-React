@@ -21,8 +21,8 @@ const AllCLients = () => {
   return (
     <section className="h-100">
       <SystemControler />
-      <div className="row ">
-        <div className="col-md-3">
+      <div className="grid grid-cols-12 gap-2">
+        <div className="col-span-3">
           <AllCategories
             child={
               <div className="d-flex  flex-column   align-items-center ">
@@ -179,7 +179,7 @@ const AllCLients = () => {
             }
           />
         </div>
-        <div className="col-md-9">
+        <div className="col-span-9">
           <Outlet />
         </div>
       </div>

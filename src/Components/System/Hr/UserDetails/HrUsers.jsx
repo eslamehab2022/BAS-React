@@ -20,6 +20,7 @@ import Image from "../../../Image";
 import CustomModal from "../../../Modals/CustomModal";
 import SuccessfullModal from "../../../Modals/SuccessfullModal";
 import UpdatePassword from "../../../Modals/UpdatePassword";
+import DownloadButton from "../../../Buttons/DownloadButton";
 
 const HrUsers = () => {
   const [employeeDetails, setEmployeeDetails] = useState("عن الموظف");
@@ -107,8 +108,8 @@ const HrUsers = () => {
                   <div className="d-flex justify-content-between">
                     <p className="golden">مدير قسم / البرمجة</p>
                     <div>
-                      <Button className="export-bg ms-2 ">تصدير CSV </Button>
-                      <Button className="export-bg ms-2"> تصدير Excel </Button>
+                      <DownloadButton>تصدير CSV </DownloadButton>
+                      <DownloadButton> تصدير Excel </DownloadButton>
                     </div>
                   </div>
                   <div className="flex justify-between gap-3 ">

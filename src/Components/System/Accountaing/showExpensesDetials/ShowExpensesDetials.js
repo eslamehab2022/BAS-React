@@ -6,6 +6,7 @@ import SaveButton from "../../../SaveButton";
 import { useState } from "react";
 import EditExpenses from "../EditExpenses/EditExpenses";
 import DeleteModal from "../../../../Pages/System/Settings/RemoveModal";
+import DownloadButton from "../../../Buttons/DownloadButton";
 
 const ShowExpensesDetials = ({ setOpenDisplayDetials }) => {
   const { ExpensesType } = useParams();
@@ -129,8 +130,8 @@ const ShowExpensesDetials = ({ setOpenDisplayDetials }) => {
 
           <div className="col-md-4 mb-2">
             <div className="d-flex gap-3 justify-content-start">
-              <Button className="export-bg ms-2">تصدير CSV </Button>
-              <Button className="export-bg ms-2">تصدير Excel </Button>
+              <DownloadButton>تصدير CSV </DownloadButton>
+              <DownloadButton>تصدير Excel </DownloadButton>
             </div>
           </div>
           <div className="col-md-9"></div>

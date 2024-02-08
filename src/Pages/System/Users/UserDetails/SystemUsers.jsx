@@ -17,6 +17,7 @@ import SearchUsers from "../../../../Components/System/Users/SearchUsers/SearchU
 import ProfessinollInformation from "../../../../Components/System/Users/ProfessinollInformation/ProfessinollInformation";
 import { AddHrType } from "../../../../Context/AddHr";
 import Image from "../../../../Components/Image";
+import DownloadButton from "../../../../Components/Buttons/DownloadButton";
 
 const SystemUsers = () => {
   const [employeeDetails, setEmployeeDetails] = useState("عن الموظف");
@@ -73,8 +74,8 @@ const SystemUsers = () => {
                 <div className="d-flex justify-content-between">
                   <p className="text-[#D59921] mb-5 font-medium">مدير قسم / البرمجة</p>
                   <div className="flex gap-1">
-                    <button className="text-xs font-medium h-7 px-4 rounded-[3px] bg-[#D9D9D980]">تصدير CSV </button>
-                    <button className="text-xs font-medium h-7 px-4 rounded-[3px] bg-[#D9D9D980]"> تصدير Excel </button>
+                    <DownloadButton>تصدير CSV </DownloadButton>
+                    <DownloadButton> تصدير Excel </DownloadButton>
                   </div>
                 </div>
                 <div className="d-flex justify-content-between w-100">
@@ -101,7 +102,7 @@ const SystemUsers = () => {
                 </div>
               </div>
 
-              <div className="main-text choose-inf position-relative d-flex justify-content-between mx-5 my-3">
+              <div className="main-text choose-inf position-relative d-flex justify-content-between  my-3">
                 <p
                   className={`genral-inf ${
                     employeeDetails === "عن الموظف" && "inf-type"

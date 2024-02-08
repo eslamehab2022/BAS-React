@@ -57,3 +57,34 @@ export const columns = [
     selector: (row) => row.status,
   },
 ];
+
+export const QuickLinks = [
+  {
+    id: 1,
+    title: "الطلبات",
+    total: "100",
+    img: `${process.env.PUBLIC_URL + "/Main/orders.png"}`,
+    path: "/System/Requests/index",
+  },
+  {
+    id: 2,
+    title: "العملاء",
+    total: "100",
+    img: `${process.env.PUBLIC_URL + "/Main/clients.png"}`,
+    path: "/System/Clients/index",
+  },
+  {
+    id: 3,
+    title: "المشاريع",
+    total: "100",
+    img: `${process.env.PUBLIC_URL + "/Main/projects.png"}`,
+    path: "/System/Projects/index",
+  },
+  {
+    id: 4,
+    title: "المهام",
+    total: "100",
+    img: `${process.env.PUBLIC_URL + "/Main/tasks.png"}`,
+    path: "/System/plans",
+  },
+];

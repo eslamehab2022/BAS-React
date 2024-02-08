@@ -124,12 +124,12 @@ class MonthlyApexChart extends React.Component {
 
   render() {
     return (
-      <div id="chart" className="w-100">
+      <div id="chart" className="w-100 custom-chart">
         <ReactApexChart
           options={this.state.options}
           series={this.state.series}
           type="bar"
-          height={305}
+          height={300}
         />
       </div>
     );

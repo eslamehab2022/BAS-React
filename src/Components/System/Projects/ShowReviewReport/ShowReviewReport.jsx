@@ -9,6 +9,7 @@ import Pdf from "../../../Pdf";
 import PdfImage from "../../../PdfImage";
 import EditReviewReport from "../EditReviewReport/EditReviewReport";
 import DeleteModal from "../../../../Pages/System/Settings/RemoveModal";
+import DownloadButton from "../../../Buttons/DownloadButton";
 
 const ShowReviewReport = ({ setShowReport }) => {
   const searchProject = UseInput("", "");
@@ -128,12 +129,12 @@ const ShowReviewReport = ({ setShowReport }) => {
               </p>
             </div>
             <div className="col-md-6 mb-3">
-              <Button className="export-bg ms-2 ">تصدير CSV </Button>
-              <Button className="export-bg ms-2"> تصدير Excel </Button>
+              <DownloadButton>تصدير CSV </DownloadButton>
+              <DownloadButton> تصدير Excel </DownloadButton>
             </div>
 
             <div className="col-md-6 mb-3">
-              <p className="text-white">
+              <p className="text-white"> 
                 نوع المشروع :{" "}
                 <span className="main-text"> الاشراف على التنفيذ</span>
               </p>

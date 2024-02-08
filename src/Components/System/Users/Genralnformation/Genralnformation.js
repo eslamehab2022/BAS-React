@@ -65,40 +65,50 @@ const Genralnformation = () => {
 
 
   return (
-    <div className='genralnformation overflow-y-auto p-5'>
+    <div className='genralnformation overflow-y-auto py-3 px-2'>
       <ShowHolidayComponent setShowHoliday={setShowHoliday} ShowHoliday={ShowHoliday} />
 
-      <div className=''>
-        <div className='row py-1 jutify-content-between inf-square golden-square '>
-          <div className='col-md-6 mb-3'><p> الاسم الاول : <span className='main-text'> اسلام </span></p> </div>
-          <div className='col-md-12 mb-3 '><p> الاسم الاخير: <span className='main-text'> اسلام </span></p> </div>
-          <div className='col-md-12 mb-3'><p> اسم المستخدم: <span className='main-text'> اسلام_ايهاب</span></p> </div>
-          <div className='col-md-12 mb-3'><p> النوع: <span className='main-text'> ذكر</span></p> </div>
-          <div className='col-md-12 mb-3'><p> البريد الالكتروني: <span className='main-text'> Islam@bsa.com</span></p> </div>
-          <div className='col-md-12 mb-3'><p> رقم الجوال  : <span className='main-text'> 010123456789</span></p> </div>
-          <div className='col-md-12 mb-3'><p>  تاريخ الميلاد  : <span className='main-text'> 15 - 10 -2023</span></p> </div>
-          <div className='col-md-12 mb-3'><p>  النوع   : <span className='main-text'>ذكر</span></p> </div>
-          <div className='col-md-6 mb-3'><p>  الكود الوظيفي   : <span className='main-text'>1235</span></p> </div>
-          <div className='col-md-6 mb-3'><p>  البلد  : <span className='main-text'> مصر</span></p> </div>
+      <div className='flex flex-col gap-3'>
+        <div className='w-full flex flex-col items-start justify-between gap-3 py-1 px-2 jutify-content-between inf-square golden-square '>
+          <div className='w-full flex items-center justify-between gap-2'>
+            <p className="w-full"> الاسم الاول : <span className='main-text'> اسلام </span></p> 
+            <p className="w-full text-end"> الاسم الاخير: <span className='main-text'> اسلام </span></p> 
+          </div>
+          
+          <div className='w-full flex items-center justify-between gap-2'>
+            <p className="w-full"> اسم المستخدم: <span className='main-text'> اسلام_ايهاب</span></p> 
+            <p className="w-full text-end"> النوع: <span className='main-text'> ذكر</span></p> 
+          </div>
+          
+          <div className=''><p> البريد الالكتروني: <span className='main-text'> Islam@bsa.com</span></p> </div>
+          
+          <div className='w-full flex items-center justify-between gap-2'>
+            <p className="w-full"> رقم الجوال  : <span className='main-text'> 010123456789</span></p> 
+            <p className="w-full text-end">  البلد  : <span className='main-text'> مصر</span></p> 
+          </div>
+          
+          
+            <p>  تاريخ الميلاد  : <span className='main-text'> 15 - 10 -2023</span></p>
+          <div className=''><p>  الكود الوظيفي   : <span className='main-text'>1235</span></p> </div>
 
 
 
         </div>
-        <div className='row py-3 jutify-content-between golden-square mt-3 '>
-          <div className='col-md-6 mb-3'><p> الصلاحية:  <span className='main-text'> مدير قسم </span></p> </div>
-          <div className='col-md-6 mb-3 '><p>  القسم: <span className='main-text'> برمجة  </span></p> </div>
-          <div className='col-md-12 mb-3'><p>بدأ العمل :   <span className='main-text'> 15  - 10 - 2023</span></p> </div>
-          <div className='col-md-12 mb-3'><p> المستوي :   <span className='main-text'>خبير </span></p> </div>
+        <div className='w-full flex flex-col items-start justify-between gap-3 py-1 px-2 jutify-content-between inf-square golden-square '>
+          <div className=''><p> الصلاحية:  <span className='main-text'> مدير قسم </span></p> </div>
+          <div className=''><p>  القسم: <span className='main-text'> برمجة  </span></p> </div>
+          <div className=''><p>بدأ العمل :   <span className='main-text'> 15  - 10 - 2023</span></p> </div>
+          <div className=''><p> المستوي :   <span className='main-text'>خبير </span></p> </div>
 
 
         </div>
-        <div className='row py-3 jutify-content-between golden-square mt-3 '>
-          <p className='text-xl my-3'>
+        <div className='w-full flex flex-col items-start justify-between gap-3 py-1  jutify-content-between inf-square golden-square '>
+          <p className='text-xl my-3 p-2 '>
             جميع اجازات الشهر الحالي
 
 
           </p>
-        <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+        <div className="mt-3 w-full !h-[400px] overflow-scroll scrollbar-none">
 
           {/* <DataTableComponent 
           className={"overflow-x-hidden w-100"} 

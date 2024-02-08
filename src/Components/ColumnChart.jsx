@@ -96,8 +96,8 @@ class ColumnChart extends React.Component {
 
     render() {
         return (
-            <div id="chart">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={200} />
+            <div id="chart" className='custom-chart'>
+                <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={190} />
             </div>
         );
     }

@@ -8,6 +8,7 @@ import Input from "../../../FormHandler/Input";
 import "./Invoice.css";
 import EditRevenues from "../EditRevenues/EditRevenues";
 import Image from "../../../Image.jsx";
+import DownloadButton from "../../../Buttons/DownloadButton.jsx";
 
 const DisplayInvoice = ({ setViewInvoices, viewInvoice }) => {
   // show img
@@ -157,8 +158,8 @@ const DisplayInvoice = ({ setViewInvoices, viewInvoice }) => {
           </div>
           <div className="col-md-4   mb-2">
             <div className=" d-flex gap-3 justify-content-start ">
-              <Button className="export-bg  ms-2 ">تصدير CSV </Button>
-              <Button className="export-bg ms-2"> تصدير Excel </Button>
+              <DownloadButton>تصدير CSV </DownloadButton>
+              <DownloadButton> تصدير Excel </DownloadButton>
             </div>
           </div>
           <div className="col-md-9 mb-3">

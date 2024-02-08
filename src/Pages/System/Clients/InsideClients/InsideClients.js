@@ -29,8 +29,8 @@ const InsideClients = () => {
   ];
 
   return (
-    <div className="row justify-content-around  ">
-      <div className="col-md-3 all-clients-search-container">
+    <div className="grid grid-cols-12 gap-2">
+      <div className="col-span-3 all-clients-search-container">
         <SearchComponent />
 
         <div className="d-flex justify-content-between mt-4 w-100">
@@ -105,7 +105,7 @@ const InsideClients = () => {
                 </div>
                 </Link> */}
       </div>
-      <div className="col-md-8     category-client-Component">
+      <div className="col-span-8     category-client-Component">
         <div className="insideChart p-4 h-100 d-flex  justify-content-between  align-items-center flex-column">
           <div className="AllRequestsPieChartContainer w-100  d-flex flex-column align-items-center justify-content-center">
             <p className="text-white" style={{ fontSize: "24px" }}>

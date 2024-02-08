@@ -137,8 +137,8 @@ class InsideClientLineChart extends React.Component {
         return (
 
 
-            <div id="chart" className="w-100">
-                <ReactApexChart options={this.state.options} series={this.state.series} type="line" className="w-100 " height={350} />
+            <div id="chart" className="w-100 custom-chart">
+                <ReactApexChart options={this.state.options} series={this.state.series} type="line" className="w-100" height={340} />
             </div>
 
 

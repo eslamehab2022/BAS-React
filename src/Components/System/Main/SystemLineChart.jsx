@@ -16,6 +16,7 @@ class SystemLineChart extends React.Component {
         chart: {
           height: 150,
           type: "bar",
+          
         },
         legend: {
           labels: {
@@ -109,7 +110,7 @@ class SystemLineChart extends React.Component {
 
   render() {
     return (
-      <div id="chart" className="w-90  systemLineChart p-0 h-90">
+      <div id="chart" className="w-90  systemLineChart custom-chart h-90">
         <ReactApexChart
           className="p-0"
           options={this.state.options}

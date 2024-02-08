@@ -11,6 +11,7 @@ import EditReviewReport from "../EditReviewReport/EditReviewReport";
 import DataTableComponent from "../../../DataTableComponent";
 import Image from "../../../Image";
 import DeleteModal from "../../../../Pages/System/Settings/RemoveModal";
+import DownloadButton from "../../../Buttons/DownloadButton";
 
 const ShowDesignReport = ({ setShowReport }) => {
   const searchProject = UseInput("", "");
@@ -257,8 +258,8 @@ const ShowDesignReport = ({ setShowReport }) => {
               </p>
             </div>
             <div className="col-md-6 mb-3">
-              <Button className="export-bg ms-2 ">تصدير CSV </Button>
-              <Button className="export-bg ms-2"> تصدير Excel </Button>
+              <DownloadButton>تصدير CSV </DownloadButton>
+              <DownloadButton> تصدير Excel </DownloadButton>
             </div>
 
             <div className="col-md-6 mb-3">

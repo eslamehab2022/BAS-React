@@ -10,7 +10,7 @@ const SearchCountryUsers = () => {
   const users = Array.from({ length: 15 });
   return (
     <div>
-      <div className="search-users  overflow-x-hidden">
+      <div className="search-users  overflow-x-hidden overflow-y-scroll scrollbar-none">
         <div className="d-flex   justify-content-center">
           <SearchComponent /> 
         </div>
@@ -53,12 +53,14 @@ const SearchCountryUsers = () => {
         </div>
         {users.map((user, index) => (
           <Link to="/system/users/1" key={index}>
-            <div className="tab   !mb-3 d-flex   ">
+            <div className="tab !mb-3 flex  border !border-transparent hover:!border-[#efaa20] p-1 ">
+              <div className="w-8 h-8 rounded-full overflow-hidden">
               <Image
                 src={process.env.PUBLIC_URL + "/People/habeeb.jpg"}
                 alt="user img"
-                className="user-img"
+                className="object-cover"
               />
+              </div>
               <div className="d-flex flex-column me-3 ">
                 <h2 className=" name-header text-white         ">
               حبيب نصر

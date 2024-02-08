@@ -116,13 +116,13 @@ class CountryColumnChart extends React.Component {
 
   render() {
     return (
-      <div id="chart" className="w-100">
+      <div id="chart" className="w-100 custom-chart">
         <ReactApexChart
           options={this.state.options}
           series={this.state.series}
           type="bar"
           width={"100%"}
-          height={220}
+          height={230}
         />
       </div>
     );

@@ -12,6 +12,7 @@ import CustomModal from "../../Modals/CustomModal";
 import SuccessfullModal from "../../Modals/SuccessfullModal";
 import CommentModel from "../../Modals/CommentModel";
 import { IoMdMore } from "react-icons/io";
+import DownloadButton from "../../Buttons/DownloadButton";
 const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
   const [showImg, setShowImg] = useState(false);
   const [imgSrc, setImgSrc] = useState(
@@ -275,8 +276,8 @@ const ShowDesignRequest = ({ setShowProject, DesignProjectType }) => {
           </div>
           <div className="col-6 flex flex-col items-end gap-4">
           <div className="flex gap-2 justify-start">
-              <button className="text-xs font-medium bg-[#D9D9D980] text-white py-1 px-3 rounded-[3px]">تصدير CSV </button>
-              <button className="text-xs font-medium bg-[#D9D9D980] text-white py-1 px-3 rounded-[3px]"> تصدير Excel </button>
+              <DownloadButton>تصدير CSV </DownloadButton>
+              <DownloadButton> تصدير Excel </DownloadButton>
             </div>
             <div className="">
             <p className="text-white text-xl font-normal">

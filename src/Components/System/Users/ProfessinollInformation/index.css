@@ -27,7 +27,7 @@
     top: 3px !important;
     
 }
-.apexcharts-canvas{
+.custom-chart .apexcharts-canvas{
     padding-top: 15px;
 }
 .apexcharts-menu{

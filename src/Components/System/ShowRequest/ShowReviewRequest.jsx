@@ -10,6 +10,7 @@ import EditReviewRequest from "../Requests/EditRequest/EditReviewRequest";
 import DeleteModal from "../../../Pages/System/Settings/RemoveModal";
 import { RiEdit2Line } from "react-icons/ri";
 import { IoMdMore } from "react-icons/io";
+import DownloadButton from "../../Buttons/DownloadButton";
 const ShowReviewRequest = ({ setShowProject, ReviewProjectType }) => {
   const [showImg, setShowImg] = useState(false);
   const [imgSrc, setImgSrc] = useState(
@@ -477,8 +478,8 @@ const ShowReviewRequest = ({ setShowProject, ReviewProjectType }) => {
 </div>
 <div className="col-6 flex flex-col items-end gap-4">
 <div className="flex gap-2 justify-start">
-              <button className="text-xs font-medium bg-[#D9D9D980] text-white py-1 px-3 rounded-[3px]">تصدير CSV </button>
-              <button className="text-xs font-medium bg-[#D9D9D980] text-white py-1 px-3 rounded-[3px]"> تصدير Excel </button>
+              <DownloadButton>تصدير CSV </DownloadButton>
+              <DownloadButton> تصدير Excel </DownloadButton>
             </div>
             <div className="">
             <p className="text-white flex gap-2">
