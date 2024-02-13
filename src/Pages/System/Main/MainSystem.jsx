@@ -12,11 +12,10 @@ import style from "./MainSystem.module.css";
 import { TableCell } from "../../../Components/Table/TableCell.jsx";
 import { TableRow } from "../../../Components/Table/TableRow.jsx";
 import CustomTable from "../../../Components/Table/index.jsx";
-import {useNavigate} from "react-router-dom"
-
+import { useNavigate } from "react-router-dom";
 
 export const MainSystem = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // define cleander value
   const [cleanderValue, setCleanderValue] = useState(false);
 
@@ -60,7 +59,11 @@ export const MainSystem = () => {
               <div className={`item   p-3  ${style.cardsBackground}`}>
                 <div className="row">
                   {QuickLinks.map(({ id, title, total, img, path }, index) => (
-                    <div onClick={()=> navigate(path)} className="col-md-6 mb-3 cursor-pointer" key={id}>
+                    <div
+                      onClick={() => navigate(path)}
+                      className="col-md-6 mb-3 cursor-pointer"
+                      key={id}
+                    >
                       <div className={`   ${style.systemCard}`}>
                         <div className="d-flex justify-content-between    laptop:flex-row  tablet:flex-col mobile:flex-col w-90 h-100 align-items-center mx-2">
                           <div>
@@ -70,10 +73,7 @@ export const MainSystem = () => {
                             </p>
                           </div>
                           <div className="d-flex flex-column">
-                            <Image
-                              src={img}
-                              alt="orders"
-                            />
+                            <Image src={img} alt="orders" />
                             <p className="text-white laptop:text-xl  tablet:text-center text-xl tablet:text-sm mobile:text-sm">
                               {total}
                             </p>

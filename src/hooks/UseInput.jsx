@@ -1,16 +1,20 @@
 import { useState, useCallback } from "react";
-import validate, { isString } from '../utiltis/validation-rules';
+import validate, { isString } from "../utiltis/validation-rules";
 
-
-const UseInput = (initialValue = '', validateRule = 'textInput', submitted) => {
+const UseInput = (initialValue = "", validateRule = "textInput", submitted) => {
   const [value, setValue] = useState(initialValue);
-  const [validator, setValidator] = useState(() => validate(validateRule, initialValue));
+  const [validator, setValidator] = useState(() =>
+    validate(validateRule, initialValue)
+  );
 
-  const handleOnChange = useCallback(event => {
-    let value = event.target.value;
-    setValidator(validate(validateRule, value));
-    setValue(value);
-  }, [setValue, setValidator, validateRule]);
+  const handleOnChange = useCallback(
+    (event) => {
+      let value = event.target.value;
+      setValidator(validate(validateRule, value));
+      setValue(value);
+    },
+    [setValue, setValidator, validateRule]
+  );
 
   const reset = useCallback(() => {
     let value = isString(initialValue) ? initialValue.trim() : initialValue;
@@ -18,13 +22,16 @@ const UseInput = (initialValue = '', validateRule = 'textInput', submitted) => {
     setValue(value);
   }, [setValue, setValidator, validateRule, initialValue]);
 
-  const changeValue = useCallback(inputValue => {
-    let value = validateRule === 'email' ? inputValue.trim() : inputValue;
-    setValidator(validate(validateRule, value));
-    setValue(value);
-  }, [setValue, setValidator, validateRule]);
+  const changeValue = useCallback(
+    (inputValue) => {
+      let value = validateRule === "email" ? inputValue.trim() : inputValue;
+      setValidator(validate(validateRule, value));
+      setValue(value);
+    },
+    [setValue, setValidator, validateRule]
+  );
 
-  const setError = message => {
+  const setError = (message) => {
     const valid = !message;
     setValidator({ valid, message });
   };
@@ -39,8 +46,8 @@ const UseInput = (initialValue = '', validateRule = 'textInput', submitted) => {
       value,
       onChange: handleOnChange,
       validator,
-      submitted
-    }
+      submitted,
+    },
   };
 };
 

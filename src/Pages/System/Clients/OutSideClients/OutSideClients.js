@@ -28,7 +28,7 @@ const Clients = [
 const OutSideClients = () => {
   return (
     <div className="grid grid-cols-12 gap-2 ">
-      <div className="col-span-3 all-clients-search-container p-1">
+      <div className="col-span-4 all-clients-search-container p-1">
         <SearchComponent background={"#161620 !important"} />
 
         <div className="d-flex justify-content-between mt-4 w-100">

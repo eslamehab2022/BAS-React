@@ -84,8 +84,8 @@ const AllRequests = () => {
           )
         }
       />
-      <div className="row ">
-        <div className="col-md-3">
+      <div className="grid grid-cols-12 gap-2 h-full">
+        <div className="col-span-3 h-full">
           <AllCategories
             child={
               <div className="d-flex  flex-column   align-items-center ">
@@ -291,7 +291,7 @@ const AllRequests = () => {
             }
           />
         </div>
-        <div className="col-md-9 ">{view ? <AddRequest /> : <Outlet />}</div>
+        <div className="col-span-9 h-full">{view ? <AddRequest /> : <Outlet />}</div>
       </div>
     </div>
   );

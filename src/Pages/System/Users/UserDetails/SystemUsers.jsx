@@ -20,7 +20,7 @@ import Image from "../../../../Components/Image";
 import DownloadButton from "../../../../Components/Buttons/DownloadButton";
 
 const SystemUsers = () => {
-  const [employeeDetails, setEmployeeDetails] = useState("عن الموظف");
+  const [employeeDetails, setEmployeeDetails] = useState("aboutEmpolyee");
 
   const handleGetUserDetails = () => {};
 
@@ -72,23 +72,25 @@ const SystemUsers = () => {
             <div className="show-employee py-4 px-2 w-100 scrollbar-none ">
               <div className="show-employee-header">
                 <div className="d-flex justify-content-between">
-                  <p className="text-[#D59921] mb-5 font-medium">مدير قسم / البرمجة</p>
-                  <div className="flex gap-1">
+                  <p className="text-[#D59921] mb-5 font-medium">
+                    مدير قسم / البرمجة
+                  </p>
+                  <div className="flex gap-3">
                     <DownloadButton>تصدير CSV </DownloadButton>
                     <DownloadButton> تصدير Excel </DownloadButton>
                   </div>
                 </div>
-                <div className="d-flex justify-content-between w-100">
+                <div className="d-flex justify-content-between w-100 px-3">
                   <div className="tab d-flex   ">
                     <Image
                       src={`${process.env.PUBLIC_URL + "/People/islam.jpg"}`}
                       alt="user Image "
                       className="user-Personal  "
                     />
-                    <div className="d-flex flex-column me-3 ">
-                      <h2 className=" name-header     my-0    "> اسلام</h2>
-                      <p className="main-text  my-0   ">islam@bsa.com</p>
-                      <p className=" name-header my-0    ">01023456789</p>
+                    <div className="flex flex-col gap-2 me-3 ">
+                      <h2 className="name-header"> اسلام</h2>
+                      <p className="main-text">islam@bsa.com</p>
+                      <p className="name-header">01023456789</p>
                     </div>
                   </div>
 
@@ -102,10 +104,10 @@ const SystemUsers = () => {
                 </div>
               </div>
 
-              <div className="main-text choose-inf position-relative d-flex justify-content-between  my-3">
+              <div className="choose-inf main-text relative flex px-3 mb-3">
                 <p
-                  className={`genral-inf ${
-                    employeeDetails === "عن الموظف" && "inf-type"
+                  className={`genral-inf text-center border-b-2 flex-1 py-3 ${
+                    employeeDetails === "aboutEmpolyee" ? "inf-type !border-[#D59921]": "!border-white/30"
                   }`}
                   onClick={() => {
                     setEmployeeDetails("aboutEmpolyee");
@@ -115,8 +117,8 @@ const SystemUsers = () => {
                   عن الموظف
                 </p>
                 <p
-                  className={`genral-inf ${
-                    employeeDetails === "ProfessinollInformation" && "inf-type"
+                  className={`genral-inf text-center border-b-2 flex-1 py-3 ${
+                    employeeDetails === "ProfessinollInformation" ? "inf-type !border-[#D59921]": "!border-white/30"
                   }`}
                   onClick={() => {
                     setEmployeeDetails("ProfessinollInformation");
@@ -125,8 +127,8 @@ const SystemUsers = () => {
                   معلومات مهنية
                 </p>
                 <p
-                  className={`genral-inf ${
-                    employeeDetails === "AccountaingInformation" && "inf-type"
+                  className={`genral-inf text-center border-b-2  flex-1 py-3 ${
+                    employeeDetails === "AccountaingInformation" ? "inf-type !border-[#D59921]": "!border-white/30"
                   }`}
                   onClick={() => {
                     setEmployeeDetails("AccountaingInformation");

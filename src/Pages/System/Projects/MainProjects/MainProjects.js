@@ -32,7 +32,7 @@ const MainProjects = () => {
       ProjectType: " تصميم",
       display: (
         <Image
-          src={process.env.PUBLIC_URL + "/icons/view.png"}
+          src={process.env.PUBLIC_URL + "/icons/view.svg"}
           onClick={() => {
             setShowProject(true);
           }}
@@ -42,7 +42,7 @@ const MainProjects = () => {
       ),
       edit: (
         <Image
-          src={process.env.PUBLIC_URL + "/edit.png"}
+          src={process.env.PUBLIC_URL + "/icons/edit.svg"}
           onClick={() => {
             setEditProject(true);
             console.log(editProject);
@@ -101,7 +101,7 @@ const MainProjects = () => {
   }, []);
 
   return (
-    <div className="AllRequests p-3">
+    <div className="rounded-[19px] bg-[#1e1e2d]">
       {!showProject ? (
         <div className=" NestedMainProjects  ">
           <div

@@ -8,13 +8,11 @@ export const SettingContextProvider = ({ children }) => {
   const [settingType, setSettingType] = useState("");
 
   return (
-    <div>
-      <SettingContext.Provider
-        value={{ settingType, setSettingType, ReciptionType, setReceptionType }}
-      >
-        {children}
-      </SettingContext.Provider>
-    </div>
+    <SettingContext.Provider
+      value={{ settingType, setSettingType, ReciptionType, setReceptionType }}
+    >
+      {children}
+    </SettingContext.Provider>
   );
 };
 

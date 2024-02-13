@@ -194,19 +194,21 @@
   }
 }
 
-.choose-inf {
+.choose-inf p {
+  
   position: relative;
   cursor: pointer;
 }
 
-.choose-inf::after {
+/* .choose-inf p::after {
   position: absolute;
   content: "";
   width: 100%;
   height: 2px;
-  background-color: #534D59;
+  background-color: #6e0ad3;
   top: 100%;
-}
+  right: 0px;
+} */
 
 .inf-type {
   color: #D59921;

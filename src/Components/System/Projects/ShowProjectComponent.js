@@ -9,17 +9,23 @@ import DownloadButton from "../../Buttons/DownloadButton.jsx";
 import CustomModal from "../../Modals/CustomModal.jsx";
 import CommentModel from "../../Modals/CommentModel.jsx";
 import SuccessfullModal from "../../Modals/SuccessfullModal.jsx";
+import { TableCell } from "../../Table/TableCell.jsx";
+import { TableRow } from "../../Table/TableRow.jsx";
+import CustomTable from "../../Table/index.jsx";
+import Image from "../../Image.jsx";
+import PdfImage from "../../PdfImage.jsx";
 // import { Document, Page } from 'react-pdf';
 
 const ShowProjectComponent = ({ showProject, setShowProject }) => {
   // show img
-  const [openDeleteModal,setOpenDeleteModal] = useState(false)
-  const [openDeleteSuccessModal,setOpenDeleteSuccessModal] = useState(false)
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openDeleteSuccessModal, setOpenDeleteSuccessModal] = useState(false);
   const [showImg, setShowImg] = useState(false);
   const [imgSrc, setImgSrc] = useState(
     `${process.env.PUBLIC_URL}/icons/show.png`
   );
   const [pageNumber, setPageNumber] = useState(1);
+  const [openCliam, setOpenClaim] = useState(false);
 
   const { ProjectTime, ProjectType } = useParams();
   const [numPages, setNumPages] = useState();
@@ -33,42 +39,48 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
 
   console.log(ProjectType);
 
+  const [openPdf,setOpenPdf]= useState(false)
   const [ConfirmUpdate, setConfirmUpdate] = useState(false);
 
   // Data table data
   const columns = [
     {
-      name: "الدفعات  ",
+      name: "م",
       selector: (row) => row.Payments,
     },
     {
-      name: " نوع الدفعة",
+      name: "الدفعات",
+      selector: (row) => row.Payments,
+    },
+    {
+      name: "نوع الدفعة",
       selector: (row) => row.PaymentType,
     },
     {
-      name: "  تاريخ الاستحقاق ",
+      name: "تاريخ الاستحقاق ",
       selector: (row) => row.recivedDate,
     },
     {
-      name: "   الحالة",
+      name: "الحالة",
       selector: (row) => row.status,
     },
     {
-      name: "   المطالبة",
+      name: "المطالبة",
       selector: (row) => row.claim,
     },
     {
-      name: "   الفاتوره",
+      name: "الفاتوره",
       selector: (row) => row.bill,
     },
   ];
   const ShowProjectsData = Array.from({ length: 2 }).map((_, index) => {
     return {
+      id: index + 1,
       Payments: "1500 ريال",
       PaymentType: " القيمة الافتتاحية",
       recivedDate: " مع العقد",
       status: (
-        <div className="d-flex flex-column justfiy-content-center">
+        <div className="flex flex-col justfiy-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="17"
@@ -101,11 +113,11 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
               </clipPath>
             </defs>
           </svg>
-          <p>تم الدفع</p>
+          <p className="text-center">تم الدفع</p>
         </div>
       ),
       claim: (
-        <div>
+        <div onClick={() => setOpenClaim(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="17"
@@ -159,116 +171,29 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
 
   return (
     <div className="showProject">
-      {/* {holdProject && (
-        <Modal
-          className="submitSystemPoper"
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          onHide={() => setHoldProject(false)}
-          show={holdProject}
-        >
-          <Modal.Body className="d-flex align-items-center">
-            <div className="d-flex w-75 flex-column mx-auto mt-3 justify-content-center align-items-center ">
-              {
-                <p className="text-white" style={{ fontSize: "30px" }}>
-                  {" "}
-                  هل انت متاكد من تعليق هذا المشروع{" "}
-                </p>
-              }
-              <div className="d-flex justify-content-center mt-3 gap-3">
-                <Button
-                  onClick={() => {
-                    setConfirmHoldProject(true);
-                    setHoldProject(false);
-                  }}
-                  className="Delete-button"
-                >
-                  نعم
-                </Button>
-
-                <Button
-                  onClick={() => {
-                    setHoldProject(false);
-                  }}
-                  className="No-Delete"
-                >
-                  لا
-                </Button>
-              </div>
-            </div>
-          </Modal.Body>
-        </Modal>
-      )} */}
-        <CustomModal
+   
+      <CustomModal
         title="التاكيد"
         show={holdProject}
         message={"هل انت متاكد من تعليق المشروع"}
         handleSave={() => {
-            setHoldProject(false)
-            setConfirmHoldProject(true)
+          setHoldProject(false);
+          setConfirmHoldProject(true);
         }}
         handleClose={() => {
-            setHoldProject(false);
-            
+          setHoldProject(false);
         }}
       />
-        <CommentModel
-       
+      <CommentModel
         show={confirmholdProject}
         message={"اترك سبب التعليق ...."}
         handleSave={() => {
-            setConfirmHoldProject(false)
-            handleHoldProject()
+          setConfirmHoldProject(false);
+          handleHoldProject();
         }}
-        
       />
 
-
-
-
-
-
-
-
-      {/* {confirmholdProject && (
-        <Modal
-          className="submitSystemPoper leaveComment"
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          onHide={() => setConfirmHoldProject(false)}
-          show={confirmholdProject}
-        >
-          <Modal.Body>
-            <div className="w-100   mt-3 ">
-              {
-                <p className="text-white" style={{ fontSize: "30px" }}>
-                  {" "}
-                  اترك سبب التعليق ....{" "}
-                </p>
-              }
-
-              <Form className="w-100">
-                <textarea
-                  className="form-control w-100"
-                  rows={5}
-                  placeholder="اترك سبب التعليق ...."
-                />
-
-                <div className="d-flex justify-content-center my-3">
-                  <Button
-                    onClick={() => {
-                      handleHoldProject();
-                    }}
-                    className="sumbmitAddUpdateUser"
-                  >
-                    حفظ
-                  </Button>
-                </div>
-              </Form>
-            </div>
-          </Modal.Body>
-        </Modal>
-      )} */}
+     
       {FinishHoldProject && (
         <Modal
           className="submitSystemPoper"
@@ -310,98 +235,17 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
         </Modal>
       )}
 
-      {/* {confirmContinueProject && (
-        <Modal
-          className="submitSystemPoper"
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          onHide={() => setConfirmContinueProject(false)}
-          show={confirmContinueProject}
-        >
-          <Modal.Body>
-            <div className="d-flex justify-content-center w-100">
-              {" "}
-              <img
-                alt=""
-                src={process.env.PUBLIC_URL + "/correct.gif"}
-                width={120}
-                height={120}
-                className="my-3"
-                color="#E1B67C"
-              />
-            </div>
+     
 
-            <div className="d-flex w-75 flex-column mx-auto mt-3 justify-content-center align-items-center ">
-              {
-                <p className="text-white mb-4" style={{ fontSize: "30px" }}>
-                  {" "}
-                  تم استكمال المشروع بنجاح{" "}
-                </p>
-              }
-              <Button
-                onClick={() => {
-                  setConfirmContinueProject(false);
-                }}
-                className="sumbmitAddUpdateUser"
-              >
-                حفظ
-              </Button>
-            </div>
-          </Modal.Body>
-        </Modal>
-      )} */}
-
-      {/* {continueProject && (
-        <Modal
-          className="submitSystemPoper"
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
-          onHide={() => setContinueProject(false)}
-          show={continueProject}
-        >
-          <Modal.Body className="d-flex align-items-center">
-            <div className="d-flex w-75 flex-column mx-auto mt-3 justify-content-center align-items-center ">
-              {
-                <p className="text-white" style={{ fontSize: "30px" }}>
-                  {" "}
-                  هل انت متاكد من استكمال هذا المشروع{" "}
-                </p>
-              }
-              <div className="d-flex justify-content-center mt-3 gap-3">
-                <Button
-                  onClick={() => {
-                    handleContinueProject();
-                  }}
-                  className="Delete-button"
-                >
-                  نعم
-                </Button>
-
-                <Button
-                  onClick={() => {
-                    setContinueProject(false);
-                  }}
-                  className="No-Delete"
-                >
-                  لا
-                </Button>
-              </div>
-            </div>
-          </Modal.Body>
-        </Modal>
-      )} */}
-
-
-<CustomModal
+      <CustomModal
         title="التاكيد"
         show={continueProject}
         message={"هل انت متاكد من استكمال هذا المشروع"}
         handleSave={() => {
-          handleContinueProject()
+          handleContinueProject();
         }}
         handleClose={() => {
-          setContinueProject(false)
-            
+          setContinueProject(false);
         }}
       />
       <SuccessfullModal
@@ -411,11 +255,6 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
           setConfirmContinueProject(false);
         }}
       />
-
-
-
-
-
 
       {viewMore && (
         <Modal
@@ -630,18 +469,18 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
                   </div>
                   <div className="col-md-12 mt-3 mb-3">
                     <div className="flex gap-3 p-2">
-                    <div className="flex flex-col items-center gap-2">
-                    <img
-                      className="pointer instrutmentimg"
-                      onClick={() => {
-                        setShowImg(true);
-                      }}
-                      src={imgSrc}
-                      alt="owner img"
-                    />
+                      <div className="flex flex-col items-center gap-2">
+                        <img
+                          className="pointer instrutmentimg"
+                          onClick={() => {
+                            setShowImg(true);
+                          }}
+                          src={imgSrc}
+                          alt="owner img"
+                        />
 
-                    <p className="text-white"> مسند الرخصة </p>
-                    </div>
+                        <p className="text-white"> مسند الرخصة </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -661,6 +500,26 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
           </Modal.Body>
         </Modal>
       )}
+
+      {openCliam && (
+        <Modal
+          className="d-flex claimModal align-items-center jusify-content-center"
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          onHide={() => setOpenClaim(false)}
+          show={openCliam}
+        >
+          <Modal.Body className="d-flex align-items-center">
+            <Image
+              src={`${process.env.PUBLIC_URL + "/FinancalRequest.png"}`}
+              alt="FinancalRequest png"
+              width={650}
+              height={700}
+            />
+          </Modal.Body>
+        </Modal>
+      )}
+
       <div className="border-golden">
         <div className="grid grid-cols-12 gap-y-2 p-3">
           {/* <Document file="../../../../public/examplepdf.pdf" onLoadSuccess={onDocumentLoadSuccess}>
@@ -723,30 +582,29 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
                   alt=""
                   className="pointer editIcon"
                   onClick={() => {
-                    setOpenDeleteModal(true)
+                    setOpenDeleteModal(true);
                   }}
                   src={process.env.PUBLIC_URL + "/icons/delete.png"}
                 />
-<CustomModal
-        title="التاكيد"
-        show={openDeleteModal}
-        message={"هل انت متاكد من حذف المشروع"}
-        handleSave={() => {
-          setOpenDeleteModal(false)
-          setOpenDeleteSuccessModal(true)
-        }}
-        handleClose={() => {
-          setOpenDeleteModal(false)
-            
-        }}
-      />
-      <SuccessfullModal
-        show={openDeleteSuccessModal}
-        message={"تم الحذف بنجاح"}
-        handleClose={() => {
-          setOpenDeleteSuccessModal(false);
-        }}
-      />
+                <CustomModal
+                  title="التاكيد"
+                  show={openDeleteModal}
+                  message={"هل انت متاكد من حذف المشروع"}
+                  handleSave={() => {
+                    setOpenDeleteModal(false);
+                    setOpenDeleteSuccessModal(true);
+                  }}
+                  handleClose={() => {
+                    setOpenDeleteModal(false);
+                  }}
+                />
+                <SuccessfullModal
+                  show={openDeleteSuccessModal}
+                  message={"تم الحذف بنجاح"}
+                  handleClose={() => {
+                    setOpenDeleteSuccessModal(false);
+                  }}
+                />
                 <NavDropdown
                   title={
                     <svg
@@ -797,31 +655,30 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
                 <img
                   className="pointer action-icon"
                   onClick={() => {
-                    setOpenDeleteModal(true)
+                    setOpenDeleteModal(true);
                   }}
                   alt=""
                   src={process.env.PUBLIC_URL + "/icons/delete.png"}
                 />
-        <CustomModal
-        title="التاكيد"
-        show={openDeleteModal}
-        message={"هل انت متاكد من حذف المشروع"}
-        handleSave={() => {
-          setOpenDeleteModal(false)
-          setOpenDeleteSuccessModal(true)
-        }}
-        handleClose={() => {
-          setOpenDeleteModal(false)
-            
-        }}
-      />
-      <SuccessfullModal
-        show={openDeleteSuccessModal}
-        message={"تم الحذف بنجاح"}
-        handleClose={() => {
-          setOpenDeleteSuccessModal(false);
-        }}
-      />
+                <CustomModal
+                  title="التاكيد"
+                  show={openDeleteModal}
+                  message={"هل انت متاكد من حذف المشروع"}
+                  handleSave={() => {
+                    setOpenDeleteModal(false);
+                    setOpenDeleteSuccessModal(true);
+                  }}
+                  handleClose={() => {
+                    setOpenDeleteModal(false);
+                  }}
+                />
+                <SuccessfullModal
+                  show={openDeleteSuccessModal}
+                  message={"تم الحذف بنجاح"}
+                  handleClose={() => {
+                    setOpenDeleteSuccessModal(false);
+                  }}
+                />
                 <NavDropdown
                   title={
                     <svg
@@ -876,194 +733,204 @@ const ShowProjectComponent = ({ showProject, setShowProject }) => {
           </div>
         </div>
       </div>
-      <fieldset className="showProjectBorder pb-3 ">
-        <legend className="text-center">معلومات عامة</legend>
-        <div className="d-flex w-90 m-auto justify-content-between">
-          <p className="projectdetails text-white">
+
+      <div className="overflow-y-scroll scrollbar-none p-3 h-[600px]">
+        <fieldset className="showProjectBorder pb-3 ">
+          <legend className="text-center">معلومات عامة</legend>
+          <div className="d-flex w-90 m-auto justify-content-between">
+            <p className="projectdetails text-white">
+              {" "}
+              اسم المالك :<span className="main-text"> سلطان عبد الله</span>
+            </p>
+            <p className="projectdetails text-white">
+              {" "}
+              نوع المشروع :
+              <span className="main-text"> الاشراف علي التنفيذ</span>
+            </p>
+          </div>
+          <p className="projectdetails text-white w-90 m-auto">
             {" "}
-            اسم المالك :<span className="main-text"> سلطان عبد الله</span>
+            موقع المشروع :<span className="main-text"> الدمام</span>
           </p>
-          <p className="projectdetails text-white">
-            {" "}
-            نوع المشروع :<span className="main-text"> الاشراف علي التنفيذ</span>
-          </p>
-        </div>
-        <p className="projectdetails text-white w-90 m-auto">
-          {" "}
-          موقع المشروع :<span className="main-text"> الدمام</span>
-        </p>
-      </fieldset>
-      <fieldset className="showProjectBorder p-2 ">
-        <legend className="text-center"> الملاحظات</legend>
+        </fieldset>
+        <fieldset className="showProjectBorder p-2 ">
+          <legend className="text-center"> الملاحظات</legend>
 
-        <p className=" text-white"> ملاحظات المشروع :</p>
+          <p className=" text-white"> ملاحظات المشروع :</p>
 
-        <textarea
-          placeholder="اكتب ملاحظات المشروع  "
-          className="form-control my-3 w-100 m-auto"
-          cols={30}
-          rows={5}
-        />
-      </fieldset>
-      <fieldset className="showProjectBorder p-2 ">
-        <legend className="text-center"> المرفقات</legend>
+          <textarea
+            placeholder="اكتب ملاحظات المشروع  "
+            className="form-control my-3 w-100 m-auto"
+            cols={30}
+            rows={5}
+          />
+        </fieldset>
+        <fieldset className="showProjectBorder p-2 ">
+          <legend className="text-center"> المرفقات</legend>
 
-        <div className="w-90 p-3 m-auto d-flex  gap-5">
-          <div className="pdfbg">
-            <img
-              src={process.env.PUBLIC_URL + "/icons/Pdf.png"}
-              alt="pdf"
-              className="pdfImage"
-            />
-            <div
-              style={{ borderRadius: "7px" }}
-              className="bg-[#252538] d-flex justify-content-center "
-            >
-              <p className="text-white mx-auto mt-2">عرض مالي</p>
-            </div>
-          </div>
-          <div className="pdfbg">
-            <img
-              src={process.env.PUBLIC_URL + "/icons/Pdf.png"}
-              alt="pdf"
-              className="pdfImage"
-            />
-            <div
-              style={{ borderRadius: "7px" }}
-              className="bg-[#252538] d-flex justify-content-center "
-            >
-              <p className="text-white mx-auto  mt-2 ">عرض فني</p>
-            </div>
-          </div>
-        </div>
-      </fieldset>
-      <fieldset className="showProjectBorder p-2 ">
-        <legend className="text-center"> ملفات المشروع </legend>
-
-        <div className="w-90 p-3 m-auto d-flex  gap-5">
-          <div className="pdfbg">
-            <img
-              src={process.env.PUBLIC_URL + "/icons/Pdf.png"}
-              alt="pdf"
-              className="pdfImage"
-            />
-            <div
-              style={{ borderRadius: "7px" }}
-              className="bg-[#252538] d-flex justify-content-center "
-            >
-              <p className="text-white mx-auto   mt-2   "> ملف مدني</p>
-            </div>
-          </div>
-          <div className="pdfbg">
-            <img
-              src={process.env.PUBLIC_URL + "/icons/Pdf.png"}
-              alt="pdf"
-              className="pdfImage"
-            />
-            <div
-              style={{ borderRadius: "7px" }}
-              className="bg-[#252538] d-flex justify-content-center "
-            >
-              <p className="text-white mx-auto  mt-2 "> ملف معماري</p>
-            </div>
-          </div>
-          {ProjectTime === "Done" && (
-            <div className="pdfbg">
-              <img
-                src={process.env.PUBLIC_URL + "/icons/Pdf.png"}
-                alt="pdf"
-                className="pdfImage"
-              />
+          <div className="w-90 p-3 m-auto d-flex  gap-5">
+            <div className="">
+              <PdfImage openPdf={openPdf} className="!bg-[#151521]" setOpenPdf={setOpenPdf} width="93px" height="61px" pdfSrc={"/example.pdf"} />
               <div
                 style={{ borderRadius: "7px" }}
-                className="bg-[#252538]    d-flex justify-content-center m-auto     "
+                className="bg-[#252538] d-flex justify-content-center "
               >
-                <p className="text-white   mt-2 "> الملف النهائي للمشروع</p>
+                <p className="text-white mx-auto mt-2">عرض مالي</p>
               </div>
             </div>
-          )}
-        </div>
-      </fieldset>
-
-      <fieldset className="showProjectBorder p-2 ">
-        <legend className="text-center"> التقارير </legend>
-
-        <div className="w-90 p-3 m-auto d-flex  gap-5">
-          <div className="pdfbg">
-            <img
-              src={process.env.PUBLIC_URL + "/icons/Pdf.png"}
-              alt="pdf"
-              className="pdfImage"
-            />
-            <div
-              style={{ borderRadius: "7px" }}
-              className="bg-[#252538] d-flex justify-content-center "
-            >
-              <p className="text-white mx-auto   mt-2   "> نوع التقرير</p>
+            <div className="">
+              <PdfImage openPdf={openPdf} className="!bg-[#151521]" setOpenPdf={setOpenPdf} width="93px" height="61px" pdfSrc={"/example.pdf"} />
+              <div
+                style={{ borderRadius: "7px" }}
+                className="bg-[#252538] d-flex justify-content-center "
+              >
+                <p className="text-white mx-auto  mt-2 ">عرض فني</p>
+              </div>
             </div>
           </div>
-          <div className="pdfbg">
-            <img
-              src={process.env.PUBLIC_URL + "/icons/Pdf.png"}
-              alt="pdf"
-              className="pdfImage"
-            />
-            <div
-              style={{ borderRadius: "7px" }}
-              className="bg-[#252538] d-flex justify-content-center "
-            >
-              <p className="text-white mx-auto   mt-2   "> نوع التقرير</p>
+        </fieldset>
+        <fieldset className="showProjectBorder p-2 ">
+          <legend className="text-center"> ملفات المشروع </legend>
+
+          <div className="w-90 p-3 m-auto d-flex  gap-5">
+            <div className="">
+              <PdfImage openPdf={openPdf} className="!bg-[#151521]" setOpenPdf={setOpenPdf} width="93px" height="61px" pdfSrc={"/example.pdf"} />
+
+              <div
+                style={{ borderRadius: "7px" }}
+                className="bg-[#252538] d-flex justify-content-center "
+              >
+                <p className="text-white mx-auto   mt-2   "> ملف مدني</p>
+              </div>
+            </div>
+            <div className="">
+              <PdfImage openPdf={openPdf} className="!bg-[#151521]" setOpenPdf={setOpenPdf} width="93px" height="61px" pdfSrc={"/example.pdf"} />
+
+              <div
+                style={{ borderRadius: "7px" }}
+                className="bg-[#252538] d-flex justify-content-center "
+              >
+                <p className="text-white mx-auto  mt-2 "> ملف معماري</p>
+              </div>
+            </div>
+            {ProjectTime === "Done" && (
+              <div className="">
+                <PdfImage openPdf={openPdf} className="!bg-[#151521]" setOpenPdf={setOpenPdf} width="93px" height="61px" pdfSrc={"/example.pdf"} />
+
+                <div
+                  style={{ borderRadius: "7px" }}
+                  className="bg-[#252538]    d-flex justify-content-center m-auto     "
+                >
+                  <p className="text-white   mt-2 "> الملف النهائي للمشروع</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </fieldset>
+
+        <fieldset className="showProjectBorder p-2 ">
+          <legend className="text-center"> التقارير </legend>
+
+          <div className="w-90 p-3 m-auto d-flex  gap-5">
+            <div className="">
+              <PdfImage openPdf={openPdf} className="!bg-[#151521]" setOpenPdf={setOpenPdf}  width="93px" height="61px" pdfSrc={"/example.pdf"} />
+
+              <div
+                style={{ borderRadius: "7px" }}
+                className="bg-[#252538] d-flex justify-content-center "
+              >
+                <p className="text-white mx-auto   mt-2   "> نوع التقرير</p>
+              </div>
+            </div>
+            <div className="">
+              <PdfImage openPdf={openPdf} className="!bg-[#151521]" setOpenPdf={setOpenPdf} width="93px" height="61px" pdfSrc={"/example.pdf"} />
+
+              <div
+                style={{ borderRadius: "7px" }}
+                className="bg-[#252538] d-flex justify-content-center "
+              >
+                <p className="text-white mx-auto   mt-2   "> نوع التقرير</p>
+              </div>
             </div>
           </div>
-        </div>
-      </fieldset>
+        </fieldset>
 
-      <fieldset className="showProjectBorder p-2 ">
-        <legend className="text-center"> معلومات الدفع </legend>
-        <div className="d-flex mx-2 justify-content-between ">
-          <p className="text-white">
-            المبلغ الاجمالى : <span className="main-text"> 1000 ريال</span>
-          </p>
-          <p className="text-white">
-            {" "}
-            عدد الدفعات : <span className="main-text"> 2</span>
-          </p>
+        <fieldset className="showProjectBorder p-2 ">
+          <legend className="text-center"> معلومات الدفع </legend>
+          <div className="d-flex text-start m-2 justify-content-between ">
+            <p className="text-white">
+              المبلغ الاجمالى : <span className="main-text"> 1000 ريال</span>
+            </p>
+            <p className="text-white">
+              {" "}
+              عدد الدفعات : <span className="main-text"> 2</span>
+            </p>
+          </div>
+          <div className="d-flex text-start m-2 justify-content-between">
+            <p className="text-white">
+              {" "}
+              المبلغ المتبقى : <span className="main-text"> 0ريال </span>
+            </p>
+            <p className="text-white">
+              {" "}
+              عدد الدفعات المتبقى : <span className="main-text"> 0</span>
+            </p>
+          </div>
+
+          <CustomTable columns={columns} data={ShowProjectsData}>
+            {ShowProjectsData && ShowProjectsData.length > 0
+              ? ShowProjectsData.map(
+                  (
+                    {
+                      id,
+                      Payments,
+                      PaymentType,
+                      recivedDate,
+                      status,
+                      claim,
+                      bill,
+                    },
+                    index
+                  ) => (
+                    <TableRow
+                      className={`my-2 border !border-[#efaa207f] ${
+                        index % 2 === 0 ? "bg-[#151521]" : ""
+                      }`}
+                      key={index}
+                    >
+                      <TableCell textColor="#ffffff7f">{id}</TableCell>
+                      <TableCell>{Payments}</TableCell>
+                      <TableCell>{PaymentType}</TableCell>
+                      <TableCell>{recivedDate}</TableCell>
+                      <TableCell>{status}</TableCell>
+                      <TableCell>{claim}</TableCell>
+                      <TableCell>{bill}</TableCell>
+                    </TableRow>
+                  )
+                )
+              : null}
+          </CustomTable>
+        </fieldset>
+        <div className="showProjectBorder p-2 ">
+          <p className="text-white"> ملاحظات الدفع </p>
+          <textarea
+            placeholder="..............."
+            disabled
+            className="form-control my-3"
+            cols={30}
+            rows={5}
+          />
         </div>
-        <div className="d-flex mx-2 justify-content-between">
-          <p className="text-white">
-            {" "}
-            المبلغ المتبقى : <span className="main-text"> 0ريال </span>
-          </p>
-          <p className="text-white">
-            {" "}
-            عدد الدفعات المتبقى : <span className="main-text"> 0</span>
-          </p>
+        <div className="d-flex justify-content-end">
+          <Button
+            onClick={() => {
+              setShowProject(false);
+            }}
+            className="sumbmitAddUpdateUser"
+          >
+            حفظ
+          </Button>
         </div>
-        <DataTableComponent
-          className={"my-2 overflow-x-hidden overflow-y-auto"}
-          columns={columns}
-          data={ShowProjectsData}
-        />
-      </fieldset>
-      <div className="showProjectBorder p-2 ">
-        <p className="text-white"> ملاحظات الدفع </p>
-        <textarea
-          placeholder="..............."
-          disabled
-          className="form-control my-3"
-          cols={30}
-          rows={5}
-        />
-      </div>
-      <div className="d-flex justify-content-end">
-        <Button
-          onClick={() => {
-            setShowProject(false);
-          }}
-          className="sumbmitAddUpdateUser"
-        >
-          حفظ
-        </Button>
       </div>
     </div>
   );

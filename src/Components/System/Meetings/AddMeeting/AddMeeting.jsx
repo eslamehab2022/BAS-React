@@ -69,221 +69,221 @@ export const AddMeeting = ({ view, setView }) => {
         chooseDepartment={chooseDepartment}
         setChooseDeprtmant={setChooseDeprtmant}
       />
-   
-        <Modal
-          size="lg"
-          show={view}
-          onHide={() => setView(false)}
-          aria-labelledby=" example-modal-sizes-title-lg"
-          className="systemModal mettingModal   "
-        >
-          <Container>
-            <div className="d-flex justify-content-between">
-              <p className="text-xl text-white">اضافة اجتماع جديد</p>
-              <Image
-                src="/Rejected.png"
-                alt="close modal button"
-                className="pointer"
-                onClick={() => {
-                  setView(false);
-                }}
+
+      <Modal
+        size="lg"
+        show={view}
+        onHide={() => setView(false)}
+        aria-labelledby=" example-modal-sizes-title-lg"
+        className="systemModal mettingModal   "
+        contentClassName="scroll"
+      >
+        <Container>
+          <div className="d-flex justify-content-between">
+            <p className="text-xl text-white">اضافة اجتماع جديد</p>
+            <Image
+              src="/Rejected.png"
+              alt="close modal button"
+              className="pointer"
+              onClick={() => {
+                setView(false);
+              }}
+            />
+          </div>
+          <Form className="row my-4 date-input border-golden w-100 mx-auto p-3  ">
+            <div className="col-md-12 mb-4">
+              <Select
+                className="w-50"
+                label="بلد الاجتماع"
+                OptionbackgroundColor="#2B2B40"
+                {...selectCountry.bind}
+                options={meetingCountries}
+                mandtory
               />
             </div>
-            <Form className="row my-4 date-input border-golden w-100 mx-auto p-3  ">
-              <div className="col-md-12 mb-4">
-                <Select
-                  className="w-50"
-                  label="بلد الاجتماع"
-                  OptionbackgroundColor="#2B2B40"
-                  {...selectCountry.bind}
-                  options={meetingCountries}
-                  mandtory
-                />
-              </div>
-              <div className="col-md-6 mb-4">
-                <Select
-                  OptionbackgroundColor="#2B2B40"
-                  label="نوع الاجتماع"
-                  {...selectMeetingType.bind}
-                  options={meetingType}
-                  mandtory
-                />
-              </div>
+            <div className="col-md-6 mb-4">
+              <Select
+                OptionbackgroundColor="#2B2B40"
+                label="نوع الاجتماع"
+                {...selectMeetingType.bind}
+                options={meetingType}
+                mandtory
+              />
+            </div>
 
-              {selectMeetingType.value.value === "مع قسم" && (
-                <div className="col-md-6 d-flex align-items-end  justify-content-center mb-4">
-                  <Button
-                    className="w-100 ChooseDeprtmant  bg-[#2B2B40]"
-                    onClick={() => {
-                      setChooseDeprtmant(true);
-                    }}
-                  >
-                    اختار القسم{" "}
-                  </Button>
-                </div>
-              )}
-
-              <div className="col-md-12 mb-4">
-                <Form.Group>
-                  <Form.Label>الاجتماع عن</Form.Label>
-                  <CKEditor
-                    onChange={(event, editor) => {
-                      const data = editor.getData();
-                      console.log({ event, editor, data });
-                    }}
-                    editor={ClassicEditor}
-                    data="<h2>تفاصيل الاجتماع</h2>"
-                    onBlur={(event, editor) => {
-                      const data = editor.getData();
-                      console.log({ event, editor, data });
-                    }}
-                  ></CKEditor>
-                </Form.Group>
-              </div>
-              <div className="col-md-6   mb-4">
-                <FormControl>
-                  <FormLabel
-                    className="text-white "
-                    id="demo-radio-buttons-group-label"
-                  >
-                    {" "}
-                    مكان الاجتماع
-                  </FormLabel>
-                  <RadioGroup
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    name="radio-buttons-group"
-                    className="custom-radio"
-                  >
-                    <FormControlLabel
-                      onChange={(e) => {
-                        setMeetingPlace(e.target.value);
-                        setSelectedPlace(1);
-                      }}
-                      className="text-white mt-2 flex gap-3 "
-                      value="online"
-                      control={
-                        <label
-                          onClick={() => {
-                            setMeetingPlace("online");
-                            setSelectedPlace(1);
-                          }}
-                          htmlFor="online"
-                          className={`w-5 h-5 rounded-[5px] bg-[#2B2B40] border ${
-                            meetingPlace === "online" ? "!border-[#EFAA20]" : ""
-                          }`}
-                        >
-                          {selectedPlace == 1 ? <FaCheck /> : null}{" "}
-                          <Radio sx={{ display: "none" }} />
-                        </label>
-                      }
-                      label="online"
-                    />
-                    <FormControlLabel
-                      className="text-white flex gap-3 my-2"
-                      onChange={(e) => {
-                        setMeetingPlace(e.target.value);
-                        setSelectedPlace(2);
-                      }}
-                      value="offline"
-                      control={
-                        <label
-                          onClick={() => {
-                            setMeetingPlace("offline");
-                            setSelectedPlace(2);
-                          }}
-                          htmlFor="offline"
-                          className={`w-5 h-5 rounded-[5px] bg-[#2B2B40] border ${
-                            meetingPlace === "offline"
-                              ? "!border-[#EFAA20]"
-                              : ""
-                          }`}
-                        >
-                          {selectedPlace == 2 ? <FaCheck /> : null}{" "}
-                          <Radio id="offline" sx={{ display: "none" }} />
-                        </label>
-                      }
-                      label="offline"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </div>
-              {meetingPlace === "online" && (
-                <div className="col-md-6 meetingLink d-flex align-items-center  justify-content-start mb-4">
-                  <Input label={" لينك الاجتماع "} {...meetingLink.bind} />
-                </div>
-              )}
-              <div className="col-md-12  mb-4">
-                <div className="!w-1/2">
-                  <Form.Group
-                    className="licenseDate-container "
-                    controlId="licenseDate"
-                  >
-                    <Form.Label className="d-flex gap-2 align-items-center">
-                      تاريخ الاجتماع
-                    </Form.Label>
-
-                    <FormDatePicker
-                      date={meetingDate}
-                      placeholderText=" ادخل تاريخ الاجتماع "
-                      onChange={(date) => setMeetingDate(date)}
-                      className="w-50 form-control"
-                    />
-                  </Form.Group>
-                </div>
-              </div>
-              <div dir="ltr" className="col-md-6  mb-2">
-                <div>
-                  <Form.Group
-                    className="licenseDate-container w-100"
-                    controlId="licenseDate"
-                  >
-                    <Form.Label className="d-flex gap-2 align-items-center">
-                      توقيت بدا الاجتماع
-                    </Form.Label>
-                    <TimePickerButton
-                      value={startMeeting}
-                      label="   وقت بدا الاجتماع "
-                      onChange={(time) => setStartMeeting(time)}
-                      className="w-100 form-control "
-                    />
-                  </Form.Group>
-                </div>
-              </div>
-              <div dir="rtl" className="col-md-6  mb-2">
-                <div>
-                  <Form.Group
-                    className="licenseDate-container w-100"
-                    controlId="licenseDate"
-                  >
-                    <Form.Label className="d-flex gap-2 align-items-center">
-                      توقيت نهاية الاجتماع
-                    </Form.Label>
-                    <TimePickerButton
-                      value={endMeeting}
-                      label="   وقت نهاية الاجتماع "
-                      onChange={(time) => setEndMeeting(time)}
-                      className="w-100 form-control !text-white"
-                    />
-                    
-                  </Form.Group>
-                </div>
-              </div>
-
-              <div className="d-flex justify-content-center">
-                <button
-                  onClick={(e) => {
-                    handleAddMeeting();
+            {selectMeetingType.value.value === "مع قسم" && (
+              <div className="col-md-6 d-flex align-items-end  justify-content-center mb-4">
+                <Button
+                  type="button"
+                  className="w-100 ChooseDeprtmant  bg-[#2B2B40]"
+                  onClick={() => {
+                    setChooseDeprtmant(true);
                   }}
-                  className="  mt-4 sumbmitAddUpdateUser border-0 disabled "
+                >
+                  اختار القسم{" "}
+                </Button>
+              </div>
+            )}
+
+            <div className="col-md-12 mb-4">
+              <Form.Group>
+                <Form.Label>الاجتماع عن</Form.Label>
+                <CKEditor
+                  onChange={(event, editor) => {
+                    const data = editor.getData();
+                    console.log({ event, editor, data });
+                  }}
+                  editor={ClassicEditor}
+                  data="<h2>تفاصيل الاجتماع</h2>"
+                  onBlur={(event, editor) => {
+                    const data = editor.getData();
+                    console.log({ event, editor, data });
+                  }}
+                ></CKEditor>
+              </Form.Group>
+            </div>
+            <div className="col-md-6   mb-4">
+              <FormControl>
+                <FormLabel
+                  className="text-white "
+                  // id="demo-radio-buttons-group-label"
                 >
                   {" "}
-                  {Submitted ? <Progress isSmall /> : " حفظ"}{" "}
-                </button>
+                  مكان الاجتماع
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  name="radio-buttons-group"
+                  className="custom-radio"
+                >
+                  <FormControlLabel
+                    onChange={(e) => {
+                      setMeetingPlace(e.target.value);
+                      setSelectedPlace(1);
+                    }}
+                    className="text-white mt-2 flex gap-3 "
+                    value="online"
+                    control={
+                      <label
+                        onClick={() => {
+                          setMeetingPlace("online");
+                          setSelectedPlace(1);
+                        }}
+                        htmlFor="online"
+                        className={`w-5 h-5 rounded-[5px] bg-[#2B2B40] border ${
+                          meetingPlace === "online" ? "!border-[#EFAA20]" : ""
+                        }`}
+                      >
+                        {selectedPlace == 1 ? <FaCheck /> : null}{" "}
+                        <Radio sx={{ display: "none" }} />
+                      </label>
+                    }
+                    label="online"
+                  />
+                  <FormControlLabel
+                    className="text-white flex gap-3 my-2"
+                    onChange={(e) => {
+                      setMeetingPlace(e.target.value);
+                      setSelectedPlace(2);
+                    }}
+                    value="offline"
+                    control={
+                      <label
+                        onClick={() => {
+                          setMeetingPlace("offline");
+                          setSelectedPlace(2);
+                        }}
+                        htmlFor="offline"
+                        className={`w-5 h-5 rounded-[5px] bg-[#2B2B40] border ${
+                          meetingPlace === "offline" ? "!border-[#EFAA20]" : ""
+                        }`}
+                      >
+                        {selectedPlace == 2 ? <FaCheck /> : null}{" "}
+                        <Radio id="offline" sx={{ display: "none" }} />
+                      </label>
+                    }
+                    label="offline"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </div>
+            {meetingPlace === "online" && (
+              <div className="col-md-6 meetingLink d-flex align-items-center  justify-content-start mb-4">
+                <Input label={" لينك الاجتماع "} {...meetingLink.bind} />
               </div>
-            </Form>
-          </Container>
-        </Modal>
+            )}
+            <div className="col-md-12  mb-4">
+              <div className="!w-1/2">
+                <Form.Group
+                  className="licenseDate-container "
+                  controlId="licenseDate"
+                >
+                  <Form.Label className="d-flex gap-2 align-items-center">
+                    تاريخ الاجتماع
+                  </Form.Label>
 
+                  <FormDatePicker
+                    date={meetingDate}
+                    placeholderText=" ادخل تاريخ الاجتماع "
+                    onChange={(date) => setMeetingDate(date)}
+                    className="w-50 form-control"
+                  />
+                </Form.Group>
+              </div>
+            </div>
+            <div dir="ltr" className="col-md-6  mb-2">
+              <div>
+                <Form.Group
+                  className="licenseDate-container w-100"
+                  controlId="licenseDate"
+                >
+                  <Form.Label className="d-flex gap-2 align-items-center">
+                    توقيت بدا الاجتماع
+                  </Form.Label>
+                  <TimePickerButton
+                    value={startMeeting}
+                    label="   وقت بدا الاجتماع "
+                    onChange={(time) => setStartMeeting(time)}
+                    className="w-100 form-control "
+                  />
+                </Form.Group>
+              </div>
+            </div>
+            <div dir="rtl" className="col-md-6  mb-2">
+              <div>
+                <Form.Group
+                  className="licenseDate-container w-100"
+                  controlId="licenseDate"
+                >
+                  <Form.Label className="d-flex gap-2 align-items-center">
+                    توقيت نهاية الاجتماع
+                  </Form.Label>
+                  <TimePickerButton
+                    value={endMeeting}
+                    label="   وقت نهاية الاجتماع "
+                    onChange={(time) => setEndMeeting(time)}
+                    className="w-100 form-control !text-white"
+                  />
+                </Form.Group>
+              </div>
+            </div>
+
+            <div className="d-flex justify-content-center">
+              <button
+                type="button"
+                onClick={(e) => {
+                  handleAddMeeting();
+                }}
+                className="  mt-4 sumbmitAddUpdateUser border-0 disabled "
+              >
+                {" "}
+                {/* {Submitted ? <Progress isSmall /> : " حفظ"}{" "} */}
+                حفظ
+              </button>
+            </div>
+          </Form>
+        </Container>
+      </Modal>
     </div>
   );
 };

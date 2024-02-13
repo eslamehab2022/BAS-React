@@ -72,6 +72,7 @@ import HrUsers from "./Components/System/Hr/UserDetails/HrUsers";
 import ChatIndex from "./Pages/System/Chat/index/ChatIndex";
 import AllChats from "./Pages/System/Chat/index/AllChats";
 import UserChat from "./Pages/System/Chat/UserChat/UserChat";
+import Profile from "./Pages/System/Profile/Profile";
 
 const SignUP = lazy(() => import("./Pages/DashBoard/SignUP/SignUP"));
 const SignIn = lazy(() => import("./Pages/DashBoard/SignIn/SignIn"));
@@ -380,6 +381,11 @@ const router = createBrowserRouter([
           { path: "/System/Chat/index", element: <AllChats /> },
           { path: "/System/Chat/:country/:id", element: <UserChat /> },
         ],
+      },
+      //Profile
+      {
+        path: "Profile/:id",
+        element: <Profile />,
       },
     ],
   },

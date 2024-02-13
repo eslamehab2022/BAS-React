@@ -134,7 +134,7 @@ const ShowReviewReport = ({ setShowReport }) => {
             </div>
 
             <div className="col-md-6 mb-3">
-              <p className="text-white"> 
+              <p className="text-white">
                 نوع المشروع :{" "}
                 <span className="main-text"> الاشراف على التنفيذ</span>
               </p>

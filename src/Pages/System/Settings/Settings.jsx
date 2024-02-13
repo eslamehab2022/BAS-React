@@ -7,6 +7,7 @@ import AddNewOrders from "../../../Components/AddNewBtn/Settings/AddNewOrders";
 
 import AddUpdateReciption from "../../../Components/System/Settings/Reception/AddUpdateReception";
 import SettingContext from "../../../Context/SettingContext";
+import AddNewAccounating from "../../../Components/AddNewBtn/Settings/AddNewAccounating";
 const Settings = () => {
   const { settingType, setSettingType, ReciptionType, setReciptionType } =
     useContext(SettingContext);
@@ -37,7 +38,7 @@ const Settings = () => {
   };
   console.log("settingType: ", settingType);
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <SystemControler
         child={
           <button
@@ -75,9 +76,9 @@ const Settings = () => {
           show={show}
         />
       ) : pagePath === "Accounating" ? (
-        <AddNewTimeLine
+        <AddNewAccounating
           handleClose={handleClose}
-          title={"This is Accounating Page"}
+          title={"اضافة بند جديد"}
           show={show}
         />
       ) : pagePath === "CitizenServices" &&
@@ -103,7 +104,7 @@ const Settings = () => {
           show={show}
         />
       ) : null}
-      <div>
+      <div className="h-full">
         <Outlet />
       </div>
     </div>

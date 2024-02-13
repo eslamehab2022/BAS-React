@@ -13,7 +13,8 @@ import Image from "../../Image";
 
 import { FaBars } from "react-icons/fa6";
 import { SideBarProvider } from "../../../Context/SideBarProvider";
-
+import { FaCaretDown } from "react-icons/fa";
+import { Badge } from "@mui/material";
 const AsideBar = () => {
   const [rtl, setRtl] = useState(true);
   // setting the width of the screen
@@ -55,23 +56,25 @@ const AsideBar = () => {
 
   return (
     <div
-      className={` asidePar  d-flex align-items-center  w-100   `}
+      className={` asidePar   !overflow-x-visible !scrollbar-none   rounded-[19px]  relative flex items-center  w-full h-full   `}
       style={{ direction: rtl ? "rtl" : "ltr" }}
     >
+      <ProfileMenu show={openProfile} setShow={setOpenProfile} />
       <Sidebar
         transitionDuration={800}
+        width="300px"
         collapsedWidth="100px !important"
         rootStyles={{
           color: "#FFF",
-          // height: "897px",
+          height: "100%",
           border: "2px solid #EFAA20 !important",
           borderRadius: "19px",
           overflow: "hidden",
         }}
-        collapsed={collapsed}
+        collapsed={width < 1025 ? true : collapsed}
         rtl={rtl}
         backgroundColor="#1E1E2D"
-        className="  w-100"
+        // className="  w-100"
         color="#FFF"
       >
         <div className="d-flex collapsed-handler mx-2 mt-2 justify-end">
@@ -82,9 +85,8 @@ const AsideBar = () => {
             onClick={() => setCollapsed(!collapsed)}
           />
         </div>
-        <Menu transitionDuration={200} className="w-100 ">
-          <MenuItem className="mt-4 relative center w-100">
-            <ProfileMenu show={openProfile} />
+        <Menu transitionDuration={200} className="w-100 overflow-x-visible ">
+          <MenuItem className="mt-4 overflow-x-visible  center w-100">
             <div className="d-flex justify-content-center flex-column align-items-center">
               <div>
                 {" "}
@@ -561,16 +563,76 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
   );
 };
 
-export const ProfileMenu = ({ show }) => {
-  console.log("show" + show);
+export const ProfileMenu = ({ show, setShow }) => {
   return (
     <>
       <div
-        className={`absolute  z-10  border !border-[#2B2B40] left-[0]  top-50% transition-all ease-in-out duration-500 overflow-hidden bg-[#1E1E2D] rounded-[14px] w-[0px] h-[0] opacity-0 Z-10${
-          show && " !h-[245px] !w-[100%] !opacity-100"
+        className={` !absolute p-2  z-[100000]   border !border-[#2B2B40] right-[62%]  !top-[10%] transition-all ease-in-out duration-500  bg-[#1E1E2D] rounded-[14px] w-[0px] h-[0] opacity-0 ${
+          show && " !h-[353px] !w-[245px] !opacity-100"
         } `}
       >
-        GDFDGDGF
+        <div className="relative">
+          <div className="mx-2 flex gap-3">
+            {/* should be user img */}
+            <Image
+              src="/People/Badr.png"
+              alt="user img"
+              className={"w-[51px] h-[51px] rounded-[50%]"}
+            />
+            <div className="flex flex-col">
+              <p className="text-white text-base">بدر بن سليمان </p>
+              <p className="text-[#EFAA20] text-xs">رئيس مجلس الأدارة</p>
+
+              <span className="text-[#565674] text-xs">bader@bsa.com</span>
+            </div>
+          </div>
+          <div className="bg-[#D5992133] h-[1px] w-full my-2"></div>
+          <div onClick={() => setShow(false)} className="mt-2 mb-3 mx-2">
+            <Link className="w-full " to="Profile/2424">
+              <div>
+                <p className="text-sm text-white">صفحتى الشخصية</p>
+              </div>
+            </Link>
+          </div>
+          <div
+            onClick={() => setShow(false)}
+            className="mt-2  flex justify-between items-center pointer h-[33px] mb-3 mx-2"
+          >
+            <p className=" text-sm text-white">مشاريعي</p>
+            <Badge badgeContent={2} color="error"></Badge>
+          </div>
+
+          <div
+            onClick={() => setShow(false)}
+            className="mt-2  pointer h-[33px] mb-3 mx-2"
+          >
+            <Link
+              className="flex justify-between items-center"
+              to="/System/Chat/index"
+            >
+              <p className="text-sm text-white"> محادثاتى</p>
+              <Badge badgeContent={3} color="error"></Badge>
+            </Link>
+          </div>
+
+          <div
+            onClick={() => setShow(false)}
+            className="mt-2 pointer h-[33px] mb-3 mx-2 flex justify-between"
+          >
+            <p className="text-white">اللغة</p>
+            <FaCaretDown color="#fff" />
+          </div>
+          <div
+            onClick={() => setShow(false)}
+            className="mt-2 pointer h-[33px] mb-3 mx-2"
+          >
+            <p className="text-sm text-white"> تسجيل الخروج</p>
+          </div>
+          <div
+            className="absolute w-full  top-full 
+           bg-[#D5992133] h-[1px]  my-2"
+          ></div>
+        </div>
       </div>
     </>
   );

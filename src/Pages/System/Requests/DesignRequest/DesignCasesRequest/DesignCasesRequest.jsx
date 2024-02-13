@@ -127,7 +127,7 @@ const DesignCasesRequest = () => {
   return (
     <>
       {showProject ? (
-        <div className="AllRequests-scroll h-[600px] scrollbar-none">
+        <div className="AllRequests-scroll scrollbar-none">
           <ShowDesignRequest
             DesignProjectType={DesignProjectType}
             setShowProject={setShowProject}

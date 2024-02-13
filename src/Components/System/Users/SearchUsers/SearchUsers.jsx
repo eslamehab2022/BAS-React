@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 const SearchUsers = () => {
   const users = Array.from({ length: 15 });
   return (
-    <div>
-      <div className="search-users scrollbar-none ">
+      <div className="search-users scrollbar-none p-0">
         <div className="d-flex justify-content-between align-items-center m-2">
           <p className="text-center my-3 text-white   ">كل الموظفين</p>
           <NavDropdown
@@ -50,7 +49,7 @@ const SearchUsers = () => {
           <Link
             to={"/System/Hr/Users"}
             key={index}  
-            className="tab d-flex mb-1 py-1 border !border-transparent hover:!border-[#EFAA20]"
+            className="tab flex mb-1 p-2 border !border-transparent hover:!border-[#EFAA20]"
           >
             <Image
               src={process.env.PUBLIC_URL + "/People/islam.jpg"}
@@ -64,7 +63,6 @@ const SearchUsers = () => {
           </Link>
         ))}
       </div>
-    </div>
   );
 };
 

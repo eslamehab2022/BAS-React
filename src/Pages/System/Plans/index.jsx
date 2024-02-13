@@ -21,8 +21,8 @@ export default function Plans() {
           </IconButton>
         }
       />
-      <div className={`flex-1 grid grid-cols-4 gap-4`}>
-        <div className="py-4 px-2  bg-[#1E1E2D] rounded-[19px]">
+      <div className={`flex-1 grid grid-cols-12 gap-2`}>
+        <div className="col-span-3 py-4 px-2  bg-[#1E1E2D] rounded-[19px]">
           <p className="text-white">كل المهام</p>
           <div className="flex  justify-center flex-col">
             <CustomNav
@@ -45,7 +45,7 @@ export default function Plans() {
             />
           </div>
         </div>
-        <div className="col-span-3 bg-[#1E1E2D] rounded-[22px] ">
+        <div className="col-span-9 bg-[#1E1E2D] rounded-[22px] ">
           <div className="mb-5 flex justify-center border !border-[#efaa207f] rounded-[22px]">
             <AllPlansPieChart />
           </div>

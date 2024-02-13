@@ -454,9 +454,9 @@ function TimeLine() {
   const [services, setServices] = useState([...servicesData]);
   const [active, setActive] = useState(1);
   return (
-    <section className="pr-2">
-      <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#1E1E2D]  rounded-[19px]">
+    <section className="h-full">
+      <div className="grid grid-cols-12 gap-2 h-full">
+        <div className="col-span-3 bg-[#1E1E2D]  rounded-[19px]">
           <div className="p-2 ">
             <p className="w-full text-white text-right my-2">مراحل الخطه الزمنيه </p>
             <div className="flex flex-col gap-2">
@@ -470,7 +470,7 @@ function TimeLine() {
             </div>
           </div>
         </div>
-        <div className="bg-[#1E1E2D] flex flex-col rounded-[19px] col-span-3 ">
+        <div className="col-span-9 bg-[#1E1E2D] flex flex-col rounded-[19px]">
         <div className="p-3">
             <SearchButton />
           </div>

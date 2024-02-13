@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { showAddUpdateUser } from "../../../../Context/CheckAddUpdateUserVisability";
 import FormDatePicker from "../../../FormDatePicker";
 import Image from "../../../Image";
+import SaveButton from "../../../SaveButton";
 
 const AddUpdateUser = ({ id = null, setOpenUpdateUser, setOpenModal }) => {
   console.log(id);
@@ -144,7 +145,7 @@ const AddUpdateUser = ({ id = null, setOpenUpdateUser, setOpenModal }) => {
   };
 
   return (
-    <div className="addUpdateUser yellow-scroll  P-4">
+    <div className="addUpdateUser overflow-y-auto scrollbar-none  P-4">
       {showSubmitPoper && (
         <Modal
           className="submitSystemPoper"
@@ -213,15 +214,9 @@ const AddUpdateUser = ({ id = null, setOpenUpdateUser, setOpenModal }) => {
       <Form onSubmit={handleAddUpdateUser}>
         <fieldset className="golden-square  py-4 w-75 m-auto">
           {!id ? (
-            <legend className="text-center text-white">
-              {" "}
-              اضافة مستخدم جديد
-            </legend>
+            <legend className="text-center text-white"> اضافة موظف جديد</legend>
           ) : (
-            <legend className="text-center  text-white">
-              {" "}
-              تعديل المستخدم{" "}
-            </legend>
+            <legend className="text-center  text-white"> تعديل الموظف </legend>
           )}
           <div className="grid grid-cols-3 gap-4   mx-2 ">
             <div className=" d-flex justify-content-center  mb-2">
@@ -391,10 +386,8 @@ const AddUpdateUser = ({ id = null, setOpenUpdateUser, setOpenModal }) => {
             </div>
           </div>
         </fieldset>
-        <div className="d-flex w-75 mx-auto mt-3 justify-content-end">
-          <Button type="submit" className="sumbmitAddUpdateUser">
-            حفظ
-          </Button>
+        <div className="d-flex my-2 w-75 mx-auto mt-3 justify-content-end">
+          <SaveButton onClick={() => setOpenModal(false)} />
         </div>
       </Form>
     </div>

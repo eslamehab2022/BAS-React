@@ -261,7 +261,7 @@ const Reception = () => {
     setAnchorEl(null);
   };
   return (
-    <section className="Reception">
+    <section className="Reception h-full">
       <ViewReception
         id={"44343"}
         status={status}
@@ -275,8 +275,8 @@ const Reception = () => {
         setEditVisit={setEditVisit}
       />
 
-      <div className="grid grid-cols-4 gap-3">
-        <div className="bg-[#1E1E2D]  rounded-[19px]">
+      <div className="grid grid-cols-12 gap-2 h-full">
+        <div className="bg-[#1E1E2D] col-span-3 rounded-[19px]">
           <div className="p-3 ">
             <div className="my-3">
               <p className="text-white text-[15px] ">الاستقبال</p>
@@ -291,7 +291,7 @@ const Reception = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#1E1E2D]   rounded-[19px]">
+        <div className="bg-[#1E1E2D] col-span-3  rounded-[19px]">
           <div className="pt-4 px-3">
             <p className="text-white text-[15px]">كل الزيارات</p>
           </div>
@@ -309,7 +309,8 @@ const Reception = () => {
                 openPdf={openPdf}
                 setOpenPdf={setOpenPdf}
                 pdfSrc={""}
-                text="الصادر"
+                width="53.36px"
+                height={"35px"}
               />
               <p className="text-base text-[#ffffff80] ">الصادر</p>
             </div>
@@ -356,11 +357,14 @@ const Reception = () => {
             }      pointer`}
           >
             <div className="flex items-center gap-2 text-sm text-[#ffffff80] ">
+              <div></div>
               <PdfImage
                 openPdf={openPdf}
                 setOpenPdf={setOpenPdf}
                 pdfSrc={""}
-                text="الصادر"
+                width="53.36px"
+                height={"35px"}
+  
               />
               <p className="text-base text-[#ffffff80] ">الوارد</p>
             </div>
@@ -396,7 +400,7 @@ const Reception = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#1E1E2D]  rounded-[19px] col-span-2 ">
+        <div className="bg-[#1E1E2D] col-span-6 rounded-[19px]  ">
           <div className="p-3">
             {status === "Exports" ? (
               <p className="text-xl text-white">كل الزيارات الصادرة</p>

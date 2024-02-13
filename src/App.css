@@ -136,9 +136,6 @@ a {
   color: rgb(144, 144, 144) !important
 }
 
-.All p {
-  color: rgb(144, 144, 144);
-}
 
 .form-control.is-invalid {
   background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 width=%2712%27 height=%2712%27 fill=%27none%27 stroke=%27%23dc4c64%27%3e%3ccircle cx=%276%27 cy=%276%27 r=%274.5%27/%3e%3cpath stroke-linejoin=%27round%27 d=%27M5.8 3.6h.4L6 6.5z%27/%3e%3ccircle cx=%276%27 cy=%278.2%27 r=%27.6%27 fill=%27%23dc4c64%27 stroke=%27none%27/%3e%3c/svg%3e") !important
@@ -908,18 +905,13 @@ ol.progtrckr li.progtrckr-done:hover:before {
     top: 0% !important;
   }
 
-  .modal-content {
-    height: 700px !important;
-  }
 
   .modal.fade.show {
     display: flex !important;
     justify-content: center !important;
   }
 
-  .modal-content {
-    height: unset !important;
-  }
+  
 
   .line-before::before {
     top: 45% !important;
@@ -1183,9 +1175,9 @@ ol.progtrckr li.progtrckr-done:hover:before {
 
 }
 
-.submitSystemPoper .css-1dimb5e-singleValue {
+/* .submitSystemPoper .css-1dimb5e-singleValue {
   color: white !important;
-}
+} */
 
 
 
@@ -1389,4 +1381,8 @@ color: white;
 }
 .rbc-time-header .rbc-label{
   display: none;
+}
+
+.modal-backdrop{
+  background: transparent !important;
 }

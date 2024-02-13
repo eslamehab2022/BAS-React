@@ -8,8 +8,8 @@ import { SideBarProvider } from "../../../Context/SideBarProvider";
 const SystemIndex = () => {
   const { collapsed, setCollapsed } = useContext(SideBarProvider);
   return (
-    <section className="full-system system-bg min-h-screen relative">
-      <header className="container-lg">
+    <section className="full-system system-bg min-h-screen">
+      <header className="container px-10">
         <nav className="flex justify-end">
           <div className="">
             <Image
@@ -22,10 +22,10 @@ const SystemIndex = () => {
       </header>
 
       <section className="container px-10 flex justify-between gap-3 py-2 ">
-        <div className="max-w-xs ">
+        <div className="max-w-xs">
           <AsideBar />
         </div>
-        <main className="w-full transition-all">
+        <main className="flex-1 transition-all">
         <Outlet />
         </main>
       </section>

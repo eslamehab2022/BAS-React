@@ -46,8 +46,9 @@ const Pdf = ({ openPdf, setOpenPdf, PdfFile, height, width }) => {
           aria-labelledby="contained-modal-title-vcenter"
           onHide={() => setOpenPdf(false)}
           show={openPdf}
+          contentClassName="relative p-5"
         >
-          <Modal.Body className="d-flex align-items-center">
+          <Modal.Body className="flex items-center">
             <div className="d-flex w-100 jusify-content-start">
               <Button
                 href={PdfFile}
@@ -82,7 +83,7 @@ const Pdf = ({ openPdf, setOpenPdf, PdfFile, height, width }) => {
                 Page {pageNumber} of {numPages}
               </p>
             )}
-            <div className="d-flex gap-4">
+            <div className="w-full flex justify-between gap-4 absolute z-10">
               {pageNumber > 1 && (
                 <FaArrowRight
                   onClick={changepageBack}

@@ -4,7 +4,7 @@ export default function SearchButton({}) {
   return (
     <div
       dir="ltr"
-      className="bg-[#161620] px-3 py-2 rounded-[7.721px] flex items-center gap-2"
+      className="bg-[#161620] text-white px-3 py-2 rounded-[7.721px] flex items-center gap-2"
     >
       <CiSearch fontSize={20} fontWeight={500} />
       <input

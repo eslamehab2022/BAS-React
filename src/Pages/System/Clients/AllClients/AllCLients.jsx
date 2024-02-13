@@ -19,10 +19,10 @@ const AllCLients = () => {
 
   console.log(active);
   return (
-    <section className="h-100">
+    <section className="h-full">
       <SystemControler />
-      <div className="grid grid-cols-12 gap-2">
-        <div className="col-span-3">
+      <div className="grid grid-cols-12 gap-2 h-full">
+        <div className="col-span-3 h-full">
           <AllCategories
             child={
               <div className="d-flex  flex-column   align-items-center ">
@@ -179,7 +179,7 @@ const AllCLients = () => {
             }
           />
         </div>
-        <div className="col-span-9">
+        <div className="col-span-9 h-full ">
           <Outlet />
         </div>
       </div>

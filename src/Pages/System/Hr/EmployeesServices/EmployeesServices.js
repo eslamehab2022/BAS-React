@@ -96,8 +96,8 @@ const EmployeesServices = () => {
       {openHr && HrType == "EmployeesServices" ? (
         <AddServices />
       ) : (
-        <div className="row">
-          <div className="col-md-3">
+        <div className="grid grid-cols-12 gap-2">
+          <div className="col-span-3">
             <div className={`${style.servicesTypesContainer} `}>
               <SearchComponent />
               <p className="text-white mt-2">كل الخدمات</p>
@@ -193,7 +193,7 @@ const EmployeesServices = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-9">
+          <div className="col-span-9">
             <div
               className={`${style.allServcies} w-100 allServciesContainer p-4`}
             >

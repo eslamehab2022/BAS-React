@@ -50,10 +50,7 @@
     width: 100%;
     height: 100%;
 }
-.asidePar {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
+
 .asidePar .progress {
     width: 326px;
     height: 18px;

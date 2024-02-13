@@ -40,8 +40,8 @@ const AccountaingIndex = () => {
           </Button>
         }
       />
-      <div className="row">
-        <div className="col-md-3">
+      <div className="grid grid-cols-12 gap-2">
+        <div className="col-span-3">
           <AllCategories
             child={
               <div>
@@ -188,7 +188,7 @@ const AccountaingIndex = () => {
             }
           />
         </div>
-        <div className="col-md-9">
+        <div className="col-span-9">
           <div className={`${style.AccountaingIndexbg} yellow-scroll`}>
             <Outlet />
           </div>

@@ -4,7 +4,7 @@ import AllRequestsPieChart from "../../../../Components/System/Requests/AllReque
 import AllRequestLineChart from "../../../../Components/System/Requests/AllRequestlineChart/AllRequestLineChart";
 export const AllRequestsCharts = () => {
   return (
-    <div className=" p-4 d-flex gap-5 AllRequests  align-items-center flex-column">
+    <div className="p-4 flex gap-5 AllRequests items-center flex-col">
       <div className="AllRequestsPieChartContainer w-100  d-flex align-items-center justify-content-center">
         <AllRequestsPieChart />
       </div>

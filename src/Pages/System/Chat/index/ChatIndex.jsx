@@ -116,8 +116,8 @@ const ChatIndex = () => {
   return (
     <div>
       <SystemControler />
-      <div className="grid grid-cols-4 gap-4">
-        <div className="bg-[#1E1E2D] h-[801px] p-2 rounded-[19px]">
+      <div className="grid grid-cols-12 gap-2">
+        <div className="col-span-3 bg-[#1E1E2D] p-2 rounded-[19px]">
           <p className="text-white mt-2 text-[15px]">كل المستخدمين</p>
           <div
             onClick={() => {
@@ -142,14 +142,14 @@ const ChatIndex = () => {
             <p className="text-[#FFFFFF]"> مصر</p>
           </div>
         </div>
-        <div className="bg-[#1E1E2D] p-2 h-[801px] rounded-[19px] overflow-x-hidden overflow-y-auto scrollbar-none !scrollbar-track-[transparent] !scrollbar-thin !scrollbar-thumb-[#D9D9D9]">
+        <div className="col-span-3 bg-[#1E1E2D] flex flex-col gap-3 rounded-[19px] overflow-x-hidden overflow-y-auto scrollbar-none">
           <SearchComponent className={"!w-3/4 mx-auto"} />
           <div className="my-2 flex justify-between">
             <p
               onClick={() => {
                 setUsersSatus("");
               }}
-              className="text-white pointer text-[14px]"
+              className="text-white pointer text-[14px] px-2"
             >
               كل المستخدمين
             </p>
@@ -185,7 +185,7 @@ const ChatIndex = () => {
                   to={`/System/chat/${user.country}/${
                     user.id
                   }`}
-                  className="my-2 p-2 pointer flex border !border-transparent hover:!border-[#EFAA20] gap-3 mx-2"
+                  className=" p-2 pointer flex border !border-transparent hover:!border-[#EFAA20] gap-3"
                   key={user.id}
                 >
                   <Stack direction="row" spacing={2}>
@@ -275,7 +275,7 @@ const ChatIndex = () => {
           )}
   
         </div>
-        <div className="col-span-2 bg-[#1E1E2D] h-[801px] rounded-[19px]">
+        <div className="col-span-6 bg-[#1E1E2D] h-[801px] rounded-[19px]">
           <Outlet />
         </div>
       </div>

@@ -12,6 +12,9 @@ import DataTableComponent from "../../../DataTableComponent";
 import Image from "../../../Image";
 import DeleteModal from "../../../../Pages/System/Settings/RemoveModal";
 import DownloadButton from "../../../Buttons/DownloadButton";
+import CustomTable from "../../../Table";
+import { TableRow } from "../../../Table/TableRow";
+import { TableCell } from "../../../Table/TableCell";
 
 const ShowDesignReport = ({ setShowReport }) => {
   const searchProject = UseInput("", "");
@@ -30,6 +33,10 @@ const ShowDesignReport = ({ setShowReport }) => {
   };
 
   const areaColumns = [
+    {
+      id: "م",
+      selector: (row) => row.id,
+    },
     {
       name: "الاسم",
       selector: (row) => row.Name,
@@ -69,6 +76,7 @@ const ShowDesignReport = ({ setShowReport }) => {
   ];
   const areaData = Array.from({ length: 2 }).map((_, index) => {
     return {
+      id: index +1,
       Name: " محمد",
       rolesDueTolisence: " قبو 2",
       usage: " مع العقد",
@@ -96,8 +104,8 @@ const ShowDesignReport = ({ setShowReport }) => {
   });
   const bouncesColumns = [
     {
-      name: "م",
-      selector: (row) => row.name,
+      id: "م",
+      selector: (row) => row.id,
     },
     {
       name: "    المجاورين",
@@ -122,8 +130,8 @@ const ShowDesignReport = ({ setShowReport }) => {
   ];
   const bounceData = Array.from({ length: 2 }).map((_, index) => {
     return {
-      name: index + 1,
-      neighbors: " قبو 2",
+      id: index + 1,
+      name: " قبو 2",
       height: " 250Cm ",
       lisence: 34545,
       chart: 54535,
@@ -249,7 +257,7 @@ const ShowDesignReport = ({ setShowReport }) => {
         </Modal>
       )}
 
-      <div className="showProjectComponent px-2">
+      <div className="showProjectComponent px-2 scrollbar-none">
         <div className=" fieldBorder mb-4 p-3">
           <div className="row">
             <div className="col-md-6 mb-3">
@@ -257,7 +265,7 @@ const ShowDesignReport = ({ setShowReport }) => {
                 اسم المالك :<span className="main-text"> BSA</span>
               </p>
             </div>
-            <div className="col-md-6 mb-3">
+            <div className="col-md-6 mb-3 flex gap-1">
               <DownloadButton>تصدير CSV </DownloadButton>
               <DownloadButton> تصدير Excel </DownloadButton>
             </div>
@@ -473,16 +481,99 @@ const ShowDesignReport = ({ setShowReport }) => {
         <fieldset className=" fieldBorder mb-4 p-3">
           <legend className="text-center">المساحات</legend>
 
-          <DataTableComponent columns={areaColumns} data={areaData} />
+          <CustomTable columns={areaColumns} data={areaData}>
+              {areaData && areaData.length > 0
+                ? areaData.map(
+                    (
+                      {
+                        id,
+                        Name,
+                        rolesDueTolisence,
+                        usage,
+                        lisence,
+                        lisenceUnitesNumber,
+                        nature,
+                        natureUnitesNumber,
+                        difference,
+                        notes
+                      },
+                      index
+                    ) => (
+                      <TableRow
+                        className={`my-2 border !border-[#efaa207f] ${
+                          index % 2 === 0 ? "bg-[#151521]" : ""
+                        }`}
+                        key={index}
+                      >
+                        <TableCell textColor="#ffffff7f">{id}</TableCell>
+                        <TableCell>{Name}</TableCell>
+                        <TableCell>{rolesDueTolisence}</TableCell>
+                        <TableCell>{usage}</TableCell>
+                        <TableCell>{lisence}</TableCell>
+                        <TableCell>{lisenceUnitesNumber}</TableCell>
+                        <TableCell>{nature}</TableCell>
+                        <TableCell>{natureUnitesNumber}</TableCell>
+                        <TableCell>{difference}</TableCell>
+                        <TableCell>{notes}</TableCell>
+                      </TableRow>
+                    )
+                  )
+                : null}
+            </CustomTable>
+
+
+
+
         </fieldset>
         <fieldset className=" fieldBorder mb-4 p-3">
           <legend className="text-center">الارتدادات</legend>
 
-          <DataTableComponent
-            className="mb-4"
-            columns={bouncesColumns}
-            data={bounceData}
-          />
+          
+<CustomTable columns={bouncesColumns} data={bounceData}>
+              {bounceData && bounceData.length > 0
+                ? bounceData.map(
+                    (
+                      {
+                        id,
+                        name,
+                        height,
+                        lisence,
+                        chart,
+                        nature,
+                      },
+                      index
+                    ) => (
+                      <TableRow
+                        className={`my-2 border !border-[#efaa207f] ${
+                          index % 2 === 0 ? "bg-[#151521]" : ""
+                        }`}
+                        key={index}
+                      >
+                        <TableCell textColor="#ffffff7f">{id}</TableCell>
+                        <TableCell>{name}</TableCell>
+                        <TableCell>{height}</TableCell>
+                        <TableCell>{lisence}</TableCell>
+                        <TableCell>{chart}</TableCell>
+                        <TableCell>{nature}</TableCell>
+                      </TableRow>
+                    )
+                  )
+                : null}
+            </CustomTable>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <Form.Group>
             <Form.Label>ملاحظات</Form.Label>
             <textarea cols={5} rows={5} className="form-control"></textarea>

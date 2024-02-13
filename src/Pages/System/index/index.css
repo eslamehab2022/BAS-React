@@ -15,11 +15,14 @@
   height: 70px;
 }
 
+.css-1dimb5e-singleValue{
+  color: white !important;
+}
 .systemModal .modal-content {
   background-color: #1e1e2d !important;
   height: 846px !important;
   padding: 30px 0px;
-  overflow-y: auto !important;
+  overflow-y: auto;
 }
 .sumbmitAddUpdateUser {
   width: 139px;
@@ -36,37 +39,10 @@
   color: white !important;
 }
 
-.systemModal .modal-content::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #f5f5f5;
-  border-top-left-radius: 27px;
-  border-bottom-left-radius: 27px;
-}
-
 .systemModal .modal-content::-webkit-scrollbar {
-  width: 15px;
-  border-top-left-radius: 27px;
-  border-bottom-left-radius: 27px;
-
-  background-color: #f5f5f5;
+  display: none !important;
 }
 
-.systemModal .modal-content::-webkit-scrollbar-thumb {
-  background-color: #f90 !important;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-
-  background-image: -webkit-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
-  );
-}
 .yellow-scroll::-webkit-scrollbar-track
   .AddProjectComponent::-webkit-scrollbar-track,
 .AllRequests-scroll::-webkit-scrollbar-track,
@@ -130,9 +106,9 @@
   background-color: unset !important;
 }
 
-.full-system .css-1dimb5e-singleValue {
+/* .full-system .css-1dimb5e-singleValue {
   color: rgba(255, 255, 255, 0.5) !important;
-}
+} */
 
 .system-container {
   min-height: 100vh;
@@ -352,8 +328,8 @@
 }
 
 .full-system .dkGVyE {
-  color: #fff;
-  background: #1e1e2d;
+  color: #fff !important;
+  background: #1e1e2d !important;
 }
 
 .full-system .jiAnER {
