@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SystemControler from "../../../Components/System/SystemControler/SystemControler";
 import { FaCaretRight, FaDownload } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { Container, FormControl, TextField } from "@mui/material";
+import { Button, Container, FormControl, TextField } from "@mui/material";
 import Image from "../../../Components/Image";
 import { Form } from "react-bootstrap";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
@@ -70,7 +70,6 @@ const Profile = () => {
                     size="small"
                     id="first-Name"
                     name="first-Name"
-           
                     variant="outlined"
                     sx={{
                       "& fieldset": {
@@ -94,7 +93,6 @@ const Profile = () => {
                     size="small"
                     id="last-Name"
                     name="last-Name"
-
                     variant="outlined"
                     sx={{
                       "& fieldset": {
@@ -117,7 +115,6 @@ const Profile = () => {
                     size="small"
                     id="user-Name"
                     name="user-Name"
-  
                     variant="outlined"
                     sx={{
                       "& fieldset": {
@@ -250,7 +247,6 @@ const Profile = () => {
                   <InputLabel htmlFor="level" label={"الصلاحية"} />
                   <TextField
                     disabled
-            
                     size="small"
                     id="level"
                     name="level"
@@ -344,7 +340,12 @@ const Profile = () => {
 
               <FormControl className="!w-full">
                 <InputLabel htmlFor="password" label={" نبذة عني  "} />
-                <textarea cols={5} rows={5} disabled className="form-control overflow-hidden !w-full" />
+                <textarea
+                  cols={5}
+                  rows={5}
+                  disabled
+                  className="form-control overflow-hidden !w-full"
+                />
               </FormControl>
             </fieldset>
             <fieldset className="border p-4 my-4 !border-[#D5992133] w-3/4 mx-auto">
@@ -367,9 +368,13 @@ const Profile = () => {
                     <p className="text-white">اسم الملف</p>
                   </div>
                   <div className="flex mx-3 items-center gap-3">
-                    <div className="bg-[#03795D] flex justify-center items-center  rounded-[3px] pointer w-[22px] h-[25px]">
+                    <Button
+                      href={"/example.pdf"}
+                      download={true}
+                      className="!bg-[#03795D] flex justify-center items-center  rounded-[3px] pointer w-[22px] h-[25px]"
+                    >
                       <FaDownload color="#fff" size={15} />
-                    </div>
+                    </Button>
                   </div>
                 </div>
                 <div className="border flex my-3  justify-between  bg-[#1E1E2D] !border-[#EFAA20] !w-full h-[55px] rounded-[3.37px]">
@@ -387,9 +392,13 @@ const Profile = () => {
                     <p className="text-white">اسم الملف</p>
                   </div>
                   <div className="flex mx-3 items-center gap-3">
-                    <div className="bg-[#03795D] flex justify-center items-center  rounded-[3px] pointer w-[22px] h-[25px]">
+                    <Button
+                      href={"/example.pdf"}
+                      download={true}
+                      className=" !bg-[#03795D] flex justify-center items-center  rounded-[3px] pointer w-[22px] h-[25px]"
+                    >
                       <FaDownload color="#fff" size={15} />
-                    </div>
+                    </Button>
                   </div>
                 </div>
               </FormControl>

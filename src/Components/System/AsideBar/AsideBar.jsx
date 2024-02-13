@@ -564,6 +564,18 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
 };
 
 export const ProfileMenu = ({ show, setShow }) => {
+  const [lang, setLang] = useState("ar");
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const handlelang = () => {
+    setShowLangMenu(!showLangMenu);
+  };
+  const handleChangeLang = () => {
+    if (lang === "ar") {
+      setLang("en");
+    } else {
+      setLang("ar");
+    }
+  };
   return (
     <>
       <div
@@ -572,7 +584,7 @@ export const ProfileMenu = ({ show, setShow }) => {
         } `}
       >
         <div className="relative">
-          <div className="mx-2 flex gap-3">
+          <div className="mx-2 flex gap-2">
             {/* should be user img */}
             <Image
               src="/People/Badr.png"
@@ -594,13 +606,14 @@ export const ProfileMenu = ({ show, setShow }) => {
               </div>
             </Link>
           </div>
-          <div
+          <Link
+            to="/System/Projects/index"
             onClick={() => setShow(false)}
             className="mt-2  flex justify-between items-center pointer h-[33px] mb-3 mx-2"
           >
             <p className=" text-sm text-white">مشاريعي</p>
             <Badge badgeContent={2} color="error"></Badge>
-          </div>
+          </Link>
 
           <div
             onClick={() => setShow(false)}
@@ -615,13 +628,70 @@ export const ProfileMenu = ({ show, setShow }) => {
             </Link>
           </div>
 
-          <div
-            onClick={() => setShow(false)}
-            className="mt-2 pointer h-[33px] mb-3 mx-2 flex justify-between"
-          >
-            <p className="text-white">اللغة</p>
-            <FaCaretDown color="#fff" />
+          <div className="mt-2 pointer relative h-[33px] mb-3 mx-1 flex items-center justify-between">
+            <p className="text-white">اللغة </p>
+
+            {lang === "ar" ? (
+              <div
+                onClick={handlelang}
+                dir="rtl"
+                className="w-full my-3 mx-2  flex   justify-end gap-3 "
+              >
+                <p className="text-white">العربية (KSA)</p>
+                <Image
+                  src="/saudiFlagicon.png"
+                  alt="sauida flag"
+                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+                />
+              </div>
+            ) : (
+              <div
+                onClick={handlelang}
+                dir="rtl"
+                className="w-full my-3 mx-2  flex   justify-end gap-3 "
+              >
+                <p className="text-white"> English (USA)</p>
+                <Image
+                  src="/usa.png"
+                  alt="usa flag"
+                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+                />
+              </div>
+            )}
+
+            <div
+              className={`lang-meu absolute p-3  border !border-[#2B2B40] transition-all ease-in-out duration-500 right-[110%] top-[100%] w-[0px] h-[0] opacity-0  bg-[#1E1E2D] rounded-[14px]
+            ${showLangMenu && "!w-[172px] !h-[118px] !opacity-100"}
+            `}
+            >
+              {" "}
+              <div
+                onClick={()=> setLang("ar")}
+                dir="rtl"
+                className="w-full my-3 mx-2  flex   justify-end gap-3 "
+              >
+                <p className="text-white">العربية (KSA)</p>
+                <Image
+                  src="/saudiFlagicon.png"
+                  alt="sauida flag"
+                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+                />
+              </div>
+              <div
+               onClick={()=> setLang("en")}
+                dir="rtl"
+                className="w-full my-3 mx-2  flex   justify-end gap-3 "
+              >
+                <p className="text-white"> English (USA)</p>
+                <Image
+                  src="/usa.png"
+                  alt="usa flag"
+                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+                />
+              </div>
+            </div>
           </div>
+
           <div
             onClick={() => setShow(false)}
             className="mt-2 pointer h-[33px] mb-3 mx-2"

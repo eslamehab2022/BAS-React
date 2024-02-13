@@ -20,10 +20,16 @@ import CheckAccountType from "./Context/AddAccountaing";
 import { AddHr } from "./Context/AddHr";
 import { AddReport } from "./Context/AddReport";
 import SidebarContext from "./Context/SideBarProvider";
-
+import {
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
     <PrimeReactProvider>
       <CheckAccountType>
         <AddReport>
@@ -40,6 +46,11 @@ root.render(
         </AddReport>
       </CheckAccountType>
     </PrimeReactProvider>
+    <div dir="ltr">
+    <ReactQueryDevtools position="bottom-right"  />
+
+    </div>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

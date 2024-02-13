@@ -74,7 +74,7 @@ const AddUpdateDesignReport = ({
 
   const onSubmit = (data) => {
     console.log(data);
-    handleClose()
+    handleClose();
     // after ensuring the data is submitted
     if (id) {
       // update case
@@ -86,7 +86,7 @@ const AddUpdateDesignReport = ({
     }
   };
   return (
-    <div className="AddDesignReport  p-3">
+    <div className="AddDesignReport overflow-y-auto  scrollbar-none p-3">
       {id ? (
         <p className="text-xl text-[#EFAA20] ">تعديل التقرير</p>
       ) : (
@@ -1707,7 +1707,7 @@ const AddUpdateDesignReport = ({
             />
           </fieldset>
           <div className="submit-div flex justify-end">
-            <SaveButton />
+            <SaveButton onClick={() => setEditReport(false)} />
           </div>
         </Form>
       )}

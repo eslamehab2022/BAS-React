@@ -57,7 +57,7 @@ const DeleteIcon = () => {
   );
 };
 
-export const OptionsButton = () => {
+export const OptionsButton = ({id}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

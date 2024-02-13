@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import PieChart from "../../../../../Components/pieChart";
 import DataTableComponent from "../../../../../Components/DataTableComponent";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import "./NestedReportMangment.css";
 import { AddReportType } from "../../../../../Context/AddReport";
 
@@ -22,6 +22,8 @@ const NestedReportMangment = () => {
   const [showReport, setShowReport] = useState(false);
   const [editReport, setEditReport] = useState(false);
   const [id, setId] = useState(null);
+  const { pathname } = useLocation();
+  const pagePath = pathname.split("/System/Projects/Main/ReportManagement/")[1];
 
   const reportsData = Array.from({ length: 3 }).map((_, index) => {
     return {
@@ -76,8 +78,6 @@ const NestedReportMangment = () => {
       selector: (row) => row.ClientType,
     },
 
-    
-
     {
       name: "    عرض",
       selector: (row) => row.display,
@@ -89,34 +89,31 @@ const NestedReportMangment = () => {
   ];
   const { projectType } = useParams();
   useMemo(() => {
-    if (editReport && reportType === "DesignReports") {
+    if (editReport && pagePath === "DesignReports") {
       setShowAddUpdateDesignReport(true);
     } else {
       setShowAddUpdateDesignReport(false);
     }
   }, [editReport, reportType]);
-  useEffect(() => {
-    setReportType(projectType);
 
-    return () => {
-      // setReportType('')
-    };
-  }, [projectType]);
+  useLayoutEffect(() => {
+    setEditReport(false);
+  }, [pagePath]);
   return (
     <>
-      {editReport && reportType == "ReviewReports" && (
+      {editReport && pagePath === "ReviewReports" && (
         <EditReviewReport
           editReport={editReport}
           setEditReport={setEditReport}
         />
       )}
-      {showReport && projectType === "ReviewReports" ? (
+      {showReport && pagePath === "ReviewReports" ? (
         <ShowReviewReport setShowReport={setShowReport} />
-      ) : showReport && projectType === "DesignReports" ? (
+      ) : showReport && pagePath === "DesignReports" ? (
         <ShowDesignReport setShowReport={setShowReport} />
       ) : (
         <>
-          {editReport && reportType == "DesignReports" ? (
+          {editReport && pagePath == "DesignReports" ? (
             <AddUpdateDesignReport
               setEditReport={setEditReport}
               setId={setId}
@@ -141,48 +138,48 @@ const NestedReportMangment = () => {
                   </legend>
                 )}
 
-                  <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
-                    {/* <DataTableComponent
+                <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+                  {/* <DataTableComponent
                       className={"  !h-[400px]"}
                       columns={columns}
                       data={reportsData}
                     /> */}
-                    <CustomTable columns={columns} data={reportsData}>
-                  {reportsData && reportsData.length > 0
-                    ? reportsData.map(
-                        (
-                          {
-                            id,
-                            ProjectName,
-                            ProjectNumber,
-                            createdAt,
-                            // ClientType,
-                            ProjectType,
-                            display,
-                            edit
-                          },
-                          index
-                        ) => (
-                          <TableRow
-                            className={`my-2 border !border-[#efaa207f] ${
-                              index % 2 === 0 ? "bg-[#151521]" : ""
-                            }`}
-                            key={index}
-                          >
-                            <TableCell textColor="#ffffff7f">{id}</TableCell>
-                            <TableCell>{ProjectName}</TableCell>
-                            <TableCell>{ProjectNumber}</TableCell>
-                            {/* <TableCell>{ClientType}</TableCell> */}
-                            <TableCell>{createdAt}</TableCell>
-                            <TableCell>{ProjectType}</TableCell>
-                            <TableCell>{display}</TableCell>
-                            <TableCell>{edit}</TableCell>
-                          </TableRow>
+                  <CustomTable columns={columns} data={reportsData}>
+                    {reportsData && reportsData.length > 0
+                      ? reportsData.map(
+                          (
+                            {
+                              id,
+                              ProjectName,
+                              ProjectNumber,
+                              createdAt,
+                              // ClientType,
+                              ProjectType,
+                              display,
+                              edit,
+                            },
+                            index
+                          ) => (
+                            <TableRow
+                              className={`my-2 border !border-[#efaa207f] ${
+                                index % 2 === 0 ? "bg-[#151521]" : ""
+                              }`}
+                              key={index}
+                            >
+                              <TableCell textColor="#ffffff7f">{id}</TableCell>
+                              <TableCell>{ProjectName}</TableCell>
+                              <TableCell>{ProjectNumber}</TableCell>
+                              {/* <TableCell>{ClientType}</TableCell> */}
+                              <TableCell>{createdAt}</TableCell>
+                              <TableCell>{ProjectType}</TableCell>
+                              <TableCell>{display}</TableCell>
+                              <TableCell>{edit}</TableCell>
+                            </TableRow>
+                          )
                         )
-                      )
-                    : null}
-                </CustomTable>
-                  </div>
+                      : null}
+                  </CustomTable>
+                </div>
               </fieldset>
             </div>
           )}

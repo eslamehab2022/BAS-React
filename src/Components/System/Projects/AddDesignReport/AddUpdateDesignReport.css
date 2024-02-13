@@ -1,51 +1,14 @@
 .AddDesignReport {
-    border-radius: 25px;
-    border: 1px solid #EFAA20;
-    background: #1E1E2D;
-    height: 793px;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-}
-
-
-
-.AddDesignReport::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #F5F5F5;
-    border-top-left-radius: 22px;
-    border-bottom-left-radius: 22px;
-
-}
-
-
-.AddDesignReport::-webkit-scrollbar {
-    width: 12px;
-    border-top-left-radius: 22px;
-    border-bottom-left-radius: 22px;
-
-    background-color: #F5F5F5;
-
-}
-
-.AddDesignReport::-webkit-scrollbar-thumb {
-    background-color: #F90;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    background-image: -webkit-linear-gradient(45deg,
-            rgba(255, 255, 255, .2) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(255, 255, 255, .2) 50%,
-            rgba(255, 255, 255, .2) 75%,
-            transparent 75%,
-            transparent)
+  border-radius: 25px;
+  border: 1px solid #efaa20;
+  background: #1e1e2d;
+  height: 793px;
 }
 
 .AddDesignReport .input-container {
-    width: 100%;
+  width: 100%;
 }
 
 .AddDesignReport .form-group {
-    width: 100%;
+  width: 100%;
 }

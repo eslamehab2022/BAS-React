@@ -112,21 +112,21 @@ export default function AddNewCitizenServices({
                         stroke="white"
                         stroke-width="2.70019"
                         stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M23.172 8.45814C22.6406 6.35366 21.3288 4.52999 19.5026 3.35683C17.6764 2.18366 15.4724 1.74878 13.3375 2.14033C11.2026 2.53188 9.29638 3.72057 8.00536 5.46543C6.71435 7.2103 6.1351 9.38078 6.38504 11.5369C6.38504 11.5369 6.62294 12.9083 7.10963 13.6858"
                         stroke="white"
-                        stroke-width="2.70019"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2.70019"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M24.9967 23.7934C26.0945 23.7926 27.1798 23.5594 28.181 23.109C29.1822 22.6586 30.0766 22.0013 30.8055 21.1803C31.5343 20.3593 32.081 19.3933 32.4096 18.3458C32.7382 17.2982 32.8412 16.193 32.7119 15.1028C32.5825 14.0126 32.2238 12.9622 31.6592 12.0206C31.0946 11.0791 30.3371 10.2678 29.4364 9.64013C28.5357 9.01246 27.5122 8.58267 26.4334 8.37905C25.3546 8.17542 24.245 8.20257 23.1774 8.45872L21.1094 9.0216"
                         stroke="white"
-                        stroke-width="2.70019"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2.70019"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                 <p>ارفق الملف</p>

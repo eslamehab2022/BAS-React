@@ -2,14 +2,29 @@ import React, { useState } from "react";
 import "./SystemSignIn.css";
 import { Button, Container, Form } from "react-bootstrap";
 import Input from "../../../../Components/FormHandler/Input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "../../../../Components/Image";
+import { useForm } from "react-hook-form";
+
+import { useMutation } from "react-query";
+import myAxiosInstance from "../../../../helper/https";
+import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import Progress from "../../../../Components/Progress";
 
 const SystemSignIn = () => {
   const [morningNightMode, setMorningNightMode] = useState("morning");
   const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -67,6 +82,34 @@ const SystemSignIn = () => {
       setMorningNightMode("morning");
     }
   };
+  const onSubmit = async (userData) => {
+   console.log(userData)
+    setIsLoading(true);
+    try {
+      const { data } = await myAxiosInstance({
+        url: "/user/login",
+        method: "POST",
+        data: userData,
+        
+      });
+      console.log(data);
+      if (data.message == "user login Done") {
+        setIsLoading(false);
+        Cookies.set("accessToken", data.accessToken);
+        navigate("/System/index");
+      } else {
+        setIsLoading(false);
+        toast.error(data?.message);
+      }
+    } catch ({response}) {
+      setIsLoading(false);
+      toast.error(response?.data?.message);
+ 
+
+    } finally {
+
+    }
+  };
 
   return (
     <div
@@ -94,44 +137,46 @@ const SystemSignIn = () => {
 
                  "
         >
-          <Form className="  w-75 h-100">
+          <Form onSubmit={handleSubmit(onSubmit)} className="  w-75 h-100">
             <Image
               src="../systemlogin.gif"
               style={{ width: "379px", height: "214px" }}
               alt="logo image"
             />
-            <Input
+            <input
+              {...register("userName")}
+              className="form-control mb-4"
               borderColor="#94713E"
               height="48.903px"
               background="transparent"
               label={" أسم المستخدم"}
               placeholder="ادخل اسم المستخدم "
-              className=" mb-4"
             />
-            <Input
+            <input
+              {...register("password")}
+              className="form-control mb-4"
               type="password"
               borderColor="#94713E"
               height="48.903px"
               background="transparent"
               label={" كلمة المرور"}
               placeholder="ادخل كلمه مرور المستخدم "
-              className="mb-4"
             />
-            <Link className="" to="/System/index">
-              <Button
-                className="text-black mt-3 shadow-lg shadow-neutral-600"
-                style={{
-                  width: "379.646px",
 
-                  height: "48.987px",
-                  backgroundColor: "#FFF",
-                  border: "none",
-                }}
-              >
-                {" "}
-                الدخول الي الحساب
-              </Button>
-            </Link>
+            <Button
+              type="submit"
+              className="text-black mt-3 shadow-lg shadow-neutral-600"
+              style={{
+                width: "379.646px",
+
+                height: "48.987px",
+                backgroundColor: "#FFF",
+                border: "none",
+              }}
+            >
+              {" "}
+              {isLoading ? <Progress isSmall /> : " الدخول الي الحساب"}
+            </Button>
           </Form>
         </div>
       </div>

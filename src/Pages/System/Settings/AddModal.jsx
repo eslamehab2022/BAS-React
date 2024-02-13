@@ -3,15 +3,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import SaveButton from "../../../Components/SaveButton";
 // import CloseBtn from "/assets/icons/Rejected.svg"
-function AddModal({title,show,handleClose,arr}) {
-  const [inputVal,setInputVal] = useState("")
-  const handleSave = () => {
-    arr(prev=> {
-      // console.log(prev.subCategories)
-      return {...prev,subCategories: [...prev.subCategories,{id:prev.subCategories.length+1,name:inputVal}] }
-    })
-    handleClose()
-  }
+function AddModal({title,show,handleClose,handleSave,setNewValue}) {
+  
 
   return (
     <>
@@ -44,8 +37,8 @@ function AddModal({title,show,handleClose,arr}) {
             className="w-full bg-[#161622] py-3 px-2 rounded-[7px] outline-none"
             type="text"
             placeholder="ادخل الاسم"
-            value={inputVal}
-            onChange={(e)=> setInputVal(e.target.value)}
+            // value={inputVal}
+            onChange={(e)=> setNewValue(e.target.value)}
           />
         </Modal.Body>
         <Modal.Footer className="border-none">
