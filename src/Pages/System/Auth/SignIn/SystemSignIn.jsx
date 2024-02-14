@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import "./SystemSignIn.css";
 import { Button, Container, Form } from "react-bootstrap";
 import Input from "../../../../Components/FormHandler/Input";
@@ -13,17 +13,20 @@ import myAxiosInstance from "../../../../helper/https";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import Progress from "../../../../Components/Progress";
+import { userLogin } from "../../../../helper/fetchers/Login";
 
 const SystemSignIn = () => {
   const [morningNightMode, setMorningNightMode] = useState("morning");
   const [checked, setChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [notFound, setNotFound] = useState("");
+
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+
+    formState: { errors, isSubmitting },
   } = useForm();
 
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
@@ -83,31 +86,21 @@ const SystemSignIn = () => {
     }
   };
   const onSubmit = async (userData) => {
-   console.log(userData)
-    setIsLoading(true);
     try {
-      const { data } = await myAxiosInstance({
-        url: "/user/login",
-        method: "POST",
-        data: userData,
-        
-      });
+      const { data } = await userLogin(userData);
       console.log(data);
-      if (data.message == "user login Done") {
-        setIsLoading(false);
+      if (data.success) {
         Cookies.set("accessToken", data.accessToken);
         navigate("/System/index");
-      } else {
-        setIsLoading(false);
-        toast.error(data?.message);
       }
-    } catch ({response}) {
-      setIsLoading(false);
-      toast.error(response?.data?.message);
- 
-
+    } catch ({ response }) {
+      if (response.status === 404 || response.status === 401) {
+        setNotFound("اسم المستخدم او كلمة المرور غير صحيحة");
+      } else {
+        toast.error(response?.data?.message);
+      }
     } finally {
-
+      // write any code here
     }
   };
 
@@ -133,8 +126,8 @@ const SystemSignIn = () => {
       </FormGroup>
       <div className="layer  absolute  d-flex justify-content-center align-items-center top-0 bottom-0 right-0 end-0">
         <div
-          class="signInCard 
-
+          className="signInCard 
+                  rounded-[56.95px]
                  "
         >
           <Form onSubmit={handleSubmit(onSubmit)} className="  w-75 h-100">
@@ -143,39 +136,33 @@ const SystemSignIn = () => {
               style={{ width: "379px", height: "214px" }}
               alt="logo image"
             />
-            <input
-              {...register("userName")}
-              className="form-control mb-4"
-              borderColor="#94713E"
-              height="48.903px"
-              background="transparent"
-              label={" أسم المستخدم"}
-              placeholder="ادخل اسم المستخدم "
-            />
-            <input
-              {...register("password")}
-              className="form-control mb-4"
-              type="password"
-              borderColor="#94713E"
-              height="48.903px"
-              background="transparent"
-              label={" كلمة المرور"}
-              placeholder="ادخل كلمه مرور المستخدم "
-            />
+            <Form.Group>
+              <Form.Label className="text-black">أسم المستخدم</Form.Label>
+              <input
+                {...register("userName")}
+                onChange={() => setNotFound("")}
+                className="form-control !bg-transparent mb-4 h-[48.99px] border !border-[#94713E] hover:!border-[#94713E]  focus:!border-[#94713E] "
+                placeholder="ادخل اسم المستخدم "
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="text-black"> كلمة المرور</Form.Label>
 
+              <input
+                {...register("password")}
+                onChange={() => setNotFound("")}
+                className="form-control !bg-transparent mb-4 h-[48.99px] border !border-[#94713E] hover:!border-[#94713E]  focus:!border-[#94713E] "
+                type="password"
+                placeholder="ادخل كلمه مرور المستخدم "
+              />
+            </Form.Group>
+            <p className="flex justify-center text-[#FF1C00]"> {notFound} </p>
             <Button
               type="submit"
-              className="text-black mt-3 shadow-lg shadow-neutral-600"
-              style={{
-                width: "379.646px",
-
-                height: "48.987px",
-                backgroundColor: "#FFF",
-                border: "none",
-              }}
+              className="text-black mt-3 w-[379.646px] h-[48.987px] !bg-[#fff] hover:!bg-[#fff] !border-trasnparent shadow-lg shadow-neutral-600"
             >
               {" "}
-              {isLoading ? <Progress isSmall /> : " الدخول الي الحساب"}
+              {isSubmitting ? <Progress isSmall /> : " الدخول الي الحساب"}
             </Button>
           </Form>
         </div>

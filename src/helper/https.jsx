@@ -28,9 +28,10 @@ myAxiosInstance.interceptors.request.use(
 myAxiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error?.response?.status === 406) {
-      toast.error(error.response.data?.message);
-    }
+    // if (error?.response?.status === 404) {
+    //   toast.error(error.response.data?.message);
+    //   // history.push("");
+    // }
 
     return Promise.reject(error);
   }

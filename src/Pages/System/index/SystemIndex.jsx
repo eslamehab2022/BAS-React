@@ -1,12 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useLayoutEffect } from "react";
 
 import "./index.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import AsideBar from "../../../Components/System/AsideBar/AsideBar";
 import Image from "../../../Components/Image";
 import { SideBarProvider } from "../../../Context/SideBarProvider";
+import { UserProvider } from "../../../Context/userProvider";
 const SystemIndex = () => {
   const { collapsed, setCollapsed } = useContext(SideBarProvider);
+  const navigate = useNavigate();
+  const { user } = useContext(UserProvider);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+      console.log("no user exists");
+    }
+  }, [user]);
+
   return (
     <section className="full-system system-bg min-h-screen">
       <header className="container px-10">
@@ -26,7 +37,7 @@ const SystemIndex = () => {
           <AsideBar />
         </div>
         <main className="flex-1 transition-all">
-        <Outlet />
+          <Outlet />
         </main>
       </section>
     </section>

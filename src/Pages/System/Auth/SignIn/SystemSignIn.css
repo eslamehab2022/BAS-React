@@ -16,9 +16,8 @@
   border: 1px solid white;
   box-shadow: 12px 17px 51px rgba(0, 0, 0, 0.22);
   backdrop-filter: blur(6px);
-  border-radius: 17px;
+  
   text-align: center;
-
   transition: all 0.5s;
   display: flex;
   align-items: center;

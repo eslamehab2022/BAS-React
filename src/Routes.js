@@ -73,6 +73,7 @@ import ChatIndex from "./Pages/System/Chat/index/ChatIndex";
 import AllChats from "./Pages/System/Chat/index/AllChats";
 import UserChat from "./Pages/System/Chat/UserChat/UserChat";
 import Profile from "./Pages/System/Profile/Profile";
+import UserContext from "./Context/userProvider";
 
 const SignUP = lazy(() => import("./Pages/DashBoard/SignUP/SignUP"));
 const SignIn = lazy(() => import("./Pages/DashBoard/SignIn/SignIn"));
@@ -143,7 +144,12 @@ const router = createBrowserRouter([
   {
     path: "",
 
-    element: <SystemIndex />,
+    element: (
+      <UserContext>
+        {" "}
+        <SystemIndex />
+      </UserContext>
+    ),
     children: [
       // system index (main)
       { path: "/System/index", element: <MainSystem /> },
