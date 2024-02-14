@@ -56,391 +56,394 @@ const AsideBar = () => {
 
   return (
     <div
-      className={` asidePar   !overflow-x-visible !scrollbar-none   rounded-[19px]  relative flex items-center  w-full h-full   `}
+      className={` asidePar    !scrollbar-none   rounded-[19px]   flex items-center  !w-full   !min-h-screen !h-full     `}
       style={{ direction: rtl ? "rtl" : "ltr" }}
     >
-      <ProfileMenu show={openProfile} setShow={setOpenProfile} />
-      <Sidebar
-        transitionDuration={800}
-        width="300px"
-        collapsedWidth="100px !important"
-        rootStyles={{
-          color: "#FFF",
-          height: "100%",
-          border: "2px solid #EFAA20 !important",
-          borderRadius: "19px",
-          overflow: "hidden",
-        }}
-        collapsed={width < 1025 ? true : collapsed}
-        rtl={rtl}
-        backgroundColor="#1E1E2D"
-        // className="  w-100"
-        color="#FFF"
-      >
-        <div className="d-flex collapsed-handler mx-2 mt-2 justify-end">
-          <FaBars
-            color="#FFF"
-            size={20}
-            className="pointer"
-            onClick={() => setCollapsed(!collapsed)}
-          />
-        </div>
-        <Menu transitionDuration={200} className="w-100 overflow-x-visible ">
-          <MenuItem className="mt-4 overflow-x-visible  center w-100">
-            <div className="d-flex justify-content-center flex-column align-items-center">
-              <div>
-                {" "}
-                <Image
-                  src={process.env.PUBLIC_URL + "/Badr.png"}
-                  alt="icon"
-                  className="user-icon"
-                  onClick={handleOpenProfileMenu}
-                />
-              </div>
-              <div className="hidden-collapsed ">
-                <p style={{ fontSize: "19px" }} className=" p-0 mx-0  my-2">
-                  بدر بن سليمان
-                </p>
-                <p className="golden-text ">رئيس مجلس الأدارة</p>
-                <p style={{ fontSize: "14px", color: "#565674" }}>
-                  badr@bsa.com
-                </p>
-              </div>
-            </div>
-          </MenuItem>
-
-          <MenuItem className="my-2 hidden-collapsed  d-flex flex-column ">
-            <div className=" goals    ">
-              <p>الاهداف</p>
-              <ProgressBar className="w-100   " variant="warning" now={37} />
-              <p style={{ fontSize: "14px" }} className="my-2">
-                وصلت إلى 37% من هدفك
-              </p>
-
-              <div className="d-flex justify-content-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="134"
-                  height="66"
-                  viewBox="0 0 134 66"
-                  fill="none"
-                >
-                  <rect
-                    x="0.5"
-                    y="0.5"
-                    width="133"
-                    height="65"
-                    rx="10.5"
-                    stroke="#434362"
-                    stroke-linejoin="round"
-                    stroke-dasharray="3 3"
-                  />
-                  <text fill="white   ">
-                    <tspan
-                      fill="rgba(255, 255, 255, 0.50)"
-                      x="100"
-                      y={20}
-                      fontSize={"12"}
-                      dy="0"
-                    >
-                      مشاريع منتهية
-                    </tspan>
-                    <tspan
-                      x="90"
-                      fill="#75CC68"
-                      y={50}
-                      fontSize={"20"}
-                      className="text-center "
-                      dy="0"
-                    >
-                      {" "}
-                      30 %
-                    </tspan>
-                  </text>
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="134"
-                  height="66"
-                  viewBox="0 0 134 66"
-                  fill="none"
-                >
-                  <rect
-                    x="0.5"
-                    y="0.5"
-                    width="133"
-                    height="65"
-                    rx="10.5"
-                    stroke="#434362"
-                    stroke-linejoin="round"
-                    stroke-dasharray="3 3"
-                  />
-                  <text fill="white   ">
-                    <tspan
-                      fill="rgba(255, 255, 255, 0.50)"
-                      x="110"
-                      y={20}
-                      fontSize={"12"}
-                      dy="0"
-                    >
-                      {" "}
-                      مشاريع قيد التنفيذ
-                    </tspan>
-                    <tspan
-                      x="90"
-                      fill="#F1416C"
-                      y={50}
-                      fontSize={"20"}
-                      className="text-center "
-                      dy="0"
-                    >
-                      {" "}
-                      70 %
-                    </tspan>
-                  </text>
-                </svg>
-              </div>
-            </div>
-          </MenuItem>
-          <MenuItem className="my-2 overflow-y-hidden w-100">
-            <div className="row  system-card-container">
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to="/System/index">
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/Main.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-
-                        <p>الرئيسية</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to={"/System/Clients/index"}>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/Customers.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>العملاء</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to="/System/Users/index">
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/users.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>المستخدمين</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to="/System/Requests/index">
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/orders.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>الطلبات</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>{" "}
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to={"/System/Projects/index"}>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/projects.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>المشاريع</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>{" "}
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to={"/System/plans"}>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/tasks.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>المهام</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to={"/System/Meetings/index"}>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/meetings.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>الاجتماعات</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to={"/System/Hr/index"}>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL + "/icons/asideIcons/hr.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>الموارد البشرية </p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to={"/System/Accounating/index"}>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/Acouuntaing.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>الحسابات </p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link to={"/System/Chat/index"}>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/Conversation.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>محادثاتى</p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  {/* <Link> */}
-                  <div class="system-card" onClick={handleOpenMenu}>
-                    <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                      <Image
-                        src={
-                          process.env.PUBLIC_URL +
-                          "/icons/asideIcons/settings.png"
-                        }
-                        alt="icon"
-                        className="aside-icon mt-3"
-                      />
-                      <p style={{ fontSize: "14px" }}>الاعدادات </p>
-                    </div>
-                  </div>
-                  {/* </Link> */}
-                </div>
-              </div>
-              <div className="col-md-4 ">
-                <div className="system-item">
-                  <Link>
-                    <div class="system-card">
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                        <Image
-                          src={
-                            process.env.PUBLIC_URL +
-                            "/icons/asideIcons/exit.png"
-                          }
-                          alt="icon"
-                          className="aside-icon mt-3"
-                        />
-                        <p>خروج </p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <SettingsMenu
-              handleCloseMenu={handleCloseMenu}
-              openSettingsMenu={isMenuOpen}
+      <div className="relative !overflow-x-visible !w-full !h-full">
+        <ProfileMenu show={openProfile} setShow={setOpenProfile} />
+        <Sidebar
+          transitionDuration={800}
+          width="300px"
+          collapsedWidth="100px !important"
+          rootStyles={{
+            color: "#FFF",
+            height: "100% !important",
+            border: "2px solid #EFAA20 !important",
+            borderRadius: "19px",
+            overflow: "hidden",
+          }}
+          collapsed={width < 1025 ? true : collapsed}
+          rtl={rtl}
+          backgroundColor="#1E1E2D"
+          // className="  w-100"
+          color="#FFF"
+        >
+          <div className="d-flex collapsed-handler mx-2 mt-2 justify-end">
+            <FaBars
+              color="#FFF"
+              size={20}
+              className="pointer"
+              onClick={() => setCollapsed(!collapsed)}
             />
-          </MenuItem>
-        </Menu>
-      </Sidebar>
+          </div>
+          <Menu transitionDuration={200} className="w-100 overflow-x-visible ">
+            <MenuItem className="mt-4 overflow-x-visible  center w-100">
+              <div className="d-flex justify-content-center flex-column align-items-center">
+                <div>
+                  {" "}
+                  <Image
+                    src={process.env.PUBLIC_URL + "/Badr.png"}
+                    alt="icon"
+                    className="user-icon"
+                    onClick={handleOpenProfileMenu}
+                  />
+                </div>
+                <div className="hidden-collapsed ">
+                  <p style={{ fontSize: "19px" }} className=" p-0 mx-0  my-2">
+                    بدر بن سليمان
+                  </p>
+                  <p className="golden-text ">رئيس مجلس الأدارة</p>
+                  <p style={{ fontSize: "14px", color: "#565674" }}>
+                    badr@bsa.com
+                  </p>
+                </div>
+              </div>
+            </MenuItem>
+
+            <MenuItem className="my-2 hidden-collapsed  d-flex flex-column ">
+              <div className=" goals    ">
+                <p>الاهداف</p>
+                <ProgressBar className="w-100   " variant="warning" now={37} />
+                <p style={{ fontSize: "14px" }} className="my-2">
+                  وصلت إلى 37% من هدفك
+                </p>
+
+                <div className="d-flex justify-content-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="134"
+                    height="66"
+                    viewBox="0 0 134 66"
+                    fill="none"
+                  >
+                    <rect
+                      x="0.5"
+                      y="0.5"
+                      width="133"
+                      height="65"
+                      rx="10.5"
+                      stroke="#434362"
+                      stroke-linejoin="round"
+                      stroke-dasharray="3 3"
+                    />
+                    <text fill="white   ">
+                      <tspan
+                        fill="rgba(255, 255, 255, 0.50)"
+                        x="100"
+                        y={20}
+                        fontSize={"12"}
+                        dy="0"
+                      >
+                        مشاريع منتهية
+                      </tspan>
+                      <tspan
+                        x="90"
+                        fill="#75CC68"
+                        y={50}
+                        fontSize={"20"}
+                        className="text-center "
+                        dy="0"
+                      >
+                        {" "}
+                        30 %
+                      </tspan>
+                    </text>
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="134"
+                    height="66"
+                    viewBox="0 0 134 66"
+                    fill="none"
+                  >
+                    <rect
+                      x="0.5"
+                      y="0.5"
+                      width="133"
+                      height="65"
+                      rx="10.5"
+                      stroke="#434362"
+                      stroke-linejoin="round"
+                      stroke-dasharray="3 3"
+                    />
+                    <text fill="white   ">
+                      <tspan
+                        fill="rgba(255, 255, 255, 0.50)"
+                        x="110"
+                        y={20}
+                        fontSize={"12"}
+                        dy="0"
+                      >
+                        {" "}
+                        مشاريع قيد التنفيذ
+                      </tspan>
+                      <tspan
+                        x="90"
+                        fill="#F1416C"
+                        y={50}
+                        fontSize={"20"}
+                        className="text-center "
+                        dy="0"
+                      >
+                        {" "}
+                        70 %
+                      </tspan>
+                    </text>
+                  </svg>
+                </div>
+              </div>
+            </MenuItem>
+            <MenuItem className="my-2 overflow-y-hidden w-100">
+              <div className="row  system-card-container">
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to="/System/index">
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/Main.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+
+                          <p>الرئيسية</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to={"/System/Clients/index"}>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/Customers.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>العملاء</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to="/System/Users/index">
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/users.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>المستخدمين</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to="/System/Requests/index">
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/orders.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>الطلبات</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>{" "}
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to={"/System/Projects/index"}>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/projects.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>المشاريع</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>{" "}
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to={"/System/plans"}>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/tasks.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>المهام</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to={"/System/Meetings/index"}>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/meetings.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>الاجتماعات</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to={"/System/Hr/index"}>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/hr.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>الموارد البشرية </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to={"/System/Accounating/index"}>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/Acouuntaing.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>الحسابات </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link to={"/System/Chat/index"}>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/Conversation.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>محادثاتى</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    {/* <Link> */}
+                    <div class="system-card" onClick={handleOpenMenu}>
+                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                        <Image
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/icons/asideIcons/settings.png"
+                          }
+                          alt="icon"
+                          className="aside-icon mt-3"
+                        />
+                        <p style={{ fontSize: "14px" }}>الاعدادات </p>
+                      </div>
+                    </div>
+                    {/* </Link> */}
+                  </div>
+                </div>
+                <div className="col-md-4 ">
+                  <div className="system-item">
+                    <Link>
+                      <div class="system-card">
+                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                          <Image
+                            src={
+                              process.env.PUBLIC_URL +
+                              "/icons/asideIcons/exit.png"
+                            }
+                            alt="icon"
+                            className="aside-icon mt-3"
+                          />
+                          <p>خروج </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              <SettingsMenu
+                handleCloseMenu={handleCloseMenu}
+                openSettingsMenu={isMenuOpen}
+              />
+            </MenuItem>
+          </Menu>
+        </Sidebar>
+      </div>
     </div>
   );
 };
@@ -666,7 +669,10 @@ export const ProfileMenu = ({ show, setShow }) => {
             >
               {" "}
               <div
-                onClick={()=> setLang("ar")}
+                onClick={() => {
+                  setLang("ar");
+                  setShowLangMenu(false);
+                }}
                 dir="rtl"
                 className="w-full my-3 mx-2  flex   justify-end gap-3 "
               >
@@ -678,7 +684,10 @@ export const ProfileMenu = ({ show, setShow }) => {
                 />
               </div>
               <div
-               onClick={()=> setLang("en")}
+                onClick={() => {
+                  setLang("en");
+                  setShowLangMenu(false);
+                }}
                 dir="rtl"
                 className="w-full my-3 mx-2  flex   justify-end gap-3 "
               >

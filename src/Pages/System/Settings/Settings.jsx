@@ -1,18 +1,40 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SystemControler from "../../../Components/System/SystemControler/SystemControler";
 import { Outlet, useLocation } from "react-router-dom";
 import AddNewTimeLine from "../../../Components/AddNewBtn/Settings/AddNewTimeLine";
 import AddNewCitizenServices from "../../../Components/AddNewBtn/Settings/AddNewCitizenServices";
 import AddNewOrders from "../../../Components/AddNewBtn/Settings/AddNewOrders";
+import { toast } from "react-toastify";
 
 import AddUpdateReciption from "../../../Components/System/Settings/Reception/AddUpdateReception";
 import SettingContext from "../../../Context/SettingContext";
 import AddNewAccounating from "../../../Components/AddNewBtn/Settings/AddNewAccounating";
+import AddModal from "./AddModal";
+import { useAddCategory } from "../../../hooks/fetchers/Categories";
+import SuccessfullModal from "../../../Components/Modals/SuccessfullModal";
+import { useQueryClient } from "react-query";
+
 const Settings = () => {
   const { settingType, setSettingType, ReciptionType, setReciptionType } =
     useContext(SettingContext);
-
+    const [successfull, setSuccsesfull] = useState(false);
+    const [errorModal, setErrorModal] = useState(false);
+    const queryClient = useQueryClient()
+  // ***********************************
+  const [newCategory, setNewCategory] = useState("");
+  const { mutate, isSuccess,isError,error } = useAddCategory(() =>{
+    queryClient.invalidateQueries('category')
+    setSuccsesfull(true)
+  }
+  );
+  // ***********************************
   const [show, setShow] = useState(false);
+
+  useEffect(()=>{
+    setErrorModal(isError)
+    console.log(error?.message)
+
+  },[isError])
   let { pathname } = useLocation();
   let pagePath = pathname.split("/System/Settings/")[1];
   const handleOpen = () => setShow(true);
@@ -49,7 +71,7 @@ const Settings = () => {
           </button>
         }
       />
-      {pagePath === "Reception" ? (
+      {/* {pagePath === "Reception" ? (
         <AddUpdateReciption
           handleClose={handleClose}
           ReciptionType={ReciptionType}
@@ -103,7 +125,40 @@ const Settings = () => {
           title={"اضافة مرحله للخطه الزمنيه"}
           show={show}
         />
-      ) : null}
+      ) : null} */}
+<AddModal
+              title={"اضافة جديدة"}
+              show={show}
+              handleClose={handleClose}
+              setNewValue={setNewCategory}
+              handleSave={() => {
+                mutate({ name: newCategory });
+
+                handleClose();
+              }}
+            />
+<SuccessfullModal
+        show={successfull}
+        message={"تمت الاضافة بنجاح"}
+        handleClose={() => {
+          setSuccsesfull(false);
+        }}
+      />
+<SuccessfullModal
+        status = "error"
+        show={errorModal}
+        message={error?.message}
+        handleClose={() => {
+          setErrorModal(false);
+        }}
+      />
+
+
+
+
+
+
+
       <div className="h-full">
         <Outlet />
       </div>

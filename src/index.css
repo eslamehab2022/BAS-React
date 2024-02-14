@@ -11,8 +11,10 @@
 
 
   .all-categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #1E1E2D !important;
-    height: 801px;
     border-radius: 19px;
     padding: 10px;
     border-radius: 22px;
