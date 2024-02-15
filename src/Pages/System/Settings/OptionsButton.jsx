@@ -77,11 +77,14 @@ export const OptionsButton = ({id,onUpdate,onDelete}) => {
           onClose={handleClose}
           MenuListProps={{
             "aria-labelledby": "basic-button",
+            sx:{
+              bgcolor: "white"
+            }
           }}
           classes="bg-red-200"
         >
           <MenuItem
-            className="border min-w-[133px] text-right"
+            className="border min-w-[133px] text-right text-black"
             sx={{ gap: 1 }}
             onClick={() => {
                 onUpdate();
@@ -91,7 +94,7 @@ export const OptionsButton = ({id,onUpdate,onDelete}) => {
             <EditIcon /> <span>تعديل</span>{" "}
           </MenuItem>
           <MenuItem
-            className="border min-w-[133px] text-right"
+            className="border min-w-[133px] text-right text-black"
             sx={{ gap: 1 }}
             onClick={() => {
                 onDelete();

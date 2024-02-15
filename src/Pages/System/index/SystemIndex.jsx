@@ -32,11 +32,11 @@ const SystemIndex = () => {
         </nav>
       </header>
 
-      <section className="container   !min-h-screen !h-full  px-10 flex justify-between gap-3 py-2 ">
-        <div className="max-w-xs  !min-h-screen  !h-full">
+      <section className="container !min-h-screen px-10 flex justify-between gap-3 py-2 ">
+        <div className="max-w-xs !min-h-screen">
           <AsideBar />
         </div>
-        <main className="flex-1    !min-h-screen !h-full transition-all">
+        <main className="flex-1 !min-h-[calc(100vh-88px)] transition-all">
           <Outlet />
         </main>
       </section>

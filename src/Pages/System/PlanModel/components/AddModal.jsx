@@ -198,7 +198,7 @@ export const AddModal = () => {
                           stroke="#EFAA20"
                           stroke-width="2"
                           stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                       <p className="text-sm mx-auto text-white">اضافة جديدة</p>
@@ -226,7 +226,7 @@ export const AddModal = () => {
                           stroke="#EFAA20"
                           stroke-width="2"
                           stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                       <p className="text-sm mx-auto text-white">اضافة جديدة</p>

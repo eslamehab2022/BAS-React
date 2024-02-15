@@ -13,28 +13,38 @@ import AddModal from "./AddModal";
 import { useAddCategory } from "../../../hooks/fetchers/Categories";
 import SuccessfullModal from "../../../Components/Modals/SuccessfullModal";
 import { useQueryClient } from "react-query";
+import { useAddService } from "../../../hooks/fetchers/Services";
 
 const Settings = () => {
-  const { settingType, setSettingType, ReciptionType, setReciptionType } =
-    useContext(SettingContext);
-    const [successfull, setSuccsesfull] = useState(false);
-    const [errorModal, setErrorModal] = useState(false);
-    const queryClient = useQueryClient()
+  const {
+    settingType,
+    setSettingType,
+    ReciptionType,
+    setReciptionType,
+    orderType,
+    setOrderType,
+  } = useContext(SettingContext);
+  const [successfull, setSuccsesfull] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const queryClient = useQueryClient();
   // ***********************************
   const [newCategory, setNewCategory] = useState("");
-  const { mutate, isSuccess,isError,error } = useAddCategory(() =>{
-    queryClient.invalidateQueries('category')
-    setSuccsesfull(true)
-  }
-  );
+  const [newService, setNewService] = useState("");
+  const { mutate: mutateCategory, isSuccess, isError, error } = useAddCategory(() => {
+    queryClient.invalidateQueries("category");
+    setSuccsesfull(true);
+  });
+  const { mutate: mutateService } = useAddService(() => {
+    queryClient.invalidateQueries("services");
+    setSuccsesfull(true);
+  });
   // ***********************************
   const [show, setShow] = useState(false);
 
-  useEffect(()=>{
-    setErrorModal(isError)
-    console.log(error?.message)
-
-  },[isError])
+  useEffect(() => {
+    setErrorModal(isError);
+    console.log(error?.message);
+  }, [isError]);
   let { pathname } = useLocation();
   let pagePath = pathname.split("/System/Settings/")[1];
   const handleOpen = () => setShow(true);
@@ -58,7 +68,7 @@ const Settings = () => {
     }
     // handleOpen()
   };
-  console.log("settingType: ", settingType);
+  // console.log("settingType: ", settingType);
   return (
     <div className="w-full h-full">
       <SystemControler
@@ -126,38 +136,47 @@ const Settings = () => {
           show={show}
         />
       ) : null} */}
-<AddModal
-              title={"اضافة جديدة"}
-              show={show}
-              handleClose={handleClose}
-              setNewValue={setNewCategory}
-              handleSave={() => {
-                mutate({ name: newCategory });
+      {orderType === 1 && (
+        <AddModal
+          title={"اضافة جديدة"}
+          show={show}
+          handleClose={handleClose}
+          setNewValue={setNewCategory}
+          handleSave={() => {
+            mutateCategory({ name: newCategory });
 
-                handleClose();
-              }}
-            />
-<SuccessfullModal
+            handleClose();
+          }}
+        />
+      )}
+      {orderType === 2 && (
+        <AddModal
+          title={"اضافة جديدة"}
+          show={show}
+          handleClose={handleClose}
+          setNewValue={setNewService}
+          handleSave={() => {
+            mutateService({ name: newService });
+
+            handleClose();
+          }}
+        />
+      )}
+      <SuccessfullModal
         show={successfull}
         message={"تمت الاضافة بنجاح"}
         handleClose={() => {
           setSuccsesfull(false);
         }}
       />
-<SuccessfullModal
-        status = "error"
+      <SuccessfullModal
+        status="error"
         show={errorModal}
         message={error?.message}
         handleClose={() => {
           setErrorModal(false);
         }}
       />
-
-
-
-
-
-
 
       <div className="h-full">
         <Outlet />

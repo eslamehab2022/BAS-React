@@ -42,12 +42,12 @@ const AsideBar = () => {
     // if you use screens from tablet collapse the sidebar
     if (width < 1025) {
       setCollapsed(true);
-      console.log("closed due to small width");
+      // console.log("closed due to small width");
     } else {
       setCollapsed(false);
-      console.log("opend due to small width");
+      // console.log("opend due to small width");
     }
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
     // clear the use Effect
     return () => {
       window.removeEventListener("resize", getSize);
@@ -56,10 +56,10 @@ const AsideBar = () => {
 
   return (
     <div
-      className={` asidePar    !scrollbar-none   rounded-[19px]   flex items-center  !w-full   !min-h-screen !h-full     `}
+      className={`asidePar !scrollbar-none rounded-[19px] flex flex-col !w-full !min-h-screen`}
       style={{ direction: rtl ? "rtl" : "ltr" }}
     >
-      <div className="relative !overflow-x-visible !w-full !h-full">
+      <div className="relative !overflow-x-visible !w-full flex-1 flex flex-col ">
         <ProfileMenu show={openProfile} setShow={setOpenProfile} />
         <Sidebar
           transitionDuration={800}
@@ -67,6 +67,7 @@ const AsideBar = () => {
           collapsedWidth="100px !important"
           rootStyles={{
             color: "#FFF",
+            backgroundColor:"#1E1E2D",
             height: "100% !important",
             border: "2px solid #EFAA20 !important",
             borderRadius: "19px",
@@ -75,10 +76,10 @@ const AsideBar = () => {
           collapsed={width < 1025 ? true : collapsed}
           rtl={rtl}
           backgroundColor="#1E1E2D"
-          // className="  w-100"
+          className="flex-1"
           color="#FFF"
         >
-          <div className="d-flex collapsed-handler mx-2 mt-2 justify-end">
+          <div className="flex collapsed-handler mx-2 mt-2 justify-end">
             <FaBars
               color="#FFF"
               size={20}
@@ -86,7 +87,7 @@ const AsideBar = () => {
               onClick={() => setCollapsed(!collapsed)}
             />
           </div>
-          <Menu transitionDuration={200} className="w-100 overflow-x-visible ">
+          <Menu transitionDuration={200} className="w-100 overflow-x-visible h-full">
             <MenuItem className="mt-4 overflow-x-visible  center w-100">
               <div className="d-flex justify-content-center flex-column align-items-center">
                 <div>
@@ -467,8 +468,8 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
         <div className="col-md-4 ">
           <div className="system-item">
             <Link to="/System/Settings/Reception">
-              <div class="system-card">
-                <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+              <div className="system-card">
+                <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                   <Image
                     src={
                       process.env.PUBLIC_URL + "/icons/asideIcons/Reception.png"
@@ -485,8 +486,8 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
         <div className="col-md-4 ">
           <div className="system-item">
             <Link to="/System/Settings/Orders">
-              <div class="system-card">
-                <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+              <div className="system-card">
+                <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                   <Image
                     src={
                       process.env.PUBLIC_URL + "/icons/asideIcons/orders.png"
@@ -503,8 +504,8 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
         <div className="col-md-4 ">
           <div className="system-item">
             <Link to={"/System/Settings/Accounating"}>
-              <div class="system-card">
-                <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+              <div className="system-card">
+                <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                   <Image
                     src={
                       process.env.PUBLIC_URL +
@@ -522,8 +523,8 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
         <div className="col-md-4 ">
           <div className="system-item">
             <Link to={"/System/Settings/CitizenServices"}>
-              <div class="system-card">
-                <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+              <div className="system-card">
+                <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                   <Image
                     src={
                       process.env.PUBLIC_URL +
@@ -542,12 +543,12 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
           <div className="system-item">
             <Link to={"/System/Settings/TimeLine"}>
               <div
-                class="system-card"
+                className="system-card"
                 onClick={() => {
-                  console.log("Settings Clicked");
+                  // console.log("Settings Clicked");
                 }}
               >
-                <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                   <Image
                     src={
                       process.env.PUBLIC_URL + "/icons/asideIcons/TimePlan.png"

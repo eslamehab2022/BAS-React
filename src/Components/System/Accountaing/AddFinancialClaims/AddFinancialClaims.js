@@ -336,9 +336,9 @@ const AddFinancialClaims = () => {
                     <path
                       d="M1 8H8M8 8H15M8 8V15M8 8V1"
                       stroke="#EFAA20"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   <p className="text-sm mx-auto text-white">اضافة جديدة</p>

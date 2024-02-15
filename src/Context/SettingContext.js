@@ -5,11 +5,19 @@ const SettingContext = createContext();
 
 export const SettingContextProvider = ({ children }) => {
   const [ReciptionType, setReceptionType] = useState(null);
+  const [orderType, setOrderType] = useState(1);
   const [settingType, setSettingType] = useState("");
 
   return (
     <SettingContext.Provider
-      value={{ settingType, setSettingType, ReciptionType, setReceptionType }}
+      value={{
+        settingType,
+        setSettingType,
+        ReciptionType,
+        setReceptionType,
+        orderType,
+        setOrderType,
+      }}
     >
       {children}
     </SettingContext.Provider>

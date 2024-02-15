@@ -64,7 +64,7 @@ class ReviewRequestChart extends React.Component {
   render() {
     return (
       <div>
-        <div class="chart-wrap">
+        <div className="chart-wrap">
           <div id="chart">
             <ReactApexChart
               options={this.state.options}

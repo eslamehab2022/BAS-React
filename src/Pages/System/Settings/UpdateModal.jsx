@@ -120,7 +120,7 @@ function UpdateModal({ title, show, handleClose, arr, id }) {
                       stroke="#EFAA20"
                       stroke-width="2"
                       stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </span>

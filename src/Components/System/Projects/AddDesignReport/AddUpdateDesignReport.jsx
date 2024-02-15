@@ -440,14 +440,14 @@ const AddUpdateDesignReport = ({
                               cy="32.5"
                               r="32"
                               stroke="#D59921"
-                              stroke-dasharray="4 4"
+                              strokeDasharray="4 4"
                             />
                             <path
                               d="M21.4609 32.5004H32.4994M32.4994 32.5004H43.5379M32.4994 32.5004V43.5388M32.4994 32.5004V21.4619"
                               stroke="#D59921"
                               stroke-width="2"
                               stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeLinejoin="round"
                             />
                           </svg>
 
@@ -472,14 +472,14 @@ const AddUpdateDesignReport = ({
                                 cy="32.5"
                                 r="32"
                                 stroke="#D59921"
-                                stroke-dasharray="4 4"
+                                strokeDasharray="4 4"
                               />
                               <path
                                 d="M21.4609 32.5H32.4994H43.5379"
                                 stroke="#D59921"
                                 stroke-width="2"
                                 stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinejoin="round"
                               />
                             </svg>
                           )}
@@ -635,14 +635,14 @@ const AddUpdateDesignReport = ({
                                 cy="32.5"
                                 r="32"
                                 stroke="#D59921"
-                                stroke-dasharray="4 4"
+                                strokeDasharray="4 4"
                               />
                               <path
                                 d="M21.4609 32.5004H32.4994M32.4994 32.5004H43.5379M32.4994 32.5004V43.5388M32.4994 32.5004V21.4619"
                                 stroke="#D59921"
                                 stroke-width="2"
                                 stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinejoin="round"
                               />
                             </svg>
 
@@ -667,14 +667,14 @@ const AddUpdateDesignReport = ({
                                   cy="32.5"
                                   r="32"
                                   stroke="#D59921"
-                                  stroke-dasharray="4 4"
+                                  strokeDasharray="4 4"
                                 />
                                 <path
                                   d="M21.4609 32.5H32.4994H43.5379"
                                   stroke="#D59921"
                                   stroke-width="2"
                                   stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeLinejoin="round"
                                 />
                               </svg>
                             )}
@@ -1239,14 +1239,14 @@ const AddUpdateDesignReport = ({
                             cy="32.5"
                             r="32"
                             stroke="#D59921"
-                            stroke-dasharray="4 4"
+                            strokeDasharray="4 4"
                           />
                           <path
                             d="M21.4609 32.5004H32.4994M32.4994 32.5004H43.5379M32.4994 32.5004V43.5388M32.4994 32.5004V21.4619"
                             stroke="#D59921"
                             stroke-width="2"
                             stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinejoin="round"
                           />
                         </svg>
 
@@ -1271,14 +1271,14 @@ const AddUpdateDesignReport = ({
                               cy="32.5"
                               r="32"
                               stroke="#D59921"
-                              stroke-dasharray="4 4"
+                              strokeDasharray="4 4"
                             />
                             <path
                               d="M21.4609 32.5H32.4994H43.5379"
                               stroke="#D59921"
                               stroke-width="2"
                               stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeLinejoin="round"
                             />
                           </svg>
                         )}
@@ -1434,14 +1434,14 @@ const AddUpdateDesignReport = ({
                               cy="32.5"
                               r="32"
                               stroke="#D59921"
-                              stroke-dasharray="4 4"
+                              strokeDasharray="4 4"
                             />
                             <path
                               d="M21.4609 32.5004H32.4994M32.4994 32.5004H43.5379M32.4994 32.5004V43.5388M32.4994 32.5004V21.4619"
                               stroke="#D59921"
                               stroke-width="2"
                               stroke-linecap="round"
-                              stroke-linejoin="round"
+                              strokeLinejoin="round"
                             />
                           </svg>
 
@@ -1466,14 +1466,14 @@ const AddUpdateDesignReport = ({
                                 cy="32.5"
                                 r="32"
                                 stroke="#D59921"
-                                stroke-dasharray="4 4"
+                                strokeDasharray="4 4"
                               />
                               <path
                                 d="M21.4609 32.5H32.4994H43.5379"
                                 stroke="#D59921"
                                 stroke-width="2"
                                 stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeLinejoin="round"
                               />
                             </svg>
                           )}

@@ -22,20 +22,20 @@ const ViewReception = ({ id = null, viewVisit, setViewVisit, status }) => {
               <legend className="text-center !text-base">
                 معلومات الزيارة
               </legend>
-              <div class="grid grid-cols-1  gap-4 mb-3">
+              <div className="grid grid-cols-1  gap-4 mb-3">
                 <div className="flex justify-start gap-3">
                   <p className="text-white">اسم الشخص:</p>
                   <span className="main-text">حبيب محمد</span>
                 </div>
               </div>
-              <div class="grid grid-cols-2 gap-4 mb-3">
+              <div className="grid grid-cols-2 gap-4 mb-3">
                 <div className="flex justify-start gap-3">
                   <p className="text-white">مكان الزيارة:</p>
                   <span className="main-text">مصر </span>
                 </div>
               </div>
 
-              <div class="grid grid-cols-3 gap-4 mb-3">
+              <div className="grid grid-cols-3 gap-4 mb-3">
                 <div className="flex gap-2">
                   <p className="text-white"> تاريخ الزيارة:</p>
                   <span className="main-text">15-10-2023</span>
@@ -102,13 +102,13 @@ const ViewReception = ({ id = null, viewVisit, setViewVisit, status }) => {
           <Form>
             <fieldset className="fieldBorder container   mx-auto  p-3 my-3">
               <legend className="text-center">معلومات الزيارة</legend>
-              <div class="grid grid-cols-1  gap-4 mb-3">
+              <div className="grid grid-cols-1  gap-4 mb-3">
                 <div className="flex justify-start gap-3">
                   <p className="text-white">اسم الموظف:</p>
                   <span className="main-text">حبيب محمد</span>
                 </div>
               </div>
-              <div class="grid grid-cols-2 gap-4 mb-3">
+              <div className="grid grid-cols-2 gap-4 mb-3">
                 <div className="flex justify-start gap-3">
                   <p className="text-white"> فئة الزائر:</p>
                   <span className="main-text">مصر </span>
@@ -119,7 +119,7 @@ const ViewReception = ({ id = null, viewVisit, setViewVisit, status }) => {
                 </div>
               </div>
 
-              <div class="grid grid-cols-3 gap-4 mb-3">
+              <div className="grid grid-cols-3 gap-4 mb-3">
                 <div className="flex gap-2">
                   <p className="text-white"> تاريخ الزيارة:</p>
                   <span className="main-text">15-10-2023</span>

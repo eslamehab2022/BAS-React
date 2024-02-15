@@ -8,7 +8,7 @@ const DesignCard = () => {
     return (
 
         // <Link to="/Landing/DesignMultiStep">
-            <div class="choice-card design-card d-flex flex-column justify-content-center align-items-center">
+            <div className="choice-card design-card d-flex flex-column justify-content-center align-items-center">
 
                 <BsBuildings size={60} color='#E1B67C' />
                 <h3 className='mt-3 fs-6'>التصميم</h3>

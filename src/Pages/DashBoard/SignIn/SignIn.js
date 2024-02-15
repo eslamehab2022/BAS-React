@@ -97,10 +97,10 @@ const SignIn = () => {
                             <Link to="/Dashboard/ForgetPassword" ><p style={{ color: "#6A0411 !important" }} >  نسيت كلمة المرور ؟ </p></Link>
                             <div className='d-flex  '>
                                 <p className='ms-2' style={{ fontSize: "18px" }}>ابقى متصلاً</p>
-                                <label class="toggle-switch">
+                                <label className="toggle-switch">
                                     <input type="checkbox" />
-                                    <div class="toggle-switch-background">
-                                        <div class="toggle-switch-handle"></div>
+                                    <div className="toggle-switch-background">
+                                        <div className="toggle-switch-handle"></div>
                                     </div>
                                 </label>
 

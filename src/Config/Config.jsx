@@ -16,5 +16,5 @@ const production = {
 
 const config =
   process.env.NODE_ENV === "development" ? development : production;
-console.log("API URL", config.apiGateway.URL);
+// console.log("API URL", config.apiGateway.URL);
 export default config;

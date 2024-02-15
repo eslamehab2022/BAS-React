@@ -80,7 +80,7 @@ class   AllUsersPieChart extends React.Component {
   }
   render() {
     return (
-      <div class="chart-wrap h-100">
+      <div className="chart-wrap h-100">
         <div id="chart" className="h-100  overflow-x-hidden">
           <ReactApexChart
             options={this.state.options}

@@ -89,7 +89,7 @@ const AddUpdateReciption = ({
                 <legend className="text-center !text-base">
                   معلومات الزيارة
                 </legend>
-                <div class="grid grid-cols-2 gap-4 mb-3">
+                <div className="grid grid-cols-2 gap-4 mb-3">
                   <Controller
                     name="visitType"
                     className="w-100"
@@ -120,7 +120,7 @@ const AddUpdateReciption = ({
                   {/* <div className="">
                     <p className="mb-2">نوع الزياره</p>
                     <select
-                      class="form-select border-none bg-[#2B2B40]"
+                      className="form-select border-none bg-[#2B2B40]"
                       aria-label="Default select example"
                     >
                       {/* <option selected>Open this select menu</option> */}
@@ -137,7 +137,7 @@ const AddUpdateReciption = ({
                     />
                   </Form.Group>
                 </div>
-                <div class="grid grid-cols-2 gap-4 mb-3">
+                <div className="grid grid-cols-2 gap-4 mb-3">
                   <Controller
                     name="identity"
                     className="w-100"
@@ -175,7 +175,7 @@ const AddUpdateReciption = ({
                   </Form.Group>
                 </div>
 
-                <div class="grid grid-cols-3 gap-4 mb-3">
+                <div className="grid grid-cols-3 gap-4 mb-3">
                   <Form.Group>
                     <Form.Label> تاريخ الزيارة</Form.Label>
                     <Controller
@@ -279,7 +279,7 @@ const AddUpdateReciption = ({
             <Form onSubmit={handleSubmit(handleEditvisit)}>
               <fieldset className="fieldBorder container   mx-auto  p-3 my-3">
                 <legend className="text-center">معلومات الزيارة</legend>
-                <div class="grid grid-cols-2 gap-4 mb-3">
+                <div className="grid grid-cols-2 gap-4 mb-3">
                   <Controller
                     name="visitType"
                     className="w-100"
@@ -328,7 +328,7 @@ const AddUpdateReciption = ({
                   </Form.Group>
                 </div>
 
-                <div class="grid grid-cols-3 gap-4 mb-3">
+                <div className="grid grid-cols-3 gap-4 mb-3">
                   <Form.Group>
                     <Form.Label> تاريخ الزيارة</Form.Label>
                     <Controller
@@ -429,7 +429,7 @@ const AddUpdateReciption = ({
           </div> */}
             <Form onSubmit={handleSubmit(handleAddvisit)}>
               <FormModal title={"معلومات الزيارة"}>
-                <div class="grid grid-cols-3 gap-4 mb-3">
+                <div className="grid grid-cols-3 gap-4 mb-3">
                   <Controller
                     name="visitType"
                     className="w-100"
@@ -487,7 +487,7 @@ const AddUpdateReciption = ({
                   </Form.Group>
                 </div>
 
-                <div class="grid grid-cols-2 gap-4 mb-3">
+                <div className="grid grid-cols-2 gap-4 mb-3">
                   <Controller
                     name="identity"
                     className="w-100"
@@ -525,7 +525,7 @@ const AddUpdateReciption = ({
                   </Form.Group>
                 </div>
 
-                <div class="grid grid-cols-3 gap-4 mb-3">
+                <div className="grid grid-cols-3 gap-4 mb-3">
                   <Form.Group>
                     <InputLabel id="recieving-date" label={"تاريخ الزيارة"} />
                     <DatePicker
@@ -658,7 +658,7 @@ const AddUpdateReciption = ({
             <Form onSubmit={handleSubmit(handleAddvisit)}>
               <fieldset className="fieldBorder container   mx-auto  p-3 my-3">
                 <legend className="text-center">معلومات الزيارة</legend>
-                <div class="grid grid-cols-2 gap-4 mb-3">
+                <div className="grid grid-cols-2 gap-4 mb-3">
                   <Controller
                     name="visitType"
                     className="w-100"
@@ -707,7 +707,7 @@ const AddUpdateReciption = ({
                   </Form.Group>
                 </div>
 
-                <div class="grid grid-cols-3 gap-4 mb-3">
+                <div className="grid grid-cols-3 gap-4 mb-3">
                   <Form.Group>
                     <InputLabel id="recieving-date" label={"تاريخ الزيارة"} />
                     <DatePicker

@@ -54,7 +54,7 @@ const CountryChartHR = () => {
                     stroke="#D59921"
                     stroke-width="2.28571"
                     stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </Link>

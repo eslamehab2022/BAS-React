@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import SystemControler from "../../../../Components/System/SystemControler/SystemControler";
 import { SearchComponent } from "../../../../Components/SearchComponent/SearchComponent";
@@ -88,8 +86,7 @@ const NotConnectedBadge = styled(Badge)(({ theme }) => ({
 
 const ChatIndex = () => {
   const [country, setCountry] = useState(0);
-  let [usersStatus, setUsersSatus] = useSearchParams("");
-  usersStatus = String(usersStatus)?.slice(0, -1);
+  let [usersStatus, setUsersSatus] = useSearchParams();
   const [filtredUsers, setFiltredUsers] = useState(null);
 
   useEffect(() => {
@@ -98,20 +95,23 @@ const ChatIndex = () => {
       if (country === 0) {
         // If Saudi Arabia is selected
         setFiltredUsers(
-          saudiaUsers.filter((user) => user.status === usersStatus)
+          saudiaUsers.filter(
+            (user) => user.status === usersStatus.get("status")
+          )
         );
       } else if (country === 1) {
         // If Egypt is selected
         setFiltredUsers(
-          egypetUsers.filter((user) => user.status === usersStatus)
+          egypetUsers.filter(
+            (user) => user.status === usersStatus.get("status")
+          )
         );
       }
     };
+    console.log(filtredUsers);
 
     filterUsers();
   }, [country, usersStatus]);
-
-
 
   return (
     <div>
@@ -147,7 +147,7 @@ const ChatIndex = () => {
           <div className="my-2 flex justify-between">
             <p
               onClick={() => {
-                setUsersSatus("");
+                setUsersSatus({});
               }}
               className="text-white pointer text-[14px] px-2"
             >
@@ -160,7 +160,9 @@ const ChatIndex = () => {
             >
               <NavDropdown.Item
                 onClick={() => {
-                  setUsersSatus("connected");
+                  setUsersSatus({
+                    status: "connected",
+                  });
                 }}
                 className="text-end d-flex justify-content-between align-items-center"
               >
@@ -169,7 +171,9 @@ const ChatIndex = () => {
               </NavDropdown.Item>
               <NavDropdown.Item
                 onClick={() => {
-                  setUsersSatus("notConnected");
+                  setUsersSatus({
+                    status: "notConnected",
+                  });
                 }}
                 className="text-end d-flex justify-content-between align-items-center"
               >
@@ -178,58 +182,12 @@ const ChatIndex = () => {
               </NavDropdown.Item>
             </NavDropdown>
           </div>
-          {usersStatus === "" ? (
-            <>
-              {(country ? egypetUsers : saudiaUsers).map((user, index) => (
-                <Link
-                  to={`/System/chat/${user.country}/${
-                    user.id
-                  }`}
-                  className=" p-2 pointer flex border !border-transparent hover:!border-[#EFAA20] gap-3"
-                  key={user.id}
-                >
-                  <Stack direction="row" spacing={2}>
-                    {user.status === "connected" ? (
-                      <ConnectedBadge
-                        overlap="circular"
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "right",
-                        }}
-                        variant="dot"
-                      >
-                        <Avatar alt="Remy Sharp" src={user.img} />
-                      </ConnectedBadge>
-                    ) : (
-                      <NotConnectedBadge
-                        overlap="circular"
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "right",
-                        }}
-                        variant="dot"
-                      >
-                        <Avatar alt="Remy Sharp" src={user.img} />
-                      </NotConnectedBadge>
-                    )}
-                  </Stack>
-                  <div className="flex flex-col">
-                    <p className="text-white">{user.name}</p>
-                    <span className="text-[#565674] text-[14px]">
-                      {user.email}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </>
-          ) : (
+          {usersStatus.get("status") ? (
             <>
               {filtredUsers && filtredUsers.length > 0 ? (
                 filtredUsers.map((user, index) => (
                   <Link
-                    to={`/System/chat/${user.country}/${
-                      user.id
-                    }`}
+                    to={`/System/chat/${user.country}/${user.id}`}
                     className="my-2 p-2 pointer flex border !border-transparent hover:!border-[#EFAA20] gap-3 mx-2"
                     key={user.id}
                   >
@@ -272,8 +230,49 @@ const ChatIndex = () => {
                 </p>
               )}
             </>
+          ) : (
+            <>
+              {(country ? egypetUsers : saudiaUsers).map((user, index) => (
+                <Link
+                  to={`/System/chat/${user.country}/${user.id}`}
+                  className=" p-2 pointer flex border !border-transparent hover:!border-[#EFAA20] gap-3"
+                  key={user.id}
+                >
+                  <Stack direction="row" spacing={2}>
+                    {user.status === "connected" ? (
+                      <ConnectedBadge
+                        overlap="circular"
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                        variant="dot"
+                      >
+                        <Avatar alt="Remy Sharp" src={user.img} />
+                      </ConnectedBadge>
+                    ) : (
+                      <NotConnectedBadge
+                        overlap="circular"
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                        variant="dot"
+                      >
+                        <Avatar alt="Remy Sharp" src={user.img} />
+                      </NotConnectedBadge>
+                    )}
+                  </Stack>
+                  <div className="flex flex-col">
+                    <p className="text-white">{user.name}</p>
+                    <span className="text-[#565674] text-[14px]">
+                      {user.email}
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </>
           )}
-  
         </div>
         <div className="col-span-6 bg-[#1E1E2D] h-[801px] rounded-[19px]">
           <Outlet />

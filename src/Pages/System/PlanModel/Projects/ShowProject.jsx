@@ -240,28 +240,28 @@ export default function ShowProject() {
                         stroke="black"
                         stroke-width="0.5"
                         stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M4.875 7.58398L6.5 9.20898L8.125 7.58398"
                         stroke="black"
                         stroke-width="0.5"
                         stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M6.5 4.875V9.20833"
                         stroke="black"
                         stroke-width="0.5"
                         stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinejoin="round"
                       />
                       <path
                         d="M1.625 3.25H11.375"
                         stroke="black"
                         stroke-width="0.5"
                         stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </span>
