@@ -167,7 +167,7 @@ const SubCategoryBtn = ({ title, active, setActive, index, setTerms }) => {
 
 const Reception = () => {
   const { ReciptionType, setReceptionType } = useContext(SettingContext);
-  const [ id, setId ] = useState(null);
+  const [id, setId] = useState(null);
   const [visitsData, setVisitsData] = useState([]);
   const [openPdf, setOpenPdf] = useState(false);
   const [active, setActive] = useState(0);
@@ -275,8 +275,8 @@ const Reception = () => {
         setEditVisit={setEditVisit}
       />
 
-      <div className="grid grid-cols-12 gap-2 h-full">
-        <div className="bg-[#1E1E2D] col-span-3 rounded-[19px]">
+      <div className="grid grid-cols-12 gap-2 !h-full">
+        <div className="bg-[#1E1E2D] col-span-3  !h-full rounded-[19px]">
           <div className="p-3 ">
             <div className="my-3">
               <p className="text-white text-[15px] ">الاستقبال</p>
@@ -291,7 +291,7 @@ const Reception = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#1E1E2D] col-span-3  rounded-[19px]">
+        <div className="bg-[#1E1E2D] col-span-3  !h-full rounded-[19px]">
           <div className="pt-4 px-3">
             <p className="text-white text-[15px]">كل الزيارات</p>
           </div>
@@ -364,7 +364,6 @@ const Reception = () => {
                 pdfSrc={""}
                 width="53.36px"
                 height={"35px"}
-  
               />
               <p className="text-base text-[#ffffff80] ">الوارد</p>
             </div>
@@ -400,7 +399,7 @@ const Reception = () => {
             </div>
           </div>
         </div>
-        <div className="bg-[#1E1E2D] col-span-6 rounded-[19px]  ">
+        <div className="bg-[#1E1E2D] col-span-6 !h-full rounded-[19px]  ">
           <div className="p-3">
             {status === "Exports" ? (
               <p className="text-xl text-white">كل الزيارات الصادرة</p>
@@ -421,9 +420,7 @@ const Reception = () => {
           <fieldset className=" fieldBorder mt-3">
             <legend className="text-center">كل الزيارات</legend>
 
-            
-              
-               {/* <DataTableComponent
+            {/* <DataTableComponent
                 className={
                   "overflow-y-auto overflow-x-auto scrollbar-thin scrollbar-thumb-[#C8D0D0] scrollbar-track-transparent "
                 }
@@ -431,36 +428,29 @@ const Reception = () => {
                 data={visits}
             /> */}
             <CustomTable columns={columns} data={visits}>
-                  {visits && visits.length > 0
-                    ? visits.map(
-                        (
-                          {
-                            id,
-                            personName,
-                            Enterprise,
-                            visitDate,
-                            view,
-                            edit,
-                          },
-                          index
-                        ) => (
-                          <TableRow
-                            className={`my-2 border !border-[#efaa207f] ${
-                              index % 2 === 0 ? "bg-[#151521]" : ""
-                            }`}
-                            key={index}
-                          >
-                            <TableCell textColor="#ffffff7f">{id}</TableCell>
-                            <TableCell>{personName}</TableCell>
-                            <TableCell>{Enterprise}</TableCell>
-                            <TableCell>{visitDate}</TableCell>
-                            <TableCell>{view}</TableCell>
-                            <TableCell>{edit}</TableCell>
-                          </TableRow>
-                        )
-                      )
-                    : null}
-                </CustomTable>
+              {visits && visits.length > 0
+                ? visits.map(
+                    (
+                      { id, personName, Enterprise, visitDate, view, edit },
+                      index
+                    ) => (
+                      <TableRow
+                        className={`my-2 border !border-[#efaa207f] ${
+                          index % 2 === 0 ? "bg-[#151521]" : ""
+                        }`}
+                        key={index}
+                      >
+                        <TableCell textColor="#ffffff7f">{id}</TableCell>
+                        <TableCell>{personName}</TableCell>
+                        <TableCell>{Enterprise}</TableCell>
+                        <TableCell>{visitDate}</TableCell>
+                        <TableCell>{view}</TableCell>
+                        <TableCell>{edit}</TableCell>
+                      </TableRow>
+                    )
+                  )
+                : null}
+            </CustomTable>
           </fieldset>
         </div>
       </div>

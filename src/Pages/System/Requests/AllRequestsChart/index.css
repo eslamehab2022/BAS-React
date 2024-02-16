@@ -1,6 +1,6 @@
 .AllRequests {
   width: 100%;
-  height: 801px;
+  height: 100%;
   border-radius: 19px;
   overflow-y: hidden !important;
   overflow-x: hidden !important;
@@ -8,7 +8,7 @@
 }
 .AllRequests-scroll {
   width: 100%;
-  height: 801px;
+  height: 100%;
   border-radius: 19px;
   overflow-y: auto !important;
   overflow-x: hidden !important;

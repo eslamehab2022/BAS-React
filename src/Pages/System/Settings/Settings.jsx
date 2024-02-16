@@ -70,7 +70,7 @@ const Settings = () => {
   };
   // console.log("settingType: ", settingType);
   return (
-    <div className="w-full h-full">
+    <div className="">
       <SystemControler
         child={
           <button

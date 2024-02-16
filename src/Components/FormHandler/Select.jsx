@@ -20,6 +20,7 @@ const Select = React.forwardRef((props, ref) => {
     OptionbackgroundColor = "#2B2B40",
     cacheOptions = true,
     labelClasses,
+    onChange,
   } = props;
 
   let hasWarning = submitted && validator && !validator.valid;
@@ -67,7 +68,6 @@ const Select = React.forwardRef((props, ref) => {
           }),
         },
       };
-     
     }
 
     return options;

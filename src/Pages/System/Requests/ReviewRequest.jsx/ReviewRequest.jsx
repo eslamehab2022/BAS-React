@@ -94,16 +94,16 @@ const ReviewRequest = () => {
   return (
     <>
       {showProject ? (
-        <div className="AllRequests-scroll scrollbar-none">
+        <div className="AllRequests-scroll  h-full scrollbar-none">
           <ShowReviewRequest
             ReviewProjectType={ReviewProjectType}
             setShowProject={setShowProject}
           />
         </div>
       ) : (
-        <div className="AllRequests">
+        <div className="AllRequests  h-full">
           <div>
-            <div className="reviewChartContainer d-flex justify-content-center align-items-center">
+            <div className="reviewChartContainer  d-flex justify-content-center align-items-center">
               <ReviewRequestChart />
             </div>
 

@@ -8,6 +8,8 @@
   background: #151521 !important;
   font-family: "Cairo" !important;
   overflow-y: hidden;
+  height: auto;
+  
 }
 
 .system-logo {

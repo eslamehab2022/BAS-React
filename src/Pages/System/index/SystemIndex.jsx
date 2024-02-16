@@ -19,7 +19,7 @@ const SystemIndex = () => {
   }, [user]);
 
   return (
-    <section className="full-system system-bg min-h-screen">
+    <section className="full-system system-bg min-h-screen  flex flex-col">
       <header className="container px-10">
         <nav className="flex justify-end">
           <div className="">

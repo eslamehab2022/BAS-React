@@ -126,14 +126,14 @@ const ReviewCasesRequest = () => {
   return (
     <div className=" p-3">
       {showProject ? (
-        <div className="AllRequests-scroll h-[600px] scrollbar-none">
+        <div className="AllRequests-scroll  h-full scrollbar-none">
           <ShowReviewRequest
             ReviewProjectType={ReviewProjectType}
             setShowProject={setShowProject}
           />
         </div>
       ) : (
-        <div className="AllRequests">
+        <div className="AllRequests  h-full">
           <div className="ReviewCasesRequest  ">
             <div className="reviewChartContainer d-flex flex-column justify-content-center align-items-center">
               <p className="my-3 fs-4 text-white">{projectTypeAR}</p>

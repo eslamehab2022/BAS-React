@@ -91,7 +91,7 @@ const DesignRequest = () => {
   return (
     <>
       {showProject ? (
-        <div className="AllRequests-scroll h-[600] scrollbar-none">
+        <div className="AllRequests-scroll h-full scrollbar-none">
           
           <ShowDesignRequest
             DesignProjectType={DesignProjectType}
@@ -99,8 +99,8 @@ const DesignRequest = () => {
           />
         </div>
       ) : (
-        <div className="AllRequests p-3">
-          <div className="  ">
+        <div className="AllRequests  h-full p-3">
+          <div className="h-full  ">
             <div className="designChartContainer d-flex justify-content-center align-items-center">
               <DesignRequestChart />
             </div>

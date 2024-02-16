@@ -127,15 +127,15 @@ const DesignCasesRequest = () => {
   return (
     <>
       {showProject ? (
-        <div className="AllRequests-scroll scrollbar-none">
+        <div className="AllRequests-scroll  h-full scrollbar-none">
           <ShowDesignRequest
             DesignProjectType={DesignProjectType}
             setShowProject={setShowProject}
           />
         </div>
       ) : (
-        <div className="AllRequests p-3">
-          <div className="DesignCasesRequest  ">
+        <div className="AllRequests  h-full p-3">
+          <div className="DesignCasesRequest  h-full ">
             <div className="designChartContainer d-flex flex-column justify-content-center align-items-center">
               <p className="my-3 fs-4 text-white">{projectTypeAR}</p>
               <DesignCasesChart

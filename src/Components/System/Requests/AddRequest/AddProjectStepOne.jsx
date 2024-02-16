@@ -3,12 +3,18 @@ import Input from "../../../FormHandler/Input";
 import { useContext } from "react";
 import { multiStepContext } from "../../../../Context/StepContext";
 import { UseInput, UseSelect } from "../../../../hooks";
-import Select from "../../../FormHandler/Select";
 import KSACites from "../../../KSACItes";
-
-import { Form } from "react-bootstrap";
+import { Form, FormGroup } from "react-bootstrap";
 import ReactSelectAsync from "react-select/async";
+import { toast } from "react-toastify";
+import { getAllCategories } from "../../../../helper/fetchers/Categories";
+import { Data } from "@react-google-maps/api";
 
+import { FormControl, MenuItem } from "@mui/material";
+import { InputLabel } from "../../../../Pages/System/PlanModel/components/InputLabel";
+import { Category } from "@mui/icons-material";
+import Select from "../../../FormHandler/Select";
+import { getAllServices } from "../../../../helper/fetchers/Services";
 export const AddProjectStepOne = (props) => {
   // context inputs
   const { userData, setUserData } = useContext(multiStepContext);
@@ -42,31 +48,24 @@ export const AddProjectStepOne = (props) => {
     "",
     true
   );
-  const Area = UseInput(`${userData?.Area ? userData.Area : ""}`, "text", true);
+  const area = UseInput(`${userData?.area ? userData.area : ""}`, "text", true);
   const pieceNumber = UseInput(
     `${userData?.pieceNumber ? userData.pieceNumber : ""}`,
     "pieceNumber",
     true
   );
-  const ChartNumber = UseInput(
-    `${userData?.ChartNumber ? userData.ChartNumber : ""}`,
+  const chartNumber = UseInput(
+    `${userData?.chartNumber ? userData.chartNumber : ""}`,
     "chartNumber",
     true
   );
   const [projectType, setProjectType] = useState(
     userData.projectType ? userData.projectType : ""
   );
-  console.log(projectType);
-  const projectTypeOptions = [
-    {
-      value: "تصميم",
-      label: "تصميم",
-    },
-    {
-      value: "الاشراف علي التنفيذ",
-      label: "الاشراف علي التنفيذ",
-    },
-  ];
+
+  const [projectCategory, setProjectCategory] = useState();
+  const [projectServices, setProjectServices] = useState();
+
   const ProjectUse = UseSelect(
     userData?.subCategoryId
       ? {
@@ -115,35 +114,6 @@ export const AddProjectStepOne = (props) => {
     },
   ];
 
-  const ProjectUseRoles = [
-    {
-      label: " سكني",
-      options: [
-        {
-          label: "سكني طبي",
-          value: "سكني طبي",
-        },
-        {
-          label: "سكني تجاري",
-          value: "سكني تجاري",
-        },
-      ],
-    },
-    {
-      label: " تجاري",
-      options: [
-        {
-          label: "تجاري طبي",
-          value: "تجاري طبي",
-        },
-        {
-          label: "تجاري محلات",
-          value: "تجاري محلات",
-        },
-      ],
-    },
-  ];
-
   //Check vaildation
 
   const [IsVaildState, setIsVaildState] = useState(false);
@@ -161,14 +131,14 @@ export const AddProjectStepOne = (props) => {
       buildingLocation.isValid &&
       city.value?.label &&
       city.isValid &&
-      Area.value &&
-      Area.isValid &&
+      area.value &&
+      area.isValid &&
       pieceNumber.value &&
       pieceNumber.isValid &&
       pieceNumber.value &&
       pieceNumber.isValid &&
-      ChartNumber.value &&
-      ChartNumber.isValid &&
+      chartNumber.value &&
+      chartNumber.isValid &&
       ProjectUse.value.label &&
       ProjectUse.isValid &&
       serviceType.value.label &&
@@ -183,9 +153,9 @@ export const AddProjectStepOne = (props) => {
         ownerName: ownerName?.value,
         buildingLocation: buildingLocation?.value,
         city: city?.value?.label,
-        Area: Area.value,
+        area: area.value,
         pieceNumber: pieceNumber?.value,
-        ChartNumber: ChartNumber?.value,
+        chartNumber: chartNumber?.value,
         projectType,
         categoryId: "سكني",
         subCategoryId: ProjectUse?.value.label,
@@ -201,9 +171,9 @@ export const AddProjectStepOne = (props) => {
         ownerName: ownerName.value,
         buildingLocation: buildingLocation.value,
         city: city?.value.label,
-        Area: Area?.value,
+        area: area?.value,
         pieceNumber: pieceNumber?.value,
-        ChartNumber: ChartNumber?.value,
+        chartNumber: chartNumber?.value,
         projectType,
         categoryId: "سكني",
         subCategoryId: ProjectUse?.value.label,
@@ -221,14 +191,14 @@ export const AddProjectStepOne = (props) => {
     buildingLocation.isValid,
     city.value?.label,
     city.isValid,
-    Area.value,
-    Area.isValid,
+    area.value,
+    area.isValid,
     pieceNumber.value,
     pieceNumber.isValid,
     pieceNumber.value,
     pieceNumber.isValid,
-    ChartNumber.value,
-    ChartNumber.isValid,
+    chartNumber.value,
+    chartNumber.isValid,
     ProjectUse?.value.label,
     serviceType?.value.label,
     projectName.value,
@@ -244,12 +214,12 @@ export const AddProjectStepOne = (props) => {
       buildingLocation.isValid &&
       city.value?.label &&
       city.isValid &&
-      Area.value &&
-      Area.isValid &&
+      area.value &&
+      area.isValid &&
       pieceNumber.value &&
       pieceNumber.isValid &&
-      ChartNumber.value &&
-      ChartNumber.isValid &&
+      chartNumber.value &&
+      chartNumber.isValid &&
       projectName.value &&
       projectName.isValid &&
       projectType === "الاشراف علي التنفيذ"
@@ -260,9 +230,9 @@ export const AddProjectStepOne = (props) => {
         ownerName: ownerName.value,
         buildingLocation: buildingLocation.value,
         city: city?.value,
-        Area: Area.value,
+        area: area.value,
         pieceNumber: pieceNumber.value,
-        ChartNumber: ChartNumber.value,
+        chartNumber: chartNumber.value,
         projectType,
         projectName: projectName.value,
       };
@@ -275,9 +245,9 @@ export const AddProjectStepOne = (props) => {
         ownerName: ownerName.value,
         buildingLocation: buildingLocation.value,
         city: city.value.label,
-        Area: Area.value,
+        area: area.value,
         pieceNumber: pieceNumber.value,
-        ChartNumber: ChartNumber.value,
+        chartNumber: chartNumber.value,
         projectType,
         projectName: projectName.value,
       };
@@ -291,135 +261,199 @@ export const AddProjectStepOne = (props) => {
     buildingLocation.isValid,
     city.value?.label,
     city.isValid,
-    Area.value,
-    Area.isValid,
+    area.value,
+    area.isValid,
     pieceNumber.value,
     pieceNumber.isValid,
     pieceNumber.value,
     pieceNumber.isValid,
-    ChartNumber.value,
-    ChartNumber.isValid,
+    chartNumber.value,
+    chartNumber.isValid,
     projectType,
     projectName.value,
     projectName.isValid,
   ]);
-
+  const getCategories = async () => {
+    try {
+      const { data } = await getAllCategories();
+      console.log(data);
+      if (data?.sucsses) {
+        setProjectCategory(data.category);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  const getServices = async () => {
+    try {
+      const { data } = await getAllServices();
+      console.log(data);
+      if (data?.sucsses) {
+        // setProjectCategory(data.category);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
   useEffect(() => {
+    getCategories();
     signalParent(IsVaildState);
   }, [IsVaildState]);
+  useEffect(() => {
+    console.log(projectCategory);
+  }, [projectCategory]);
 
   return (
     <fieldset className="addProjectStep mx-auto">
       <legend className="text-center">اضافة بيانات المشروع </legend>
-      <div className="row      p-3">
-        <div className=" col-md-6 mb-4">
-          <Input
-            placeholder=" اخل اسم المالك"
-            className="w-100 h-[37px]"
-            label={"اسم المالك"}
-            {...ownerName.bind}
-            mandatory
-          />
-        </div>
-        <div className=" col-md-6 mb-4">
-          <Input
-            placeholder=" اخل اسم المشروع"
-            className="w-100 h-[37px]"
-            label={"اسم المشروع"}
-            {...projectName.bind}
-            mandatory
-          />
-        </div>
-        <div className=" col-md-8 mb-4">
-          <Input
-            placeholder=" ادخل موقع المشروع  "
-            label={" موقع المشروع "}
-            {...buildingLocation.bind}
-            className="h-[37px]"
-            mandatory
-          />
-        </div>
-        <div className=" col-md-4 mb-4">
-          <Select
-            label={" المدينة"}
-            placeholder="اخل اسم المدينة"
-            OptionbackgroundColor="#414162"
-            {...city.bind}
-            options={KSACites}
-            mandatory
-          />
-        </div>
-
-        <div className=" col-md-4    mb-4">
-          <Input
-            className="h-[37px]"
-            placeholder="ادخل اسم الحى"
-            label={" الحي"}
-            {...Area.bind}
-            mandatory
-          />
-        </div>
-
-        <div className=" col-md-4 mb-4">
-          <Input
-            className="h-[37px]"
-            placeholder="اخل رقم القطعة"
-            label={" رقم القطعة"}
-            {...pieceNumber.bind}
-            mandatory
-          />
-        </div>
-
-        <div className=" col-md-4 mb-4">
-          <Input
-            className="h-[37px]"
-            placeholder="اخل رقم المخطط"
-            label={" رقم المخطط"}
-            {...ChartNumber.bind}
-            mandatory
-          />
-        </div>
-        <div className=" col-md-4 mb-4">
-          <Form.Group>
-            <Form.Label>نوع المشروع</Form.Label>
-            <Select
-              placeholder="اختار نوع المشروع ..."
-              OptionbackgroundColor="#414162"
-              options={projectTypeOptions}
-              onChange={(e) => {
-                setProjectType(e.value);
-                setCheckProjectType(e.value);
-              }}
+      <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <div className="row      p-3">
+          <div className=" col-md-6 mb-4">
+            <Input
+              placeholder=" اخل اسم المالك"
+              className="w-100 h-[37px]"
+              label={"اسم المالك"}
+              {...ownerName.bind}
               mandatory
             />
-          </Form.Group>
-        </div>
-        {projectType === "تصميم" ? (
-          <>
-            <div className=" col-md-4 mb-4">
-              <Select
-                label={"  استخدام المشروع"}
-                OptionbackgroundColor="#414162"
-                options={ProjectUseRoles}
-                {...ProjectUse.bind}
-                mandatory
-              />
-            </div>
+          </div>
+          <div className=" col-md-6 mb-4">
+            <Input
+              placeholder=" اخل اسم المشروع"
+              className="w-100 h-[37px]"
+              label={"اسم المشروع"}
+              {...projectName.bind}
+              mandatory
+            />
+          </div>
+          <div className=" col-md-8 mb-4">
+            <Input
+              placeholder=" ادخل موقع المشروع  "
+              label={" موقع المشروع "}
+              {...buildingLocation.bind}
+              className="h-[37px]"
+              mandatory
+            />
+          </div>
+          <div className=" col-md-4 mb-4">
+            <Select
+              label={" المدينة"}
+              placeholder="اخل اسم المدينة"
+              OptionbackgroundColor="#414162"
+              {...city.bind}
+              options={KSACites}
+              mandatory
+            />
+          </div>
 
-            <div className=" col-md-4 mb-4">
+          <div className=" col-md-4    mb-4">
+            <Input
+              className="h-[37px]"
+              placeholder="ادخل اسم الحى"
+              label={" الحي"}
+              {...area.bind}
+              mandatory
+            />
+          </div>
+
+          <div className=" col-md-4 mb-4">
+            <Input
+              className="h-[37px]"
+              placeholder="اخل رقم القطعة"
+              label={" رقم القطعة"}
+              {...pieceNumber.bind}
+              mandatory
+            />
+          </div>
+
+          <div className=" col-md-4 mb-4">
+            <Input
+              className="h-[37px]"
+              placeholder="اخل رقم المخطط"
+              label={" رقم المخطط"}
+              {...chartNumber.bind}
+              mandatory
+            />
+          </div>
+          <div className=" col-md-4 mb-4">
+            <FormControl fullWidth>
               <Select
-                label={"  نوع الخدمة "}
-                OptionbackgroundColor="#414162"
-                {...serviceType.bind}
-                options={serviceTypeRoles}
-                mandatory
+                label={"نوع المشروع"}
+                options={[
+                  {
+                    value: "تصميم",
+                    label: "تصميم",
+                  },
+                  {
+                    value: "اشراف علي التنفيذ",
+                    label: "اشراف علي التنفيذ",
+                  },
+                ]}
+                placeholder="اختر نوع المشروع"
+                onChange={(e) => {
+                  setProjectType(e.value);
+                  setCheckProjectType(e.value);
+                }}
               />
-            </div>
-          </>
-        ) : (
-          projectType === "الاشراف علي التنفيذ" && null
-        )}
-      </div>
+            </FormControl>
+          </div>
+          {projectType === "تصميم" ? (
+            <>
+              <div className=" col-md-4 mb-4">
+                <FormGroup className="flex flex-col gap-3">
+                  <InputLabel
+                    htmlFor="project-type-select"
+                    label={"استخدام المشروع"}
+                  />
+                  <select
+                    name="projectUse"
+                    id="projectUse"
+                    label="Grouping"
+                    className="h-[37px] bg-[#2B2B40] text-white !border-transparent hover:!border-transparent focus:!border-transparent"
+                  >
+                    {Array.isArray(projectCategory) &&
+                    projectCategory.length > 0 ? (
+                      projectCategory.map(({ name, _id, subcategories }) => (
+                        <optgroup
+                          key={_id}
+                          id={_id}
+                          className="bg-[#2B2B40] text-[#fff]"
+                          label={name}
+                        >
+                          {subcategories.length > 0 &&
+                            subcategories.map(({ _id, name, categoryId }) => (
+                              <option key={_id} value={categoryId}>
+                                {name}
+                              </option>
+                            ))}
+                        </optgroup>
+                      ))
+                    ) : (
+                      <option value="">No Categories</option>
+                    )}
+                  </select>
+                </FormGroup>
+              </div>
+
+              <div className=" col-md-4 mb-4">
+                <Select
+                  label={"  نوع الخدمة "}
+                  OptionbackgroundColor="#414162"
+                  {...serviceType.bind}
+                  options={serviceTypeRoles}
+                  mandatory
+                />
+              </div>
+            </>
+          ) : (
+            projectType === "الاشراف علي التنفيذ" && null
+          )}
+        </div>
+      </FormControl>
     </fieldset>
   );
 };

@@ -1,7 +1,7 @@
 .all-clients-search-container {
-    height: 801px !important;
     border-radius: 19px;
     background: #1E1E2D;
+    height: 100%;
 }
 
 .all-clients-search-container .dropdown-toggle::after {

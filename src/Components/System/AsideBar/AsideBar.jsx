@@ -63,7 +63,8 @@ const AsideBar = () => {
         <ProfileMenu show={openProfile} setShow={setOpenProfile} />
         <Sidebar
           transitionDuration={800}
-          width="300px"
+          width="100%"
+          height="100%"
           collapsedWidth="100px !important"
           rootStyles={{
             color: "#FFF",
@@ -581,140 +582,138 @@ export const ProfileMenu = ({ show, setShow }) => {
     }
   };
   return (
-    <>
-      <div
-        className={` !absolute p-2  z-[100000]   border !border-[#2B2B40] right-[62%]  !top-[10%] transition-all ease-in-out duration-500  bg-[#1E1E2D] rounded-[14px] w-[0px] h-[0] opacity-0 ${
-          show && " !h-[353px] !w-[245px] !opacity-100"
-        } `}
-      >
-        <div className="relative">
-          <div className="mx-2 flex gap-2">
-            {/* should be user img */}
-            <Image
-              src="/People/Badr.png"
-              alt="user img"
-              className={"w-[51px] h-[51px] rounded-[50%]"}
-            />
-            <div className="flex flex-col">
-              <p className="text-white text-base">بدر بن سليمان </p>
-              <p className="text-[#EFAA20] text-xs">رئيس مجلس الأدارة</p>
+    <div
+      className={` !absolute p-2  z-[100000]   border !border-[#2B2B40] right-[62%]  !top-[10%] transition-all ease-in-out duration-500  bg-[#1E1E2D] rounded-[14px] w-[0px] h-[0] opacity-0 ${
+        show && " !h-[353px] !w-[245px] !opacity-100"
+      } `}
+    >
+      <div className="relative">
+        <div className="mx-2 flex gap-2">
+          {/* should be user img */}
+          <Image
+            src="/People/Badr.png"
+            alt="user img"
+            className={"w-[51px] h-[51px] rounded-[50%]"}
+          />
+          <div className="flex flex-col">
+            <p className="text-white text-base">بدر بن سليمان </p>
+            <p className="text-[#EFAA20] text-xs">رئيس مجلس الأدارة</p>
 
-              <span className="text-[#565674] text-xs">bader@bsa.com</span>
+            <span className="text-[#565674] text-xs">bader@bsa.com</span>
+          </div>
+        </div>
+        <div className="bg-[#D5992133] h-[1px] w-full my-2"></div>
+        <div onClick={() => setShow(false)} className="mt-2 mb-3 mx-2">
+          <Link className="w-full " to="Profile/2424">
+            <div>
+              <p className="text-sm text-white">صفحتى الشخصية</p>
             </div>
-          </div>
-          <div className="bg-[#D5992133] h-[1px] w-full my-2"></div>
-          <div onClick={() => setShow(false)} className="mt-2 mb-3 mx-2">
-            <Link className="w-full " to="Profile/2424">
-              <div>
-                <p className="text-sm text-white">صفحتى الشخصية</p>
-              </div>
-            </Link>
-          </div>
-          <Link
-            to="/System/Projects/index"
-            onClick={() => setShow(false)}
-            className="mt-2  flex justify-between items-center pointer h-[33px] mb-3 mx-2"
-          >
-            <p className=" text-sm text-white">مشاريعي</p>
-            <Badge badgeContent={2} color="error"></Badge>
           </Link>
+        </div>
+        <Link
+          to="/System/Projects/index"
+          onClick={() => setShow(false)}
+          className="mt-2  flex justify-between items-center pointer h-[33px] mb-3 mx-2"
+        >
+          <p className=" text-sm text-white">مشاريعي</p>
+          <Badge badgeContent={2} color="error"></Badge>
+        </Link>
+
+        <div
+          onClick={() => setShow(false)}
+          className="mt-2  pointer h-[33px] mb-3 mx-2"
+        >
+          <Link
+            className="flex justify-between items-center"
+            to="/System/Chat/index"
+          >
+            <p className="text-sm text-white"> محادثاتى</p>
+            <Badge badgeContent={3} color="error"></Badge>
+          </Link>
+        </div>
+
+        <div className="mt-2 pointer relative h-[33px] mb-3 mx-1 flex items-center justify-between">
+          <p className="text-white">اللغة </p>
+
+          {lang === "ar" ? (
+            <div
+              onClick={handlelang}
+              dir="rtl"
+              className="w-full my-3 mx-2  flex   justify-end gap-3 "
+            >
+              <p className="text-white">العربية (KSA)</p>
+              <Image
+                src="/saudiFlagicon.png"
+                alt="sauida flag"
+                className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+              />
+            </div>
+          ) : (
+            <div
+              onClick={handlelang}
+              dir="rtl"
+              className="w-full my-3 mx-2  flex   justify-end gap-3 "
+            >
+              <p className="text-white"> English (USA)</p>
+              <Image
+                src="/usa.png"
+                alt="usa flag"
+                className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+              />
+            </div>
+          )}
 
           <div
-            onClick={() => setShow(false)}
-            className="mt-2  pointer h-[33px] mb-3 mx-2"
-          >
-            <Link
-              className="flex justify-between items-center"
-              to="/System/Chat/index"
-            >
-              <p className="text-sm text-white"> محادثاتى</p>
-              <Badge badgeContent={3} color="error"></Badge>
-            </Link>
-          </div>
-
-          <div className="mt-2 pointer relative h-[33px] mb-3 mx-1 flex items-center justify-between">
-            <p className="text-white">اللغة </p>
-
-            {lang === "ar" ? (
-              <div
-                onClick={handlelang}
-                dir="rtl"
-                className="w-full my-3 mx-2  flex   justify-end gap-3 "
-              >
-                <p className="text-white">العربية (KSA)</p>
-                <Image
-                  src="/saudiFlagicon.png"
-                  alt="sauida flag"
-                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
-                />
-              </div>
-            ) : (
-              <div
-                onClick={handlelang}
-                dir="rtl"
-                className="w-full my-3 mx-2  flex   justify-end gap-3 "
-              >
-                <p className="text-white"> English (USA)</p>
-                <Image
-                  src="/usa.png"
-                  alt="usa flag"
-                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
-                />
-              </div>
-            )}
-
-            <div
-              className={`lang-meu absolute p-3  border !border-[#2B2B40] transition-all ease-in-out duration-500 right-[110%] top-[100%] w-[0px] h-[0] opacity-0  bg-[#1E1E2D] rounded-[14px]
+            className={`lang-meu absolute p-3  border !border-[#2B2B40] transition-all ease-in-out duration-500 right-[110%] top-[100%] w-[0px] h-[0] opacity-0  bg-[#1E1E2D] rounded-[14px]
             ${showLangMenu && "!w-[172px] !h-[118px] !opacity-100"}
             `}
+          >
+            {" "}
+            <div
+              onClick={() => {
+                setLang("ar");
+                setShowLangMenu(false);
+              }}
+              dir="rtl"
+              className="w-full my-3 mx-2  flex   justify-end gap-3 "
             >
-              {" "}
-              <div
-                onClick={() => {
-                  setLang("ar");
-                  setShowLangMenu(false);
-                }}
-                dir="rtl"
-                className="w-full my-3 mx-2  flex   justify-end gap-3 "
-              >
-                <p className="text-white">العربية (KSA)</p>
-                <Image
-                  src="/saudiFlagicon.png"
-                  alt="sauida flag"
-                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
-                />
-              </div>
-              <div
-                onClick={() => {
-                  setLang("en");
-                  setShowLangMenu(false);
-                }}
-                dir="rtl"
-                className="w-full my-3 mx-2  flex   justify-end gap-3 "
-              >
-                <p className="text-white"> English (USA)</p>
-                <Image
-                  src="/usa.png"
-                  alt="usa flag"
-                  className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
-                />
-              </div>
+              <p className="text-white">العربية (KSA)</p>
+              <Image
+                src="/saudiFlagicon.png"
+                alt="sauida flag"
+                className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+              />
+            </div>
+            <div
+              onClick={() => {
+                setLang("en");
+                setShowLangMenu(false);
+              }}
+              dir="rtl"
+              className="w-full my-3 mx-2  flex   justify-end gap-3 "
+            >
+              <p className="text-white"> English (USA)</p>
+              <Image
+                src="/usa.png"
+                alt="usa flag"
+                className={"rounded-[50%]  w-[21.26px] h-[21.26px] "}
+              />
             </div>
           </div>
-
-          <div
-            onClick={() => setShow(false)}
-            className="mt-2 pointer h-[33px] mb-3 mx-2"
-          >
-            <p className="text-sm text-white"> تسجيل الخروج</p>
-          </div>
-          <div
-            className="absolute w-full  top-full 
-           bg-[#D5992133] h-[1px]  my-2"
-          ></div>
         </div>
+
+        <div
+          onClick={() => setShow(false)}
+          className="mt-2 pointer h-[33px] mb-3 mx-2"
+        >
+          <p className="text-sm text-white"> تسجيل الخروج</p>
+        </div>
+        <div
+          className="absolute w-full  top-full 
+           bg-[#D5992133] h-[1px]  my-2"
+        ></div>
       </div>
-    </>
+    </div>
   );
 };
 
