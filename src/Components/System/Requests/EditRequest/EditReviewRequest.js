@@ -20,6 +20,7 @@ const EditReviewRequest = ({
   editRequest,
   setEditRequest,
   setConfirmPoper,
+  id
 }) => {
   const [ConfirmUpdate, setConfirmUpdate] = useState(false);
   //define inupts

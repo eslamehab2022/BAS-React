@@ -15,6 +15,7 @@ import Cookies from "js-cookie";
 import Progress from "../../../../Components/Progress";
 import { userLogin } from "../../../../helper/fetchers/Login";
 
+
 const SystemSignIn = () => {
   const [morningNightMode, setMorningNightMode] = useState("morning");
   const [checked, setChecked] = useState(false);
@@ -86,15 +87,20 @@ const SystemSignIn = () => {
     }
   };
   const onSubmit = async (userData) => {
+    // const formData = new FormData();
+    // formData.append("userName", userData.userName);
+    // formData.append("password", userData.password);
+
     try {
       const { data } = await userLogin(userData);
+
       console.log(data);
       if (data.success) {
         Cookies.set("accessToken", data.accessToken);
         navigate("/System/index");
       }
     } catch ({ response }) {
-      if (response.status === 404 || response.status === 401) {
+      if (response?.status === 404 || response?.status === 401) {
         setNotFound("اسم المستخدم او كلمة المرور غير صحيحة");
       } else {
         toast.error(response?.data?.message);

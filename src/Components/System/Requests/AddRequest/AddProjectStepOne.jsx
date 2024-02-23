@@ -17,10 +17,15 @@ import Select from "../../../FormHandler/Select";
 import { getAllServices } from "../../../../helper/fetchers/Services";
 export const AddProjectStepOne = (props) => {
   // context inputs
-  const { userData, setUserData } = useContext(multiStepContext);
-  const { pagePath } = props;
-  const { checkProjectType, setCheckProjectType } =
-    useContext(multiStepContext);
+
+  // const { pagePath } = props;
+  const {
+    userData,
+    setUserData,
+    selectProjectType,
+    setSelectedProjectType,
+    
+  } = useContext(multiStepContext);
   //define inupts
 
   const ownerName = UseInput(
@@ -59,61 +64,38 @@ export const AddProjectStepOne = (props) => {
     "chartNumber",
     true
   );
-  const [projectType, setProjectType] = useState(
-    userData.projectType ? userData.projectType : ""
-  );
-
   const [projectCategory, setProjectCategory] = useState();
   const [projectServices, setProjectServices] = useState();
+  const [categoryId, setCategoryId] = useState();
+  const [subcategoryId, setSubcategoryId] = useState();
 
-  const ProjectUse = UseSelect(
-    userData?.subCategoryId
+  const handleCategories = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selectedCategoryId = selectedOption.getAttribute("categoryId");
+    const selectedSubcategoryId = e.target.value;
+
+    setCategoryId(selectedCategoryId);
+    setSubcategoryId(selectedSubcategoryId);
+  };
+  const [servicesId, setServiceId] = useState();
+  const [subservicesId, setsubServicesId] = useState();
+  const handleServices = (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const selctedServicesId = selectedOption.getAttribute("servicesId");
+    const selectedSubservices = e.target.value;
+    setServiceId(selctedServicesId);
+    setsubServicesId(selectedSubservices);
+    console.log(servicesId);
+    console.log(setsubServicesId);
+  };
+  const [projectType, setProjectType] = useState(
+    userData.projectType
       ? {
-          value: userData?.subCategoryId,
-          label: userData?.subCategoryId,
+          value: userData?.projectType,
+          label: userData?.projectType,
         }
-      : "",
-
-    "Select",
-    true
+      : ""
   );
-  const serviceType = UseSelect(
-    // userData?.subServiceId ? {
-    //     value: userData?.subServiceId,
-    //     label: userData?.subServiceId
-    // } : ""
-
-    "",
-    "Select",
-    true
-  );
-
-  const serviceTypeRoles = [
-    {
-      label: " قرارات مساحيه",
-      value: "قرارات مساحيه",
-      options: [
-        {
-          label: "قرار مساحي لكل الاغراض",
-          value: "قرار مساحي لكل الاغراض",
-        },
-        {
-          label: "قرار مساحي لغرض الدمج ",
-          value: "قرار مساحي لغرض الدمج ",
-        },
-      ],
-    },
-    {
-      label: "  رخص البناء",
-      options: [
-        {
-          label: "موفع جديد",
-          value: "موفع جديد",
-        },
-      ],
-    },
-  ];
-
   //Check vaildation
 
   const [IsVaildState, setIsVaildState] = useState(false);
@@ -127,58 +109,56 @@ export const AddProjectStepOne = (props) => {
     if (
       ownerName.value &&
       ownerName.isValid &&
+      projectName.value &&
+      projectName.isValid &&
       buildingLocation.value &&
       buildingLocation.isValid &&
       city.value?.label &&
-      city.isValid &&
       area.value &&
       area.isValid &&
       pieceNumber.value &&
       pieceNumber.isValid &&
-      pieceNumber.value &&
-      pieceNumber.isValid &&
       chartNumber.value &&
       chartNumber.isValid &&
-      ProjectUse.value.label &&
-      ProjectUse.isValid &&
-      serviceType.value.label &&
-      serviceType.isValid &&
-      projectName.value &&
-      projectName.isValid &&
-      projectType === "تصميم"
+      projectType === 1 &&
+      categoryId &&
+      subcategoryId &&
+      servicesId &&
+      subservicesId
     ) {
-      console.log("validation");
+      console.log("valid");
       const updatedUserData = {
-        ...userData,
         ownerName: ownerName?.value,
         buildingLocation: buildingLocation?.value,
         city: city?.value?.label,
-        area: area.value,
-        pieceNumber: pieceNumber?.value,
-        chartNumber: chartNumber?.value,
-        projectType,
-        categoryId: "سكني",
-        subCategoryId: ProjectUse?.value.label,
-        serviceId: "تجاري",
-        projectName: projectName.value,
-        subServiceId: serviceType?.value.label,
-      };
-      setUserData(updatedUserData);
-      signalParent(true);
-    } else {
-      const updatedUserData = {
-        ...userData,
-        ownerName: ownerName.value,
-        buildingLocation: buildingLocation.value,
-        city: city?.value.label,
         area: area?.value,
         pieceNumber: pieceNumber?.value,
         chartNumber: chartNumber?.value,
         projectType,
-        categoryId: "سكني",
-        subCategoryId: ProjectUse?.value.label,
-        serviceId: "تجاري",
-        subServiceId: serviceType?.value.label,
+        categoryId,
+        subcategoryId,
+        servicesId,
+        subservicesId,
+        projectName: projectName.value,
+      };
+
+      setUserData(updatedUserData);
+      signalParent(true);
+    } else {
+      console.log("not valid");
+
+      const updatedUserData = {
+        ownerName: ownerName.value,
+        buildingLocation: buildingLocation.value,
+        city: city?.value?.label,
+        area: area?.value,
+        pieceNumber: pieceNumber?.value,
+        chartNumber: chartNumber?.value,
+        projectType,
+        categoryId,
+        subcategoryId,
+        servicesId,
+        subservicesId,
         projectName: projectName.value,
       };
       setUserData(updatedUserData);
@@ -199,10 +179,13 @@ export const AddProjectStepOne = (props) => {
     pieceNumber.isValid,
     chartNumber.value,
     chartNumber.isValid,
-    ProjectUse?.value.label,
-    serviceType?.value.label,
+    categoryId,
+    subcategoryId,
+    servicesId,
+    subservicesId,
     projectName.value,
-    projectType.value,
+    projectType,
+    ,
   ]);
 
   // checking review Vaildation
@@ -222,19 +205,18 @@ export const AddProjectStepOne = (props) => {
       chartNumber.isValid &&
       projectName.value &&
       projectName.isValid &&
-      projectType === "الاشراف علي التنفيذ"
+      projectType === 2
     ) {
       console.log("validation");
       const updatedUserData = {
-        ...userData,
         ownerName: ownerName.value,
+        projectName: projectName.value,
         buildingLocation: buildingLocation.value,
-        city: city?.value,
+        city: city?.value.label,
         area: area.value,
         pieceNumber: pieceNumber.value,
         chartNumber: chartNumber.value,
         projectType,
-        projectName: projectName.value,
       };
       setUserData(updatedUserData);
       signalParent(true);
@@ -257,6 +239,8 @@ export const AddProjectStepOne = (props) => {
   }, [
     ownerName.value,
     ownerName.isValid,
+    projectName.value,
+    projectName.isValid,
     buildingLocation.value,
     buildingLocation.isValid,
     city.value?.label,
@@ -265,13 +249,9 @@ export const AddProjectStepOne = (props) => {
     area.isValid,
     pieceNumber.value,
     pieceNumber.isValid,
-    pieceNumber.value,
-    pieceNumber.isValid,
     chartNumber.value,
     chartNumber.isValid,
     projectType,
-    projectName.value,
-    projectName.isValid,
   ]);
   const getCategories = async () => {
     try {
@@ -289,9 +269,8 @@ export const AddProjectStepOne = (props) => {
   const getServices = async () => {
     try {
       const { data } = await getAllServices();
-      console.log(data);
-      if (data?.sucsses) {
-        // setProjectCategory(data.category);
+      if (data?.success) {
+        setProjectServices(data.services);
       } else {
         console.log("Data retrieval failed");
       }
@@ -300,12 +279,15 @@ export const AddProjectStepOne = (props) => {
     }
   };
   useEffect(() => {
-    getCategories();
     signalParent(IsVaildState);
   }, [IsVaildState]);
   useEffect(() => {
-    console.log(projectCategory);
-  }, [projectCategory]);
+    getCategories();
+    getServices();
+  }, []);
+  useEffect(() => {
+    console.log(userData);
+  }, []);
 
   return (
     <fieldset className="addProjectStep mx-auto">
@@ -385,35 +367,33 @@ export const AddProjectStepOne = (props) => {
                 label={"نوع المشروع"}
                 options={[
                   {
-                    value: "تصميم",
+                    value: 1,
                     label: "تصميم",
                   },
                   {
-                    value: "اشراف علي التنفيذ",
-                    label: "اشراف علي التنفيذ",
+                    value: 2,
+                    label: "الاشراف علي التنفيذ",
                   },
                 ]}
                 placeholder="اختر نوع المشروع"
                 onChange={(e) => {
+                  setSelectedProjectType(e.value);
                   setProjectType(e.value);
-                  setCheckProjectType(e.value);
                 }}
               />
             </FormControl>
           </div>
-          {projectType === "تصميم" ? (
+          {projectType === 1 ? (
             <>
               <div className=" col-md-4 mb-4">
                 <FormGroup className="flex flex-col gap-3">
-                  <InputLabel
-                    htmlFor="project-type-select"
-                    label={"استخدام المشروع"}
-                  />
+                  <Form.Label>استخدام المشروع</Form.Label>
                   <select
                     name="projectUse"
                     id="projectUse"
                     label="Grouping"
                     className="h-[37px] bg-[#2B2B40] text-white !border-transparent hover:!border-transparent focus:!border-transparent"
+                    onChange={handleCategories}
                   >
                     {Array.isArray(projectCategory) &&
                     projectCategory.length > 0 ? (
@@ -426,7 +406,12 @@ export const AddProjectStepOne = (props) => {
                         >
                           {subcategories.length > 0 &&
                             subcategories.map(({ _id, name, categoryId }) => (
-                              <option key={_id} value={categoryId}>
+                              <option
+                                key={_id}
+                                categoryId={categoryId}
+                                value={_id}
+                                className="h-[37px] px-2"
+                              >
                                 {name}
                               </option>
                             ))}
@@ -440,18 +425,45 @@ export const AddProjectStepOne = (props) => {
               </div>
 
               <div className=" col-md-4 mb-4">
-                <Select
-                  label={"  نوع الخدمة "}
-                  OptionbackgroundColor="#414162"
-                  {...serviceType.bind}
-                  options={serviceTypeRoles}
-                  mandatory
-                />
+                <FormGroup className="flex flex-col gap-3">
+                  <Form.Label> نوع الخدمة</Form.Label>
+                  <select
+                    name="projectUse"
+                    id="projectUse"
+                    label="Grouping"
+                    className="h-[37px] bg-[#2B2B40] text-white !border-transparent hover:!border-transparent focus:!border-transparent"
+                    onChange={handleServices}
+                  >
+                    {Array.isArray(projectServices) &&
+                    projectServices.length > 0 ? (
+                      projectServices.map(({ name, _id, subservices }) => (
+                        <optgroup
+                          key={_id}
+                          id={_id}
+                          className="bg-[#2B2B40] text-[#fff]"
+                          label={name}
+                        >
+                          {subservices.length > 0 &&
+                            subservices.map(({ _id, name, serviceId }) => (
+                              <option
+                                key={_id}
+                                servicesId={serviceId}
+                                value={_id}
+                                className="h-[37px] px-2"
+                              >
+                                {name}
+                              </option>
+                            ))}
+                        </optgroup>
+                      ))
+                    ) : (
+                      <option value="">No Services</option>
+                    )}
+                  </select>
+                </FormGroup>
               </div>
             </>
-          ) : (
-            projectType === "الاشراف علي التنفيذ" && null
-          )}
+          ) : null}
         </div>
       </FormControl>
     </fieldset>

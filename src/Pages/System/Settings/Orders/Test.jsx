@@ -85,7 +85,6 @@ export const OptionsButton = ({id}) => {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
-        classes="bg-red-200"
       >
         <MenuItem
           className="border min-w-[133px] text-right"

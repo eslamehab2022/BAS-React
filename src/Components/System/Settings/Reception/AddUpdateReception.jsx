@@ -19,6 +19,7 @@ import CustomSelect from "../../../../Pages/System/PlanModel/components/CustomSe
 import { CiSearch } from "react-icons/ci";
 import { ProjectNames } from "../../../../Pages/System/PlanModel/consts";
 import TimePickerButton from "../../../TimePickerPage";
+import myAxiosInstance from "../../../../helper/https";
 
 const ModalHeader = ({ title }) => {
   return (
@@ -59,7 +60,44 @@ const AddUpdateReciption = ({
   };
   const handleAddvisit = (data) => {
     console.log(data);
+    var formdata = new FormData();
+    // formdata.append("fileVist", fileInput.files[0], "logo.png");
+    formdata.append("phone", data.phone);
+    formdata.append("visitLocation", data.visitPlace);
+    formdata.append("typeVisit", data.visitType.value === 'صادرة' ? "1" : data.visitType.value === 'واردة' ? "2" : null);
+    formdata.append("resoneVisit", data.visitReason);
+    formdata.append("dateVist", "2025-07-25T14:34:50.600+00:00");
+    formdata.append("timeOutVist", "2025-07-13T14:34:50.600+00:00");
+    formdata.append("timeInVist", "2025-07-13T14:34:50.600+00:00");
+    formdata.append("IdentityNumber", "12345678911");
+    // formdata.append("IdentityNumber", data.identity);
+    /**
+     identity
+: 
+undefined
+personName
+: 
+""
+visitNotes
+: 
+"سيرسيرسيرسيرسي"
+visitPlace
+: 
+"المنوفية"
+visitReason: "سيرسيرسيرسي"
+visitType: {value: 'واردة', label: 'واردة'}
+ُEmployeeName: "حمادة"
+     */
     setShow(false);
+
+    myAxiosInstance
+      .post("reception", formdata)
+      .then((data) => {
+        console.log("reception data: ", data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -84,7 +122,10 @@ const AddUpdateReciption = ({
                 تعديل الزيارة{" "}
               </p>
             </div>
-            <Form onSubmit={handleSubmit(handleEditvisit)}>
+            <Form
+              onSubmit={handleSubmit(handleEditvisit)}
+              encType="multipart/form-data"
+            >
               <fieldset className="fieldBorder container   mx-auto  p-3 my-3">
                 <legend className="text-center !text-base">
                   معلومات الزيارة
@@ -276,7 +317,10 @@ const AddUpdateReciption = ({
             <div className="mx-auto w-[139px] h-[43px] flex justify-center items-center rounded-md border-1 border-[#EFAA20]">
               <p className="text-white"> تعديل الزيارة الواردة</p>
             </div>
-            <Form onSubmit={handleSubmit(handleEditvisit)}>
+            <Form
+              onSubmit={handleSubmit(handleEditvisit)}
+              encType="multipart/form-data"
+            >
               <fieldset className="fieldBorder container   mx-auto  p-3 my-3">
                 <legend className="text-center">معلومات الزيارة</legend>
                 <div className="grid grid-cols-2 gap-4 mb-3">
@@ -317,7 +361,7 @@ const AddUpdateReciption = ({
                     />
                   </Form.Group>
                 </div>
-                <div className="grid grid-cols-1 mb-3">
+                <div className="grid grid-cols-3 mb-3">
                   <Form.Group>
                     <Form.Label> مكان الزيارة</Form.Label>
                     <input
@@ -422,12 +466,15 @@ const AddUpdateReciption = ({
             aria-labelledby=" example-modal-sizes-title-lg"
             className={`systemModal   scrollbar-none overflow-y-auto`}
           >
-            <ModalHeader title={"اضافة زيارة"} />
+            <ModalHeader title={"اضافة زيارة صادرة"} />
 
             {/* <div className="mx-auto w-[139px] h-[43px] flex justify-center items-center rounded-md border-1 border-[#EFAA20]">
             <p className="text-white">اضافة زيارة صادرة</p>
           </div> */}
-            <Form onSubmit={handleSubmit(handleAddvisit)}>
+            <Form
+              onSubmit={handleSubmit(handleAddvisit)}
+              encType="multipart/form-data"
+            >
               <FormModal title={"معلومات الزيارة"}>
                 <div className="grid grid-cols-3 gap-4 mb-3">
                   <Controller
@@ -651,11 +698,14 @@ const AddUpdateReciption = ({
             aria-labelledby=" example-modal-sizes-title-lg"
             className={`systemModal ${styles.ReciptionModal}  scrollbar-none overflow-y-scroll `}
           >
-            <ModalHeader title={"اضافة زيارة"} />
+            <ModalHeader title={"اضافة زيارة واردة"} />
             {/* <div className="mx-auto w-[139px] h-[43px] flex justify-center items-center rounded-md border-1 border-[#EFAA20]">
             <p className="text-white">اضافة الزيارة الواردة</p>
           </div> */}
-            <Form onSubmit={handleSubmit(handleAddvisit)}>
+            <Form
+              onSubmit={handleSubmit(handleAddvisit)}
+              encType="multipart/form-data"
+            >
               <fieldset className="fieldBorder container   mx-auto  p-3 my-3">
                 <legend className="text-center">معلومات الزيارة</legend>
                 <div className="grid grid-cols-2 gap-4 mb-3">
@@ -696,13 +746,22 @@ const AddUpdateReciption = ({
                     />
                   </Form.Group>
                 </div>
-                <div className="grid grid-cols-1 mb-3">
-                  <Form.Group>
+                <div className="grid grid-cols-3 mb-3 gap-4">
+                  <Form.Group className="col-span-2">
                     <Form.Label> مكان الزيارة</Form.Label>
                     <input
                       className="form-control h-[37px]"
                       {...register("visitPlace")}
                       placeholder="اكتب مكان الزياة"
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>رقم الجوال</Form.Label>
+                    <input
+                      className="form-control h-[37px]"
+                      // pattern phone:pattern(new RegExp(/^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/)),
+                      {...register("phone")}
+                      placeholder="ادخل رقم الجوال"
                     />
                   </Form.Group>
                 </div>

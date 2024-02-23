@@ -14,6 +14,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Input from "../../../FormHandler/Input";
+import { useForm } from "react-hook-form";
+
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import TimePicker from "react-time-picker";
@@ -32,6 +34,15 @@ const EditDeleteMeeting = ({
   showEditDeleteModal,
   setShowEditDeleteModal,
 }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+
+
+  
   const [Submitted, setSubmitted] = useState(false);
   const selectCountry = UseSelect("", "Select");
   const selectMeetingType = UseSelect("", "Select");
@@ -77,6 +88,10 @@ const EditDeleteMeeting = ({
 
     setShowEditDeleteModal(false);
   };
+
+
+
+
 
   return (
     <div>

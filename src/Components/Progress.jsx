@@ -7,7 +7,7 @@ const Progress = ({ isSmall = false }) => {
   }
   return (
     <div className="text-center py-4">
-      <Spinner animation="border" />;
+      <Spinner animation="border" />
     </div>
   );
 };

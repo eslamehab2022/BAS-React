@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import styles from "./AllMeetings.module.css";
 import "./MeettingStyles.css";
 import SystemControler from "../../../../Components/System/SystemControler/SystemControler";
@@ -21,6 +21,7 @@ import getDay from "date-fns/getDay";
 
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import { getAllEvents } from "../../../../helper/fetchers/events";
 
 const AllMeetings = () => {
   require("globalize/lib/cultures/globalize.culture.ar-AE");
@@ -33,6 +34,7 @@ const AllMeetings = () => {
   const [selectedEventId, setSelectedEventId] = useState(null);
   const localizer = momentLocalizer(moment);
   const DnDCalendar = withDragAndDrop(Calendar);
+
   const lang = {
     "ar-AE": {
       week: "أسبوع",
@@ -107,6 +109,12 @@ const AllMeetings = () => {
   function onEventDrop({ event, start, end, allDay }) {}
   function onEventResize({ event, start, end, allDay }) {}
 
+  const getEvents = async () => {
+    const { data } = await getAllEvents();
+  };
+
+  useEffect(() => {}, []);
+
   return (
     <div>
       <EditDeleteMeeting
@@ -130,9 +138,9 @@ const AllMeetings = () => {
         }
       />
 
-      <div 
-      // className={styles.cleanderbg}
-      className="bg-[#1E1E2D] h-[801px] rounded-[17px] meeting scrollbar-none overflow-scroll"
+      <div
+        // className={styles.cleanderbg}
+        className="bg-[#1E1E2D] h-[801px] rounded-[17px] meeting scrollbar-none overflow-scroll"
       >
         <AddMeeting view={view} setView={setView} />
 
@@ -146,8 +154,7 @@ const AllMeetings = () => {
           onEventDrop={moveEvent}
           onEventResize={resizeEvent}
           draggableAccessor={(event) => true}
-          
-          style={{ height: "100%", margin: "0px", padding: '10px' }}
+          style={{ height: "100%", margin: "0px", padding: "10px" }}
           messages={{
             week: "أسبوع",
             work_week: "أسبوع العمل",

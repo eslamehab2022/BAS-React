@@ -1,2 +1,5 @@
-import myAxiosInstance from "../https";
-export const userLogin = (userData) => myAxiosInstance.post("/user/login", userData);
+import { myAxiosJson } from "../https";
+export const userLogin = (data) => {
+  
+  return myAxiosJson.post("/user/login", data);
+};

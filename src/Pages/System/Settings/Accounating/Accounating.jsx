@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchComponent } from "../../../../Components/SearchComponent/SearchComponent";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { IoMdMore } from "react-icons/io";
 import { PiImageThin } from "react-icons/pi";
+import { useQueryClient } from "react-query";
+
 import RemoveModal from "../RemoveModal";
 import ViewModel from "../ViewModel";
 import UpdateModal from "../UpdateModal";
 import SearchButton from "../SearchButton";
+import { useAddClause, useDeleteClause, useGetAllClauses, useUpdateClause } from "../../../../hooks/fetchers/Clause";
 const DownloadIcon = ({ color }) => {
   return (
     <svg
@@ -34,7 +37,7 @@ const ViewIcon = () => {
       viewBox="0 0 14 12"
       fill="none"
     >
-      <g clip-path="url(#clip0_5150_37806)">
+      <g clipPath="url(#clip0_5150_37806)">
         <path
           d="M12.5644 1.43457H1.36159C1.06819 1.43457 0.828125 1.66935 0.828125 1.95631V10.0433C0.828125 10.3302 1.06819 10.565 1.36159 10.565H12.5644C12.8578 10.565 13.0979 10.3302 13.0979 10.0433V1.95631C13.0979 1.66935 12.8578 1.43457 12.5644 1.43457ZM12.031 2.47805V6.84761L11.1374 6.11718C10.9374 5.96066 10.6573 5.96066 10.4572 6.11718L9.01687 7.29109L5.66935 4.44761C5.4693 4.27805 5.18923 4.27805 4.98918 4.43457L1.89506 6.8737V2.47805H12.031ZM1.89506 9.52153V8.21718L5.30926 5.51718L8.65677 8.36066C8.85682 8.53022 9.15023 8.53022 9.35028 8.3737L10.7906 7.19979L12.031 8.21718V9.52153H1.89506ZM7.77655 4.25196C7.77655 3.73022 8.21666 3.29979 8.76347 3.29979C9.31027 3.29979 9.75038 3.73022 9.75038 4.25196C9.75038 4.7737 9.31027 5.20414 8.76347 5.20414C8.21666 5.20414 7.77655 4.7737 7.77655 4.25196Z"
           fill="#757575"
@@ -62,7 +65,7 @@ const EditIcon = ({ color }) => {
       viewBox="0 0 13 13"
       fill="none"
     >
-      <g clip-path="url(#clip0_2905_33423)">
+      <g clipPath="url(#clip0_2905_33423)">
         <path
           d="M2.24662 9.75056H4.75935C4.83734 9.75101 4.91465 9.73606 4.98686 9.70657C5.05906 9.67708 5.12473 9.63362 5.18011 9.5787L9.28107 5.47181L10.9641 3.82432C11.0197 3.76922 11.0638 3.70368 11.0938 3.63146C11.1239 3.55925 11.1394 3.48179 11.1394 3.40355C11.1394 3.32532 11.1239 3.24786 11.0938 3.17564C11.0638 3.10343 11.0197 3.03788 10.9641 2.98279L8.45139 0.440434C8.3963 0.384888 8.33076 0.3408 8.25854 0.310714C8.18632 0.280627 8.10886 0.265137 8.03063 0.265137C7.9524 0.265137 7.87494 0.280627 7.80272 0.310714C7.7305 0.3408 7.66496 0.384888 7.60987 0.440434L5.93867 2.11756L1.82586 6.22444C1.77093 6.27982 1.72748 6.34549 1.69799 6.41769C1.6685 6.4899 1.65355 6.56721 1.654 6.64521V9.15793C1.654 9.31511 1.71643 9.46584 1.82757 9.57698C1.93871 9.68812 2.08945 9.75056 2.24662 9.75056ZM8.03063 1.6968L9.70776 3.37392L8.86623 4.21545L7.1891 2.53832L8.03063 1.6968ZM2.83925 6.88818L6.3535 3.37392L8.03063 5.05105L4.51637 8.56531H2.83925V6.88818ZM11.7286 10.9358H1.06137C0.9042 10.9358 0.753464 10.9982 0.642325 11.1094C0.531187 11.2205 0.46875 11.3713 0.46875 11.5284C0.46875 11.6856 0.531187 11.8363 0.642325 11.9475C0.753464 12.0586 0.9042 12.1211 1.06137 12.1211H11.7286C11.8858 12.1211 12.0365 12.0586 12.1477 11.9475C12.2588 11.8363 12.3212 11.6856 12.3212 11.5284C12.3212 11.3713 12.2588 11.2205 12.1477 11.1094C12.0365 10.9982 11.8858 10.9358 11.7286 10.9358Z"
           fill={`${color ? color : "#757575"}`}
@@ -105,15 +108,20 @@ const termsData = [
   { id: 4, name: "تأمينات" },
   { id: 5, name: "اخري" },
 ];
-const OptionsButton = ({setTerms,id}) => {
-const [showDelete, setShowDelete] = useState(false);
-const [showView, setShowView] = useState(false);
-const [showUpdate, setShowUpdate] = useState(false);
+const OptionsButton = ({ setTerms, id , data}) => {
+  const [clause, setClause] = useState({});
+  const [showDelete, setShowDelete] = useState(false);
+  const [showView, setShowView] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
+  const { mutate: deleteMutation} = useDeleteClause()
   const open = Boolean(anchorEl);
-  
-  
+  const queryClient = useQueryClient();
+
+  const { mutate: mutateUpdateClause } = useUpdateClause(() => {
+    queryClient.invalidateQueries("clause");
+    // setSuccsesfull(true);
+  },id);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -124,20 +132,20 @@ const [showUpdate, setShowUpdate] = useState(false);
   const handleShowUpdate = () => {
     setShowUpdate(true);
     // handleCloseDelete();
-    console.log("Delete");
-}
+    // console.log("Delete");
+  };
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => {
     setShowDelete(true);
     // handleCloseDelete();
-    console.log("Delete");
-}
+    // console.log("Delete");
+  };
   const handleCloseView = () => setShowView(false);
   const handleShowView = () => {
     setShowView(true);
     // handleCloseDelete();
-    console.log("Delete");
-}
+    // console.log("Delete");
+  };
   return (
     <div>
       <IconButton
@@ -156,27 +164,29 @@ const [showUpdate, setShowUpdate] = useState(false);
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
+          sx:{
+            bgcolor: "white"
+          }
         }}
-        classes="bg-red-200"
       >
         <MenuItem
-          className="border min-w-[133px] text-right"
+          className="border min-w-[133px] text-right text-black"
           sx={{ gap: 1 }}
           onClick={handleShowView}
         >
           {" "}
           <ViewIcon /> <span>عرض</span>{" "}
         </MenuItem>
-        <MenuItem
-          className="border min-w-[133px] text-right"
+        {/* <MenuItem
+          className="border min-w-[133px] text-right text-black"
           sx={{ gap: 1 }}
           onClick={handleClose}
         >
           {" "}
           <DownloadIcon /> <span>تحميل</span>{" "}
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
-          className="border min-w-[133px] text-right"
+          className="border min-w-[133px] text-right text-black"
           sx={{ gap: 1 }}
           onClick={handleShowUpdate}
         >
@@ -184,7 +194,7 @@ const [showUpdate, setShowUpdate] = useState(false);
           <EditIcon /> <span>تعديل</span>{" "}
         </MenuItem>
         <MenuItem
-          className="border min-w-[133px] text-right"
+          className="border min-w-[133px] text-right text-black"
           sx={{ gap: 1 }}
           onClick={handleShowDelete}
         >
@@ -193,26 +203,33 @@ const [showUpdate, setShowUpdate] = useState(false);
         </MenuItem>
       </Menu>
       <RemoveModal
-                title={"التأكيد"}
-                show={showDelete}
-                handleClose={handleCloseDelete}
-                arr={setTerms}
-                id={id}
-              />
+        title={"التأكيد"}
+        show={showDelete}
+        handleClose={handleCloseDelete}
+        
+        onSave={()=>{
+          deleteMutation(id)
+        }}
+      />
       <ViewModel
-                title={"عرض البند"}
-                show={showView}
-                handleClose={handleCloseView}
-                arr={setTerms}
-                id={id}
-              />
+        title={"عرض البند"}
+        show={showView}
+        handleClose={handleCloseView}
+        data={data}
+        id={id}
+      />
       <UpdateModal
-                title={"تعديل البند"}
-                show={showUpdate}
-                handleClose={handleCloseUpdate}
-                arr={setTerms}
-                id={id}
-              />
+        title={"تعديل البند"}
+        show={showUpdate}
+        handleClose={handleCloseUpdate}
+        data={data}
+        setData={setClause}
+        
+          onSave={()=> {
+            console.log("Mutated Clause: ",clause);
+            mutateUpdateClause(clause)
+          }}
+      />
     </div>
   );
 };
@@ -230,7 +247,7 @@ const OrderBtn = ({ title, active, setActive, index }) => {
     </button>
   );
 };
-const SubCategoryBtn = ({ title, active, setActive, index,setTerms }) => {
+const SubCategoryBtn = ({ title, active, setActive, index, setTerms }) => {
   return (
     <div
       className={`flex w-full justify-between items-center px-2 text-[#ffffff80] border hover:!border-[#EFAA20] text-base ${
@@ -240,13 +257,20 @@ const SubCategoryBtn = ({ title, active, setActive, index,setTerms }) => {
       <button onClick={() => setActive(index)} className="w-full">
         <p className="w-full text-white text-right my-3">{title}</p>
       </button>
-      <OptionsButton setTerms={setTerms} id={index}  />
+      {/* <OptionsButton setTerms={setTerms} id={index}  /> */}
     </div>
   );
 };
 function Accounating() {
-  const [terms,setTerms] = useState([...termsData])  
+  const { data, isLoading } = useGetAllClauses();
+  const [clauses, setClauses] = useState([]);
   const [active, setActive] = useState(1);
+
+  useEffect(() => {
+    setClauses(data?.data?.clause);
+    // console.log("clause: ", data?.data?.clause);
+  }, [isLoading]);
+
   return (
     <section className=" h-full">
       <div className="grid grid-cols-12 gap-2 h-full">
@@ -264,7 +288,7 @@ function Accounating() {
           </div>
         </div>
         <div className="bg-[#1E1E2D] col-span-9 flex flex-col rounded-[19px]  ">
-        <div className="p-3">
+          <div className="p-3">
             <SearchButton />
           </div>
           <div className="p-3 mt-3 flex-1">
@@ -277,15 +301,21 @@ function Accounating() {
                 {"كل بنود التقارير"}
               </p>
               <div className="h-full overflow-y-scroll scrollbar-thin scrollbar-thumb-[#C8D0D0] scrollbar-track-transparent">
-                {terms?.map(({ id, name }) => (
-                  <SubCategoryBtn
-                    title={name}
-                    index={id}
-                    active={active}
-                    setActive={setActive}
-                    key={id}
-                    setTerms={setTerms} 
-                  />
+                {clauses?.map(({ _id, name,descraption, image },index) => (
+                  <div
+                    key={_id}
+                    className={`flex w-full justify-between items-center px-2 text-[#ffffff80] border hover:!border-[#EFAA20] text-base ${"!border-transparent"}`}
+                  >
+                    <button
+                      // onClick={() => setActive(index)}
+                      className="w-full"
+                    >
+                      <p className="w-full text-white text-right my-3">
+                        {name}
+                      </p>
+                    </button>
+                    <OptionsButton data={clauses[index]} setTerms={setClauses} id={_id} />
+                  </div>
                 ))}
               </div>
             </div>

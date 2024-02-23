@@ -4,7 +4,7 @@ import SystemControler from "../../../../Components/System/SystemControler/Syste
 import AddUserButton from "../../../../Components/System/AddUserButton/AddUserButton";
 import { AllCategories } from "../../../../Components/System/AllCategories/AllCategories";
 import { Accordion } from "react-bootstrap";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { SearchComponent } from "../../../../Components/SearchComponent/SearchComponent";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -17,7 +17,7 @@ import AddRequest from "../../../../Components/System/Requests/AddRequest/AddReq
 const AllRequests = () => {
   const { showAddUserModel, setShowAddUserModel } =
     useContext(showAddUpdateUser);
-  const { setUserData, showAddRequest, setShowAdddRequest } =
+  const { setUserData, showAddRequest, setShowAdddRequest, view, setView } =
     useContext(multiStepContext);
   const [active, setActive] = useState();
   const [designCategories, setDesignCategories] = useState({
@@ -30,10 +30,12 @@ const AllRequests = () => {
     waiting: false,
     rejected: false,
   });
-  const [view, setView] = useState(false);
+
   const { pathname } = useLocation();
   const pagePath = pathname.split("/System/Requests/")[1];
-  console.log(pagePath);
+
+
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setView(true);

@@ -11,34 +11,27 @@ import { ProjectContext } from "../../PlanModel/context/ProjectContext";
 import { DataTable } from "../../PlanModel/Projects";
 
 const columns = [
-  {
-    name: "م",
-  },
-  {
-    name: "اسم المشروع",
-  },
-  {
-    name: "نوع المشروع ",
-  },
-  {
-    name: "موقع المشروع",
-  },
-  {
-    name: "نوع العميل",
-  },
-  {
-    name: "تاريخ التسليم",
-  },
-
-  {
-    name: "الحالة",
-  },
-  {
-    name: "المسؤل",
-  },
-  {
-    name: "عرض",
-  },
+  { name: "م" },
+  { name: "اسم المشروع" },
+  { name: "نوع المشروع " },
+  { name: "موقع المشروع" },
+  { name: "نوع العميل" },
+  { name: "تاريخ التسليم" },
+  { name: "الحالة" },
+  { name: "المسؤل" },
+  { name: "عرض" },
+];
+const columns2 = [
+  { name: "م" },
+  { name: "اسم المهمه" },
+  { name: "نوع المشروع " },
+  { name: "تاريخ التسليم" },
+  { name: "وقت التسليم" },
+  { name: "الحالة" },
+  { name: "المسؤل" },
+  { name: "الموظفين" },
+  { name: "قبول" },
+  { name: "عرض" },
 ];
 
 export default function PlansProjects() {
@@ -94,10 +87,13 @@ export default function PlansProjects() {
             <CustomNav
               title={"المهام"}
               path={"/System/plans/tasks"}
+              data={DataTable}
+              setData={setProjects}
               items={[
-                { title: "مهمة 1" },
-                { title: "مهمة 2" },
-                { title: "مهمة 3" },
+                { title: "كل المهام", search: "الكل" },
+                { title: "مهام قيد التنفيذ", search: "قيد التنفيذ" },
+                { title: "مهام معلقه", search: "معلقه" },
+                { title: "مهام منتهيه", search: "منتهيه" },
               ]}
             />
           </div>

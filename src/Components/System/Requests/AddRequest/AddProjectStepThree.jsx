@@ -13,20 +13,18 @@ import Select from "../../../FormHandler/Select";
 import { multiStepContext } from "../../../../Context/StepContext";
 import Progress from "../../../Progress";
 import ConfirmPoper from "../../ConfirmPoper";
+import moment from "moment";
 const AddProjectStepThree = (props) => {
   // Design Data
   // context variabules
-  const { pagePath } = props;
+
   const {
     userData,
     setUserData,
-    submitDesign,
     Submitted,
-    submitReview,
-    checkProjectType,
-    setCheckProjectType,
-    submitSystemReview,
-    submitSystemDesign,
+    selectProjectType,
+    setSelectedProjectType,
+    submitRequest,
   } = useContext(multiStepContext);
 
   const [userDataVaild, setUserDataVaild] = useState(false);
@@ -44,15 +42,16 @@ const AddProjectStepThree = (props) => {
     true
   );
   const [agencyAttachments, setAgencyAttachments] = useState(null);
+  const [notes, setNotes] = useState();
   const instrumentNumber = UseInput(
     `${userData.instrumentNumber ? userData.instrumentNumber : ""}`,
     "number",
     true
   );
-  const [InstrumentAttachments, setInstrumentAttachments] = useState(null);
-  const [imageUrl, setImageUrl] = useState(
-    process.env.PUBLIC_URL + "/icons/show.png"
-  );
+  const [instrument, setInstrument] = useState(null);
+  const [idPhoto, setIdPhoto] = useState();
+  console.log(notes);
+
   // check desing vaildation
   const [IsVaildState, setIsVaildState] = useState(false);
 
@@ -66,23 +65,23 @@ const AddProjectStepThree = (props) => {
       agent?.isValid &&
       agencyNumber?.value &&
       agencyNumber?.isValid &&
-      agencyNumber?.value &&
-      agencyAttachments?.name &&
+      agencyAttachments &&
       instrumentNumber.value &&
       instrumentNumber.isValid &&
-      InstrumentAttachments?.name &&
-      checkProjectType === "تصميم"
+      selectProjectType === 1
     ) {
       const updatedUserData = {
         ...userData,
         agent: agent.value,
         agencyNumber: agencyNumber?.value,
-        agencyAttachments: agencyAttachments?.name,
+        agencyAttachments,
         instrumentNumber: instrumentNumber?.value,
-        InstrumentAttachments: InstrumentAttachments?.name,
+        notes,
       };
       setUserData(updatedUserData);
       setUserDataVaild(true);
+      signalParent(true);
+
 
       console.log(userData);
     } else {
@@ -90,9 +89,9 @@ const AddProjectStepThree = (props) => {
         ...userData,
         agent: agent.value,
         agencyNumber: agencyNumber?.value,
-        agencyAttachments: agencyAttachments?.name,
+        agencyAttachments,
         instrumentNumber: instrumentNumber?.value,
-        InstrumentAttachments: InstrumentAttachments?.name,
+        notes,
       };
 
       setUserData(updatedUserData);
@@ -105,11 +104,10 @@ const AddProjectStepThree = (props) => {
       agent?.isValid &&
       agencyNumber?.value &&
       agencyNumber?.isValid &&
-      agencyNumber?.value &&
-      agencyAttachments?.name &&
+      agencyAttachments &&
       instrumentNumber.value &&
-      instrumentNumber.isValid &&
-      InstrumentAttachments?.name,
+      instrumentNumber.isValid,
+      notes,
   ]);
 
   // Review Data
@@ -120,17 +118,15 @@ const AddProjectStepThree = (props) => {
   );
   const licenseDeed = UseInput(
     `${userData.licenseDeed ? userData.licenseDeed : ""}`,
-    "number",
+    "licenseDeed",
     true
   );
   const [licenseDate, setlicenseDate] = useState(null);
-  const [licenseAttachments, setlicenseAttachments] = useState(null);
-  const [notes, setNotes] = useState("");
+  const [licenseAttachments, setlicenseAttachments] = useState();
 
   const [confirmSubmit, setConfirmSubmit] = useState(false);
-
   // check Review validation
-  console.log(checkProjectType)
+  console.log(selectProjectType);
   useMemo(() => {
     if (
       licenseNumber.isValid &&
@@ -138,17 +134,17 @@ const AddProjectStepThree = (props) => {
       licenseDeed.isValid &&
       licenseDeed.value &&
       licenseDate &&
-      licenseAttachments?.name &&
-      checkProjectType === "الاشراف علي التنفيذ"
+      licenseAttachments &&
+      selectProjectType === 2
     ) {
       signalParent(true);
       const updatedUserData = {
         ...userData,
         licenseNumber: licenseNumber?.value,
         licenseDeed: licenseDeed?.value,
-        licenseDate: licenseDate?.value,
-        licenseAttachments: licenseAttachments?.name,
-        notes: notes?.value,
+        licenseDate: moment(licenseDate?.value).format("YYYY-MM-DD"),
+        licenseAttachments,
+        notes,
       };
       setUserData(updatedUserData);
       setUserDataVaild(true);
@@ -157,25 +153,29 @@ const AddProjectStepThree = (props) => {
         ...userData,
         licenseNumber: licenseNumber?.value,
         licenseDeed: licenseDeed?.value,
-        licenseDate: licenseDate?.value,
-        licenseAttachments: licenseAttachments?.name,
-        notes: notes?.value,
+        licenseDate: moment(licenseDate?.value).format("YYYY-MM-DD"),
+        licenseAttachments,
+        notes,
       };
       setUserData(updatedUserData);
       signalParent(false);
       setUserDataVaild(false);
     }
   }, [
-    licenseNumber.isValid &&
-      licenseNumber.value &&
-      licenseDeed.isValid &&
-      licenseDeed.value &&
-      licenseDate &&
-      licenseAttachments?.name,
+    licenseNumber.isValid,
+    licenseNumber.value,
+    licenseDeed.isValid,
+    licenseDeed.value,
+    licenseDate,
+    licenseAttachments,
+    notes,
   ]);
   useEffect(() => {
     signalParent(IsVaildState);
   }, []);
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   useEffect(() => {
     signalParent(IsVaildState);
@@ -183,13 +183,13 @@ const AddProjectStepThree = (props) => {
 
   return (
     <fieldset className="addProjectStep step-three mx-auto">
-      {checkProjectType === "تصميم" ? (
+      {selectProjectType === 1 ? (
         <legend className="text-center"> اضافة بيانات الوكالة </legend>
       ) : (
         <legend className="text-center">اضافة بيانات الرخصة </legend>
       )}
 
-      {checkProjectType === "تصميم" ? (
+      {selectProjectType === 1 ? (
         <Form className=" row w-100 m-auto ">
           <div className="col-md-6 mb-4">
             <Input
@@ -215,7 +215,7 @@ const AddProjectStepThree = (props) => {
               </Form.Label>
               <Form.Control
                 type="file"
-                placeholder="صورة الهويه"
+                placeholder="      ارفاق الوكالة "
                 name="imageFile"
                 onChange={(e) => setAgencyAttachments(e.currentTarget.files[0])}
               />
@@ -230,33 +230,22 @@ const AddProjectStepThree = (props) => {
               mandatory
             />
           </div>
-          <div className="col-md-6 mb-4">
-            <Form.Group controlId="formBasicImage">
-              <Form.Label className="d-flex flex-column gap-2 ">
-                صورة الصك
-              </Form.Label>
-              <Form.Control
-                type="file"
-                placeholder="صورة الصك"
-                name="imageFile"
-                className="w-100"
-                onChange={(e) =>
-                  setInstrumentAttachments(e.currentTarget.files[0])
-                }
-              />
-            </Form.Group>
+          <div className="col-md-12 mb-4">
+            <Form.Label className="d-flex gap-2 align-items-center">
+              ملاحظاتك
+            </Form.Label>
+            <Form.Control
+              as="textarea"
+              multiple="multiple"
+              placeholder="ادخل ملاحظاتك ..."
+              style={{ height: "150px" }}
+              onChange={(e) => setNotes(e.target.value)}
+            />
           </div>
           <div className="col-md-12 d-flex justify-content-end  align-items-end mb-4">
             <button
               disabled={!userDataVaild}
-              onClick={(e) => {
-                e.preventDefault();
-                try {
-                  submitSystemDesign();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
+              onClick={submitRequest}
               className="  mt-4 sumbmitAddUpdateUser border-0 disabled "
             >
               {" "}
@@ -323,6 +312,7 @@ const AddProjectStepThree = (props) => {
               />
             </Form.Group>
           </div>
+
           <div className="col-md-12 mb-4">
             <Form.Label className="d-flex gap-2 align-items-center">
               ملاحظاتك
@@ -338,14 +328,7 @@ const AddProjectStepThree = (props) => {
           <div className="col-md-12 d-flex justify-content-end  mb-4">
             <button
               disabled={!userDataVaild}
-              onClick={(e) => {
-                e.preventDefault();
-                try {
-                  submitSystemReview();
-                } catch (error) {
-                  console.log(error);
-                }
-              }}
+              onClick={submitRequest}
               className="  mt-4 sumbmitAddUpdateUser border-0 disabled "
             >
               {" "}

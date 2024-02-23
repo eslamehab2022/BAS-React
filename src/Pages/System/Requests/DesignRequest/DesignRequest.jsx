@@ -11,11 +11,18 @@ import Image from "../../../../Components/Image.jsx";
 import CustomTable from "../../../../Components/Table/index.jsx";
 import { TableRow } from "../../../../Components/Table/TableRow.jsx";
 import { TableCell } from "../../../../Components/Table/TableCell.jsx";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { getRequestsWithProjectType } from "../../../../helper/fetchers/Requests.jsx";
+import Progress from "../../../../Components/Progress.jsx";
+import moment from "moment";
 const DesignRequest = () => {
   const [showProject, setShowProject] = useState(false);
   const [editRequest, setEditRequest] = useState(false);
   const [ConfirmUpdate, setConfirmUpdate] = useState(false);
+  const [DesignRequests, setDesignRequests] = useState();
   const [DesignProjectType, SetDesignProjectType] = useState("");
+  const [id, setId] = useState(null);
 
   const DesignProjects = Array.from({ length: 10 }).map((_, index) => {
     return {
@@ -50,7 +57,7 @@ const DesignRequest = () => {
     };
   });
 
-  console.log(DesignProjectType);
+
 
   const columns = [
     {
@@ -88,14 +95,30 @@ const DesignRequest = () => {
     },
   ];
 
+  const getDesignRequests = async () => {
+    try {
+      const { data } = await getRequestsWithProjectType(1);
+      if (data?.success) {
+        setDesignRequests(data?.request);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  useEffect(() => {
+    getDesignRequests();
+  }, []);
+
   return (
     <>
       {showProject ? (
         <div className="AllRequests-scroll h-full scrollbar-none">
-          
           <ShowDesignRequest
             DesignProjectType={DesignProjectType}
             setShowProject={setShowProject}
+            id={id}
           />
         </div>
       ) : (
@@ -109,61 +132,101 @@ const DesignRequest = () => {
               <legend className="text-center ">طلبات ( تصميم )</legend>
 
               <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none ">
-                <CustomTable columns={columns} data={DesignProjects}>
-                  {DesignProjects && DesignProjects.length > 0
-                    ? DesignProjects.map(
-                        (
-                          {
-                            id,
-                            ProjectName,
-                            ProjectNumber,
-                            createdAt,
-                            ProjectType,
-                            status,
-                            enStatus,
-                            display,
-                            edit,
-                          },
-                          index
-                        ) => (
-                          <TableRow
-                            className={`my-2 border !border-[#efaa207f] ${
-                              index % 2 === 0 ? "bg-[#151521]" : ""
-                            }`}
-                            key={index}
-                          >
-                            <TableCell textColor="#ffffff7f">{id}</TableCell>
-                            <TableCell>{ProjectName}</TableCell>
-                            <TableCell>{ProjectNumber}</TableCell>
-                            <TableCell>{createdAt}</TableCell>
-                            <TableCell>{ProjectType}</TableCell>
-                            <TableCell>{status}</TableCell>
-                            <TableCell>{display}</TableCell>
-                            <TableCell>{edit}</TableCell>
-                          </TableRow>
+                {DesignRequests ? (
+                  <CustomTable columns={columns} data={DesignRequests}>
+                    {DesignRequests && DesignRequests.length > 0
+                      ? DesignRequests.map(
+                          (
+                            {
+                              _id,
+                              projectName,
+                              orderNumber,
+                              createdAt,
+                              projectType,
+                              status,
+                              enStatus,
+                              display,
+                              edit,
+                            },
+                            index
+                          ) => (
+                            <TableRow
+                              className={`my-2 border !border-[#efaa207f] ${
+                                index % 2 === 0 ? "bg-[#151521]" : ""
+                              }`}
+                              key={_id}
+                            >
+                              <TableCell textColor="#ffffff7f">
+                                {index + 1}
+                              </TableCell>
+                              <TableCell>{projectName}</TableCell>
+                              <TableCell>{orderNumber}</TableCell>
+                              <TableCell>
+                                {moment(createdAt).format("YYYY-MM-DD")}
+                              </TableCell>
+                              <TableCell>تصميم</TableCell>
+                              <TableCell>
+                                {status == 0
+                                  ? "في الانتظار"
+                                  : status == 1
+                                  ? "قيد التنفيذ"
+                                  : "مرفوضة"}
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/view.svg"
+                                  }
+                                  onClick={() => {
+                                    setShowProject(true);
+                                    SetDesignProjectType(
+                                      DesignProjects[index]?.enStatus
+                                    );
+                                    setId(_id);
+                                  }}
+                                  className="display_project  rounded"
+                                  alt=" display project"
+                                />
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/edit.svg"
+                                  }
+                                  onClick={() => {
+                                    setEditRequest(true);
+                                    setId(_id);
+                                  }}
+                                  className=" edit_project  rounded"
+                                  alt=" edit project"
+                                />
+                              </TableCell>
+                            </TableRow>
+                          )
                         )
-                      )
-                    : null}
-                </CustomTable>
-                {/* <DataTableComponent
-                  className={"!h-[400px]"}
-                  columns={columns}
-                  data={DesignProjects}
-                /> */}
+                      : null}
+                  </CustomTable>
+                ) : (
+                  <Progress />
+                )}
               </div>
             </fieldset>
           </div>
         </div>
       )}
-      {editRequest && (
-        <div className="AllRequests-scroll scrollbar-none">
-          <EditDesignRequest
-            editRequest={editRequest}
-            setEditRequest={setEditRequest}
-            setConfirmPoper={setConfirmUpdate}
-          />
-        </div>
-      )}
+
+      <div className="AllRequests-scroll scrollbar-none">
+        <EditDesignRequest
+          editRequest={editRequest}
+          id={id}
+          setEditRequest={setEditRequest}
+          setConfirmPoper={setConfirmUpdate}
+          handleClose={() => {
+            setEditRequest(false);
+          }}
+        />
+      </div>
+
       {ConfirmUpdate && (
         <div className="AllRequests-scroll scrollbar-none">
           <ConfirmPoper

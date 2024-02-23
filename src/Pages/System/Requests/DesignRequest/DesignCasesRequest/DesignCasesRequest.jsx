@@ -11,13 +11,22 @@ import Image from "../../../../../Components/Image.jsx";
 import { TableCell } from "../../../../../Components/Table/TableCell.jsx";
 import { TableRow } from "../../../../../Components/Table/TableRow.jsx";
 import CustomTable from "../../../../../Components/Table/index.jsx";
+import {
+  getDesignRequestsWithStatus,
+  getRequestsWithStatus,
+} from "../../../../../helper/fetchers/Requests.jsx";
+import { toast } from "react-toastify";
+import moment from "moment";
+import Progress from "../../../../../Components/Progress.jsx";
 const DesignCasesRequest = () => {
   const [showProject, setShowProject] = useState(false);
   const [editRequest, setEditRequest] = useState(false);
   const [ConfirmUpdate, setConfirmUpdate] = useState(false);
   const [projectType, setProjectType] = useState("");
+  const [status, setStatus] = useState();
   const [projectTypeAR, setProjectTypeAR] = useState("");
   const [chartColor, setChartColor] = useState("");
+  const [designRequests, setDesignRequests] = useState();
 
   const DesignCasesProjects = Array.from({ length: 10 }).map((_, index) => {
     return {
@@ -86,43 +95,53 @@ const DesignCasesRequest = () => {
     },
   ];
   console.log(projectTypeAR);
-  useMemo(() => {
+  const [id, setId] = useState(null);
+  const getDesignRequests = async () => {
+    try {
+      const { data } = await getDesignRequestsWithStatus(status);
+      console.log("design requests based on status ");
+      console.log(data);
+      if (data?.success) {
+        setDesignRequests(data?.request);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
     switch (DesignProjectType) {
       case "inProgress":
         setProjectType("inProgress");
         setProjectTypeAR("طلبات قيد التنفيذ");
         setChartColor("#4200FF");
+        setStatus(1);
+
         break;
       case "pending":
         setProjectType("pending");
         setProjectTypeAR("طلبات فى انتظار الموافقة");
         setChartColor("#D59921");
+        setStatus(0);
 
         break;
-      case "confirm":
-        setProjectType("confirm");
-        setProjectTypeAR("طلبات منتهية");
 
-        setChartColor("#03795D");
-
-        break;
       case "rejected":
         setProjectType("rejected");
         setProjectTypeAR("طلبات مرفوضة");
         setChartColor("#E40038  ");
+        setStatus(2);
 
         break;
       default:
         break;
     }
   }, [DesignProjectType]);
-
-  const callDesignData = () => {};
-
   useEffect(() => {
-    //call design case data
-    callDesignData();
-  }, []);
+    getDesignRequests();
+  }, [status, DesignProjectType]);
 
   return (
     <>
@@ -131,6 +150,7 @@ const DesignCasesRequest = () => {
           <ShowDesignRequest
             DesignProjectType={DesignProjectType}
             setShowProject={setShowProject}
+            id={id}
           />
         </div>
       ) : (
@@ -163,42 +183,80 @@ const DesignCasesRequest = () => {
                   columns={columns}
                   data={DesignCasesProjects}
                 /> */}
-                <CustomTable columns={columns} data={DesignCasesProjects}>
-                  {DesignCasesProjects && DesignCasesProjects.length > 0
-                    ? DesignCasesProjects.map(
-                        (
-                          {
-                            id,
-                            ProjectName,
-                            ProjectNumber,
-                            createdAt,
-                            ProjectType,
-                            status,
-                            display,
-                            edit,
-                          },
-                          index
-                        ) => (
-                          <TableRow
-                            className={`my-2 border !border-[#efaa207f] ${
-                              index % 2 === 0 ? "bg-[#151521]" : ""
-                            }`}
-                            key={index}
-                          >
-                            <TableCell textColor="#ffffff7f">{id}</TableCell>
-                            <TableCell>{ProjectName}</TableCell>
-                            <TableCell>{ProjectNumber}</TableCell>
-                            <TableCell>{createdAt}</TableCell>
-                            <TableCell>{ProjectType}</TableCell>
-                            <TableCell>{status}</TableCell>
-
-                            <TableCell>{display}</TableCell>
-                            <TableCell>{edit}</TableCell>
-                          </TableRow>
+                {designRequests ? ( // Check if designRequests is not null or undefined
+                  <CustomTable columns={columns} data={designRequests}>
+                    {designRequests && designRequests.length > 0 // Check if designRequests has elements
+                      ? designRequests.map(
+                          (
+                            {
+                              _id,
+                              projectName,
+                              orderNumber,
+                              createdAt,
+                              projectType,
+                              status,
+                              enStatus,
+                              display,
+                              edit,
+                            },
+                            index
+                          ) => (
+                            <TableRow
+                              className={`my-2 border !border-[#efaa207f] ${
+                                index % 2 === 0 ? "bg-[#151521]" : ""
+                              }`}
+                              key={_id}
+                            >
+                              <TableCell textColor="#ffffff7f">
+                                {index + 1}
+                              </TableCell>
+                              <TableCell>{projectName}</TableCell>
+                              <TableCell>{orderNumber}</TableCell>
+                              <TableCell>
+                                {moment(createdAt).format("YYYY-MM-DD")}
+                              </TableCell>
+                              <TableCell>تصميم</TableCell>
+                              <TableCell>
+                                {status == 0
+                                  ? "في الانتظار"
+                                  : status == 1
+                                  ? "قيد التنفيذ"
+                                  : "مرفوضة"}
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/view.svg"
+                                  }
+                                  onClick={() => {
+                                    setShowProject(true);
+                                    setId(_id);
+                                  }}
+                                  className="display_project  rounded"
+                                  alt=" display project"
+                                />
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/edit.svg"
+                                  }
+                                  onClick={() => {
+                                    setEditRequest(true);
+                                  }}
+                                  className=" edit_project  rounded"
+                                  alt=" edit project"
+                                />
+                              </TableCell>
+                            </TableRow>
+                          )
                         )
-                      )
-                    : null}
-                </CustomTable>
+                      : null}{" "}
+                    {/* Render null if designRequests is empty */}
+                  </CustomTable>
+                ) : (
+                  <Progress /> // Render Progress if designRequests is null or undefined
+                )}
               </div>
             </fieldset>
           </div>

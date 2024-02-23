@@ -16,6 +16,7 @@ import SettingContext from "../../../../Context/SettingContext";
 import { TableCell } from "../../../../Components/Table/TableCell";
 import { TableRow } from "../../../../Components/Table/TableRow";
 import CustomTable from "../../../../Components/Table";
+import { useGetAllReceptions } from "../../../../hooks/fetchers/Receptions";
 
 const EditIcon = () => {
   return (
@@ -26,7 +27,7 @@ const EditIcon = () => {
       viewBox="0 0 13 13"
       fill="none"
     >
-      <g clip-path="url(#clip0_2905_33423)">
+      <g clipPath="url(#clip0_2905_33423)">
         <path
           d="M2.24662 9.75056H4.75935C4.83734 9.75101 4.91465 9.73606 4.98686 9.70657C5.05906 9.67708 5.12473 9.63362 5.18011 9.5787L9.28107 5.47181L10.9641 3.82432C11.0197 3.76922 11.0638 3.70368 11.0938 3.63146C11.1239 3.55925 11.1394 3.48179 11.1394 3.40355C11.1394 3.32532 11.1239 3.24786 11.0938 3.17564C11.0638 3.10343 11.0197 3.03788 10.9641 2.98279L8.45139 0.440434C8.3963 0.384888 8.33076 0.3408 8.25854 0.310714C8.18632 0.280627 8.10886 0.265137 8.03063 0.265137C7.9524 0.265137 7.87494 0.280627 7.80272 0.310714C7.7305 0.3408 7.66496 0.384888 7.60987 0.440434L5.93867 2.11756L1.82586 6.22444C1.77093 6.27982 1.72748 6.34549 1.69799 6.41769C1.6685 6.4899 1.65355 6.56721 1.654 6.64521V9.15793C1.654 9.31511 1.71643 9.46584 1.82757 9.57698C1.93871 9.68812 2.08945 9.75056 2.24662 9.75056ZM8.03063 1.6968L9.70776 3.37392L8.86623 4.21545L7.1891 2.53832L8.03063 1.6968ZM2.83925 6.88818L6.3535 3.37392L8.03063 5.05105L4.51637 8.56531H2.83925V6.88818ZM11.7286 10.9358H1.06137C0.9042 10.9358 0.753464 10.9982 0.642325 11.1094C0.531187 11.2205 0.46875 11.3713 0.46875 11.5284C0.46875 11.6856 0.531187 11.8363 0.642325 11.9475C0.753464 12.0586 0.9042 12.1211 1.06137 12.1211H11.7286C11.8858 12.1211 12.0365 12.0586 12.1477 11.9475C12.2588 11.8363 12.3212 11.6856 12.3212 11.5284C12.3212 11.3713 12.2588 11.2205 12.1477 11.1094C12.0365 10.9982 11.8858 10.9358 11.7286 10.9358Z"
           fill="#757575"
@@ -94,19 +95,19 @@ const OptionsButton = ({ setTerms, id }) => {
   const handleShowUpdate = () => {
     setShowUpdate(true);
     // handleCloseDelete();
-    console.log("Delete");
+    // console.log("Delete");
   };
   const handleCloseDelete = () => setShowDelete(false);
   const handleShowDelete = () => {
     setShowDelete(true);
     // handleCloseDelete();
-    console.log("Delete");
+    // console.log("Delete");
   };
   const handleCloseView = () => setShowView(false);
   const handleShowView = () => {
     setShowView(true);
     // handleCloseDelete();
-    console.log("Delete");
+    // console.log("Delete");
   };
   return (
     <div>
@@ -127,7 +128,6 @@ const OptionsButton = ({ setTerms, id }) => {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
-        classes="bg-red-200"
       >
         <MenuItem
           className="border min-w-[133px] text-right"
@@ -166,6 +166,17 @@ const SubCategoryBtn = ({ title, active, setActive, index, setTerms }) => {
 };
 
 const Reception = () => {
+
+  const {data:receptionData} = useGetAllReceptions()
+
+
+
+
+
+
+
+
+
   const { ReciptionType, setReceptionType } = useContext(SettingContext);
   const [id, setId] = useState(null);
   const [visitsData, setVisitsData] = useState([]);
@@ -260,6 +271,13 @@ const Reception = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+
+
+
+
+  console.log(receptionData?.data?.reception);
   return (
     <section className="Reception h-full">
       <ViewReception

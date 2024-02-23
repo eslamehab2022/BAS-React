@@ -12,6 +12,11 @@ import EditReviewRequest from "../../../../../Components/System/Requests/EditReq
 import { TableCell } from "../../../../../Components/Table/TableCell.jsx";
 import { TableRow } from "../../../../../Components/Table/TableRow.jsx";
 import CustomTable from "../../../../../Components/Table/index.jsx";
+import { getReviewRequestsWithStatus } from "../../../../../helper/fetchers/Requests.jsx";
+import { toast } from "react-toastify";
+import Progress from "../../../../../Components/Progress.jsx";
+import Image from "../../../../../Components/Image.jsx";
+import moment from "moment";
 const ReviewCasesRequest = () => {
   const [showProject, setShowProject] = useState(false);
   const [editRequest, setEditRequest] = useState(false);
@@ -19,38 +24,36 @@ const ReviewCasesRequest = () => {
   const [projectType, setProjectType] = useState("");
   const [projectTypeAR, setProjectTypeAR] = useState("");
   const [chartColor, setChartColor] = useState("");
-
+  const [status, setStatus] = useState();
   const { ReviewProjectType } = useParams();
-  const ReviewCasesProjects = Array.from({ length: 10 }).map((_, index) => {
-    return {
-      id: index+1,
-      ProjectName: "BSA",
-      ProjectNumber: "53543",
-      createdAt: "12-10-2023",
-      ProjectType: "تصميم",
-      status: projectType,
-      display: (
-        <img
-          src={process.env.PUBLIC_URL + "/icons/view.svg"}
-          onClick={() => {
-            setShowProject(true);
-          }}
-          className="display_project  rounded"
-          alt=" display project"
-        />
-      ),
-      edit: (
-        <img
-          src={process.env.PUBLIC_URL + "/icons/edit.svg"}
-          onClick={() => {
-            setEditRequest(true);
-          }}
-          className=" edit_project  rounded"
-          alt=" edit project"
-        />
-      ),
-    };
-  });
+
+  console.log(projectTypeAR);
+  useMemo(() => {
+    switch (ReviewProjectType) {
+      case "inProgress":
+        setProjectType("inProgress");
+        setProjectTypeAR("طلبات قيد التنفيذ");
+        setChartColor("#4200FF");
+        setStatus(1);
+        break;
+      case "pending":
+        setProjectType("pending");
+        setProjectTypeAR("طلبات فى انتظار الموافقة");
+        setChartColor("#D59921");
+        setStatus(0);
+
+        break;
+      case "rejected":
+        setProjectType("rejected");
+        setProjectTypeAR("طلبات مرفوضة");
+        setChartColor("#E40038 ");
+        setStatus(2);
+
+        break;
+      default:
+        break;
+    }
+  }, [ReviewProjectType]);
 
   const columns = [
     {
@@ -63,14 +66,10 @@ const ReviewCasesRequest = () => {
     },
     {
       name: " رقم الطلب ",
-      selector: (row) => row.ProjectNumber,
+      selector: (row) => row.orderNumber,
     },
     {
       name: "  تاريخ الاستلام",
-      selector: (row) => row.createdAt,
-    },
-    {
-      name: "  تاريخ التسليم",
       selector: (row) => row.createdAt,
     },
     {
@@ -91,37 +90,26 @@ const ReviewCasesRequest = () => {
       selector: (row) => row.edit,
     },
   ];
-  console.log(projectTypeAR);
-  useMemo(() => {
-    switch (ReviewProjectType) {
-      case "inProgress":
-        setProjectType("inProgress");
-        setProjectTypeAR("طلبات قيد التنفيذ");
-        setChartColor("#4200FF");
-        break;
-      case "pending":
-        setProjectType("pending");
-        setProjectTypeAR("طلبات فى انتظار الموافقة");
-        setChartColor("#D59921");
-
-        break;
-      case "rejected":
-        setProjectType("rejected");
-        setProjectTypeAR("طلبات مرفوضة");
-        setChartColor("#E40038  ");
-
-        break;
-        default:
-        break;
+  const [id, setId] = useState(null);
+  const [reviewRequests, setReviewRequests] = useState();
+  const getReviewRequests = async () => {
+    try {
+      const { data } = await getReviewRequestsWithStatus(status);
+      if (data?.success) {
+        setReviewRequests(data?.request);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
-  }, [ReviewProjectType]);
-
-  const callDesignData = () => {};
-
+  };
   useEffect(() => {
-    //call design case data
-    callDesignData();
-  }, []);
+    getReviewRequests();
+  }, [status]);
+  useEffect(() => {
+    getReviewRequests();
+  }, [ReviewProjectType]);
 
   return (
     <div className=" p-3">
@@ -130,6 +118,7 @@ const ReviewCasesRequest = () => {
           <ShowReviewRequest
             ReviewProjectType={ReviewProjectType}
             setShowProject={setShowProject}
+            id={id}
           />
         </div>
       ) : (
@@ -155,49 +144,82 @@ const ReviewCasesRequest = () => {
               </legend>
 
               <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
+              
 
-                {/* <DataTableComponent
-                  className={" !h-[400px]  "}
-                  columns={columns}
-                  data={ReviewCasesProjects}
-                /> */}
-                <CustomTable columns={columns} data={ReviewCasesProjects}>
-                  {ReviewCasesProjects && ReviewCasesProjects.length > 0
-                    ? ReviewCasesProjects.map(
-                        (
-                          {
-                            id,
-                            ProjectName,
-                            ProjectNumber,
-                            createdAt,
-                            ProjectType,
-                            status,
-                            enStatus,
-                            display,
-                            edit,
-                          },
-                          index
-                        ) => (
-                          <TableRow
-                            className={`my-2 border !border-[#efaa207f] ${
-                              index % 2 === 0 ? "bg-[#151521]" : ""
-                            }`}
-                            key={index}
-                          >
-                            <TableCell textColor="#ffffff7f">{id}</TableCell>
-                            <TableCell>{ProjectName}</TableCell>
-                            <TableCell>{ProjectNumber}</TableCell>
-                            <TableCell>{createdAt}</TableCell>
-                            <TableCell>{createdAt}</TableCell>
-                            <TableCell>{ProjectType}</TableCell>
-                            <TableCell>{status}</TableCell>
-                            <TableCell>{display}</TableCell>
-                            <TableCell>{edit}</TableCell>
-                          </TableRow>
+                {reviewRequests ? ( // Check if reviewRequests is not null or undefined
+                  <CustomTable columns={columns} data={reviewRequests}>
+                    {reviewRequests && reviewRequests.length > 0 // Check if reviewRequests has elements
+                      ? reviewRequests.map(
+                          (
+                            {
+                              _id,
+                              projectName,
+                              orderNumber,
+                              createdAt,
+                              projectType,
+                              status,
+                              enStatus,
+                              display,
+                              edit,
+                            },
+                            index
+                          ) => (
+                            <TableRow
+                              className={`my-2 border !border-[#efaa207f] ${
+                                index % 2 === 0 ? "bg-[#151521]" : ""
+                              }`}
+                              key={_id}
+                            >
+                              <TableCell textColor="#ffffff7f">
+                                {index + 1}
+                              </TableCell>
+                              <TableCell>{projectName}</TableCell>
+                              <TableCell>{orderNumber}</TableCell>
+                              <TableCell>
+                                {moment(createdAt).format("YYYY-MM-DD")}
+                              </TableCell>
+                              <TableCell>اشراف علي التنفيذ</TableCell>
+                              <TableCell>
+                                {status == 0
+                                  ? "في الانتظار"
+                                  : status == 1
+                                  ? "قيد التنفيذ"
+                                  : "مرفوضة"}
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/view.svg"
+                                  }
+                                  onClick={() => {
+                                    setShowProject(true);
+                                    setId(_id);
+                                  }}
+                                  className="display_project  rounded"
+                                  alt=" display project"
+                                />
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/edit.svg"
+                                  }
+                                  onClick={() => {
+                                    setEditRequest(true);
+                                  }}
+                                  className=" edit_project  rounded"
+                                  alt=" edit project"
+                                />
+                              </TableCell>
+                            </TableRow>
+                          )
                         )
-                      )
-                    : null}
-                </CustomTable>
+                      : null}{" "}
+                    {/* Render null if designRequests is empty */}
+                  </CustomTable>
+                ) : (
+                  <Progress /> // Render Progress if designRequests is null or undefined
+                )}
               </div>
             </fieldset>
           </div>

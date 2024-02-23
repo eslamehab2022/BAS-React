@@ -3,18 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import SaveButton from "../../../Components/SaveButton";
 // import CloseBtn from "/assets/icons/Rejected.svg"
-function ViewModel({ title, show, handleClose, arr, id }) {
-  const [inputVal, setInputVal] = useState("");
-  const handleSave = () => {
-    arr((prev) => {
-      const filteredData = prev.filter((prev) => prev.id != id);
-
-      // console.log(prev.subCategories)
-      return filteredData;
-      //   return [...prev,{id:prev.length+1,name:inputVal}]
-    });
-    handleClose();
-  };
+function ViewModel({ title, show, handleClose, data }) {  
 
   return (
     <>
@@ -40,16 +29,18 @@ function ViewModel({ title, show, handleClose, arr, id }) {
         <Modal.Body className="justify-start">
           <div className="w-full text-start">
             <p className="text-end py-3 px-2 font-semibold rounded-[7px] outline-none">
-              اسم البند : <span className="text-[#ffffff4c]">اساسية</span>
+              اسم البند : <span className="text-[#ffffff4c]">{data?.name}</span>
             </p>
             <p className="text-end py-3 px-2 font-semibold rounded-[7px] outline-none">
               الوصف
             </p>
             <div className="min-h-[200px] border !border-[#EFAA20] rounded-md">
-              <textarea
+              {/* <textarea
                 className="bg-transparent w-full px-2 py-3"
-                placeholder="وصف البند "
-              ></textarea>
+                // placeholder="وصف البند "
+                value={data?.description}
+              ></textarea> */}
+              <p className="text-right bg-transparent w-full px-2 py-3 text-white">{data?.descraption}</p>
             </div>
             <p className="text-end py-3 px-2 font-semibold rounded-[7px] outline-none">
               المرفقات
@@ -92,7 +83,7 @@ function ViewModel({ title, show, handleClose, arr, id }) {
           </div>
         </Modal.Body>
         <Modal.Footer className="border-none justify-center gap-2">
-          <SaveButton onClick={handleSave} />
+          {/* <SaveButton onClick={handleSave} /> */}
         </Modal.Footer>
       </Modal>
     </>

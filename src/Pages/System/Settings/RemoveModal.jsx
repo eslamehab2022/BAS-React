@@ -3,17 +3,9 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Image from "../../../Components/Image";
 // import CloseBtn from "/assets/icons/Rejected.svg"
-function DeleteModal({ title, show, handleClose, arr, id, body }) {
-  const [inputVal, setInputVal] = useState("");
+function DeleteModal({ title, show, handleClose, onSave, body }) {
   const handleSave = () => {
-    arr &&
-      arr((prev) => {
-        const filteredData = prev.filter((prev) => prev.id != id);
-
-        // console.log(prev.subCategories)
-        return filteredData;
-        //   return [...prev,{id:prev.length+1,name:inputVal}]
-      });
+    onSave()
     handleClose();
   };
   if (body) {

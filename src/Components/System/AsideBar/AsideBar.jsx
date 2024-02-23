@@ -15,6 +15,9 @@ import { FaBars } from "react-icons/fa6";
 import { SideBarProvider } from "../../../Context/SideBarProvider";
 import { FaCaretDown } from "react-icons/fa";
 import { Badge } from "@mui/material";
+import { getUserProfile } from "../../../helper/fetchers/Profie";
+import { toast } from "react-toastify";
+import { staticImageSrc } from "../../../Config/Config";
 const AsideBar = () => {
   const [rtl, setRtl] = useState(true);
   // setting the width of the screen
@@ -68,7 +71,7 @@ const AsideBar = () => {
           collapsedWidth="100px !important"
           rootStyles={{
             color: "#FFF",
-            backgroundColor:"#1E1E2D",
+            backgroundColor: "#1E1E2D",
             height: "100% !important",
             border: "2px solid #EFAA20 !important",
             borderRadius: "19px",
@@ -88,7 +91,10 @@ const AsideBar = () => {
               onClick={() => setCollapsed(!collapsed)}
             />
           </div>
-          <Menu transitionDuration={200} className="w-100 overflow-x-visible h-full">
+          <Menu
+            transitionDuration={200}
+            className="w-100 overflow-x-visible h-full"
+          >
             <MenuItem className="mt-4 overflow-x-visible  center w-100">
               <div className="d-flex justify-content-center flex-column align-items-center">
                 <div>
@@ -135,8 +141,8 @@ const AsideBar = () => {
                       height="65"
                       rx="10.5"
                       stroke="#434362"
-                      stroke-linejoin="round"
-                      stroke-dasharray="3 3"
+                      strokeLinejoin="round"
+                      strokeDasharray="3 3"
                     />
                     <text fill="white   ">
                       <tspan
@@ -175,8 +181,8 @@ const AsideBar = () => {
                       height="65"
                       rx="10.5"
                       stroke="#434362"
-                      stroke-linejoin="round"
-                      stroke-dasharray="3 3"
+                      strokeLinejoin="round"
+                      strokeDasharray="3 3"
                     />
                     <text fill="white   ">
                       <tspan
@@ -210,8 +216,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to="/System/index">
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -230,8 +236,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to={"/System/Clients/index"}>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -249,8 +255,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to="/System/Users/index">
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -268,8 +274,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to="/System/Requests/index">
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -287,8 +293,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to={"/System/Projects/index"}>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -306,8 +312,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to={"/System/plans"}>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -325,8 +331,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to={"/System/Meetings/index"}>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -344,8 +350,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to={"/System/Hr/index"}>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -363,8 +369,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to={"/System/Accounating/index"}>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -382,8 +388,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link to={"/System/Chat/index"}>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -401,8 +407,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     {/* <Link> */}
-                    <div class="system-card" onClick={handleOpenMenu}>
-                      <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                    <div className="system-card" onClick={handleOpenMenu}>
+                      <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                         <Image
                           src={
                             process.env.PUBLIC_URL +
@@ -420,8 +426,8 @@ const AsideBar = () => {
                 <div className="col-md-4 ">
                   <div className="system-item">
                     <Link>
-                      <div class="system-card">
-                        <div class="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                      <div className="system-card">
+                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
                             src={
                               process.env.PUBLIC_URL +
@@ -581,6 +587,26 @@ export const ProfileMenu = ({ show, setShow }) => {
       setLang("ar");
     }
   };
+  const [user, setUser] = useState();
+
+  const getUser = async () => {
+    try {
+      const { data } = await getUserProfile();
+      console.log(data);
+      if (data?.success) {
+        setUser(data.user);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <div
       className={` !absolute p-2  z-[100000]   border !border-[#2B2B40] right-[62%]  !top-[10%] transition-all ease-in-out duration-500  bg-[#1E1E2D] rounded-[14px] w-[0px] h-[0] opacity-0 ${
@@ -591,20 +617,19 @@ export const ProfileMenu = ({ show, setShow }) => {
         <div className="mx-2 flex gap-2">
           {/* should be user img */}
           <Image
-            src="/People/Badr.png"
+            src={staticImageSrc + user.image}
             alt="user img"
             className={"w-[51px] h-[51px] rounded-[50%]"}
           />
           <div className="flex flex-col">
-            <p className="text-white text-base">بدر بن سليمان </p>
-            <p className="text-[#EFAA20] text-xs">رئيس مجلس الأدارة</p>
-
-            <span className="text-[#565674] text-xs">bader@bsa.com</span>
+            <p className="text-white text-base">{user.firstName} </p>
+            <p className="text-[#EFAA20] text-xs"> {user.role} </p>
+            <span className="text-[#565674] text-xs"> {user.email}</span>
           </div>
         </div>
         <div className="bg-[#D5992133] h-[1px] w-full my-2"></div>
         <div onClick={() => setShow(false)} className="mt-2 mb-3 mx-2">
-          <Link className="w-full " to="Profile/2424">
+          <Link className="w-full " to="/Profile">
             <div>
               <p className="text-sm text-white">صفحتى الشخصية</p>
             </div>

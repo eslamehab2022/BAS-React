@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import DataTableComponent from "../../../../Components/DataTableComponent.jsx";
 
@@ -12,6 +12,10 @@ import Image from "../../../../Components/Image.jsx";
 import { TableCell } from "../../../../Components/Table/TableCell.jsx";
 import { TableRow } from "../../../../Components/Table/TableRow.jsx";
 import CustomTable from "../../../../Components/Table/index.jsx";
+import { getRequestsWithProjectType } from "../../../../helper/fetchers/Requests.jsx";
+import { toast } from "react-toastify";
+import Progress from "../../../../Components/Progress.jsx";
+import moment from "moment";
 const ReviewRequest = () => {
   const [showProject, setShowProject] = useState(false);
   const [editRequest, setEditRequest] = useState(false);
@@ -62,14 +66,10 @@ const ReviewRequest = () => {
     },
     {
       name: " رقم الطلب ",
-      selector: (row) => row.ProjectNumber,
+      selector: (row) => row.orderNumber,
     },
     {
       name: "  تاريخ الاستلام",
-      selector: (row) => row.createdAt,
-    },
-    {
-      name: "  تاريخ التسليم",
       selector: (row) => row.createdAt,
     },
     {
@@ -90,6 +90,23 @@ const ReviewRequest = () => {
       selector: (row) => row.edit,
     },
   ];
+  const [id, setId] = useState(null);
+  const [reviewRequests, setReviewRequests] = useState();
+  const getReviewRequests = async () => {
+    try {
+      const { data } = await getRequestsWithProjectType(2);
+      if (data?.success) {
+        setReviewRequests(data?.request);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+  useEffect(() => {
+    getReviewRequests();
+  }, []);
 
   return (
     <>
@@ -98,6 +115,7 @@ const ReviewRequest = () => {
           <ShowReviewRequest
             ReviewProjectType={ReviewProjectType}
             setShowProject={setShowProject}
+            id={id}
           />
         </div>
       ) : (
@@ -111,48 +129,83 @@ const ReviewRequest = () => {
               <legend className="text-center">طلبات ( اشراف )</legend>
 
               <div className="mt-3 !h-[400px] overflow-scroll scrollbar-none">
-                {/* <DataTableComponent
-                  className={"!h-[400px]"}
-                  columns={columns}
-                  data={DesignProjects}
-                /> */}
-                <CustomTable columns={columns} data={DesignProjects}>
-                  {DesignProjects && DesignProjects.length > 0
-                    ? DesignProjects.map(
-                        (
-                          {
-                            id,
-                            ProjectName,
-                            ProjectNumber,
-                            createdAt,
-                            ProjectType,
-                            status,
-                            enStatus,
-                            display,
-                            edit,
-                          },
-                          index
-                        ) => (
-                          <TableRow
-                            className={`my-2 border !border-[#efaa207f] ${
-                              index % 2 === 0 ? "bg-[#151521]" : ""
-                            }`}
-                            key={index}
-                          >
-                            <TableCell textColor="#ffffff7f">{id}</TableCell>
-                            <TableCell>{ProjectName}</TableCell>
-                            <TableCell>{ProjectNumber}</TableCell>
-                            <TableCell>{createdAt}</TableCell>
-                            <TableCell>{createdAt}</TableCell>
-                            <TableCell>{ProjectType}</TableCell>
-                            <TableCell>{status}</TableCell>
-                            <TableCell>{display}</TableCell>
-                            <TableCell>{edit}</TableCell>
-                          </TableRow>
+                {reviewRequests ? (
+                  <CustomTable columns={columns} data={reviewRequests}>
+                    {reviewRequests && reviewRequests.length > 0
+                      ? reviewRequests.map(
+                          (
+                            {
+                              _id,
+                              projectName,
+                              orderNumber,
+                              createdAt,
+                              projectType,
+                              status,
+                              enStatus,
+                              display,
+                              edit,
+                            },
+                            index
+                          ) => (
+                            <TableRow
+                              className={`my-2 border !border-[#efaa207f] ${
+                                index % 2 === 0 ? "bg-[#151521]" : ""
+                              }`}
+                              key={_id}
+                            >
+                              <TableCell textColor="#ffffff7f">
+                                {index + 1}
+                              </TableCell>
+                              <TableCell>{projectName}</TableCell>
+                              <TableCell>{orderNumber}</TableCell>
+                              <TableCell>
+                                {moment(createdAt).format("YYYY-MM-DD")}
+                              </TableCell>
+                              <TableCell>اشراف علي التنفيذ</TableCell>
+                              <TableCell>
+                                {status == 0
+                                  ? "في الانتظار"
+                                  : status == 1
+                                  ? "قيد التنفيذ"
+                                  : "مرفوضة"}
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/view.svg"
+                                  }
+                                  onClick={() => {
+                                    setShowProject(true);
+                                    // se(
+                                    //   DesignProjects[index]?.enStatus
+                                    // );
+                                    setId(_id);
+                                  }}
+                                  className="display_project  rounded"
+                                  alt=" display project"
+                                />
+                              </TableCell>
+                              <TableCell>
+                                <Image
+                                  src={
+                                    process.env.PUBLIC_URL + "/icons/edit.svg"
+                                  }
+                                  onClick={() => {
+                                    setEditRequest(true);
+                                    setId(_id);
+                                  }}
+                                  className=" edit_project  rounded"
+                                  alt=" edit project"
+                                />
+                              </TableCell>
+                            </TableRow>
+                          )
                         )
-                      )
-                    : null}
-                </CustomTable>
+                      : null}
+                  </CustomTable>
+                ) : (
+                  <Progress />
+                )}
               </div>
             </fieldset>
           </div>

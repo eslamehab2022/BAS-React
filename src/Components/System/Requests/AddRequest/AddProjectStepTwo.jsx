@@ -1,16 +1,23 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
-import Input from '../../../FormHandler/Input'
-import Select from '../../../FormHandler/Select'
-import { UseCheckBox, UseInput, UseMultiSelect, UseSelect } from '../../../../hooks';
-import { Form, Image, InputGroup } from 'react-bootstrap';
-import { multiStepContext } from '../../../../Context/StepContext';
-import { PhoneInput, parseCountry ,defaultCountries} from 'react-international-phone';
-import { PhoneNumberUtil } from 'google-libphonenumber';
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import Input from "../../../FormHandler/Input";
+import Select from "../../../FormHandler/Select";
+import {
+  UseCheckBox,
+  UseInput,
+  UseMultiSelect,
+  UseSelect,
+} from "../../../../hooks";
+import { Form, Image, InputGroup } from "react-bootstrap";
+import { multiStepContext } from "../../../../Context/StepContext";
+import {
+  PhoneInput,
+  parseCountry,
+  defaultCountries,
+} from "react-international-phone";
+import { PhoneNumberUtil } from "google-libphonenumber";
+import { identity } from "@fullcalendar/core/internal";
 const AddProjectStepTwo = (props) => {
-
-
-
-  const { userData, setUserData } = useContext(multiStepContext)
+  const { userData, setUserData } = useContext(multiStepContext);
 
   const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -22,162 +29,186 @@ const AddProjectStepTwo = (props) => {
     }
   };
 
-
   const clientType = UseSelect(
-    userData?.clientType ? {
-      value: userData?.clientType,
-      label: userData?.clientType
-    } : ""
+    userData?.clientType
+      ? {
+          value: userData?.clientType,
+          label: userData?.clientType,
+        }
+      : "",
 
-    , "Select");
+    "Select"
+  );
   const identityType = UseSelect(
-    userData?.identityType ? {
-      value: userData?.identityType,
-      label: userData?.identityType
-    } : ""
+    userData?.identityType
+      ? {
+          value: userData?.identityType,
+          label: userData?.identityType,
+        }
+      : "",
 
-    , "", "Select");
-  const email = UseInput(`${userData?.email ? userData.email : ""}`, "email", true);
-  const [phone, setPhone] = useState(`${userData?.phone ? userData.phone : ""}`)
+    "",
+    "Select"
+  );
+  const identityNumber = UseInput(
+    `${userData?.identityNumber ? userData.identityNumber : ""}`,
+    "identityNumber",
+    true
+  );
+
+  const email = UseInput(
+    `${userData?.email ? userData.email : ""}`,
+    "email",
+    true
+  );
+  const [phone, setPhone] = useState(
+    `${userData?.phone ? userData.phone : ""}`
+  );
   const checkPhoneValidation = isPhoneValid(phone);
-  const taxCertificateNumber = UseInput(`${userData?.taxCertificateNumber ? userData.taxCertificateNumber : ""} `, "number", true)
-  const [instrumentImage, setInstrumentImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(process.env.PUBLIC_URL + "/icons/show.png");
+  const taxNumber = UseInput(
+    `${userData?.taxNumber ? userData.taxNumber : ""} `,
+    "taxNumber",
+    true
+  );
+  const [idPhoto, setIdPhoto] = useState();
 
   const clientTypeRoles = [
     {
       label: "فردي",
-      value: "فردي"
+      value: 3,
     },
     {
-      label: " شركه  او مؤسسة",
-      value: " شركه  او مؤسسة "
+      label: "شركه  او مؤسسة",
+      value: 2,
     },
     {
-      label: "حكومي",
-      value: "حكومي"
-    }, {
-      label: "مستثمر",
-      value: "مستثمر"
+      label: "حكومي او مستثمر",
+      value: 1,
     },
-
-  ]
+  ];
   const identityTypeRoles = [
     {
       label: "تجاري",
-      value: "تجاري",
-
-    }, {
+      value: 2,
+    },
+    {
       label: "هوية",
-      value: "هوية"
-    }
-  ]
+      value: 1,
+    },
+  ];
 
   const countries = defaultCountries.filter((country) => {
     const { iso2 } = parseCountry(country);
-    return ['sa', 'eg'].includes(iso2);
+    return ["sa"].includes(iso2);
   });
-
-
-
-
-
-
-
 
   //  vaildation
 
-  const [IsVaildState, setIsVaildState] = useState(false)
+  const [IsVaildState, setIsVaildState] = useState(false);
   const signalParent = (isValid) => {
-    setIsVaildState(isValid)
-    props.signalIfValid(isValid)
-  }
-
+    setIsVaildState(isValid);
+    props.signalIfValid(isValid);
+  };
 
   useMemo(() => {
-    if (clientType?.value.label && identityType?.value.label && instrumentImage?.name && email.value && email.isValid && phone && checkPhoneValidation) {
+    if (
+      clientType?.value.value &&
+      identityType?.value.value &&
+      email.value &&
+      email.isValid &&
+      identityNumber.isValid &&
+      identityNumber.value &&
+      idPhoto &&
+      phone &&
+      checkPhoneValidation
+    ) {
       const updatedUserData = {
         ...userData,
-        instrumentImage: instrumentImage?.name,
-        clientType: clientType.value.label,
-        identityType: identityType.value.label,
+        clientType: clientType.value.value,
+        identityType: identityType.value.value,
+        identityNumber: identityNumber.value,
         email: email.value,
+        idPhoto,
         phone,
-        taxCertificateNumber: taxCertificateNumber.value
-
-
+        taxNumber: taxNumber.value,
       };
-      setUserData(updatedUserData)
+      setUserData(updatedUserData);
 
-      console.log(checkPhoneValidation)
-
-
-      signalParent(true)
+      signalParent(true);
     } else {
-      signalParent(false)
+      signalParent(false);
       const updatedUserData = {
         ...userData,
-        instrumentImage: instrumentImage?.name,
-        clientType: clientType.value.label,
-        identityType: identityType.value.label,
+        clientType: clientType.value.value,
+        identityType: identityType.value.vlaue,
+        identityNumber: identityNumber.value,
         email: email.value,
-        taxCertificateNumber: taxCertificateNumber.value,
-        phone
-
-
+        idPhoto,
+        taxNumber: taxNumber.value,
+        phone,
       };
-      setUserData(updatedUserData)
-
-      console.log(checkPhoneValidation)
+      setUserData(updatedUserData);
     }
-
-  }, [clientType?.value.label && identityType?.value.label && instrumentImage?.name && email.value && email.isValid && checkPhoneValidation])
-
+  }, [
+    clientType?.value.label &&
+      identityType?.value.label &&
+      email.value &&
+      idPhoto &&
+      email.isValid &&
+      checkPhoneValidation,
+    identityType.value,
+  ]);
 
   useEffect(() => {
-    signalParent(IsVaildState)
-  }, [IsVaildState])
-
-
-
-
-
-
-
-
+    signalParent(IsVaildState);
+  }, [IsVaildState]);
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   return (
-
-    <fieldset className='addProjectStep mx-auto'>
-
-
-
-
-      <legend className='text-center'>اضافة بيانات المالك </legend>
-      <Form className='row w-100 m-auto '>
+    <fieldset className="addProjectStep mx-auto">
+      <legend className="text-center">اضافة بيانات المالك </legend>
+      <Form className="row w-100 m-auto ">
         <div className="col-md-6 mb-4">
-          <Select label={" نوع العميل"}
+          <Select
+            label={" نوع العميل"}
             placeholder="اختر..."
             OptionbackgroundColor="#414162"
-            {...clientType.bind} options={clientTypeRoles} mandatory />
+            {...clientType.bind}
+            options={clientTypeRoles}
+            mandatory
+          />
         </div>
         <div className="col-md-6 mb-4">
-          <Select label={" نوع الهوية  "}
+          <Select
+            label={" نوع الهوية  "}
             placeholder="اختر..."
             OptionbackgroundColor="#414162"
-            {...identityType.bind} options={identityTypeRoles} mandatory />
-
-        </div>
-
-
-
-        <div className="col-md-6 mb-4">
-          <Input label={"البريد الالكتروني"} {...email.bind} mandatory />
-
+            {...identityType.bind}
+            options={identityTypeRoles}
+            mandatory
+          />
         </div>
 
         <div className="col-md-6 mb-4">
+          <Input
+            placeholder="ادخل البريد الالكتروني"
+            label={"البريد الالكتروني"}
+            {...email.bind}
+            mandatory
+          />
+        </div>
+        <div className="col-md-6 mb-4">
+          <Input
+            placeholder="ادخل  رقم الهوية"
+            label={"رقم الهوية"}
+            {...identityNumber.bind}
+            mandatory
+          />
+        </div>
 
+        <div className="col-md-6 mb-4">
           <Form.Group controlId="formBasicImage">
             <Form.Label className="d-flex gap-2 align-items-center">
               رقم الجوال
@@ -185,34 +216,23 @@ const AddProjectStepTwo = (props) => {
             <PhoneInput
               defaultCountry="sa"
               value={phone}
-              className='w-100 h-100'
+              className="w-100 h-100"
               onChange={(phone) => setPhone(phone)}
               countries={countries}
-         
             />
-
           </Form.Group>
-
-
-
-
-
-
         </div>
         <div className="col-md-6 mb-4">
-          <Input label={"رقم الشهادة الضربية"} {...taxCertificateNumber.bind} />
-
-
-
-
-
-
+          <Input
+            placeholder="ادخل رقم الشهادة الضريبية"
+            label={"رقم الشهادة الضربية"}
+            {...taxNumber.bind}
+          />
         </div>
-        <div className='col-md-12 mb-4'>
+        <div className="col-md-12 mb-4">
           <Form.Group controlId="formBasicImage">
             <Form.Label className="d-flex flex-column gap-2 ">
-              <span>        صورة الهويه</span>
-             
+              <span> صورة الهويه</span>
             </Form.Label>
 
             <Form.Control
@@ -220,21 +240,16 @@ const AddProjectStepTwo = (props) => {
               multiple="multiple"
               width={100}
               height={100}
-              className='choose-file-input'
+              className="choose-file-input"
               placeholder="صورة الهويه"
               name="imageFile"
-              onChange={(e) => setInstrumentImage(e.currentTarget.files[0])}
+              onChange={(e) => setIdPhoto(e.currentTarget.files[0])}
             />
-
-
           </Form.Group>
         </div>
-
-
-
-      </Form >
+      </Form>
     </fieldset>
-  )
-}
+  );
+};
 
-export default AddProjectStepTwo
+export default AddProjectStepTwo;

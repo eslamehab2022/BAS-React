@@ -6,6 +6,7 @@ const SettingContext = createContext();
 export const SettingContextProvider = ({ children }) => {
   const [ReciptionType, setReceptionType] = useState(null);
   const [orderType, setOrderType] = useState(1);
+  const [citizenServicesType, setCitizenServicesType] = useState(1);
   const [settingType, setSettingType] = useState("");
 
   return (
@@ -17,6 +18,8 @@ export const SettingContextProvider = ({ children }) => {
         setReceptionType,
         orderType,
         setOrderType,
+        citizenServicesType,
+        setCitizenServicesType
       }}
     >
       {children}

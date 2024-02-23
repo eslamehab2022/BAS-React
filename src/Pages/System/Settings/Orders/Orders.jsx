@@ -198,8 +198,8 @@ export default function Orders() {
     setSettingType("uses");
   }, []);
   useEffect(() => {
-    isSuccess && setCategory(data?.data?.category[0]);
-    servicesIsSuccess && setService(servicesData?.data?.services[0])
+    isSuccess && setCategory(data?.data?.category[0] || {});
+    servicesIsSuccess && setService(servicesData?.data?.services[0] || {})
     // console.log("servicesData: ",servicesData);
   }, [isSuccess,servicesIsSuccess]);
   console.log("servicesData: ", servicesData?.data?.services);

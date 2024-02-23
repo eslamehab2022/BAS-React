@@ -13,6 +13,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { MenuItem } from "@mui/material";
+
 import Input from "../../../FormHandler/Input";
 import moment from "moment";
 import Progress from "../../../Progress";
@@ -20,7 +22,19 @@ import ChooseDepartmentComponent from "../ChooseDepartmentComponent/ChooseDepart
 import TimePickerButton from "../../../TimePickerPage";
 import { FaCheck } from "react-icons/fa6";
 import FormDatePicker from "../../../FormDatePicker";
+import { useForm } from "react-hook-form";
+import CustomSelect from "../../../../Pages/System/PlanModel/components/CustomSelect";
+import { CiSearch } from "react-icons/ci";
+import { InputLabel } from "../../../../Pages/System/PlanModel/components/InputLabel";
+import myAxiosInstance, { myAxiosJson } from "../../../../helper/https";
 export const AddMeeting = ({ view, setView }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedMeetingType, setSelectedMeetingType] = useState("");
   const [selectedPlace, setSelectedPlace] = useState(0);
   const [Submitted, setSubmitted] = useState(false);
   const selectCountry = UseSelect("", "Select");
@@ -28,6 +42,7 @@ export const AddMeeting = ({ view, setView }) => {
   let [chooseDepartment, setChooseDeprtmant] = useState(false);
   let [meetingDetails, setMeetingDetails] = useState(false);
   let [meetingDate, setMeetingDate] = useState(null);
+  let [description, setDescription] = useState("");
   let [startMeeting, setStartMeeting] = useState(null);
   let [endMeeting, setEndMeeting] = useState(null);
   let [meetingPlace, setMeetingPlace] = useState("10:00");
@@ -37,32 +52,69 @@ export const AddMeeting = ({ view, setView }) => {
 
   const meetingCountries = [
     {
-      value: "الكل",
+      value: "الكل", // 0
       label: "الكل",
     },
     {
-      value: "السعودية",
+      value: "السعودية", // 1
       label: "السعودية",
     },
     {
-      value: "مصر",
+      value: "مصر", // 2
       label: "مصر",
     },
   ];
   const meetingType = [
     {
-      value: "شامل",
+      value: "شامل", // 1
       label: "شامل",
     },
     {
-      value: "مع قسم",
+      value: "مع قسم", // 2
       label: "مع قسم",
     },
   ];
-  const handleAddMeeting = () => {
+  const handleAddMeeting = () => {};
+  const onSubmit = (data) => {
+    const DataSent = {
+      meetingType: data.meetingType === "شامل" ?  1 : data.meetingType === "مع قسم" ?  2 : null,
+      // descraption: description,
+      country: data.country === "الكل" ?  0 : data.country === "السعودية" ?  1 : data.country === "مصر"? 2 : null,
+      typeMeeting: selectedPlace, // 0 => offline , 1 => online
+      startDate: meetingDate,
+      // endDate: "2024-12-01",
+      meetingLink: data.meetingLink,
+      startTime: startMeeting,
+      endTime: endMeeting,
+    };
+    /*
+    {
+    "meetingType" : 2,
+   "descraption" : "this is ecent",
+   "country" : 1,
+   "typeMeeting" : 0, // 0 => offline , 1 => online
+   "startDate" : "2023-12-01",
+   "endDate" : "2024-12-01",
+   "startTime" : "2024-12-01",
+   "meetingLink": "",
+   "endTime" : "2024-01-12",
+    "employeId" : [{
+        "_id" : "65d20292482491c1474c49c0"
+    }]
+
+}
+     */
+myAxiosJson.post("event", DataSent)
+    .then(data => {
+      console.log("event data: ",data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+    // console.log("Submitted Data: ", DataSent);
     setView(false);
   };
-
   return (
     <div>
       <ChooseDepartmentComponent
@@ -75,7 +127,7 @@ export const AddMeeting = ({ view, setView }) => {
         show={view}
         onHide={() => setView(false)}
         aria-labelledby=" example-modal-sizes-title-lg"
-        className="systemModal mettingModal   "
+        className="systemModal mettingModal"
         contentClassName="scroll"
       >
         <Container>
@@ -90,28 +142,68 @@ export const AddMeeting = ({ view, setView }) => {
               }}
             />
           </div>
-          <Form className="row my-4 date-input border-golden w-100 mx-auto p-3  ">
+          <Form
+            onSubmit={handleSubmit(onSubmit)}
+            encType="multipart/form-data"
+            className="row my-4 date-input border-golden w-100 mx-auto p-3"
+          >
             <div className="col-md-12 mb-4">
-              <Select
-                className="w-50"
-                label="بلد الاجتماع"
-                OptionbackgroundColor="#2B2B40"
-                {...selectCountry.bind}
-                options={meetingCountries}
-                mandtory
-              />
+              <div className="row">
+                <div className="col-md-6">
+                  {/* <Select
+                    // className="w-50"
+                    label="بلد الاجتماع"
+                    OptionbackgroundColor="#2B2B40"
+                    {...selectCountry.bind}
+                    options={meetingCountries}
+                    mandtory
+                  /> */}
+                  <InputLabel
+                    size={18}
+                    label={"بلد الاجتماع"}
+                    className={"mb-3"}
+                    mandatory
+                  />
+                  <CustomSelect
+                    placeholderValue="اختار بلد الاجتماع"
+                    {...register("country")}
+                  >
+                    {meetingCountries.map(({ label, value }, index) => (
+                      <MenuItem key={index} value={value} onClick={() => {}}>
+                        {label}
+                      </MenuItem>
+                    ))}
+                  </CustomSelect>
+                </div>
+              </div>
             </div>
             <div className="col-md-6 mb-4">
-              <Select
-                OptionbackgroundColor="#2B2B40"
-                label="نوع الاجتماع"
-                {...selectMeetingType.bind}
-                options={meetingType}
-                mandtory
+              <InputLabel
+                size={18}
+                label={"نوع الاجتماع"}
+                className={"mb-3"}
+                mandatory
               />
+
+              <CustomSelect
+                placeholderValue="اختار نوع الاجتماع"
+                {...register("meetingType")}
+              >
+                {meetingType.map(({ label, value }, index) => (
+                  <MenuItem
+                    key={index}
+                    value={value}
+                    onClick={() => {
+                      setSelectedMeetingType(value);
+                    }}
+                  >
+                    {label}
+                  </MenuItem>
+                ))}
+              </CustomSelect>
             </div>
 
-            {selectMeetingType.value.value === "مع قسم" && (
+            {selectedMeetingType === "مع قسم" && (
               <div className="col-md-6 d-flex align-items-end  justify-content-center mb-4">
                 <Button
                   type="button"
@@ -131,10 +223,11 @@ export const AddMeeting = ({ view, setView }) => {
                 <CKEditor
                   onChange={(event, editor) => {
                     const data = editor.getData();
+                    setDescription(data)
                     console.log({ event, editor, data });
                   }}
                   editor={ClassicEditor}
-                  data="<h2>تفاصيل الاجتماع</h2>"
+                  // data="<h2>تفاصيل الاجتماع</h2>"
                   onBlur={(event, editor) => {
                     const data = editor.getData();
                     console.log({ event, editor, data });
@@ -184,21 +277,21 @@ export const AddMeeting = ({ view, setView }) => {
                     className="text-white flex gap-3 my-2"
                     onChange={(e) => {
                       setMeetingPlace(e.target.value);
-                      setSelectedPlace(2);
+                      setSelectedPlace(0);
                     }}
                     value="offline"
                     control={
                       <label
                         onClick={() => {
                           setMeetingPlace("offline");
-                          setSelectedPlace(2);
+                          setSelectedPlace(0);
                         }}
                         htmlFor="offline"
                         className={`w-5 h-5 rounded-[5px] bg-[#2B2B40] border ${
                           meetingPlace === "offline" ? "!border-[#EFAA20]" : ""
                         }`}
                       >
-                        {selectedPlace == 2 ? <FaCheck /> : null}{" "}
+                        {selectedPlace == 0 ? <FaCheck /> : null}{" "}
                         <Radio id="offline" sx={{ display: "none" }} />
                       </label>
                     }
@@ -208,8 +301,19 @@ export const AddMeeting = ({ view, setView }) => {
               </FormControl>
             </div>
             {meetingPlace === "online" && (
-              <div className="col-md-6 meetingLink d-flex align-items-center  justify-content-start mb-4">
-                <Input label={" لينك الاجتماع "} {...meetingLink.bind} />
+              <div className="col-md-6 meetingLink flex flex-col  mb-4">
+                <InputLabel
+                    size={18}
+                    label={"لينك الاجتماع "} 
+                    className={"mb-3"}
+                    mandatory
+                  />
+                <input 
+                className="bg-[#2B2B40] text-white w-full outline-none p-2 rounded-[7px]"
+                type="text"
+                // {...meetingLink.bind}
+                {...register("meetingLink")}
+                />
               </div>
             )}
             <div className="col-md-12  mb-4">
@@ -242,7 +346,7 @@ export const AddMeeting = ({ view, setView }) => {
                   </Form.Label>
                   <TimePickerButton
                     value={startMeeting}
-                    label="   وقت بدا الاجتماع "
+                    label="وقت بدا الاجتماع "
                     onChange={(time) => setStartMeeting(time)}
                     className="w-100 form-control "
                   />
@@ -260,7 +364,7 @@ export const AddMeeting = ({ view, setView }) => {
                   </Form.Label>
                   <TimePickerButton
                     value={endMeeting}
-                    label="   وقت نهاية الاجتماع "
+                    label="وقت نهاية الاجتماع "
                     onChange={(time) => setEndMeeting(time)}
                     className="w-100 form-control !text-white"
                   />
@@ -270,10 +374,7 @@ export const AddMeeting = ({ view, setView }) => {
 
             <div className="d-flex justify-content-center">
               <button
-                type="button"
-                onClick={(e) => {
-                  handleAddMeeting();
-                }}
+                type="submit"
                 className="  mt-4 sumbmitAddUpdateUser border-0 disabled "
               >
                 {" "}
