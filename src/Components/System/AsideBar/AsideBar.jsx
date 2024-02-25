@@ -18,6 +18,7 @@ import { Badge } from "@mui/material";
 import { getUserProfile } from "../../../helper/fetchers/Profie";
 import { toast } from "react-toastify";
 import { staticImageSrc } from "../../../Config/Config";
+import { UserProvider } from "../../../Context/userProvider";
 const AsideBar = () => {
   const [rtl, setRtl] = useState(true);
   // setting the width of the screen
@@ -25,6 +26,7 @@ const AsideBar = () => {
   const { collapsed, setCollapsed } = useContext(SideBarProvider);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
+  const {logOut} = useContext(UserProvider)
 
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -57,6 +59,25 @@ const AsideBar = () => {
     };
   }, [window.innerWidth]);
 
+  const [user, setUser] = useState();
+
+  const getUser = async () => {
+    try {
+      const { data } = await getUserProfile();
+      console.log(data);
+      if (data?.success) {
+        setUser(data.user);
+      } else {
+        console.log("Data retrieval failed");
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <div
       className={`asidePar !scrollbar-none rounded-[19px] flex flex-col !w-full !min-h-screen`}
@@ -100,19 +121,19 @@ const AsideBar = () => {
                 <div>
                   {" "}
                   <Image
-                    src={process.env.PUBLIC_URL + "/Badr.png"}
+                    src={staticImageSrc+user?.image}
                     alt="icon"
                     className="user-icon"
                     onClick={handleOpenProfileMenu}
                   />
                 </div>
                 <div className="hidden-collapsed ">
-                  <p style={{ fontSize: "19px" }} className=" p-0 mx-0  my-2">
-                    بدر بن سليمان
+                  <p  className="text-xl text-center p-0 mx-0  my-2">
+                    {user?.firstName}
                   </p>
-                  <p className="golden-text ">رئيس مجلس الأدارة</p>
+                  <p className="golden-text "> {user?.role} </p>
                   <p style={{ fontSize: "14px", color: "#565674" }}>
-                    badr@bsa.com
+                    {user?.email}
                   </p>
                 </div>
               </div>
@@ -424,8 +445,8 @@ const AsideBar = () => {
                   </div>
                 </div>
                 <div className="col-md-4 ">
-                  <div className="system-item">
-                    <Link>
+                  <div className="system-item" onClick={logOut}>
+                 
                       <div className="system-card">
                         <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
@@ -439,7 +460,7 @@ const AsideBar = () => {
                           <p>خروج </p>
                         </div>
                       </div>
-                    </Link>
+                
                   </div>
                 </div>
               </div>
@@ -617,14 +638,14 @@ export const ProfileMenu = ({ show, setShow }) => {
         <div className="mx-2 flex gap-2">
           {/* should be user img */}
           <Image
-            src={staticImageSrc + user.image}
+            src={staticImageSrc + user?.image}
             alt="user img"
             className={"w-[51px] h-[51px] rounded-[50%]"}
           />
           <div className="flex flex-col">
-            <p className="text-white text-base">{user.firstName} </p>
-            <p className="text-[#EFAA20] text-xs"> {user.role} </p>
-            <span className="text-[#565674] text-xs"> {user.email}</span>
+            <p className="text-white text-base">{user?.firstName} </p>
+            <p className="text-[#EFAA20] text-xs"> {user?.role} </p>
+            <span className="text-[#565674] text-xs"> {user?.email}</span>
           </div>
         </div>
         <div className="bg-[#D5992133] h-[1px] w-full my-2"></div>

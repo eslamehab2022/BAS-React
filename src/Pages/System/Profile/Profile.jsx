@@ -247,6 +247,7 @@ const Profile = () => {
                     <textarea
                       cols={5}
                       rows={5}
+                      defaultValue={user.bio}
                       disabled
                       className="form-control overflow-hidden !w-full"
                     />
@@ -256,10 +257,10 @@ const Profile = () => {
                   <legend className="text-center text-white">اوراقي</legend>
 
                   <FormControl className="!w-full">
-                    {user.fileUser > 0 &&
+                    {user.fileUser &&
+                      user.fileUser.length > 0 &&
                       user.fileUser.map((file, index) => (
-                        <div key={index}>
-                          <InputLabel label={"اوراقي "} />
+                        <div key={index}> 
                           <div
                             className="border flex my-3 justify-between bg-[#1E1E2D] border-[#EFAA20] w-full h-[55px] rounded-[3.37px]"
                             key={index}
@@ -273,15 +274,15 @@ const Profile = () => {
                                 height="53px"
                                 openPdf={openPdf}
                                 setOpenPdf={setOpenPdf}
-                                pdfSrc={"/example.pdf"}
+                                pdfSrc={`${staticImageSrc + file}`}
                               />
                               <p className="text-white">اسم الملف</p>
                             </div>
                             <div className="flex mx-3 items-center gap-3">
                               <Button
-                                href={"/example.pdf"}
+                                href={`${staticImageSrc + file}`}
                                 download={true}
-                                className="bg-[#03795D] flex justify-center items-center rounded-[3px] pointer w-[22px] h-[25px]"
+                                className="!bg-[#03795D] hover:!bg-[#03795D] flex justify-center items-center rounded-[3px] pointer w-[22px] h-[25px]"
                               >
                                 <FaDownload color="#fff" size={15} />
                               </Button>
