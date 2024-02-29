@@ -4,11 +4,11 @@ import { AddHrType } from "../../../../Context/AddHr";
 import AddUpdateUser from "../../../../Components/System/Hr/AddUpdateUser/AddUpdateUser";
 
 const EmployeesManagment = () => {
-                                                                                                                                                                                                                                    const { openHr, setOpenHr, HrType, setHrType } = useContext(AddHrType);
+  const { openHr, setOpenHr, HrType, setHrType } = useContext(AddHrType);
 
-                                                                                                                                                                                                                                    useEffect(() => {
-                                                                                                                                                                                                                                        setHrType("Employees");
-                                                                                                                                                                                                                                    }, [openHr, HrType]);
+  useEffect(() => {
+    setHrType("Employees");
+  }, [openHr, HrType]);
   return (
     <div>
       {openHr === true && HrType == "Employees" ? (

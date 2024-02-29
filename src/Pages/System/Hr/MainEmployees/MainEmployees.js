@@ -4,7 +4,7 @@ import { Container, Image } from 'react-bootstrap'
 import { AddHrType } from '../../../../Context/AddHr.js'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-import AddUpdateUser from '../../../../Components/System/Hr/AddUpdateUser/AddUpdateUser.js';
+import AddUpdateUser from '../../../../Components/System/Hr/AddUpdateUser/AddUpdateUser.jsx';
 
 const MainEmployees = () => {
     const { openHr, setOpenHr, HrType, setHrType } = useContext(AddHrType)

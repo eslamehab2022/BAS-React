@@ -63,16 +63,14 @@ const EditDesignRequest = ({
   const [instrumentImage, setInstrumentImage] = useState();
   const [agencyAttachments, setAgencyAttachments] = useState(null);
   const [InstrumentAttachments, setInstrumentAttachments] = useState(null);
-// category 
-  const [projectCategory,setProjectCategory]= useState()
-  const [categoryId,setCategoryId]= useState()
-  const [subcategoryId,setSubcategoryId]= useState()
-// services
+  // category
+  const [projectCategory, setProjectCategory] = useState();
+  const [categoryId, setCategoryId] = useState();
+  const [subcategoryId, setSubcategoryId] = useState();
+  // services
   const [servicesId, setServiceId] = useState();
   const [subservicesId, setsubServicesId] = useState();
-  const [projectServices,setProjectServices]= useState()
-  
-  
+  const [projectServices, setProjectServices] = useState();
 
   const {
     register,
@@ -85,17 +83,19 @@ const EditDesignRequest = ({
 
   // get request with id
   const getRequestWithid = async () => {
-    try {
-      const { data } = await getDesignRequestsWithid(id);
-      console.log(data);
+    if (id) {
+      try {
+        const { data } = await getDesignRequestsWithid(id);
+        console.log(data);
 
-      if (data?.request) {
-        setRequest(data?.request);
-      } else {
-        console.log("Data retrieval failed");
+        if (data?.request) {
+          setRequest(data?.request);
+        } else {
+          console.log("Data retrieval failed");
+        }
+      } catch (error) {
+        toast.error(error?.response?.data?.message);
       }
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
     }
   };
   // get categories

@@ -26,7 +26,7 @@ const AsideBar = () => {
   const { collapsed, setCollapsed } = useContext(SideBarProvider);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
-  const {logOut} = useContext(UserProvider)
+  const { logOut } = useContext(UserProvider);
 
   const handleOpenMenu = () => {
     setMenuOpen(true);
@@ -121,14 +121,14 @@ const AsideBar = () => {
                 <div>
                   {" "}
                   <Image
-                    src={staticImageSrc+user?.image}
+                    src={user?.image}
                     alt="icon"
                     className="user-icon"
                     onClick={handleOpenProfileMenu}
                   />
                 </div>
                 <div className="hidden-collapsed ">
-                  <p  className="text-xl text-center p-0 mx-0  my-2">
+                  <p className="text-xl text-center p-0 mx-0  my-2">
                     {user?.firstName}
                   </p>
                   <p className="golden-text "> {user?.role} </p>
@@ -446,21 +446,19 @@ const AsideBar = () => {
                 </div>
                 <div className="col-md-4 ">
                   <div className="system-item" onClick={logOut}>
-                 
-                      <div className="system-card">
-                        <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
-                          <Image
-                            src={
-                              process.env.PUBLIC_URL +
-                              "/icons/asideIcons/exit.png"
-                            }
-                            alt="icon"
-                            className="aside-icon mt-3"
-                          />
-                          <p>خروج </p>
-                        </div>
+                    <div className="system-card">
+                      <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
+                        <Image
+                          src={
+                            process.env.PUBLIC_URL +
+                            "/icons/asideIcons/exit.png"
+                          }
+                          alt="icon"
+                          className="aside-icon mt-3"
+                        />
+                        <p>خروج </p>
                       </div>
-                
+                    </div>
                   </div>
                 </div>
               </div>
@@ -638,7 +636,7 @@ export const ProfileMenu = ({ show, setShow }) => {
         <div className="mx-2 flex gap-2">
           {/* should be user img */}
           <Image
-            src={staticImageSrc + user?.image}
+            src={user?.image}
             alt="user img"
             className={"w-[51px] h-[51px] rounded-[50%]"}
           />
