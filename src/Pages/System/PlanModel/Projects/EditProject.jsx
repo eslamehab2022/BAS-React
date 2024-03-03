@@ -20,21 +20,81 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { InputLabel } from "../components/InputLabel";
 import TextEditor from "../../Plans/components/TextEditor";
-import { Link,useNavigate } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import SystemControler from "../../../../Components/System/SystemControler/SystemControler";
 import CustomSelect from "../components/CustomSelect";
 import { CiSearch } from "react-icons/ci";
 import { ProjectNames, Supervisors } from "../consts";
 import MultipleSelect from "../../Plans/components/MultipleSelect";
-export default function EditProject() {
-  const navigate = useNavigate();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [selected, setSelected] = useState([]);
+import myAxiosInstance, { myAxiosJson } from "../../../../helper/https";
+import { useForm } from "react-hook-form";
 
-  const [searchProjectName, setSearchProjectName] = useState("");
-  const [selectedProjectName, setSelectedProjectName] = useState("");
-  let [recievedDate, setRecievedDate] = useState(null);
-  let [recievingDate, setRecievingDate] = useState(null);
+import { useGetPlan } from "../../../../hooks/fetchers/Plans";
+import { convertDateFormat } from "../../../../helper/utils";
+export default function EditProject() {
+  const {projectId} = useParams();
+  const {data: plan} = useGetPlan(projectId);
+  console.log("GetProject: ",plan);
+  const navigate = useNavigate();
+  const [supervisors, setSupervisors] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [planDescription, setPlanDescription] = useState("");
+  const [noteClient, setNoteClient] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  useEffect(() => {
+    myAxiosJson("request/select")
+      .then((data) => {
+        // console.log("data: ", data?.data?.request);
+        setProjects(data?.data?.request);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  useEffect(() => {
+    myAxiosJson("user/manager")
+      .then((data) => {
+        // console.log(data?.data?.allUsers);
+        setSupervisors(data?.data?.allUsers);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  const onSubmit = (data) => {
+    /*
+
+  "fileProject": ["file1.pdf", "file2.docx"],
+  "PapersProject": ["paper1.pdf", "paper2.docx"],
+     */
+    console.log({
+      ...data,
+      planDescription: planDescription,
+      noteClient: noteClient,
+    });
+    var formdata = new FormData();
+
+    formdata.append("isExist", true);
+    formdata.append("projectId", data.projectId);
+    formdata.append("assignTo", [data.owner]);
+    formdata.append("noteClient", noteClient);
+    formdata.append("planDescription", planDescription);
+    formdata.append("deliveryDate", data.deliveryDate);
+    formdata.append("endDate", data.endDate);
+
+    myAxiosInstance
+      .patch(`plan/${plan._id}`, formdata)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
     <SystemControler
@@ -53,199 +113,129 @@ export default function EditProject() {
         <ModalTitle title={" تعديل مشروع "} />
       </div>
 
-      <div className="h-[690px] overflow-scroll scrollbar-none flex flex-col gap-4 ">
-        
-        
-        
-        
-        
-        
-        
-        
-        <FormModal title={"بحث عن المشروع"}>
-          <div className="grid grid-cols-12 justify-between">
-            <div className="col-span-5">
-            <FormControl fullWidth>
-                  <InputLabel id="new-project-name" label={"اسم المشروع"} />
+      <form
+      className="flex flex-col gap-4"
+      onSubmit={handleSubmit(onSubmit)}
+      encType="multipart/form-data"
+    >
+      <FormModal title={"بحث عن المشروع"}>
+        <div className="grid grid-cols-2">
+          <FormControl fullWidth>
+            <InputLabel id="projects" label={"اسم المشروع"} />
+            <select
+              {...register("projectId")}
+              className="px-2 h-9 border-none text-white bg-[#2B2B40] rounded-[7px] outline-none"
+              id="projects"
+            >
+              <option disabled></option>
+              {projects?.map(({ _id, projectName }) => (
+                <option value={_id}>{projectName}</option>
+              ))}
+            </select>
+          </FormControl>
+        </div>
+      </FormModal>
+      <FormModal title={"تفاصيل المهمة"}>
+        <div className="grid grid-cols-2 gap-4 mb-3">
+          <FormControl fullWidth>
+            <InputLabel id="owner" label={"اسم المسؤل"} />
 
-                  <CustomSelect>
-                    <MenuItem disabled value="">
-                      <div className="w-full flex justify-between">
-                        <span>بحث ...</span>
-                        <CiSearch />
-                      </div>
-                    </MenuItem>
-                    {ProjectNames.map((name, index) => (
-                      <MenuItem
-                        key={index}
-                        value={name}
-                        onClick={(e) => setSelectedProjectName(name)}
-                        // style={getStyles(name, selectedItem, theme)}
-                      >
-                        {name}
-                      </MenuItem>
-                    ))}
-                  </CustomSelect>
-                </FormControl>
-            </div>
-          </div>
-        </FormModal>
+            <select
+              {...register("owner")}
+              className="px-2 h-9 border-none text-white bg-[#2B2B40] rounded-[7px] outline-none"
+              id="owner"
+            >
+              <option disabled></option>
+              {supervisors?.map(
+                ({ _id, firstName, lastName, position, location, img }) => (
+                  <option value={_id} key={_id}>
+                    {firstName} {lastName}
+                  </option>
+                )
+              )}
+            </select>
 
-
-
-
-
-
-
-
-
-
-        <FormModal title={"تفاصيل المهمة"}>
-                <div className="grid grid-cols-12 mb-5">
-                  <div className="col-span-5">
-                  <InputLabel id="new-project-name" label={"اسم المسؤل"} />
-                    <MultipleSelect
-                      placeholder={"اختار اسم المشرف"}
-                      data={Supervisors}
-                      selected={selected}
-                      setSelected={setSelected}
-                    >
-                      {Supervisors?.map(({id,name,position,location,img},index) => (
+            {/* <MultipleSelect
+                    placeholder={"اختار اسم المشرف"}
+                    data={Supervisors}
+                  >
+                    {Supervisors?.map(
+                      ({ id, name, position, location, img }, index) => (
                         <MenuItem
-                        onClick={()=> {
                           
-                          setSelected(prev => [...prev,{id,name}])
-                        }}
-                        key={id}
-                        disabled={selected?.map(selected=> selected.id).includes(id)}
+                          key={id}
+                          
                         >
                           <div className="flex items-center gap-2">
                             <div className="w-8 h-8 rounded-full overflow-hidden">
-                              <img src={img} alt={""} title={name} className="w-full" />
+                              <img
+                                src={img}
+                                alt={""}
+                                title={name}
+                                className="w-full"
+                              />
                             </div>
                             <div className="">
                               <div className="">
                                 <p className="text-white">{name}</p>
-                                <p className="text-[#D59921]">{position} / {location}  </p>
+                                <p className="text-[#D59921]">
+                                  {position} / {location}{" "}
+                                </p>
                               </div>
                             </div>
                           </div>
-                          
                         </MenuItem>
-                      ))}
-                    </MultipleSelect>
-                  </div>
-                </div>
-                <div className="grid grid-cols-12 mb-5">
-                  <div className="col-span-5">
-                    <InputLabel id="recieving-date" label={"تاريخ التسليم"} />
-                    <DatePicker
-                      id="recieving-date"
-                      
-                        selected={recievingDate}
-                        placeholder="اضف تاريخ التسليم"
-                        onChange={(date) => setRecievingDate(date)}
-                        dateFormat="dd-MM-yyyy"
-                        className="w-full text-white p-2 bg-[#2B2B40] rounded-[7px]"
-                      />
-                    
-                  </div>
-                  <div className="col-span-2"></div>
-                  <div className="col-span-5">
-                    <InputLabel id="recieved-date" label={"تاريخ الاستلام"} />
-                    <DatePicker
-                      id="recieved-date"
-                        selected={recievedDate}
-                        placeholder="اضف تاريخ الاستلام"
-                        onChange={(date) => setRecievedDate(date)}
-                        dateFormat="dd-MM-yyyy"
-                        className="w-full text-white p-2 bg-[#2B2B40] rounded-[7px]"
-                      />
-                    
-                  </div>
-                </div>
-  
-                <div className="">
-                  <InputLabel id="new-project-name" label={"وصف المهمة"} />
-                  <TextEditor 
-                  placeholder={"اكتب ملاحظات .................................."}
-                  />
-                </div>
-              </FormModal>
-        <FormModal title={"ملاحظات العميل"}>
-  
-                <div className="">
-                  <InputLabel id="new-project-name" label={"وصف المهمة"} />
-                  <TextEditor 
-                  placeholder={"اكتب ملاحظات .................................."}
-                  />
-                </div>
-              </FormModal>
-              <FormModal title={"ملفات المشروع"}>
-                <div className="flex gap-2">
-                  <label
-                    className={`border !border-[#D59921] !border-dashed max-w-fit rounded-[12.06px] pointer bg-[#2B2B40] py-4 px-2 flex flex-col items-center justfiy-center`}
-                  >
-                    <input type="file" className="hidden" />
-                    <div>
-                      <svg
-                        className="m-auto"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                      >
-                        <path
-                          d="M1 8H8M8 8H15M8 8V15M8 8V1"
-                          stroke="#EFAA20"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <p className="text-sm mx-auto text-white">اضافة جديدة</p>
-                    </div>
-                  </label>
-                </div>
-              </FormModal>
-              <FormModal title={"المرفقات"}>
-                <div className="flex gap-2">
-                  <label
-                    className={`border !border-[#D59921] !border-dashed max-w-fit rounded-[12.06px] pointer bg-[#2B2B40] py-4 px-2 flex flex-col items-center justfiy-center`}
-                  >
-                    <input type="file" className="hidden" />
-                    <div>
-                      <svg
-                        className="m-auto"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                      >
-                        <path
-                          d="M1 8H8M8 8H15M8 8V15M8 8V1"
-                          stroke="#EFAA20"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      <p className="text-sm mx-auto text-white">اضافة جديدة</p>
-                    </div>
-                  </label>
-                </div>
-              </FormModal>     
-      </div>
-
-      <div className="flex justify-end mt-4">
-      <Link to={"/System/plans/projects"}>
-        <button className="w-[140px] h-[30px]  bg-[#EFAA20] rounded-[6px] text-[#1E1E2D] text-[15px] font-medium">
-        حفظ
+                      )
+                    )}
+                  </MultipleSelect> */}
+          </FormControl>
+        </div>
+        <div className="grid grid-cols-2 gap-4 mb-3">
+          <FormControl fullWidth>
+            <InputLabel id="endDate" label={"تاريخ التسليم"} />
+            <input
+              type="date"
+              className="px-2 h-9 border-none text-white bg-[#2B2B40] rounded-[7px] outline-none"
+              id="endDate"
+              {...register("endDate")}
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel id="deliveryDate" label={"تاريخ الاستلام"} />
+            <input
+              type="date"
+              className="px-2 h-9 border-none text-white bg-[#2B2B40] rounded-[7px] outline-none"
+              id="deliveryDate"
+              {...register("deliveryDate")}
+            />
+          </FormControl>
+        </div>
+        <FormControl fullWidth>
+          <InputLabel id="new-project-name" label={"تاريخ التسليم"} />
+          <TextEditor
+            setValue={setPlanDescription}
+            placeholder={"اكتب ملاحظات .................................."}
+          />
+        </FormControl>
+      </FormModal>
+      <FormModal title={"ملاحظات العميل"}>
+        <div className="">
+          <InputLabel id="new-project-name" label={"ملاحظات العميل"} />
+          <TextEditor
+            setValue={setNoteClient}
+            placeholder={"اكتب ملاحظات .................................."}
+          />
+        </div>
+      </FormModal>
+      <div className="flex justify-center items-center">
+        <button
+          type="submit"
+          className="w-[140px] h-[30px] border !border-[#EFAA20] bg-[#EFAA20] hover:bg-[#2B2B40] hover:text-white transition-colors rounded-[6px] text-[#1E1E2D] text-[15px] font-medium"
+        >
+          حفظ
         </button>
-        </Link>
       </div>
+    </form>
     </div>
     </>
   );

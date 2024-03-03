@@ -28,7 +28,7 @@ const AddExpensesReports = () => {
     const [attachment, setAttachment] = useState(null)
 
 
-    console.log(attachment)
+    // console.log(attachment)
     const clauseOptions = [{
         label: "اساسيه",
         value: " اساسيه"

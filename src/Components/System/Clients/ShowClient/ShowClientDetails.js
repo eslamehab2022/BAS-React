@@ -23,7 +23,7 @@ const ShowClientDetails = ({ showProject, setShowProject , data }) => {
   );
   const [clientStatusType, setClientStatusType] = useState("معلومات المشروع");
 
-  console.log(clientStatusType);
+  // console.log(clientStatusType);
   const ClientDetailsTable = Array.from({ length: 2 }).map((_, index) => {
     return {
       amount: "BSA",

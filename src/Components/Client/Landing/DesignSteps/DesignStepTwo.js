@@ -94,7 +94,7 @@ const DesignStepTwo = (props) => {
       };
       setUserData(updatedUserData)
 
-      console.log(checkPhoneValidation)
+      // console.log(checkPhoneValidation)
 
 
       signalParent(true)
@@ -113,7 +113,7 @@ const DesignStepTwo = (props) => {
       };
       setUserData(updatedUserData)
 
-      console.log(checkPhoneValidation)
+      // console.log(checkPhoneValidation)
     }
 
   }, [clientType?.value.label && identityType?.value.label && instrumentImage?.name && email.value && email.isValid && phone && checkPhoneValidation])

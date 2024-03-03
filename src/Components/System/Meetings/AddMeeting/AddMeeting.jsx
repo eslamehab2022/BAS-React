@@ -106,13 +106,13 @@ export const AddMeeting = ({ view, setView }) => {
      */
 myAxiosJson.post("event", DataSent)
     .then(data => {
-      console.log("event data: ",data);
+      // console.log("event data: ",data);
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
     })
 
-    // console.log("Submitted Data: ", DataSent);
+    // // console.log("Submitted Data: ", DataSent);
     setView(false);
   };
   return (
@@ -224,13 +224,13 @@ myAxiosJson.post("event", DataSent)
                   onChange={(event, editor) => {
                     const data = editor.getData();
                     setDescription(data)
-                    console.log({ event, editor, data });
+                    // console.log({ event, editor, data });
                   }}
                   editor={ClassicEditor}
                   // data="<h2>تفاصيل الاجتماع</h2>"
                   onBlur={(event, editor) => {
                     const data = editor.getData();
-                    console.log({ event, editor, data });
+                    // console.log({ event, editor, data });
                   }}
                 ></CKEditor>
               </Form.Group>
@@ -332,6 +332,7 @@ myAxiosJson.post("event", DataSent)
                     onChange={(date) => setMeetingDate(date)}
                     className="w-50 form-control"
                   />
+                  
                 </Form.Group>
               </div>
             </div>

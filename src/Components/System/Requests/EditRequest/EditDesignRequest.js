@@ -87,12 +87,12 @@ const EditDesignRequest = ({
   const getRequestWithid = async () => {
     try {
       const { data } = await getDesignRequestsWithid(id);
-      console.log(data);
+      // console.log(data);
 
       if (data?.request) {
         setRequest(data?.request);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -102,11 +102,11 @@ const EditDesignRequest = ({
   const getCategories = async () => {
     try {
       const { data } = await getAllCategories();
-      console.log(data);
+      // console.log(data);
       if (data?.sucsses) {
         setProjectCategory(data.category);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -119,7 +119,7 @@ const EditDesignRequest = ({
       if (data?.success) {
         setProjectServices(data.services);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -140,8 +140,8 @@ const EditDesignRequest = ({
     const selectedSubservices = e.target.value;
     setServiceId(selctedServicesId);
     setsubServicesId(selectedSubservices);
-    console.log(servicesId);
-    console.log(setsubServicesId);
+    // console.log(servicesId);
+    // console.log(setsubServicesId);
   };
 
   const [isDataValid, setIsDataValid] = useState();
@@ -179,15 +179,15 @@ const EditDesignRequest = ({
   // ]);
 
   const handleUpdate = (data) => {
-    console.log(data);
-    console.log(categoryId);
-    console.log(subcategoryId);
-    console.log(servicesId);
-    console.log(subservicesId);
+    // console.log(data);
+    // console.log(categoryId);
+    // console.log(subcategoryId);
+    // console.log(servicesId);
+    // console.log(subservicesId);
   };
   useEffect(() => {
     getRequestWithid();
-    console.log(id);
+    // console.log(id);
   }, [id]);
   useEffect(() => {
     getCategories();

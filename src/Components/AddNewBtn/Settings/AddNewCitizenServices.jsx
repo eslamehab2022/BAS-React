@@ -90,7 +90,7 @@ export default function AddNewCitizenServices({
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
-    // console.log(data);
+    // // console.log(data);
     // setData(data);
     // onSave();
     if (type === "vacations") {
@@ -101,10 +101,10 @@ export default function AddNewCitizenServices({
       myAxiosInstance
         .post("vacationCategory", formData)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     } else if (type === "services") {
       for (const image of img) {
@@ -114,10 +114,10 @@ export default function AddNewCitizenServices({
       myAxiosInstance
         .post("serviceHuman", formData)
         .then((data) => {
-          console.log(data);
+          // console.log(data);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
 

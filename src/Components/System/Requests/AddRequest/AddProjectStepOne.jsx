@@ -85,8 +85,8 @@ export const AddProjectStepOne = (props) => {
     const selectedSubservices = e.target.value;
     setServiceId(selctedServicesId);
     setsubServicesId(selectedSubservices);
-    console.log(servicesId);
-    console.log(setsubServicesId);
+    // console.log(servicesId);
+    // console.log(setsubServicesId);
   };
   const [projectType, setProjectType] = useState(
     userData.projectType
@@ -126,7 +126,7 @@ export const AddProjectStepOne = (props) => {
       servicesId &&
       subservicesId
     ) {
-      console.log("valid");
+      // console.log("valid");
       const updatedUserData = {
         ownerName: ownerName?.value,
         buildingLocation: buildingLocation?.value,
@@ -145,7 +145,7 @@ export const AddProjectStepOne = (props) => {
       setUserData(updatedUserData);
       signalParent(true);
     } else {
-      console.log("not valid");
+      // console.log("not valid");
 
       const updatedUserData = {
         ownerName: ownerName.value,
@@ -207,7 +207,7 @@ export const AddProjectStepOne = (props) => {
       projectName.isValid &&
       projectType === 2
     ) {
-      console.log("validation");
+      // console.log("validation");
       const updatedUserData = {
         ownerName: ownerName.value,
         projectName: projectName.value,
@@ -221,7 +221,7 @@ export const AddProjectStepOne = (props) => {
       setUserData(updatedUserData);
       signalParent(true);
     } else {
-      console.log("not vaild");
+      // console.log("not vaild");
       const updatedUserData = {
         ...userData,
         ownerName: ownerName.value,
@@ -256,11 +256,11 @@ export const AddProjectStepOne = (props) => {
   const getCategories = async () => {
     try {
       const { data } = await getAllCategories();
-      console.log(data);
+      // console.log(data);
       if (data?.sucsses) {
         setProjectCategory(data.category);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -272,7 +272,7 @@ export const AddProjectStepOne = (props) => {
       if (data?.success) {
         setProjectServices(data.services);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -286,7 +286,7 @@ export const AddProjectStepOne = (props) => {
     getServices();
   }, []);
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, []);
 
   return (

@@ -44,8 +44,8 @@ export default function ReviewStepOne(props) {
 
             };
             setUserData(updatedUserData)
-            console.log("vaild")
-            console.log(userData)
+            // console.log("vaild")
+            // console.log(userData)
             signalParent(true)
         } else {
             const updatedUserData = {
@@ -61,7 +61,7 @@ export default function ReviewStepOne(props) {
 
             };
             setUserData(updatedUserData)
-            console.log(userData)
+            // console.log(userData)
             signalParent(false)
 
 

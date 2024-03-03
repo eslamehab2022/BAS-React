@@ -29,13 +29,13 @@ const EditReviewReport = ({ editReport, setEditReport }) => {
 
 
     const handleEditProject = (data) => {
-        console.log(data)
+        // console.log(data)
         // after adding a project
         setReportType('')
         setShowAddUserModel(false)
     }
     useEffect(() => {
-        console.log("edit report is open")
+        // console.log("edit report is open")
     }, [])
     return (
         <>

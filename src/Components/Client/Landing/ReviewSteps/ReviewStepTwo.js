@@ -97,7 +97,7 @@ const ReviewStepTwo = (props) => {
             };
             setUserData(updatedUserData)
             signalParent(true)
-            console.log(userData)
+            // console.log(userData)
 
 
         } else {
@@ -114,7 +114,7 @@ const ReviewStepTwo = (props) => {
 
             };
             setUserData(updatedUserData)
-            console.log(userData)
+            // console.log(userData)
 
 
         }

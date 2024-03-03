@@ -74,7 +74,7 @@ const AddProject = ({ handleClose }) => {
       totalAmount.value * ((discountAmount.value || 0) / 100);
     updatedNumber -= initialNumber.value;
     setRemainingAmount(updatedNumber);
-    console.log(remainingAmount);
+    // console.log(remainingAmount);
     setShowNextPayment(true);
   };
 
@@ -89,10 +89,10 @@ const AddProject = ({ handleClose }) => {
       initialNumber.value
     ) {
       setPaymentVaildation(true);
-      console.log(true);
+      // console.log(true);
     } else {
       setPaymentVaildation(false);
-      console.log(false);
+      // console.log(false);
     }
   }, [
     totalAmount.isValid &&

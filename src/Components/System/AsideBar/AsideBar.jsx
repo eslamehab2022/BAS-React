@@ -47,12 +47,12 @@ const AsideBar = () => {
     // if you use screens from tablet collapse the sidebar
     if (width < 1025) {
       setCollapsed(true);
-      // console.log("closed due to small width");
+      // // console.log("closed due to small width");
     } else {
       setCollapsed(false);
-      // console.log("opend due to small width");
+      // // console.log("opend due to small width");
     }
-    // console.log(window.innerWidth);
+    // // console.log(window.innerWidth);
     // clear the use Effect
     return () => {
       window.removeEventListener("resize", getSize);
@@ -64,11 +64,11 @@ const AsideBar = () => {
   const getUser = async () => {
     try {
       const { data } = await getUserProfile();
-      console.log(data);
+      // console.log(data);
       if (data?.success) {
         setUser(data.user);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -332,7 +332,7 @@ const AsideBar = () => {
                 </div>{" "}
                 <div className="col-md-4 ">
                   <div className="system-item">
-                    <Link to={"/System/plans"}>
+                    <Link to={"/System/tasks"}>
                       <div className="system-card">
                         <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
                           <Image
@@ -573,7 +573,7 @@ export const SettingsMenu = ({ openSettingsMenu, handleCloseMenu }) => {
               <div
                 className="system-card"
                 onClick={() => {
-                  // console.log("Settings Clicked");
+                  // // console.log("Settings Clicked");
                 }}
               >
                 <div className="card__content d-flex justify-content-center align-items-center  flex-column  ">
@@ -613,11 +613,11 @@ export const ProfileMenu = ({ show, setShow }) => {
   const getUser = async () => {
     try {
       const { data } = await getUserProfile();
-      console.log(data);
+      // console.log(data);
       if (data?.success) {
         setUser(data.user);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

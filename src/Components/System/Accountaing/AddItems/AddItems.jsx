@@ -34,8 +34,8 @@ const AddItems = () => {
   const itemCode = UseInput("", "", true);
   const [attachment, setAttachment] = useState(null);
 
-  console.log("attachment is " + attachment);
-  console.log("descrption is " + description);
+  // console.log("attachment is " + attachment);
+  // console.log("descrption is " + description);
   const [img, setImg] = useState(null);
 
   function updateImageDisplay(e) {
@@ -57,7 +57,7 @@ const AddItems = () => {
     formdata.append("description", data.description);
     formdata.append("dateCreated", formattedDate);
     img && img.forEach((i) => formdata.append("image", i));
-    // console.log({...data, "data": formattedDate});
+    // // console.log({...data, "data": formattedDate});
     mutateAddBatche(formdata);
     // setOpenAddAccountant(false);
   };

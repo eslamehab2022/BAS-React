@@ -62,7 +62,7 @@ class AllClientsPieChart extends React.Component {
       },
     };
     this.componentDidMount = () => {
-      console.log("series 0 is " + this.state.series[0]);
+      // console.log("series 0 is " + this.state.series[0]);
     };
   }
 

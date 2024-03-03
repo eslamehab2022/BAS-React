@@ -88,3 +88,6 @@ export const QuickLinks = [
     path: "/System/plans",
   },
 ];
+
+export const PROJECTTYPE = ["تصميم", "اشراف علي التنفيذ"];
+export const PLANSTATUS = ["منتهية", "مرفوضة", "متوقفة", "قيد التنفيذ", "معلقة"];

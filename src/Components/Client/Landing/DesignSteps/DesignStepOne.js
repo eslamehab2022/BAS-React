@@ -141,7 +141,7 @@ const DesignStepOne = (props) => {
 
     useMemo(() => {
         if (ownerName.value && ownerName.isValid && buildingLocation.value && buildingLocation.isValid && city.value?.label && city.isValid && Area.value && Area.isValid && pieceNumber.value && pieceNumber.isValid && pieceNumber.value && pieceNumber.isValid && ChartNumber.value && ChartNumber.isValid && ProjectUse?.value.label && serviceType?.value.label) {
-            console.log("validation")
+            // console.log("validation")
             const updatedUserData = {
                 ...userData,
                 ownerName: ownerName.value,

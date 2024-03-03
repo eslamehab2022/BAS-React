@@ -34,7 +34,7 @@ const Genralnformation = ({userData}) => {
       ),
     };
   });
-  console.log(openHr);
+  // console.log(openHr);
 
   const columns = [
     {

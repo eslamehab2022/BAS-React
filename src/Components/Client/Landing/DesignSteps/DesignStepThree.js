@@ -24,7 +24,7 @@ const DesignStepThree = (props) => {
     props.signalIfValid(isValid)
   }
 
-  console.log(userData)
+  // console.log(userData)
 
   useMemo(() => {
     if (agent?.value && agent?.isValid && agencyNumber?.value && agencyNumber?.isValid && agencyNumber?.value && agencyAttachments?.name && instrumentNumber.value && instrumentNumber.isValid && InstrumentAttachments?.name) {
@@ -41,7 +41,7 @@ const DesignStepThree = (props) => {
       setUserData(updatedUserData)
       setUserDataVaild(true)
 
-      console.log(userData)
+      // console.log(userData)
 
     } else {
 
@@ -61,7 +61,7 @@ const DesignStepThree = (props) => {
       setUserDataVaild(false)
       signalParent(false)
     }
-    console.log(userDataVaild)
+    // console.log(userDataVaild)
   }, [agent?.value && agent?.isValid && agencyNumber?.value && agencyNumber?.isValid && agencyNumber?.value && agencyAttachments?.name && instrumentNumber.value && instrumentNumber.isValid && InstrumentAttachments?.name])
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const DesignStepThree = (props) => {
               submitDesign()
 
             } catch (error) {
-              console.log(error)
+              // console.log(error)
 
             }
 

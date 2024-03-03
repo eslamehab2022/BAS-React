@@ -105,9 +105,10 @@ export default function PlanModel() {
               title={"المهام"}
               path={"/System/plans/tasks"}
               items={[
-                { title: "مهمة 1" },
-                { title: "مهمة 2" },
-                { title: "مهمة 3" },
+                { title: "كل المهام"},
+                { title: "مهام قيد التنفيذ"},
+                { title: "مهام معلقه"},
+                { title: "مهام منتهيه"},
               ]}
             />
           </div>

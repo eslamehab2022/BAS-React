@@ -70,10 +70,10 @@ const AddUpdateDesignReport = ({
     control,
     name: "areaGroup",
   });
-  console.log("errors in form are ", errors);
+  // console.log("errors in form are ", errors);
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     handleClose();
     // after ensuring the data is submitted
     if (id) {

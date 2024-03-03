@@ -75,6 +75,15 @@ import UserChat from "./Pages/System/Chat/UserChat/UserChat";
 import Profile from "./Pages/System/Profile/Profile";
 import UserContext from "./Context/userProvider";
 import UsersParamsProvider from "./Context/UsersParamsContext";
+import AddTask from "./Pages/System/Plans/Projects/AddTask";
+import ShowTask from "./Pages/System/PlanModel/Projects/ShowTask";
+import TaskContextProvier from "./Pages/System/PlanModel/context/TaskContext";
+import TasksModel from "./Pages/System/Tasks";
+import MainPage from "./Pages/System/Tasks/pages/MainPage";
+import ProjectsPage from "./Pages/System/Tasks/pages/ProjectsPage";
+import TasksPage from "./Pages/System/Tasks/pages/TasksPage";
+import AddPlan from "./Pages/System/Tasks/pages/AddPlan";
+import ExternalTasksPage from "./Pages/System/Tasks/pages/ExternalTasksPage";
 
 const SignUP = lazy(() => import("./Pages/DashBoard/SignUP/SignUP"));
 const SignIn = lazy(() => import("./Pages/DashBoard/SignIn/SignIn"));
@@ -148,9 +157,8 @@ const router = createBrowserRouter([
     element: (
       <UserContext>
         {" "}
-        <UsersParamsProvider> 
-        <SystemIndex />
-
+        <UsersParamsProvider>
+          <SystemIndex />
         </UsersParamsProvider>
       </UserContext>
     ),
@@ -341,6 +349,39 @@ const router = createBrowserRouter([
 
       //System Plans
       {
+        path: "/System/tasks",
+        element: <ProjectContextProvier>
+        <TaskContextProvier>
+          <TableContextProvder>
+            <TasksModel />
+          </TableContextProvder>
+        </TaskContextProvier>
+      </ProjectContextProvier> ,
+        children: [
+          {index: true, element: <MainPage/>},
+          {path:"plans", element: <ProjectsPage/>},
+          {path:"tasks", element: <TasksPage/>},
+          {path:"external-tasks", element: <ExternalTasksPage/>},
+        ]
+      },
+      {
+        path: "/System/tasks/plans/add-project",
+        element: <AddPlan />,
+      },
+      {
+        path: "/System/tasks/plans/add-task",
+        element: <AddTask />,
+      },
+      {
+        path: "/System/tasks/show-project/:projectId",
+        element: <ShowProject />,
+      },
+      {
+        path: "/System/tasks/show-task/:taskId",
+        element: <ShowTask />,
+      },
+      // .................................
+      {
         path: "/System/plans",
         element: (
           <ProjectContextProvier>
@@ -352,12 +393,14 @@ const router = createBrowserRouter([
       },
       //System Plans Projects
       {
-        path: "/System/plans/projects",
+        path: "/System/plans/:planType",
         element: (
           <ProjectContextProvier>
-            <TableContextProvder>
-              <PlansProjects />
-            </TableContextProvder>
+            <TaskContextProvier>
+              <TableContextProvder>
+                <PlansProjects />
+              </TableContextProvder>
+            </TaskContextProvier>
           </ProjectContextProvier>
         ),
       },
@@ -366,24 +409,32 @@ const router = createBrowserRouter([
         element: <AddProject />,
       },
       {
+        path: "/System/plans/tasks/add-task",
+        element: <AddTask />,
+      },
+      {
         path: "/System/plans/show-project/:projectId",
         element: <ShowProject />,
+      },
+      {
+        path: "/System/plans/show-task/:taskId",
+        element: <ShowTask />,
       },
       {
         path: "/System/plans/edit-project/:projectId",
         element: <EditProject />,
       },
-      {
-        path: "/System/plans/tasks",
-        element: (
-          <ProjectContextProvier>
-            <TableContextProvder>
-              <PlansProjects />
-            </TableContextProvder>
-          </ProjectContextProvier>
-        ),
-        
-      },
+      // {
+      //   path: "/System/plans/tasks",
+      //   element: (
+      //     <ProjectContextProvier>
+      //       <TableContextProvder>
+      //         <PlansProjects />
+      //       </TableContextProvder>
+      //     </ProjectContextProvier>
+      //   ),
+
+      // },
       // system Chat
       {
         path: "",

@@ -31,7 +31,7 @@ const ReviewStepThree = (props) => {
 
     useMemo(() => {
         if (licenseNumber.isValid && licenseNumber.value && licenseDeed.isValid && licenseDeed.value && licenseDate && licenseAttachments?.name) {
-            console.log("vaild")
+            // console.log("vaild")
             signalParent(true)
             const updatedUserData = {
                 ...userData,
@@ -68,7 +68,7 @@ const ReviewStepThree = (props) => {
         signalParent(IsVaildState)
     }, [])
 
-    console.log(licenseDate)
+    // console.log(licenseDate)
     return (
         <div className='step-three'>
             <Form className='row w-100 m-auto '>

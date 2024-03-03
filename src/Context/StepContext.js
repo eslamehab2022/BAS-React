@@ -85,14 +85,14 @@ const StepContext = ({ children }) => {
     }
 
     for (const entry of request.entries()) {
-      console.log(entry);
+      // console.log(entry);
     }
     try {
       const { data } = await addRequest(request);
       if (data.success) {
         setSubmitted(false);
         setView(false);
-        console.log("data submitted");
+        // console.log("data submitted");
         setUserData([]);
       }
 

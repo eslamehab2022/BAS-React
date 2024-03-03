@@ -74,7 +74,7 @@ export default function AddReception({ show, handleClose, status, id = null }) {
     formState: { errors },
   } = useForm({});
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

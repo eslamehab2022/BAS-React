@@ -55,7 +55,7 @@ const Test = () => {
             setSubmitted(false)
 
         }, 2000);
-        console.log(data);
+        // console.log(data);
     };
 
     return (

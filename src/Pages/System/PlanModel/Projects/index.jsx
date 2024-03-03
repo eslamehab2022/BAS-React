@@ -354,6 +354,7 @@ export default function Projects() {
       <div className="grid grid-cols-2 py-2">
         <div className="flex items-center gap-3 ">
           <IconButton
+          type="button"
             onClick={() => setFullWidthTable(!fullWidthTable)}
             aria-label="toggle"
           >

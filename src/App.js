@@ -15,18 +15,29 @@ import NetWorkError from './Components/Errors/NetWorkError';
 import  io  from 'socket.io-client';
 import config from './Config/Config';
 import { useEffect } from 'react';
+import Cookies from 'js-cookie';
+import { Provider } from 'react-redux'
+import { store } from './setup/RTK/store';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-const socket = io.connect('http://bsa2011.com:5000');
+// const socket = io.connect('http://bsa2011.com:5000');
 function App() {
-  useEffect(()=>{
-    socket.on("hey",(message)=>{
-      console.log("Hello From ",message);
-    })
-  })
+  // useEffect(()=>{
+  //   socket.on("hey",(message)=>{
+  //     // console.log("Hello From ",message);
+  //   })
+  // },[])
+  // useEffect(()=>{
+  //   const user = Cookies.get("accessToken") ? Cookies.get("accessToken") : null;
+  //   socket.emit("auth",user)
+  // })
+
   return (
     <div className="App">
+      <Provider store={store}>
+
       <RouterProvider router={router} />
+      </Provider>
       
     </div>
   );

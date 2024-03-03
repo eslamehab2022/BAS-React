@@ -97,6 +97,7 @@ const SystemSignIn = () => {
       console.log(data);
       if (data.success) {
         Cookies.set("accessToken", data.accessToken);
+        Cookies.set("role", data.role);
         navigate("/System/index");
       }
     } catch ({ response }) {

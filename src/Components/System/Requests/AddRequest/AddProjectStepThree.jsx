@@ -50,7 +50,7 @@ const AddProjectStepThree = (props) => {
   );
   const [instrument, setInstrument] = useState(null);
   const [idPhoto, setIdPhoto] = useState();
-  console.log(notes);
+  // console.log(notes);
 
   // check desing vaildation
   const [IsVaildState, setIsVaildState] = useState(false);
@@ -83,7 +83,7 @@ const AddProjectStepThree = (props) => {
       signalParent(true);
 
 
-      console.log(userData);
+      // console.log(userData);
     } else {
       const updatedUserData = {
         ...userData,
@@ -98,7 +98,7 @@ const AddProjectStepThree = (props) => {
       setUserDataVaild(false);
       signalParent(false);
     }
-    console.log(userDataVaild);
+    // console.log(userDataVaild);
   }, [
     agent?.value &&
       agent?.isValid &&
@@ -126,7 +126,7 @@ const AddProjectStepThree = (props) => {
 
   const [confirmSubmit, setConfirmSubmit] = useState(false);
   // check Review validation
-  console.log(selectProjectType);
+  // console.log(selectProjectType);
   useMemo(() => {
     if (
       licenseNumber.isValid &&
@@ -174,7 +174,7 @@ const AddProjectStepThree = (props) => {
     signalParent(IsVaildState);
   }, []);
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   useEffect(() => {

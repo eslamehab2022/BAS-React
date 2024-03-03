@@ -13,7 +13,7 @@ import Image from "../../../Image";
 import SaveButton from "../../../SaveButton";
 
 const AddUpdateUser = ({ id = null, setOpenUpdateUser, setOpenModal }) => {
-  console.log(id);
+  // console.log(id);
 
   const {
     showAddUserModel,

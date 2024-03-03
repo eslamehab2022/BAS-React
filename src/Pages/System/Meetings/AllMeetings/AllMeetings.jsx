@@ -86,7 +86,7 @@ const AllMeetings = () => {
     .catch(err => {
       console.log(err);
     })
-  })
+  },[])
   const moveEvent = ({ event, startDate, endDate, isAllDay: droppedOnAllDaySlot }) => {
     const idx = events.indexOf(event);
     let allDay = event.allDay;

@@ -31,7 +31,7 @@ const AddReviewReport = ({ handleClose }) => {
   } = useForm();
 
   const handleAddProject = (data) => {
-    console.log(data);
+    // console.log(data);
     handleClose();
     // after adding a project
     setReportType("");

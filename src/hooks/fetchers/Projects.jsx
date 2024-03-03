@@ -4,10 +4,16 @@ import {
   addProject,
   updateProject,
   deleteProject,
+  getProject,
 } from "../../helper/fetchers/Projects";
 
 export const useGetAllProjects = () => {
   const query = useQuery("project", getAllProjects);
+
+  return query;
+};
+export const useGetProject = (id) => {
+  const query = useQuery(["project",id],()=> getProject(id));
 
   return query;
 };

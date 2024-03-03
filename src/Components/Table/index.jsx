@@ -69,7 +69,7 @@ export default function CustomTable({
             : null} */}
         </tbody>
       </Table>
-      {data && data.length === 0 ? (
+      {!data || data.length === 0 ? (
         <div className="text-center">
           <p className="w-full text-center text-xl border-none min-w-[50px] p-2 !text-[#ffffff7f]">
             لا يوجد بيانات لعرضها{" "}

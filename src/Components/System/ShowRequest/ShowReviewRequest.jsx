@@ -92,12 +92,12 @@ const ShowReviewRequest = ({ setShowProject, ReviewProjectType, id }) => {
   const getRequestWithid = async () => {
     try {
       const { data } = await getDesignRequestsWithid(id);
-      console.log(data);
+      // console.log(data);
 
       if (data?.request) {
         setRequest(data?.request);
       } else {
-        console.log("Data retrieval failed");
+        // console.log("Data retrieval failed");
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);

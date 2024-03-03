@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import { CiCalendar } from "react-icons/ci";
 function CustomInput({ value, onClick }) {
@@ -26,7 +26,7 @@ function CustomInput({ value, onClick }) {
 // </span>
 //   </div>
 // </div>
-const FormDatePicker = ({ date, setDate, placeholderText, onChange }) => {
+const FormDatePicker = forwardRef(({ date, setDate, placeholderText, onChange },ref) => {
   return (
       <DatePicker
       selected={date}
@@ -36,8 +36,9 @@ const FormDatePicker = ({ date, setDate, placeholderText, onChange }) => {
       className="w-full"
       todayButton={"TODAY"}
       customInput={<CustomInput />}
+      ref={ref}
     />
   );
-};
+});
 
 export default FormDatePicker;

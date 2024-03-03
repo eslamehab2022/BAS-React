@@ -134,7 +134,7 @@ const ProfessinollInformation = () => {
   const [data, setData] = useState(FinisedProjectData);
   const { openHr } = useContext(AddHrType);
 
-  console.log(openHr);
+  // console.log(openHr);
   
   return (
     <div className="ProfessinollInformation">

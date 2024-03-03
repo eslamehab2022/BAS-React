@@ -38,7 +38,7 @@ const ShowProjectComponent = ({ showProject, setShowProject , data }) => {
   const [confirmContinueProject, setConfirmContinueProject] = useState(false);
   const [viewMore, setViewMore] = useState(false);
 
-  console.log("data: ",data);
+  // console.log("data: ",data);
 
   const [openPdf, setOpenPdf] = useState(false);
   const [ConfirmUpdate, setConfirmUpdate] = useState(false);

@@ -43,7 +43,7 @@ const AddServices = () => {
 
     const handleAddServices = () => {
         // after addServices
-        console.log("form submmited")
+        // console.log("form submmited")
         setOpenHr(false)
     }
 

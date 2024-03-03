@@ -163,7 +163,7 @@ const AddProjectStepTwo = (props) => {
     signalParent(IsVaildState);
   }, [IsVaildState]);
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   return (

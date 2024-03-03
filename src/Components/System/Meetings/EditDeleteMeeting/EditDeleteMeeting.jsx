@@ -163,13 +163,13 @@ const EditDeleteMeeting = ({
                   <CKEditor
                     onChange={(event, editor) => {
                       const data = editor.getData();
-                      console.log({ event, editor, data });
+                      // console.log({ event, editor, data });
                     }}
                     editor={ClassicEditor}
                     data="<h2>تفاصيل الاجتماع</h2>"
                     onBlur={(event, editor) => {
                       const data = editor.getData();
-                      console.log({ event, editor, data });
+                      // console.log({ event, editor, data });
                     }}
                   ></CKEditor>
                 </Form.Group>
@@ -315,9 +315,9 @@ const EditDeleteMeeting = ({
                 onClick={()=>{
                   myAxiosJson.delete(`event/${id}`)
                   .then(data=> {
-                    console.log(data);
+                    // console.log(data);
                   })
-                  .catch(error=>console.log(error))
+                  .catch(error=> console.log(error))
 
                   setShowEditDeleteModal(false);
                 }} />

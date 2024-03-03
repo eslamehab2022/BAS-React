@@ -96,11 +96,11 @@ const AddUpdateReciption = ({
   } = useForm({});
 
   const handleEditvisit = (data) => {
-    console.log(data);
+    // console.log(data);
     setEditVisit(false);
   };
   const handleAddvisit = (data) => {
-    console.log(data);
+    // console.log(data);
     var formdata = new FormData();
     /**
    typeVisit = "1" => "employId" : 65d1bb70ab6f6075b95446d1 
@@ -155,14 +155,14 @@ const AddUpdateReciption = ({
     formdata.append("timeOutVist", "2025-07-13T14:34:50.600+00:00");
     formdata.append("timeInVist", "2025-07-13T14:34:50.600+00:00");
     formdata.append("notes", data.notes);
-    console.log(data);
+    // console.log(data);
     // myAxiosInstance
     //   .post("reception", formdata)
     //   .then((data) => {
-    //     console.log("reception data: ", data);
+    //     // console.log("reception data: ", data);
     //   })
     //   .catch((err) => {
-    //     console.log(err);
+    //     // console.log(err);
     //   });
 
     setShow(false);
@@ -227,7 +227,7 @@ const AddImport = ({ show, onHide }) => {
   }
 
   const onSubmit = (data) => {
-    console.log({ ...data, image: attachment,"dateVist": dateVist });
+    // console.log({ ...data, image: attachment,"dateVist": dateVist });
 
     const formData = new FormData();
     formData.append("resoneVisit", data.resoneVisit);
@@ -471,7 +471,7 @@ const AddExport = ({ show, onHide }) => {
     }
   }
   const onSubmit = (data) => {
-    console.log({ ...data, image: attachment });
+    // console.log({ ...data, image: attachment });
     const formData = new FormData();
     formData.append("resoneVisit", data.resoneVisit);
     formData.append("notes", data.notes);
@@ -727,7 +727,7 @@ const EditExport = ({ show, onHide }) => {
     }
   }
   const onSubmit = (data) => {
-    console.log({ ...data, image: attachment });
+    // console.log({ ...data, image: attachment });
     const formData = new FormData();
     formData.append("resoneVisit", data.resoneVisit);
     formData.append("notes", data.notes);
@@ -935,7 +935,7 @@ const EditImport = ({ show, onHide }) => {
     }
   }
   const onSubmit = (data) => {
-    console.log({ ...data, image: attachment });
+    // console.log({ ...data, image: attachment });
     const formData = new FormData();
     formData.append("resoneVisit", data.resoneVisit);
     formData.append("notes", data.notes);
