@@ -288,7 +288,7 @@ const router = createBrowserRouter([
             element: <AllEmployees />,
           },
           {
-            path: "/System/Hr/Users",
+            path: "/System/Hr/Users/:id",
             element: <HrUsers />,
           },
           { path: "/System/Hr/HolidayMangment", element: <HolidayMangment /> },

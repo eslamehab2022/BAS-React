@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SystemControler from "../../../Components/System/SystemControler/SystemControler";
 import { FaCaretRight, FaDownload } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const Profile = () => {
   const [birthDate, setBirthDate] = useState(null);
   const [idDate, setIdDate] = useState(null);
   const [openPdf, setOpenPdf] = useState(null);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   const getUser = async () => {
     try {
@@ -68,11 +68,12 @@ const Profile = () => {
                     {" "}
                     معلوماتى الشخصية
                   </legend>
+                  <CheckFilePath user={user} />
                   <div>
                     <div className="mx-2 flex gap-3">
                       {/* should be user img */}
                       <Image
-                        src={staticImageSrc + user.image}
+                        src={user?.image}
                         alt="user img"
                         className={"w-[92px] h-[92px] rounded-[50%]"}
                       />
@@ -260,9 +261,9 @@ const Profile = () => {
                     {user.fileUser &&
                       user.fileUser.length > 0 &&
                       user.fileUser.map((file, index) => (
-                        <div key={index}> 
+                        <div key={index}>
                           <div
-                            className="border flex my-3 justify-between bg-[#1E1E2D] border-[#EFAA20] w-full h-[55px] rounded-[3.37px]"
+                            className="border flex my-3 justify-between bg-[#1E1E2D] px-2 !border-[#EFAA20] w-full h-[55px] rounded-[3.37px]"
                             key={index}
                           >
                             <div className="flex items-center gap-3">
@@ -311,3 +312,29 @@ const Profile = () => {
 };
 
 export default Profile;
+const CheckFilePath = ({ user }) => {
+  const imageExtensions = [
+    "jpg",
+    "jpeg",
+    "png",
+    "gif",
+    "bmp",
+    "svg",
+    "webp",
+    "tiff",
+    "tif",
+  ];
+
+  if (user && user.fileUser && user.fileUser.length > 0) {
+    for (const file of user.fileUser) {
+      const fileExtension = file.split(".").pop().toLowerCase(); // Get the file extension and convert it to lowercase
+      const isImage = imageExtensions.includes(fileExtension);
+
+      if (isImage) {
+        return true; // If an image is found, return true
+      }
+    }
+  }
+
+  return false; // If no image is found, return false
+};

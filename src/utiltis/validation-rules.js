@@ -30,6 +30,23 @@ export const validationRules = {
       invalid: "رقم هوية غير صحيح ",
     },
   },
+  userName: {
+    pattern: new RegExp(/^[a-zA-Z]+@Bsa\d+$/), //Alphanumeric string
+    required: false,
+    message: {
+      empty: "  اسم المستخدم  فارغ ",
+      invalid: "اسم مستخدم غير صحيح ",
+    },
+  },
+
+  idNumber: {
+    pattern: new RegExp(/^\d{1}-\d{10}$/), //Alphanumeric string
+    required: false,
+    message: {
+      empty: "  رقم الهوية فارغ ",
+      invalid: "رقم هوية غير صحيح ",
+    },
+  },
   //
   lastName: {
     pattern: /^[a-z ,'-]+$/i, //Alphanumeric string
@@ -55,13 +72,10 @@ export const validationRules = {
     },
   },
   password: {
-    pattern: new RegExp(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~!@#$%^&*_\-+=`|\\(){}\[\]:;"'<>,.?\/]).{8,}$/
-    ),
+    pattern: new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/),
     // required: true,
     message: {
-      invalid:
-        "Password must be at least 8 characters long and contain at least one number, letter and special character",
+      invalid:"Password must be at least 8 characters long and contain at least one number, letter and special character",
     },
   },
   chartNumber: {
@@ -144,7 +158,7 @@ export const validationRules = {
     },
   },
   phone: {
-    pattern: /^\d{4,14}$/,
+    pattern: /^(009665|9665|\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/,
     required: false,
     message: {
       empty: "Phone number is required",

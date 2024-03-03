@@ -1,11 +1,7 @@
-import { myAxiosJson } from "../https";
+import myAxiosInstance, { myAxios, myAxiosJson } from "../https";
 
-
-
-export function getAllUsers(params) {
-  let url = 'user';
-  if (params) {
-    url += `?${new URLSearchParams(params).toString()}`;
-  }
-  return myAxiosJson(url);
-}
+export const getAllUsers = () => myAxios("/user/");
+export const addUser = (data) => myAxiosInstance.post("/user/", data);
+export const getUserById = (id) => myAxios(`/user/${id}`);
+export const deleteUserByID = (id) => myAxios.delete(`/user/${id}`);
+export const upgradePassword = (id,data) => myAxiosJson.patch(`/user/updatePassword/${id}`, data);

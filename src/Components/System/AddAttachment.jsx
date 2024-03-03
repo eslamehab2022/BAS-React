@@ -27,7 +27,7 @@ const AddAttachment = ({ attachment, setAttachment }) => {
                 multiple={true}
                 htmlFor="formFile"
                 className={`chooseFile text-white`}
-                onChange={(e) => setAttachment(e.currentTarget.files[0].name)}
+                onChange={(e) => setAttachment(e.currentTarget.files[0])}
               />
             </Form.Group>
             <div
