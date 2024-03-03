@@ -1,4 +1,3 @@
-// const development_domain_server = "http://192.168.0.108:3030"
 const development_domain_server = "http://bsa2011.com:5000/api/v1";
 const production_domain_server = "http://bsa2011.com:5000/api/v1";
 export const staticImageSrc = "http://bsa2011.com:5000/";
