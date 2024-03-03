@@ -6,6 +6,8 @@ import CountryDeprtamentSlider from "../../../../Components/System/Users/Country
 import SearchCountryUsers from "../../../../Components/System/Users/SearchUsers/SearchCountryUsers";
 import { useEffect, useMemo, useState } from "react";
 import SearchUsers from "../../../../Components/System/Users/SearchUsers/SearchUsers";
+import { toast } from "react-toastify";
+import { getUserStatisticsByRole } from "../../../../helper/fetchers/Users";
 
 const CountryChartHR = () => {
   const { CountryName } = useParams();
@@ -22,6 +24,24 @@ const CountryChartHR = () => {
       setCountryBaseAr("مصر");
     }
   }, [CountryName]);
+  const [users, setUsers] = useState(false);
+  const getUsersStaticts = async () => {
+    try {
+      const { data } = await getUserStatisticsByRole();
+      console.log(data);
+      if (data) {
+        setUsers(data);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
+  useEffect(() => {
+    getUsersStaticts();
+  }, []);
+
+  // getUserStatisticsByRole
   useEffect(() => {}, [CountryName]);
   return (
     <div className="grid grid-cols-12 gap-2">
@@ -32,7 +52,7 @@ const CountryChartHR = () => {
         <div className="country-Chart py-5">
           <div className="d-flex justify-content-center flex-column align-items-center">
             <div className="d-flex  mx-auto gap-4   justify-center">
-              <p className=" text-center text-xl   text-white mb-4">    
+              <p className=" text-center text-xl   text-white mb-4">
                 {countryBase === "Saudia" ? "السعودية" : "مصر"}
               </p>
               <Link
@@ -60,7 +80,17 @@ const CountryChartHR = () => {
               </Link>
             </div>
 
-            <CountryPieChart country={countryBase} />
+            <CountryPieChart
+              country={countryBase}
+              employee={users ? users.employee : 0}
+              HR={users ? users.HR : 0}
+              admin={users ? users.admin : 0}
+              officeManager={users ? users['office manager'] : 0}
+              audit={users ? users.audit : 0}
+              senior={users ? users.senior : 0}
+              accountant={users ? users.accountant : 0}
+              administrator={users ? users.administrator : 0}
+            />
           </div>
           <fieldset className="All-users-columnChart-container  py-3 m-auto ">
             <legend className="text-white text-center">

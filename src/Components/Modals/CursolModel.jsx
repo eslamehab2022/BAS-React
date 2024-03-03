@@ -13,8 +13,8 @@ const CursolModel = ({ show, onClose, imgs }) => {
     arrows: true, // Adding arrows
     infinite: true,
     dir: "rtl",
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 2,
+    slidesToScroll: 2,
     autoplay: true,
     speed: 2000,
     autoplaySpeed: 2000,
@@ -23,8 +23,8 @@ const CursolModel = ({ show, onClose, imgs }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
           dots: true,
         },
@@ -42,8 +42,8 @@ const CursolModel = ({ show, onClose, imgs }) => {
       {
         breakpoint: 760,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           infinite: true,
           dots: true,
         },
@@ -60,12 +60,12 @@ const CursolModel = ({ show, onClose, imgs }) => {
         className=" systemModal"
       >
         <div className=" flex gap-3 items-center justify-center">
-          <Slider className="" {...settings}>
+          <Slider className="!w-full flex" {...settings}>
             {imgs ? (
               imgs.map((img, index) => (
                 <div
                   key={index}
-                  className="  flex gap-5 my-5   w-[full] h-[full] rounded  justify-content-center "
+                  className="  flex gap-5 my-5   !w-[full] !h-[full] rounded  justify-content-center "
                 >
                   <Image
                     src={staticImageSrc + img}

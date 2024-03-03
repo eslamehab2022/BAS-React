@@ -6,7 +6,7 @@ import SystemControler from "../../../../Components/System/SystemControler/Syste
 import Select from "../../../../Components/FormHandler/Select";
 import AllUsersPieChart from "../../../../Components/System/Users/AllUsersChart/AllUsersPieChart";
 import AllUsersColumnChart from "../../../../Components/System/Users/AllUsersChart/AllUsersColumnChart";
-import AddUpdateUser from "../../../../Components/System/Users/AddUpdateUser/AddUpdateUser";
+
 import DeptamentSlider from "../../../../Components/System/Users/AllUsersChart/DeprtamentSlide/DeptamentSlider";
 import { CountriesChart } from "./CountriesChart";
 import { Link, Outlet } from "react-router-dom";

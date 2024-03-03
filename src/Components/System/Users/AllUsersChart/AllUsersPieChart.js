@@ -2,12 +2,12 @@ import React from "react";
 import ReactApexChart from "react-apexcharts";
 import "./index.css";
 
-class   AllUsersPieChart extends React.Component {
+class AllUsersPieChart extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      series: [70, 30],
+      series: [this.props.Saudi, this.props.Egypet],
 
       options: {
         chart: {
@@ -78,6 +78,19 @@ class   AllUsersPieChart extends React.Component {
     );
     text[0].setAttribute("fill", "#FFFFFF");
   }
+  componentDidUpdate(prevProps) {
+    // Check if the props Saudi or Egypet have changed
+    if (
+      prevProps.Saudi !== this.props.Saudi ||
+      prevProps.Egypet !== this.props.Egypet
+    ) {
+      // If changed, update the state with new values
+      this.setState({
+        series: [this.props.Saudi, this.props.Egypet],
+      });
+    }
+  }
+
   render() {
     return (
       <div className="chart-wrap h-100">
@@ -87,7 +100,7 @@ class   AllUsersPieChart extends React.Component {
             series={this.state.series}
             type="donut"
             width={"450px"}
-          ></ReactApexChart>  
+          ></ReactApexChart>
         </div>
       </div>
     );

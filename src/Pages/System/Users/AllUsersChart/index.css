@@ -1,56 +1,53 @@
 .all-users-Chart {
-    height: 801px;
-    border-radius: 19px;
-    background: #1E1E2D;
-  
+  height: 801px;
+  border-radius: 19px;
+  background: #1e1e2d;
+  overflow: hidden !important;
+
 }
 
 .AllUsersPieChart {
-    height: 300px !important;
+  height: 300px !important;
+  overflow: hidden !important;
 }
 
 .golden-square {
-
-    border: 0.854px solid rgba(213, 153, 33, 0.50);
-
-
+  border: 0.854px solid rgba(213, 153, 33, 0.5);
 }
 
-.All-users-columnChart-container  {
-    /* height:  470px; */
-    border: 0.854px solid rgba(213, 153, 33, 0.50);
+.All-users-columnChart-container {
+  /* height:  470px; */
+  border: 0.854px solid rgba(213, 153, 33, 0.5);
 }
 
-.All-users-columnChart ,.county-users-columnChart {
-    height: 95%;
-    border-radius: 17.573px;
-    background: #151521;
-    width: 95%;
-    margin: auto;
-    overflow-x  : hidden;
-    overflow-y: hidden;
-
+.All-users-columnChart,
+.county-users-columnChart {
+  height: 95%;
+  border-radius: 17.573px;
+  background: #151521;
+  width: 95%;
+  margin: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
-.country-Chart{
-    background-color: #1E1E2D   ;
-    height: 801px;
-    border-radius: 19px;
-    
+.country-Chart {
+  background-color: #1e1e2d;
+  height: 801px;
+  border-radius: 19px;
 }
 
-.country-Chart .sections-slider ,.all-users-Chart  .sections-slider{
+.country-Chart .sections-slider,
+.all-users-Chart .sections-slider {
+  width: 129px !important;
+  height: 126px !important;
+}
 
-        width: 129px !important;
-        height: 126px !important;
-    }
-
-    .slick-list::-webkit-scrollbar {
-        display: none;
-    } 
-.country-header{
-
-    font-size: 32.268px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.slick-list::-webkit-scrollbar {
+  display: none;
+}
+.country-header {
+  font-size: 32.268px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
