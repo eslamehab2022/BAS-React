@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import "./adduser.css"
 import { Button } from 'react-bootstrap'
-import AddUpdateUser from '../Users/AddUpdateUser/AddUpdateUser'
 import { useContext } from 'react'
 import { showAddUpdateUser } from '../../../Context/CheckAddUpdateUserVisability'
 const AddUserButton = () => {

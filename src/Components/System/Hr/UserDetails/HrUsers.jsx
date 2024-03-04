@@ -8,7 +8,6 @@ import Genralnformation from "../../Users/Genralnformation/Genralnformation";
 import { AccountaingInformation } from "../../Users/AccountaingInformation/AccountaingInformation";
 
 import { showAddUpdateUser } from "../../../../Context/CheckAddUpdateUserVisability";
-import AddUpdateUser from "../../Users/AddUpdateUser/AddUpdateUser";
 import AddUserButton from "../../AddUserButton/AddUserButton";
 import { Link, useParams } from "react-router-dom";
 import SystemControler from "../../SystemControler/SystemControler";
@@ -25,6 +24,7 @@ import { deleteUserByID, getUserById } from "../../../../helper/fetchers/Users";
 import { toast } from "react-toastify";
 import Progress from "../../../Progress";
 import { defaultImage } from "../../../../Config/Config";
+import AddUpdateUser from "../AddUpdateUser/AddUpdateUser";
 
 const HrUsers = () => {
   const [employeeDetails, setEmployeeDetails] = useState("aboutEmpolyee");
@@ -74,7 +74,6 @@ const HrUsers = () => {
     }
   };
 
-
   const [user, setUser] = useState(null);
   const getUserWithID = async () => {
     try {
@@ -103,10 +102,12 @@ const HrUsers = () => {
         handleSave={handleDelete}
         handleClose={() => setDeleteUser(false)}
       />
-      <UpdatePassword id={id} show={upgradeUser} 
-       handleClose={()=> setUpgradeUser(false)}
-       setSuccsesfull={setSuccsesfull}
-       setMessage={setMessage}
+      <UpdatePassword
+        id={id}
+        show={upgradeUser}
+        handleClose={() => setUpgradeUser(false)}
+        setSuccsesfull={setSuccsesfull}
+        setMessage={setMessage}
       />
       <SuccessfullModal
         show={successfull}
@@ -140,12 +141,12 @@ const HrUsers = () => {
                           <DownloadButton> تصدير Excel </DownloadButton>
                         </div>
                       </div>
-                      <div className="flex justify-between gap-3 ">
-                        <div className="tab d-flex   ">
+                      <div className=" mt-3 gap-1 ">
+                        <div className="tab flex gap-2 w-ull  ">
                           <Image
                             src={user.image ? user.image : defaultImage}
                             alt="user Image "
-                            className="user-Personal  "
+                            className="!w-[50px] !h-[50px] !rounded-[50%]  "
                           />
                           <div className="d-flex flex-column me-3 ">
                             <h2 className=" name-header     my-0    ">
@@ -159,7 +160,7 @@ const HrUsers = () => {
                           </div>
                         </div>
 
-                        <div className="flex gap-1">
+                        <div className="flex my-3 gap-2 w-full justify-center">
                           <div className="d-flex align-items-center ">
                             <Image
                               onClick={() => {

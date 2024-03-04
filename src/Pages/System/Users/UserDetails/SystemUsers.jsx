@@ -8,7 +8,6 @@ import Genralnformation from "../../../../Components/System/Users/Genralnformati
 import { AccountaingInformation } from "../../../../Components/System/Users/AccountaingInformation/AccountaingInformation";
 
 import { showAddUpdateUser } from "../../../../Context/CheckAddUpdateUserVisability";
-import AddUpdateUser from "../../../../Components/System/Users/AddUpdateUser/AddUpdateUser";
 import AddUserButton from "../../../../Components/System/AddUserButton/AddUserButton";
 import { Link } from "react-router-dom";
 import SystemControler from "../../../../Components/System/SystemControler/SystemControler";

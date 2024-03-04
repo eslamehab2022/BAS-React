@@ -73,16 +73,18 @@ const SearchUsers = () => {
           <Link
             to={`/System/Hr/Users/${_id}`}
             key={index}
-            className="tab flex mb-1 p-2 border !border-transparent hover:!border-[#EFAA20]"
+            className=" !w-full flex mb-1 p-2 border !border-transparent hover:!border-[#EFAA20]"
           >
             <Image
               src={image ? image : defaultImage}
               alt="user img "
-              className="user-img  "
+              className="w-[40px] h-[40px] rounded-[40.5px]  "
             />
-            <div className="d-flex flex-column me-3 ">
+            <div className="d-flex w-1/2 flex-column me-3 ">
               <h2 className="text-white text-base font-medium">{firstName} </h2>
-              <p className="text-white/30 text-sm font-normal">{email}</p>
+              <p className="text-white/30 text-sm truncate  font-normal">
+                {email}
+              </p>
             </div>
           </Link>
         ))
